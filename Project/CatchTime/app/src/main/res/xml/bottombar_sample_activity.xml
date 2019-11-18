@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tabs xmlns:android="http://schemas.android.com/apk/res/android">
+<tabs>
 
     <tab
         barColorWhenSelected="#7629BB"
-        android:id="@+id/bb_menu_recents"
-        android:icon="@drawable/bottombar_cycle"
-        android:title="记录" />
+        id="@+id/bb_menu_account"
+        icon="@drawable/bottombar_cycle"
+        title="记录" />
     <tab
         barColorWhenSelected="#FB2830"
-        android:id="@+id/bb_menu_favorites"
-        android:icon="@drawable/bottombar_run"
-        android:title="活动" />
+        id="@+id/bb_menu_activity"
+        icon="@drawable/bottombar_run"
+        title="活动" />
     <tab
         barColorWhenSelected="#8BC34A"
-        android:id="@+id/bb_menu_nearby"
-        android:icon="@drawable/bottombar_world"
-        android:title="地点" />
+        id="@+id/bb_menu_location"
+        icon="@drawable/bottombar_world"
+        title="地点" />
     <tab
         barColorWhenSelected="#4964F9"
-        android:id="@+id/bb_menu_friends"
-        android:icon="@drawable/bottombar_setting"
-        android:title="设置" />
+        id="@+id/bb_menu_setting"
+        icon="@drawable/bottombar_setting"
+        title="设置" />
 </tabs>
