@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这里是地图"/>
+<!--        <com.baidu.mapapi.map.MapView-->
+<!--            android:id="@+id/bmapView"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="fill_parent"-->
+<!--            android:clickable="true" />-->
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="330dp">
+        <TextView
+            android:id="@+id/newpalece_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="名称:"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:id="@+id/newpalece_text_getname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="1111"
+            android:layout_toRightOf="@+id/newpalece_text_name"
+            android:textSize="30dp" />
+        <TextView
+            android:id="@+id/newpalece_text_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="地点事件:"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/newpalece_text_name"
+            android:textSize="30dp"/>
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/newpalece_text_place"
+            android:layout_below="@+id/newpalece_text_name"
+            android:textSize="30dp"
+            />
+        <Button
+            android:id="@+id/newpalece_text_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpalece_text_place"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp" />
+        <Button
+            android:id="@+id/newpalece_text_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpalece_text_place"
+            android:layout_toRightOf="@+id/newpalece_text_button"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newpalece_text_place"
+            android:layout_toRightOf="@+id/newpalece_text_button1"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp"/>
+    </RelativeLayout>
+</LinearLayout>
