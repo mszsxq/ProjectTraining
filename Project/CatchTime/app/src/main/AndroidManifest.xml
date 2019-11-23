@@ -24,13 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".AddLocation"/>
-=======
         <activity android:name=".login"></activity>
         <activity android:name=".forgetpwd"></activity>
         <activity android:name=".register"></activity>
->>>>>>> 3eeab3556a98f1a144c4a41fd9649d063d98c4a8
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />
