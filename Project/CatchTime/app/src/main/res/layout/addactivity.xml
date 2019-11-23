@@ -48,41 +48,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp">
     </LinearLayout>
-    <com.daimajia.swipe.SwipeLayout
-        android:id="@+id/swipelayout"
-        android:layout_marginTop="53dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#FF5534"
-            android:gravity="center">
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/setting" />
+<ListView
+    android:layout_marginTop="50dp"
+    android:id="@+id/swipe_listview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete Item?"
-                android:textSize="19sp" />
-        </LinearLayout>
+</ListView>
 
-        <LinearLayout
-            android:id="@+id/bottom_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/setting">
 
-            <TextView
-                android:id="@+id/text_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="item" />
-        </LinearLayout>
-    </com.daimajia.swipe.SwipeLayout>
 </RelativeLayout>
