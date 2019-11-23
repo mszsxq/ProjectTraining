@@ -48,6 +48,13 @@
 
         </TextView>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="48dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </LinearLayout>
     <TextView
         android:text="选择活动图标"
         android:textSize="16dp"
