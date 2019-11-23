@@ -53,4 +53,5 @@ dependencies {
 
     //edittext
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 }

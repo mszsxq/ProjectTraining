@@ -12,14 +12,15 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginTop="2dp"
-                android:src="@drawable/wleft"
-                android:layout_width="16dp"
-                android:layout_height="16dp">
+<!--            <ImageView-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:src="@drawable/wleft"-->
+<!--                android:layout_width="16dp"-->
+<!--                android:layout_height="16dp">-->
 
-            </ImageView>
+<!--            </ImageView>-->
             <TextView
+                android:id="@+id/btnex"
                 android:layout_marginLeft="5dp"
                 android:textSize="14dp"
                 android:text="返回"
@@ -39,6 +40,7 @@
         </TextView>
         <TextView
             android:layout_marginRight="10dp"
+            android:id="@+id/btnfin"
             android:text="完成"
             android:textSize="14dp"
             android:layout_alignParentRight="true"
