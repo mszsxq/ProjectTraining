@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.catchtime.Login;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.AddActivityDetial;
 import com.roughike.bottombar.BottomBar;
@@ -29,9 +30,8 @@ public class AccountFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(getContext(), AddActivityDetial
-//                .class);
-//                startActivity(intent);
+                Intent intent=new Intent(getContext(), AddActivityDetial.class);
+                startActivity(intent);
                 BottomBar bottomBar=getActivity().findViewById(R.id.bottomBar);
                 // TODO: 2019/11/18 存在问题无法进行颜色的改变 
                 bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
