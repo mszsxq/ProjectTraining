@@ -1,3 +1,5 @@
+import org.w3c.dom.DOMImplementation
+
 apply plugin: 'com.android.application'
 
 android {
@@ -45,4 +47,10 @@ dependencies {
 
     //swipeback
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+
+    //AsymmetricGridView
+    implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
+
+    //edittext
+    implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
 }
