@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.catchtime">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,22 +17,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".setting.user"></activity>
+        <activity android:name=".setting.settingActivity"></activity>
+        <activity android:name=".setting.user" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-<!--<<<<<<< HEAD-->
-        <activity android:name=".AddLocation"/>
-<!--=======-->
-        <activity android:name=".login"></activity>
-        <activity android:name=".forgetpwd"></activity>
-        <activity android:name=".register"></activity>
-        <activity android:name=".activity.AddActivityDetial" />
-        <!--&gt;>>>>>> 3eeab3556a98f1a144c4a41fd9649d063d98c4a8-->
+        </activity> <!-- <<<<<<< HEAD -->
+        <activity android:name=".AddLocation" /> <!-- ======= -->
+        <activity android:name=".login" />
+        <activity android:name=".forgetpwd" />
+        <activity android:name=".register" />
+        <activity android:name=".activity.AddActivityDetial" /> <!-- &gt;>>>>>> 3eeab3556a98f1a144c4a41fd9649d063d98c4a8 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />
