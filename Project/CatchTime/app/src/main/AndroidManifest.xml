@@ -30,6 +30,7 @@
         <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
+        <activity android:name=".activity.AddActivity" />
 
 
         <meta-data
