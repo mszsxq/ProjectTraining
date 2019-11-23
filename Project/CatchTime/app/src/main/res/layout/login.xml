@@ -92,6 +92,7 @@
             android:background="@color/orange"
             android:textSize="20dp"/>
         <TextView
+            android:id="@+id/btn_fpwd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
