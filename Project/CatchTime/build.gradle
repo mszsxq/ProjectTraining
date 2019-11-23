@@ -3,13 +3,13 @@
 buildscript {
     repositories {
         google()
-<<<<<<< HEAD
+
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
-=======
+
 //        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
        jcenter()
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5
+
         
     }
     dependencies {

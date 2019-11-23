@@ -46,9 +46,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-<<<<<<< HEAD
+
     implementation 'com.danikula:videocache:2.7.1'
-=======
+
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs\\BaiduLBS_Android.jar')
@@ -69,5 +69,5 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:20.+'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5
+
 }

@@ -1,21 +1,17 @@
 package com.example.catchtime;
 
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-
-=======
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-<<<<<<< HEAD
 import com.example.catchtime.ChartPie.ChartPie;
 import com.example.catchtime.ChartPie.ChartPieBean;
 
@@ -23,7 +19,6 @@ import com.example.catchtime.ChartPie.ChartPieBean;
 import java.util.ArrayList;
 import java.util.List;
 
-=======
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -35,11 +30,9 @@ import com.example.catchtime.fragment.SettingFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5
 
 public class MainActivity extends AppCompatActivity {
-    private List<ChartPieBean> pieBeanList;
-    private LinearLayout lineLayoutList;
+
 
     private FrameLayout mFrameLayout;
     private BottomBar bottomBar;
@@ -51,34 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-        initView();
-    }
 
-    protected void initView() {
-        lineLayoutList = findViewById(R.id.line_layout_list);
-        initData();
-        drawPie();
-    }
-    private void initData() {
-        pieBeanList = new ArrayList<>();
-        pieBeanList.add(new ChartPieBean(3090, "运动", R.color.main_green,R.drawable.run));
-        pieBeanList.add(new ChartPieBean(501f, "娱乐", R.color.blue_rgba_24_261_255,R.drawable.yule));
-        pieBeanList.add(new ChartPieBean(800, "睡觉", R.color.orange,R.drawable.moon));
-        pieBeanList.add(new ChartPieBean(1000, "学校", R.color.red_2,R.drawable.school));
-        pieBeanList.add(new ChartPieBean(2300, "路上", R.color.progress_color_default,R.drawable.load));
-    }
-
-    private void drawPie() {
-        //底部的曲线图
-        View childAt = View.inflate(this, R.layout.item_chart_pie, null);
-        lineLayoutList.addView(childAt);
-        ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
-        chartPie.setData(pieBeanList).start();
-        chartPie.start();
-    }
-
-=======
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
@@ -88,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         initFragment(0);
 
     }
+
+
+
+
 
     private void initFragment(@Nullable int i) {
         //初始化fragment
@@ -200,6 +170,5 @@ public class MainActivity extends AppCompatActivity {
         bottomBar=findViewById(R.id.bottomBar);
         mFrameLayout=findViewById(R.id.contentContainer);
     }
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5
 
 }

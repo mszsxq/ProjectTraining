@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-
     <color name="main_orange">#FA8C1D</color>
     <color name="main_body">#F5F5F5</color>
     <color name="main_blue">#678BFD</color>
@@ -31,7 +24,6 @@
     <color name="text_color_red">#F4505B</color>
     <color name="tab_color">#818791</color>
     <color name="title_color_blue">#7EC501</color>
-    <color name="red">#F61E59</color>
     <color name="red_1">#D01A4D</color>
     <color name="red_2">#F76567</color>
     <color name="red_3">#FA1E00</color>
@@ -42,7 +34,6 @@
     <color name="blue_b3c4f9">#B3C4F9</color>
     <color name="green_white">#ACD8EB</color>
     <color name="translate_alpha">#80000000</color>
-    <color name="orange">#FFBB4D</color>
     <color name="orange_1">#FFE9C5</color>
     <color name="orange_light">#FFEA8A</color>
     <color name="orange_dark">#fe7900</color>
@@ -97,8 +88,6 @@
 
     <color name="search_layover_bg">#50000000</color>
 
-</resources>
-=======
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
@@ -111,4 +100,3 @@
     <color name="orange">#FFA500</color>
     <color name="gray">#CEC7C7</color>
 </resources>
->>>>>>> 4c5206f1109f829c21c808abe7b6a29cb0e729c5

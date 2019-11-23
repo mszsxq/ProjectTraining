@@ -43,7 +43,7 @@ public class SettingFragment extends Fragment {
 
     private void getViews() {
         userImg=view.findViewById(R.id.uesr);
-        activityImg = view.findViewById(R.id.add_activity);
+        //activityImg = view.findViewById(R.id.add_activity);
         settingImg = view.findViewById(R.id.setting);
         helpImg = view.findViewById(R.id.help);
     }
@@ -58,8 +58,8 @@ public class SettingFragment extends Fragment {
                     intent.setClass(getActivity(), user.class);
                     startActivity(intent);
                     break;
-                case R.id.add_activity:
-                    break;
+               // case R.id.add_activity:
+                    //break;
                 case R.id.setting:
                     break;
                 case R.id.help:
