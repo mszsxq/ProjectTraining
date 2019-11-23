@@ -26,12 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddLocation" />
-        <activity android:name=".login" />
-        <activity android:name=".forgetpwd" />
-        <activity android:name=".register" />
         <activity android:name=".activity.AddActivityDetial" />
         <activity android:name=".Login" />
-        <activity android:name=".AddLocation" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
 
