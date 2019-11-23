@@ -22,25 +22,20 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-<<<<<<< HEAD
-        </activity> <!-- <<<<<<< HEAD -->
-        <activity android:name=".AddLocation" /> <!-- ======= -->
+        </activity>
+        <activity android:name=".AddLocation" />
         <activity android:name=".login" />
         <activity android:name=".forgetpwd" />
         <activity android:name=".register" />
-        <activity android:name=".activity.AddActivityDetial" /> <!-- &gt;>>>>>> 3eeab3556a98f1a144c4a41fd9649d063d98c4a8 -->
-=======
-        </activity>
         <activity android:name=".activity.AddActivityDetial" />
         <activity android:name=".Login" />
         <activity android:name=".AddLocation" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
-        <!--&gt;>>>>>> 3eeab3556a98f1a144c4a41fd9649d063d98c4a8-->
->>>>>>> fb82e56b12bbf1727ac17ea1b1c0e1476f839faa
+
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />
