@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
-    <TextView
-        android:text="location"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="46sp"
+        android:background="@color/green">
+        <TextView
+            android:text="Locations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46sp"
+        android:background="@color/gray">
+        <TextView
+            android:text="ALL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
 
-    </TextView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="460dp">
+        <ListView
+            android:id="@+id/loc_lv_local"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/loc_iv_addloc"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/addloc"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -10,6 +10,7 @@
         android:background="@color/green">
 
         <ImageView
+            android:id="@+id/aloc_iv_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -17,6 +18,7 @@
             android:src="@drawable/wleft" />
 
         <TextView
+            android:id="@+id/aloc_tv_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -52,7 +54,9 @@
             android:layout_height="30dp"
             android:src="@drawable/alocal"/>
         <EditText
+            android:id="@+id/aloc_ed_local"
             android:layout_width="300dp"
+            android:layout_marginLeft="40dp"
             android:layout_height="wrap_content"/>
         <ImageView
             android:layout_width="30dp"
@@ -61,8 +65,10 @@
             android:layout_marginTop="50dp"
             android:layout_below="@+id/aloc_iv_local"/>
         <EditText
+            android:id="@+id/aloc_ed_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_below="@+id/aloc_iv_local"
             android:layout_marginTop="50dp"/>
     </RelativeLayout>
