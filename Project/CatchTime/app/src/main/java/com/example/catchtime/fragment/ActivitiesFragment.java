@@ -34,7 +34,6 @@ public class ActivitiesFragment extends Fragment {
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
-
         return view;
     }
 }

@@ -42,4 +42,7 @@ dependencies {
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs\\BaiduLBS_Android.jar')
+
+    //swipeback
+    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
 }
