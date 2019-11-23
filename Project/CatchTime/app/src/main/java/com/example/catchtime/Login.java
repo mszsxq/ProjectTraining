@@ -3,12 +3,11 @@ package com.example.catchtime;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private TextView btn_login;
     private TextView btn_register;
     private TextView btn_fpwd;
@@ -42,7 +41,7 @@ public class login extends AppCompatActivity {
                    break;
                case R.id.btn_register:
                    Intent intent=new Intent();
-                   intent.setClass(login.this,register.class);
+                   intent.setClass(Login.this, Register.class);
                    startActivity(intent);
                    overridePendingTransition(
                            R.anim.in,//进入动画
@@ -51,7 +50,7 @@ public class login extends AppCompatActivity {
                    break;
                case R.id.btn_fpwd:
                    Intent intent1=new Intent();
-                   intent1.setClass(login.this,forgetpwd.class);
+                   intent1.setClass(Login.this, Forgetpwd.class);
                    startActivity(intent1);
                    break;
 
