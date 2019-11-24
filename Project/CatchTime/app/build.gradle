@@ -70,4 +70,7 @@ dependencies {
     implementation 'com.android.support:support-v4:20.+'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 
+    //graph chart
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

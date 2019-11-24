@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.catchtime.R;
+import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.setting.user;
 
 import androidx.annotation.NonNull;
@@ -36,14 +37,14 @@ public class SettingFragment extends Fragment {
     private void onLisener() {
         listener = new customListener();
         userImg.setOnClickListener(listener);
-//        activityImg.setOnClickListener(listener);
+        activityImg.setOnClickListener(listener);
         settingImg.setOnClickListener(listener);
         helpImg.setOnClickListener(listener);
     }
 
     private void getViews() {
         userImg=view.findViewById(R.id.uesr);
-//        activityImg = view.findViewById(R.id.add_activity);
+        activityImg = view.findViewById(R.id.add_activity);
         settingImg = view.findViewById(R.id.setting);
         helpImg = view.findViewById(R.id.help);
     }
@@ -58,8 +59,10 @@ public class SettingFragment extends Fragment {
                     intent.setClass(getActivity(), user.class);
                     startActivity(intent);
                     break;
-               // case R.id.add_activity:
-                    //break;
+                case R.id.add_activity:
+                    Intent intent1=new Intent(view.getContext(), AddActivity.class);
+                    startActivity(intent1);
+                    break;
                 case R.id.setting:
                     break;
                 case R.id.help:

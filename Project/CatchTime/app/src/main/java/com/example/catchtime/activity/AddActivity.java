@@ -32,6 +32,8 @@ public class AddActivity extends SwipeBackActivity {
     private SwipeLayout swipeLayout;
     private List<String> list;
     private ListView mListView;
+    private TextView btnex;
+    private TextView btnfin;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +44,29 @@ public class AddActivity extends SwipeBackActivity {
 
         list=new ArrayList<String>();
         list.add("bike");
-        list.add("bike");
-        list.add("bike");
-        list.add("bike");
-        list.add("bike");
-        list.add("bike");
+        list.add("onfeet");
+        list.add("phone");
+        list.add("biaoqian");
+        list.add("alocal");
+        list.add("addloc");
 
         mListView= (ListView) findViewById(R.id.swipe_listview);
         ListViewAdapter listViewAdapter=new ListViewAdapter(this,list);
         mListView.setAdapter(listViewAdapter);
-
+        btnex= (TextView) findViewById(R.id.btnex);
+        btnfin= (TextView) findViewById(R.id.btnfin);
+        btnfin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        btnex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     class ListViewAdapter extends BaseSwipeAdapter{
