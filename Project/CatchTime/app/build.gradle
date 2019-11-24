@@ -73,6 +73,6 @@ dependencies {
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 
     //graph chart
-//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }
