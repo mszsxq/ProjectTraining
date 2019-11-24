@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.example.catchtime.Add_detailPage;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.AddActivity;
+import com.example.catchtime.activity.AddActivityDetial;
 import com.example.catchtime.setting.user;
 
 import androidx.annotation.NonNull;
@@ -64,6 +67,8 @@ public class SettingFragment extends Fragment {
                     startActivity(intent1);
                     break;
                 case R.id.setting:
+                    Intent intent2=new Intent(view.getContext(), Add_detailPage.class);
+                    startActivity(intent2);
                     break;
                 case R.id.help:
                     break;

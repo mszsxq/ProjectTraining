@@ -16,6 +16,7 @@
         android:layout_marginTop="80dp"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/person"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
@@ -79,6 +80,7 @@
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
@@ -90,8 +92,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/setting">
-            </ImageView>
+                android:src="@drawable/setting"></ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/helping"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"

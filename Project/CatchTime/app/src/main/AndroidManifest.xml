@@ -19,7 +19,7 @@
         android:theme="@style/NoTitle">
         <activity android:name=".setting.user"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
-        <activity android:name=".add_detailPage"></activity>
+        <activity android:name=".Add_detailPage"></activity>
         <activity android:name=".setting.settingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
