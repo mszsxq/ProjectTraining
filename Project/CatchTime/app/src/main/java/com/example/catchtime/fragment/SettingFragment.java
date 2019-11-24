@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.catchtime.R;
+import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.setting.user;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,8 @@ public class SettingFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.add_activity:
+                    Intent intent1=new Intent(view.getContext(), AddActivity.class);
+                    startActivity(intent1);
                     break;
                 case R.id.setting:
                     break;

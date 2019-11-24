@@ -1,10 +1,23 @@
 package com.example.catchtime;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.catchtime.ChartPie.ChartPie;
+import com.example.catchtime.ChartPie.ChartPieBean;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +33,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private FrameLayout mFrameLayout;
     private BottomBar bottomBar;
     private AccountFragment mAccountFragment;
@@ -30,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
@@ -39,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         initFragment(0);
 
     }
+
+
+
+
 
     private void initFragment(@Nullable int i) {
         //初始化fragment

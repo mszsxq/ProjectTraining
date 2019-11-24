@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/test"
-        android:text="测试"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </Button>
+            <LinearLayout
+                android:id="@+id/line_layout_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutAnimation="@anim/layout_animation_vertical"
+                android:orientation="vertical"
+                android:paddingTop="10dp" />
 </LinearLayout>
