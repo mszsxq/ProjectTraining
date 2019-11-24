@@ -36,14 +36,14 @@ public class SettingFragment extends Fragment {
     private void onLisener() {
         listener = new customListener();
         userImg.setOnClickListener(listener);
-        activityImg.setOnClickListener(listener);
+//        activityImg.setOnClickListener(listener);
         settingImg.setOnClickListener(listener);
         helpImg.setOnClickListener(listener);
     }
 
     private void getViews() {
         userImg=view.findViewById(R.id.uesr);
-        //activityImg = view.findViewById(R.id.add_activity);
+//        activityImg = view.findViewById(R.id.add_activity);
         settingImg = view.findViewById(R.id.setting);
         helpImg = view.findViewById(R.id.help);
     }
