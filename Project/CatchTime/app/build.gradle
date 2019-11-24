@@ -1,3 +1,5 @@
+import org.w3c.dom.DOMImplementation
+
 apply plugin: 'com.android.application'
 
 android {
@@ -42,4 +44,19 @@ dependencies {
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs\\BaiduLBS_Android.jar')
+
+    //swipeback
+    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+
+    //AsymmetricGridView
+    implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
+
+    //edittext
+    implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+
+    //Android Swipe Layout
+    implementation 'com.android.support:recyclerview-v7:21.0.0'
+    implementation 'com.android.support:support-v4:20.+'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 }
