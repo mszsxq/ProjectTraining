@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddLocation" />
+        <activity android:name=".AddLocation"/>
         <activity android:name=".activity.AddActivityDetial" />
         <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />

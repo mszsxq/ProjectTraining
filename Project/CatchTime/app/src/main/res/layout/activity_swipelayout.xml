@@ -5,45 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="55dp"
         android:background="#FF5534"
-        android:gravity="center">
+        android:paddingLeft="20dp">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/lajixiang"
+            android:layout_width="40dp"
+            android:layout_height="40dp">
+
+        </ImageView>
 
         <TextView
-            android:paddingTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Delete Item?"
-            android:textSize="19sp" />
-        <Button
-            android:textSize="19sp"
+            android:paddingTop="10dp"
             android:layout_marginTop="7dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/image"
+            android:id="@+id/tx"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Delete Item?"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:layout_alignParentRight="true"
+            android:paddingTop="1dp"
+            android:textSize="20sp"
             android:id="@+id/delete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="26dp"
             android:text="确定"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:paddingLeft="10dp"
         android:id="@+id/bottom_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="55dp">
 
         <ImageView
             android:id="@+id/add_activity_imageview"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="7dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp">
+            android:layout_marginTop="10dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp">
 
         </ImageView>
         <TextView
-            android:layout_marginTop="7dp"
-            android:textSize="19sp"
+            android:paddingTop="7dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:id="@+id/add_activity_text_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
