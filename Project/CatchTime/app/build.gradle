@@ -1,3 +1,5 @@
+import org.w3c.dom.DOMImplementation
+
 apply plugin: 'com.android.application'
 
 android {
@@ -30,6 +32,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -39,6 +46,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.danikula:videocache:2.7.1'
+
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs\\BaiduLBS_Android.jar')
@@ -47,4 +57,19 @@ dependencies {
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     //observablescrollview
     implementation 'com.github.ksoichiro:android-observablescrollview:1.5.2'
+
+    //AsymmetricGridView
+    implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
+
+    //edittext
+    implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+
+    //Android Swipe Layout
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:21.0.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v4:20.+'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
 }

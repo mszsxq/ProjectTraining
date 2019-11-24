@@ -1,13 +1,17 @@
 package com.example.catchtime.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.catchtime.R;
+import com.example.catchtime.activity.ActivitiesDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +28,26 @@ public class ActivitiesFragment extends Fragment {
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第1个页面");
+
         view=inflater.inflate( R.layout.activitiesfragment,container,false);
         //存放数据的list；
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
+        Button button =view.findViewById(R.id.details);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(view.getContext(), ActivitiesDetail.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

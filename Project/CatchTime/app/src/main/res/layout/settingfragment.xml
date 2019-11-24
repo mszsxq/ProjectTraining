@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A8A8A8">
+    android:background="#D3D3D3">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:background="@color/white"
         android:text="设置"></TextView>
     <LinearLayout
@@ -18,12 +18,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:background="@color/white">
             <ImageView
                 android:id="@+id/my_user"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/user">
             </ImageView>
             <TextView
@@ -37,22 +38,25 @@
             </TextView>
             <ImageView
                 android:id="@+id/uesr"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="1dp"
             android:background="@color/white"
             android:layout_marginTop="1dp">
             <ImageView
                 android:id="@+id/my_activity"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/agreement">
             </ImageView>
             <TextView
@@ -65,23 +69,26 @@
                 android:text="添加活动">
             </TextView>
             <ImageView
-                android:id="@+id/add_activity"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/aggre"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="1dp"
             android:background="@color/white"
             android:layout_marginTop="1dp">
             <ImageView
                 android:id="@+id/my_setting"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/setting">
             </ImageView>
             <TextView
@@ -95,25 +102,27 @@
             </TextView>
             <ImageView
                 android:id="@+id/setting"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="1dp"
             android:background="@color/white"
             android:layout_marginTop="1dp">
             <ImageView
                 android:id="@+id/my_help"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/help">
             </ImageView>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,9 +134,10 @@
             </TextView>
             <ImageView
                 android:id="@+id/help"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
