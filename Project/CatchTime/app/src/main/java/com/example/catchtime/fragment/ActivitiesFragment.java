@@ -14,6 +14,7 @@ import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
@@ -27,19 +28,17 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第1个页面");
 
+
         view=inflater.inflate( R.layout.activitiesfragment,container,false);
         //存放数据的list；
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
-        listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         Button button =view.findViewById(R.id.details);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +47,20 @@ public class ActivitiesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        //准备数据源：
+        Map<String,Object> map1=new HashMap<String,Object>();
+        map1.put("img",R.drawable.study);
+        map1.put("name","学习");
+        list.add(map1);
+        Map<String,Object> map2=new HashMap<String,Object>();
+        map2.put("img",R.drawable.paly);
+        map2.put("name","游戏");
+        list.add(map2);
+        Map<String,Object> map3=new HashMap<String,Object>();
+        map3.put("img",R.drawable.walk);
+        map3.put("name","行走");
+        list.add(map3);
+        listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         return view;
     }
 }

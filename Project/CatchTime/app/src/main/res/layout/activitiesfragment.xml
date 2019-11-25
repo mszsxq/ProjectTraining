@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:text="活动"
         android:textColor="@color/black"
-        android:textSize="26dp"
+        android:textSize="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"/>
     <View

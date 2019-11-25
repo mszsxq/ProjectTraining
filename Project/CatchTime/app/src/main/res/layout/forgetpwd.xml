@@ -32,7 +32,7 @@
             android:layout_gravity="center">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -43,7 +43,7 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="160dp"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入手机号"
                     />
@@ -60,7 +60,7 @@
                 android:background="@color/green"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -71,7 +71,7 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入验证码"
                     />
@@ -82,7 +82,7 @@
                 android:background="@color/green"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -93,7 +93,7 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入密码"
                     />
@@ -105,7 +105,7 @@
                 android:background="@color/green"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -116,7 +116,7 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="再次确认密码"
                     />
@@ -125,7 +125,7 @@
         </LinearLayout>
         <Button
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:text="重置密码"
             android:textColor="@color/white"
             android:layout_marginTop="15dp"
