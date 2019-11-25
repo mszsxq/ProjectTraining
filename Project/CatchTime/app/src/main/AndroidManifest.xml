@@ -17,10 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoTitle">
-        <activity android:name=".setting.user"></activity>
+        <activity android:name=".setting.UserInfor"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
         <activity android:name=".Add_detailPage"></activity>
-        <activity android:name=".setting.settingActivity" />
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
