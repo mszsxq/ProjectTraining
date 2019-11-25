@@ -1,5 +1,4 @@
 package com.example.catchtime.fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,14 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.catchtime.R;
-
 import java.util.List;
 import java.util.Map;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 class MyAdapterActivities extends BaseAdapter {
     private Context context;
     private List<Map<String,Object>> data;

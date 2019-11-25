@@ -35,7 +35,7 @@
         android:layout_marginTop="30dp">
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="120dp"
+            android:layout_height="135dp"
             android:background="@android:color/white"
             android:orientation="vertical"
             android:layout_gravity="center">
@@ -51,6 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <EditText
+                    android:id="@+id/user_number"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@null"
@@ -60,7 +61,12 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
+            <TextView
+                android:id="@+id/full"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginLeft="260dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -76,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@null"
+                    android:inputType="numberPassword"
                     android:hint="请输入密码"
                     />
             </LinearLayout>

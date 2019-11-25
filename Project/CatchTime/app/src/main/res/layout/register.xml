@@ -8,23 +8,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="80dp"
-        android:paddingLeft="30dp"
-
-        >
+        android:paddingLeft="30dp">
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="登录"
-            android:textSize="30dp"
-            android:gravity="center"
-            />
-        <TextView
+            android:id="@id/btn_register"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="注册"
             android:textSize="30dp"
             android:textColor="@color/orange"
             android:gravity="center"/>
+        <TextView
+            android:id="@id/btn_login"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textSize="30dp"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +33,13 @@
         android:layout_marginTop="30dp">
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="240dp"
+            android:layout_height="180dp"
             android:background="@android:color/white"
             android:orientation="vertical"
             android:layout_gravity="center">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -50,10 +49,12 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <EditText
+                    android:id="@+id/full_re"
                     android:layout_width="160dp"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入手机号"
+                    android:inputType="phone"
                     />
                 <Button
                     android:layout_width="wrap_content"
@@ -65,10 +66,10 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -79,7 +80,7 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入验证码"
                     />
@@ -87,10 +88,10 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -101,22 +102,21 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@null"
                     android:hint="请输入密码"
+                    android:inputType="numberPassword"
                     />
             </LinearLayout>
-
         </LinearLayout>
         <Button
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:text="注册"
             android:textColor="@color/white"
             android:layout_marginTop="15dp"
             android:background="@color/orange"
             android:textSize="20dp"/>
-
     </LinearLayout>
 
 </LinearLayout>

@@ -45,6 +45,7 @@
                     android:layout_width="160dp"
                     android:layout_height="60dp"
                     android:background="@null"
+                    android:maxLength="11"
                     android:hint="请输入手机号"
                     />
                 <Button
@@ -57,7 +58,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -79,7 +80,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -97,12 +98,11 @@
                     android:background="@null"
                     android:hint="请输入密码"
                     />
-
             </LinearLayout>
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/green"/>
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -121,7 +121,6 @@
                     android:hint="再次确认密码"
                     />
             </LinearLayout>
-
         </LinearLayout>
         <Button
             android:layout_width="300dp"

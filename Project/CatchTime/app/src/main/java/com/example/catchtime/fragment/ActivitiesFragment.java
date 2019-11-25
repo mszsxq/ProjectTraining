@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.catchtime.Login;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
 
@@ -33,17 +34,23 @@ public class ActivitiesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第1个页面");
-
-
         view=inflater.inflate( R.layout.activitiesfragment,container,false);
         //存放数据的list；
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
         Button button =view.findViewById(R.id.details);
+        Button button1=view.findViewById(R.id.jump_login);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(view.getContext(), ActivitiesDetail.class);
+                startActivity(intent);
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(view.getContext(), Login.class);
                 startActivity(intent);
             }
         });
