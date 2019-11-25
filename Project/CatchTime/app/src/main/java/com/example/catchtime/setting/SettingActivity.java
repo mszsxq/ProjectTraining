@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.catchtime.R;
 
-public class settingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
