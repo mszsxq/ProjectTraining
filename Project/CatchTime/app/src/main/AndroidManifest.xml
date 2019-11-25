@@ -34,6 +34,7 @@
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
+        <activity android:name=".TestButton" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
