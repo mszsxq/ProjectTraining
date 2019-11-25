@@ -54,8 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@null"
-                    android:hint="请输入手机号"
-                    />
+                    android:hint="请输入手机号" />
 
             </LinearLayout>
             <View

@@ -13,7 +13,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@color/green"/>
+        android:background="@color/gray"/>
     <Button
         android:text="借用跳转详情"
         android:id="@+id/details"
