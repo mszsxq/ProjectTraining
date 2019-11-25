@@ -1,3 +1,47 @@
 <resources>
     <string name="app_name">CatchTime</string>
+
+
+
+
+    <string name="dash">PieChar</string>
+    <string name="scrollViewStart">PieChar</string>
+    <string name="viewGithub">PieChar</string>
+    <string name="scrollViewEnd">PieChar</string>
+    <string name="actionToggleBarBorders">PieChar</string>
+    <string name="actionToggleValues">PieChar</string>
+    <string name="actionToggleIcons">PieChar</string>
+    <string name="actionToggleHighlight">PieChar</string>
+    <string name="actionTogglePinch">PieChar</string>
+    <string name="actionToggleAutoScale">PieChar</string>
+    <string name="animateX">PieChar</string>
+    <string name="animateY">PieChar</string>
+    <string name="animateXY">PieChar</string>
+    <string name="actionSave">PieChar</string>
+    <string name="actionToggleCandleShadow">PieChar</string>
+    <string name="actionToggleLineValues">PieChar</string>
+    <string name="actionToggleBarValues">PieChar</string>
+    <string name="actionRemoveDataSet">PieChar</string>
+    <string name="actionToggleFilled">PieChar</string>
+    <string name="actionToggleCircles">PieChar</string>
+    <string name="actionAddEntry">PieChar</string>
+    <string name="actionRemoveEntry">PieChar</string>
+    <string name="actionAddDataSet">PieChar</string>
+    <string name="reportProblem">PieChar</string>
+    <string name="viewWebsite">PieChar</string>
+    <string name="actionToggleXValues">PieChar</string>
+    <string name="actionTogglePercent">PieChar</string>
+    <string name="actionToggleMinAngles">PieChar</string>
+    <string name="actionToggleHole">PieChar</string>
+    <string name="actionToggleCurvedSlices">PieChar</string>
+    <string name="actionDrawCenterText">PieChar</string>
+    <string name="actionToggleSpin">PieChar</string>
+    <string name="actionToggleYValues">PieChar</string>
+    <string name="actionToggleHighlightCircle">PieChar</string>
+    <string name="actionToggleRotation">PieChar</string>
+    <string name="actionClearChart">PieChar</string>
+    <string name="actionToggleCubic">PieChar</string>
+    <string name="actionToggleStepped">PieChar</string>
+    <string name="actionToggleHorizontalCubic">PieChar</string>
+    <string name="actionFeedMultiple">PieChar</string>
 </resources>
