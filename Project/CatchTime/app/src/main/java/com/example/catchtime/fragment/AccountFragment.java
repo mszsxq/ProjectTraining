@@ -1,11 +1,13 @@
 package com.example.catchtime.fragment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -20,6 +22,7 @@ import com.roughike.bottombar.BottomBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -30,6 +33,7 @@ public class AccountFragment extends Fragment {
     private List<ChartPieBean> pieBeanList;
     private LinearLayout lineLayoutList;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,27 +41,13 @@ public class AccountFragment extends Fragment {
         initData();
         Log.e("test","初始化第0个页面");
         //底部的曲线图
+        Window window=this.getActivity().getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.gray));
         View childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
         //lineLayoutList.addView(childAt);
         ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
         chartPie.setData(pieBeanList).start();
         chartPie.start();
-       /* Button button=view.findViewById(R.id.test);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-<<<<<<< HEAD
-                Intent intent=new Intent(getContext(), ActivitiesDetail.class);
-=======
-                Intent intent=new Intent(getContext(), AddActivity.class);
->>>>>>> dd92b7aedb39afb3a478d3d8407c70953fabfade
-                startActivity(intent);
-                BottomBar bottomBar=getActivity().findViewById(R.id.bottomBar);
-                // TODO: 2019/11/18 存在问题无法进行颜色的改变 
-                bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
-                bottomBar.setBadgeBackgroundColor(getResources().getColor(R.color.black));
-            }
-        });*/
         return childAt;
     }
 
