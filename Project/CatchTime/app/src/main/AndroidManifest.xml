@@ -41,7 +41,6 @@
         <activity android:name=".setting.UserInfor"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
         <activity android:name=".Add_detailPage"></activity>
-        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

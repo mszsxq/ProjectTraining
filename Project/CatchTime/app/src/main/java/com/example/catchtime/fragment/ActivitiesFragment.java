@@ -1,5 +1,8 @@
 package com.example.catchtime.fragment;
 
+
+import android.os.Build;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -38,15 +43,7 @@ public class ActivitiesFragment extends Fragment {
         //存放数据的list；
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
-        Button button =view.findViewById(R.id.details);
         Button button1=view.findViewById(R.id.jump_login);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(), ActivitiesDetail.class);
-                startActivity(intent);
-            }
-        });
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +65,14 @@ public class ActivitiesFragment extends Fragment {
         map3.put("name","行走");
         list.add(map3);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ActivitiesDetail.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

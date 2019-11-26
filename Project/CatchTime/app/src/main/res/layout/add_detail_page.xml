@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3"
+    android:background="@color/text_color_8"
     >
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:background="@color/white">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:src="@drawable/left">
         </ImageView>
@@ -57,7 +57,6 @@
             android:id="@+id/iv1"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/loc"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true">
         </ImageView>
