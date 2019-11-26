@@ -1,69 +1,98 @@
 package com.example.catchtime.activity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.ArrayAdapter;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import com.example.catchtime.MainActivity;
 import com.example.catchtime.R;
+import com.example.catchtime.chart.InitBarChart;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarEntry;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import androidx.annotation.Nullable;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 
 public class ActivitiesDetail extends SwipeBackActivity implements ObservableScrollViewCallbacks {
 
-    private View mHeaderView;
-    private View mToolbarView;
     private ObservableScrollView mScrollView;
-    private int mBaseTranslationY;
     private ProgressBar progesss;
     private TextView min;
-    private RelativeLayout view_dayoccupy;
     private  ImageView back;
+    private LinearLayout linearLayout ;
+    private LineView lineView;
+    private LineView lineView2;
+    private View   barCharts;
+    private LinearLayout l1;
+    private LinearLayout l2;
+    private LinearLayout l3;
+    private int color;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
+        //why 不能放在上面
+        color =getResources().getColor(R.color.translate_alpha);
         getView();
+        setListener();
+        setColor();
         progesss.setProgress(20);
-        min.setText(new StringBuffer().append(progesss.getProgress()).append("min"));
         //进度条
 //        setPosWay1();
-        setListener();
+        min.setText(new StringBuffer().append(progesss.getProgress()).append("min"));
 
+        //柱状图
+        ArrayList<BarEntry> values = new ArrayList<>();
+        for(int i=0;i<10;i++){
+            float multi =(100+1);
+            float val = (float)(Math.random()*multi)+multi/3;
+//            values.add(new BarEntry(i,val,getResources().getDrawable()));
+            values.add(new BarEntry(i,val));
+        }
+        new InitBarChart((BarChart) barCharts,values,this);
 
+        //折线图
+        lineView.setData(
+                Arrays.asList("02-1","02-1","02-1","02-1","02-1","02-1","02-1"),
+                Arrays.asList(0.0f,1.0f,2.0f,1.0f,4.0f,5.0f,6.0f));
+        lineView2.setData(
+                Arrays.asList("02-1","02-1","02-1","02-1","02-1","02-1","02-1"),
+                Arrays.asList(0.0f,1.0f,2.0f,1.0f,4.0f,5.0f,6.0f));
     }
 
     public void getView() {
+        l1= (LinearLayout) findViewById(R.id.view_weekoccupy);
+        l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
+        l3=(LinearLayout)findViewById(R.id.view_totaloccupy);
+        lineView2 =(LineView)findViewById(R.id.lineView2);
+        barCharts= findViewById(R.id.barchar);
+        lineView=(LineView) findViewById(R.id.lineView);
         back = (ImageView) findViewById(R.id.acdetails_back);
-        view_dayoccupy = (RelativeLayout) findViewById(R.id.view_dayoccupy1);
         progesss = (ProgressBar) findViewById(R.id.progesss1);
         min = (TextView) findViewById(R.id.min1);
+        linearLayout = (LinearLayout) findViewById(R.id.topbar);
     }
     public void setListener(){
         back.setOnClickListener(new MyListener());
+    }
+    public void setColor(){
+        linearLayout.setBackgroundColor(color);
+        l1.setBackgroundColor(color);
+        l2.setBackgroundColor(color);
+        l3.setBackgroundColor(color);
+
     }
 
     @Override
@@ -78,16 +107,21 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
 
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.topbar);
+
         if(linearLayout==null){
+            Log.e("liner","null");
             return ;
         }
         if(scrollState == ScrollState.UP){
             ViewGroup.LayoutParams lp;
             lp= linearLayout.getLayoutParams();
-            lp.height=200;
+            lp.height=70;
             linearLayout.setLayoutParams(lp);
-
+        }else if(scrollState == ScrollState.UP){
+            ViewGroup.LayoutParams lp;
+            lp= linearLayout.getLayoutParams();
+            lp.height=150;
+            linearLayout.setLayoutParams(lp);
         }
     }
 //    //进度条
