@@ -5,7 +5,7 @@
     <RelativeLayout
         android:id="@+id/ly"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="50dp"
@@ -29,8 +29,10 @@
     </RelativeLayout>
     <View
         android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray"/>
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@id/ly"
+        android:layout_alignTop="@id/details"/>
     <Button
         android:text="借用跳转详情"
         android:id="@+id/details"
@@ -48,5 +50,8 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/jump_login"/>
+        android:layout_below="@id/jump_login"
+        android:layout_marginLeft="30dp"
+        android:footerDividersEnabled="true"/>
+
 </RelativeLayout>
