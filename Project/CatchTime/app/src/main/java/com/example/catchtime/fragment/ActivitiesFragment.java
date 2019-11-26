@@ -1,17 +1,24 @@
 package com.example.catchtime.fragment;
 
+<<<<<<< HEAD
+=======
 
 import android.os.Build;
 
 import android.content.Context;
+>>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
+
+=======
 import android.view.Window;
 import android.widget.AdapterView;
+>>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,6 +41,10 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+<<<<<<< HEAD
+
+=======
+>>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
