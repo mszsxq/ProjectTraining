@@ -154,6 +154,16 @@
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"></ImageView>
+        </RelativeLayout>
     </LinearLayout>
+
 </LinearLayout>
 </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
