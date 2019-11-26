@@ -55,14 +55,17 @@ public class ActivitiesFragment extends Fragment {
         Map<String,Object> map1=new HashMap<String,Object>();
         map1.put("img",R.drawable.study);
         map1.put("name","学习");
+        map1.put("bak_color",R.color.gray);
         list.add(map1);
         Map<String,Object> map2=new HashMap<String,Object>();
         map2.put("img",R.drawable.paly);
         map2.put("name","游戏");
+        map2.put("bak_color",R.color.red_2);
         list.add(map2);
         Map<String,Object> map3=new HashMap<String,Object>();
         map3.put("img",R.drawable.walk);
         map3.put("name","行走");
+        map3.put("bak_color",R.color.colorAccent);
         list.add(map3);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
