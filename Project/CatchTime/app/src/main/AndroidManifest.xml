@@ -55,16 +55,13 @@
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
-<<<<<<< HEAD
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">
         </service>
-=======
-        <activity android:name=".TestButton" />
+        <!--<activity android:name=".TestButton" />-->
 
->>>>>>> 75ddcb55346238cc56cef283e7c085a8cd12796a
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />
