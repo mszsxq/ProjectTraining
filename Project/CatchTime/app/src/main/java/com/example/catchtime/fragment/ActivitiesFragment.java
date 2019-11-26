@@ -1,10 +1,14 @@
 package com.example.catchtime.fragment;
 
 <<<<<<< HEAD
+import android.os.Build;
+=======
+<<<<<<< HEAD
 =======
 
 import android.os.Build;
 
+>>>>>>> 56cc1c006fa24fe14c1e342f14353e2cf5a44616
 import android.content.Context;
 >>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
 import android.content.Intent;
@@ -14,11 +18,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 <<<<<<< HEAD
+import android.view.Window;
+=======
+<<<<<<< HEAD
 
 =======
 import android.view.Window;
 import android.widget.AdapterView;
 >>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
+>>>>>>> 56cc1c006fa24fe14c1e342f14353e2cf5a44616
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,6 +42,7 @@ import java.util.logging.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class ActivitiesFragment extends Fragment {
@@ -41,10 +50,13 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
-<<<<<<< HEAD
 
+<<<<<<< HEAD
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+=======
 =======
 >>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
+>>>>>>> 56cc1c006fa24fe14c1e342f14353e2cf5a44616
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,14 +78,17 @@ public class ActivitiesFragment extends Fragment {
         Map<String,Object> map1=new HashMap<String,Object>();
         map1.put("img",R.drawable.study);
         map1.put("name","学习");
+        map1.put("bak_color",R.color.gray);
         list.add(map1);
         Map<String,Object> map2=new HashMap<String,Object>();
         map2.put("img",R.drawable.paly);
         map2.put("name","游戏");
+        map2.put("bak_color",R.color.red_2);
         list.add(map2);
         Map<String,Object> map3=new HashMap<String,Object>();
         map3.put("img",R.drawable.walk);
         map3.put("name","行走");
+        map3.put("bak_color",R.color.colorAccent);
         list.add(map3);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
