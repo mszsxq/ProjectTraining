@@ -2,6 +2,7 @@ package com.example.catchtime.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,9 @@ public class AddActivity extends SwipeBackActivity {
         btnfin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent= new Intent();
+                intent.setClass(AddActivity.this,AddActivityDetial.class);
+                startActivity(intent);
             }
         });
         btnex.setOnClickListener(new View.OnClickListener() {

@@ -6,14 +6,13 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
-        android:layout_width="70dp"
-        android:layout_height="55dp"
-        android:background="#FF5534"
-        android:paddingLeft="20dp">
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="#FF5534">
         <ImageView
             android:id="@+id/delete"
-            android:layout_marginTop="7dp"
             android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/lajixiang"
             android:layout_width="30dp"
             android:layout_height="30dp">
@@ -56,24 +55,20 @@
         android:paddingLeft="10dp"
         android:id="@+id/bottom_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="40dp">
 
         <ImageView
             android:id="@+id/add_activity_imageview"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="35dp"
             android:layout_height="35dp">
 
         </ImageView>
         <TextView
             android:paddingTop="7dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:id="@+id/add_activity_text_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="item1" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </com.daimajia.swipe.SwipeLayout>
