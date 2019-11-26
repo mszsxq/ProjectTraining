@@ -1,16 +1,14 @@
-package com.example.catchtime.setting;
+package com.example.catchtime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.catchtime.R;
-
-public class settingActivity extends AppCompatActivity {
+public class Add_detailPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.add_detail_page);
     }
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.example.catchtime.R;
 
-public class user extends SwipeBackActivity {
+public class UserInfor extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

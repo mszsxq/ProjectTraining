@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D3D3D3">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:padding="10dp"
         android:textSize="20sp"
         android:background="@color/white"
@@ -16,9 +22,11 @@
         android:layout_marginTop="80dp"
         android:orientation="vertical">
         <RelativeLayout
+            android:id="@+id/person"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/my_user"
                 android:layout_width="40dp"
@@ -51,7 +59,8 @@
             android:layout_height="wrap_content"
             android:padding="1dp"
             android:background="@color/white"
-            android:layout_marginTop="1dp">
+            android:layout_marginTop="1dp"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/my_activity"
                 android:layout_width="40dp"
@@ -79,19 +88,20 @@
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
             android:background="@color/white"
-            android:layout_marginTop="1dp">
+            android:layout_marginTop="1dp"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/my_setting"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/setting">
-            </ImageView>
+                android:src="@drawable/setting"></ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,11 +121,13 @@
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/helping"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
             android:background="@color/white"
-            android:layout_marginTop="1dp">
+            android:layout_marginTop="1dp"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/my_help"
                 android:layout_width="40dp"
@@ -144,3 +156,4 @@
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
+</com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

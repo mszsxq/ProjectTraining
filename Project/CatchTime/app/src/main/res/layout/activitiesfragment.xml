@@ -2,18 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="活动"
-        android:textColor="@color/black"
-        android:textSize="26dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="活动"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="new"
+            android:textSize="20dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:layout_marginLeft="260dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@color/green"/>
+        android:background="@color/gray"/>
+    <Button
+        android:text="借用跳转详情"
+        android:id="@+id/details"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/jump_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="借用跳转登录页面"
+        />
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
