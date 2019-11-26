@@ -189,24 +189,6 @@ public class ChartPie extends BaseChart {
     }
 
     private void drawPie(Canvas canvas) {
-
-        /*for (int i = 0; i < pieBeanMap.size(); i++) {
-            ChartPieBean bean = pieBeanMap.get(i);
-            float angle = bean.startAngle + bean.sweepAngle;
-            if (angle <= mAnimatorValue) {
-                canvas.drawArc(areaArc, bean.startAngle, bean.sweepAngle, true, paintMap.get(i));
-
-                //canvas.drawArc(areaArc,bean.sweepAngle,bean.sweepAngle+1,true,paintMap.get(i));
-            } else {
-                float sweepAngle = mAnimatorValue - bean.startAngle;
-                if (sweepAngle >= 0) {
-                    canvas.drawArc(areaArc, bean.startAngle, sweepAngle, true, paintMap.get(i));
-                }
-            }
-
-        }
-        canvas.drawCircle(radius[0],radius[1],12,paintMap.get(0));
-        drawText(canvas);*/
         double arcPI = Math.PI * 2 / 360;//π的值
         float[] point;
         paint = new Paint();

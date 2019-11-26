@@ -5,16 +5,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这里是地图"/>
-<!--        <com.baidu.mapapi.map.MapView-->
-<!--            android:id="@+id/bmapView"-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:layout_height="fill_parent"-->
-<!--            android:clickable="true" />-->
+        android:layout_height="390dp">
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bbmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +19,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="@color/blue"
+            android:paddingTop="10dp"
             android:text="第一定位"
-            android:textSize="30dp"/>
+            android:textSize="20dp"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -37,13 +35,15 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:paddingLeft="10dp"
                 android:text="选择地点"
                 android:textSize="20dp"
                 android:paddingTop="10dp"/>
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/jiantou"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -57,11 +57,13 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:textSize="20dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="10dp"/>
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/jiantou"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -73,23 +75,48 @@
                 android:paddingTop="10dp"
                 android:src="@drawable/shijian"/>
             <TextView
+                android:id="@+id/time_start"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:textSize="20dp"
+                android:hint="start"
                 android:paddingTop="10dp"/>
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:src="@drawable/jiantou"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/shijian"/>
+            <TextView
+                android:id="@+id/time_end"
+                android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
+                android:textSize="20dp"
+                android:hint="end"
+                android:paddingTop="10dp"/>
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:src="@drawable/jiantou"/>-->
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:text="笔记"
-            android:textSize="30dp"/>
+            android:textSize="20dp"/>
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </LinearLayout>

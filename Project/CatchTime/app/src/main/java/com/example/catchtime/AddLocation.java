@@ -37,6 +37,7 @@ public class AddLocation extends AppCompatActivity {
     private UiSettings uiSettings;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
+    private TextView local;
 
 
     @Override
@@ -45,6 +46,7 @@ public class AddLocation extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_location);
         mapView = findViewById(R.id.bmapView);
+        local = findViewById(R.id.aloc_ed_local);
         initializeMap();
         hideLogo();
         zoomLevelOp();
@@ -100,6 +102,7 @@ public class AddLocation extends AppCompatActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 String addr = bdLocation.getAddrStr();
                 Log.i("mmy","地址"+addr);
+                local.setText(addr);
                 double lat = bdLocation.getLatitude();
                 double lng = bdLocation.getLongitude();
                 Log.i("mmy","纬度"+lat+";经度"+lng);

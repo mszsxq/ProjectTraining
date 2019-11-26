@@ -50,8 +50,11 @@ class MyAdapterActivities extends BaseAdapter {
         //获得每个item的对象
         img_activity=convertView.findViewById(R.id.img_activity);
         name_activity=convertView.findViewById(R.id.name_activity);
+
         img_activity.setImageResource((Integer)data.get(position).get("img"));
+        img_activity.setBackgroundColor((Integer) data.get(position).get("bak_color"));
         name_activity.setText((String)data.get(position).get("name"));
+
         return convertView;
     }
 }
