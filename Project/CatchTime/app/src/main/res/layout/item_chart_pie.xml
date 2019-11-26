@@ -83,12 +83,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chartpie_frame">
-        <android.support.v4.view.DirectionalViewPager
-            android:id="@+id/pager"
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_width="fill_parent" />
-
-
+            android:clipChildren="false"/>
 
     </RelativeLayout>
 

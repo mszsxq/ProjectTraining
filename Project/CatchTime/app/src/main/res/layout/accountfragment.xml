@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent">
 <RelativeLayout
     android:layout_width="match_parent"
@@ -45,7 +44,6 @@
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
-=======
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:clickable="true">
@@ -56,5 +54,4 @@
                 android:layoutAnimation="@anim/layout_animation_vertical"
                 android:orientation="vertical"
                 android:paddingTop="10dp" />
->>>>>>> a36c7fe77113029a3061855a59cc1acf55ad4baf
 </LinearLayout>

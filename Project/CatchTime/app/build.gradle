@@ -75,11 +75,11 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-<<<<<<< HEAD
-    compile 'com.android.support:appcompat-v7:25.3.1'
-=======
+    implementation 'com.android.support:appcompat-v7:25.3.1'
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
->>>>>>> a36c7fe77113029a3061855a59cc1acf55ad4baf
 
+    //viewpager
+    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:2.0.24'
+    implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
 }
