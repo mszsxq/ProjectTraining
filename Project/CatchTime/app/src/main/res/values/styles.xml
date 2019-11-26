@@ -18,7 +18,6 @@
         <item name="android:windowIsFloating">true</item>
         <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
-        <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:background">@android:color/white</item>
         <!-- 背景透明 -->
