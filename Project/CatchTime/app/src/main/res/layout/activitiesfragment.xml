@@ -1,26 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_height="match_parent"
+<<<<<<< HEAD
+    android:background="@android:color/white"
+=======
+    android:background="@color/white"
+>>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
+    android:clickable="true">
+    <RelativeLayout
+        android:id="@+id/ly"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="活动"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="new"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@id/ly" />
+    <Button
+        android:id="@+id/jump_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="活动"
-        android:textColor="@color/black"
-        android:textSize="26dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"/>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="@color/green"/>
-    <Button
-        android:text="借用跳转详情"
-        android:id="@+id/details"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"/>
+        android:text="借用跳转登录页面"
+        android:layout_below="@id/line"
+        />
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jump_login"
+        android:layout_marginLeft="30dp"
+        android:footerDividersEnabled="true"/>
+
+</RelativeLayout>

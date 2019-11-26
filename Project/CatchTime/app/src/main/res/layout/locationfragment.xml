@@ -2,45 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:clickable="true">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46sp"
-        android:background="@color/green">
+        android:layout_height="48sp">
         <TextView
-            android:text="Locations"
+            android:text="地点"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@android:color/black"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="46sp"
-        android:background="@color/gray">
+            android:layout_marginLeft="10dp"/>
         <TextView
-            android:text="ALL"
+            android:id="@+id/loc_btn_addloc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:text="添加"
+            android:textSize="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
+            android:textColor="@android:color/black"/>
     </RelativeLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="460dp">
+        android:layout_height="match_parent"
+        android:layout_margin="10sp">
         <ListView
             android:id="@+id/loc_lv_local"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/loc_iv_addloc"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/addloc"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="match_parent" />
     </RelativeLayout>
 </LinearLayout>
