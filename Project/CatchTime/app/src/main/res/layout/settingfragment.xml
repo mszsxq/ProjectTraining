@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text_color_8">
+    android:background="@color/text_color_8"
+    android:clickable="true">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
