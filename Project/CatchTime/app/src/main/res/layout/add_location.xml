@@ -59,6 +59,7 @@
             android:layout_marginLeft="40dp"
             android:layout_height="wrap_content"/>
         <ImageView
+            android:id="@+id/aloc_iv_thing"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/stuh"

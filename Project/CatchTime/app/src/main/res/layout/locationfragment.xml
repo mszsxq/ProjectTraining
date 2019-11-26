@@ -5,42 +5,43 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46sp"
+        android:layout_height="48sp"
         android:background="@color/green">
         <TextView
-            android:text="Locations"
+            android:text="地点"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="40dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="46sp"
         android:background="@color/gray">
         <TextView
-            android:text="ALL"
+            android:text="所有地点列表"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="40dp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="460dp">
+        android:layout_height="match_parent">
         <ListView
             android:id="@+id/loc_lv_local"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/loc_iv_addloc"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/addloc"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/loc_btn_addloc"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/addloc"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </LinearLayout>

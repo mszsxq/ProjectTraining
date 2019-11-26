@@ -1,10 +1,12 @@
 package com.example.catchtime.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ListView;
 
 import com.example.catchtime.R;
@@ -16,6 +18,7 @@ import java.util.logging.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class ActivitiesFragment extends Fragment {
@@ -24,6 +27,7 @@ public class ActivitiesFragment extends Fragment {
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
