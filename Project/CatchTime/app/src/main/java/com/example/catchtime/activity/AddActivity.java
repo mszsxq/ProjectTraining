@@ -2,6 +2,7 @@ package com.example.catchtime.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,9 @@ public class AddActivity extends SwipeBackActivity {
         btnfin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent= new Intent();
+                intent.setClass(AddActivity.this,AddActivityDetial.class);
+                startActivity(intent);
             }
         });
         btnex.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +114,7 @@ public class AddActivity extends SwipeBackActivity {
             final SwipeLayout sl = (SwipeLayout) convertView.findViewById(getSwipeLayoutResourceId(position));
             ImageView imageView=convertView.findViewById(R.id.add_activity_imageview);
             ImageView tubiao=convertView.findViewById(R.id.add_activity_imageview);
-            Button del=convertView.findViewById(R.id.delete);
+            ImageView del=convertView.findViewById(R.id.delete);
             int imid = getResources().getIdentifier(list.get(position), "drawable", getPackageName());
             tubiao.setImageResource(imid);
             TextView textView=convertView.findViewById(R.id.add_activity_text_view);
@@ -122,6 +125,7 @@ public class AddActivity extends SwipeBackActivity {
                 public void onClick(View v) {
                     list.remove(position);
                     notifyDataSetChanged();
+                    sl.close();
                 }
             });
 //            swipeLayout.setOnClickListener(new View.OnClickListener() {

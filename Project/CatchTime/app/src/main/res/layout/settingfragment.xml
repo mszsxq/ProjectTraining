@@ -8,11 +8,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3">
+    android:background="@color/text_color_8">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:textSize="20sp"
         android:background="@color/white"
         android:text="设置"></TextView>
@@ -154,6 +155,16 @@
                 android:src="@drawable/right">
             </ImageView>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"></ImageView>
+        </RelativeLayout>
     </LinearLayout>
+
 </LinearLayout>
 </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

@@ -17,16 +17,16 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/blue"
         android:orientation="vertical"
         >
 
         <ImageView
+            android:layout_marginLeft="5dp"
             android:id="@+id/acdetails_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             android:src="@drawable/left" />
         <ImageView
             android:layout_gravity="center_horizontal"
@@ -35,6 +35,8 @@
             android:layout_width="40dp"
             android:layout_marginBottom="10dp"
             />
+
+
         <TextView
             android:text="骑车"
             android:layout_width="wrap_content"
@@ -58,12 +60,16 @@
         android:id="@+id/view_weekoccupy"
         android:layout_below="@id/weekOccupy"
         android:layout_marginTop="20dp"
-        android:background="@color/blue"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
+
+        <com.example.catchtime.activity.LineView
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <TextView
@@ -81,12 +87,15 @@
         android:id="@+id/view_lastoccupy"
         android:layout_below="@id/lastOccupy"
         android:layout_marginTop="20dp"
-        android:background="@color/blue"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <TextView
@@ -104,12 +113,15 @@
         android:id="@+id/view_totaloccupy"
         android:layout_below="@id/toatalOccupy"
         android:layout_marginTop="20dp"
-        android:background="@color/blue"
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
+        <com.example.catchtime.activity.LineView
+            android:id="@+id/lineView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <TextView
