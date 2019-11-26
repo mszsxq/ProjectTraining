@@ -28,7 +28,14 @@
             android:layout_height="48dp"
             android:src="@drawable/header_right"
             android:layout_toRightOf="@+id/chartpie_header_date"/>
-
+<ImageView
+    android:id="@+id/chartpie_date"
+    android:layout_width="30dp"
+    android:layout_height="48dp"
+    android:src="@drawable/date"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="8dp"
+    />
     </RelativeLayout>
 <RelativeLayout
     android:id="@+id/chartpie_choose"
@@ -41,25 +48,29 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/button_day"
             android:background="@drawable/bt_shape"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="日"
             android:layout_marginRight="10dp"/>
         <Button
-            android:background="@drawable/bt_shape"
+            android:id="@+id/button_week"
+            android:background="@drawable/bt_shape_default"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="周"
             android:layout_marginRight="10dp"/>
         <Button
-            android:background="@drawable/bt_shape"
+            android:id="@+id/button_month"
+            android:background="@drawable/bt_shape_default"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="月"
             android:layout_marginRight="10dp"/>
         <Button
-            android:background="@drawable/bt_shape"
+            android:id="@+id/button_year"
+            android:background="@drawable/bt_shape_default"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="年"/>
@@ -67,55 +78,18 @@
 
 
 </RelativeLayout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_below="@+id/chartpie_choose"
-        android:layout_marginTop="60dp"
-        android:id="@+id/chartpie_frame">
-
-        <com.example.catchtime.ChartPie.ChartPie xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/chart_pie"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:background="@drawable/white_solid_round_10"
-            app:pie_duration="2000"
-            app:pie_isDrawCenter="false"
-            app:pie_isDrawLines="true"
-            app:pie_isUseAnimator="true"
-            app:pie_text_color="@color/text_color_2" />
-
-    </FrameLayout>
     <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/chartpie_frame"
+        android:layout_below="@+id/chartpie_choose"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:visibility="invisible"
-                android:id="@+id/chartpie_paint"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/main_paint"
-                android:layout_marginRight="20dp"/>
-            <ImageView
-                android:visibility="invisible"
-                android:id="@+id/chartpie_add"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/main_add"
-                android:layout_marginRight="20dp"/>
-            <ImageView
-                android:visibility="invisible"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/main_paint"/>
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/chartpie_frame">
+        <android.support.v4.view.DirectionalViewPager
+            android:id="@+id/pager"
+            android:layout_height="400dp"
+            android:layout_width="fill_parent" />
+
+
+
     </RelativeLayout>
+
 </RelativeLayout>
