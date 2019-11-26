@@ -1,10 +1,12 @@
 package com.example.catchtime.fragment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -15,6 +17,7 @@ import com.example.catchtime.setting.UserInfor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class SettingFragment extends Fragment {
@@ -24,6 +27,7 @@ public class SettingFragment extends Fragment {
     private RelativeLayout relativeLayout4;
     private customListener listener;
     private View view;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3">
+    android:background="#D3D3D3"
+    >
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
@@ -111,13 +112,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl6">
-        <EditText
+        <TextView
+            android:id="@+id/tx_begin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="START"
-            android:textSize="18sp">
-        </EditText>
+            android:hint="起始时间"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:background="@color/white"></TextView>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl8"
@@ -125,13 +127,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_below="@id/rl7">
-        <EditText
+        <TextView
+            android:id="@+id/tx_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="END"
+            android:hint="结束时间"
+            android:textColor="@color/black"
             android:textSize="18sp">
-        </EditText>
+        </TextView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -154,7 +158,11 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="@color/white"
-            android:textSize="18sp">
-        </EditText>
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:textSize="18sp"></EditText>
     </RelativeLayout>
 </RelativeLayout>
