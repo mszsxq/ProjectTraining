@@ -75,7 +75,11 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+<<<<<<< HEAD
     implementation 'com.android.support:appcompat-v7:25.3.1'
+=======
+    compile 'com.android.support:appcompat-v7:25.3.1'
+>>>>>>> 4f4e2a02234a5d856a13003ee42dae2205d1d2dc
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 

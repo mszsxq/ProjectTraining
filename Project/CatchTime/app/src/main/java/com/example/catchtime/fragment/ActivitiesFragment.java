@@ -1,7 +1,13 @@
 package com.example.catchtime.fragment;
 
 import android.os.Build;
+<<<<<<< HEAD
 import android.os.Build;
+=======
+
+import android.os.Build;
+
+>>>>>>> 4f4e2a02234a5d856a13003ee42dae2205d1d2dc
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f4e2a02234a5d856a13003ee42dae2205d1d2dc
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -36,8 +44,11 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+<<<<<<< HEAD
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+=======
+>>>>>>> 4f4e2a02234a5d856a13003ee42dae2205d1d2dc
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
