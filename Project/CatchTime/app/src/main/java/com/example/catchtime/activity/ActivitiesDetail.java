@@ -113,6 +113,18 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
+<<<<<<< HEAD
+        if(linearLayout==null){
+            Log.e("liner","null");
+            return ;
+        }
+        if(scrollState == ScrollState.UP){
+
+        }else if(scrollState == ScrollState.UP){
+
+        }
+=======
+>>>>>>> 66b5ad9a792b49121b50ebab508399c9ea96f769
     }
 //    //进度条
 //    private void setPosWay1() {
