@@ -26,14 +26,16 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
+import com.daimajia.swipe.SwipeLayout;
 
 import java.util.Calendar;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public class ModifyPage extends AppCompatActivity implements View.OnClickListener {
+public class ModifyPage extends SwipeBackActivity implements View.OnClickListener {
     private MapView mapView;
     private TextView view1;
     private TextView view2;
@@ -49,7 +51,7 @@ public class ModifyPage extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.modifypage);
-        mapView = findViewById(R.id.bbmapView);
+        mapView = (MapView) findViewById(R.id.bbmapView);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         locationOption();
@@ -57,8 +59,8 @@ public class ModifyPage extends AppCompatActivity implements View.OnClickListene
         hideLogo();
         zoomLevelOp();
         getbeginDate();
-        view1 = findViewById(R.id.time_start);
-        view2 = findViewById(R.id.time_end);
+        view1 = (TextView) findViewById(R.id.time_start);
+        view2 = (TextView) findViewById(R.id.time_end);
         view1.setOnClickListener((View.OnClickListener) this);
         getoverDate();
         view2.setOnClickListener((View.OnClickListener) this);
