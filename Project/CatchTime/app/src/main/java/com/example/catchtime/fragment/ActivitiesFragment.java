@@ -1,6 +1,7 @@
 package com.example.catchtime.fragment;
 
 import android.os.Build;
+import android.os.Build;
 
 import android.os.Build;
 
@@ -36,6 +37,8 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

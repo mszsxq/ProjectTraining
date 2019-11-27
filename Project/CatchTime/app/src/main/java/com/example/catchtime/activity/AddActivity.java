@@ -32,6 +32,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public class AddActivity extends SwipeBackActivity {
     private SwipeLayout swipeLayout;
     private List<String> list;
+    private List<String> listName;
     private ListView mListView;
     private TextView btnex;
     private TextView btnfin;
@@ -50,9 +51,11 @@ public class AddActivity extends SwipeBackActivity {
         list.add("biaoqian");
         list.add("alocal");
         list.add("addloc");
+        listName = new ArrayList<String>();
+        listName.add("学习");listName.add("走路");listName.add("读书");listName.add("睡觉");listName.add("吃饭");listName.add("娱乐");
 
         mListView= (ListView) findViewById(R.id.swipe_listview);
-        ListViewAdapter listViewAdapter=new ListViewAdapter(this,list);
+        ListViewAdapter listViewAdapter=new ListViewAdapter(this,list,listName);
         mListView.setAdapter(listViewAdapter);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
@@ -76,10 +79,12 @@ public class AddActivity extends SwipeBackActivity {
 
         private Context mContext;
         private List<String> list;
+        private List<String> listName;
         private int pos;
-        public  ListViewAdapter(Context context,List<String> list){
+        public  ListViewAdapter(Context context,List<String> list,List<String> listName){
             this.mContext=context;
             this.list=list;
+            this.listName=listName;
         }
         @Override
         public int getSwipeLayoutResourceId(int position) {
@@ -118,12 +123,13 @@ public class AddActivity extends SwipeBackActivity {
             int imid = getResources().getIdentifier(list.get(position), "drawable", getPackageName());
             tubiao.setImageResource(imid);
             TextView textView=convertView.findViewById(R.id.add_activity_text_view);
-            textView.setText(position+"");
+            textView.setText(listName.get(position).toString());
             del.setTag(position);
             del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     list.remove(position);
+                    listName.remove(position);
                     notifyDataSetChanged();
                     sl.close();
                 }
