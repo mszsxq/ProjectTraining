@@ -117,7 +117,6 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
             return ;
         }
         if(scrollState == ScrollState.UP){
-            linearLayout.set
 
         }else if(scrollState == ScrollState.UP){
 
