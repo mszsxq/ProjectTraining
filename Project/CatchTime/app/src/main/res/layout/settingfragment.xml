@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text_color_8"
     android:clickable="true">
     <TextView
         android:layout_width="match_parent"
@@ -14,159 +13,155 @@
         android:textSize="20sp"
         android:background="@color/white"
         android:text="设置"></TextView>
+
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/person"
+        android:layout_height="675dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:clickable="true">
-            <ImageView
-                android:id="@+id/my_user"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/user">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/my_user"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:text="个人页面">
-            </TextView>
-            <ImageView
-                android:id="@+id/uesr"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/right">
-            </ImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/addactivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:background="@color/white"
-            android:layout_marginTop="1dp"
-            android:clickable="true">
-            <ImageView
-                android:id="@+id/my_activity"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/agreement">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/my_activity"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:text="添加活动">
-            </TextView>
-            <ImageView
-                android:id="@+id/add_activity"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/right">
-            </ImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:background="@color/white"
-            android:layout_marginTop="1dp"
-            android:clickable="true">
-            <ImageView
-                android:id="@+id/my_setting"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/setting"></ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/my_setting"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:text="高级设置">
-            </TextView>
-            <ImageView
-                android:id="@+id/setting"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/right">
-            </ImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/helping"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:background="@color/white"
-            android:layout_marginTop="1dp"
-            android:clickable="true">
-            <ImageView
-                android:id="@+id/my_help"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/help">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/my_help"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:text="帮助">
-            </TextView>
-            <ImageView
-                android:id="@+id/help"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/right">
-            </ImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
-            <ImageView
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/time"></ImageView>
-        </RelativeLayout>
-    </LinearLayout>
+                android:background="@color/white"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/my_user"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/user"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/my_user"
+                    android:text="个人页面"
+                    android:textSize="18sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/uesr"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/right"></ImageView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/addactivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:padding="1dp">
+
+                <ImageView
+                    android:id="@+id/my_activity"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/agreement"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/my_activity"
+                    android:text="添加活动"
+                    android:textSize="18sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/add_activity"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/right"></ImageView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:padding="1dp">
+
+                <ImageView
+                    android:id="@+id/my_setting"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/setting"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/my_setting"
+                    android:text="高级设置"
+                    android:textSize="18sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/setting"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/right"></ImageView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/helping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:padding="1dp">
+
+                <ImageView
+                    android:id="@+id/my_help"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/help"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/my_help"
+                    android:text="帮助"
+                    android:textSize="18sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/help"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/right"></ImageView>
+            </RelativeLayout>
+        </LinearLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
 </LinearLayout>
