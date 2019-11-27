@@ -2,11 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:background="@android:color/white"
-=======
-    android:background="@color/white"
->>>>>>> c4971603719d9ed2f8500282335af6e25028fdde
     android:clickable="true">
     <RelativeLayout
         android:id="@+id/ly"
