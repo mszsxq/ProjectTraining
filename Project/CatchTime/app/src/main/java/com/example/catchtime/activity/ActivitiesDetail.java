@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -38,13 +39,14 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     private LinearLayout l2;
     private LinearLayout l3;
     private int color;
+    private CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
         //why 不能放在上面
-        color =getResources().getColor(R.color.translate_alpha);
+        color =getResources().getColor(R.color.orange_1);
         getView();
         setListener();
         setColor();
@@ -52,6 +54,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         //进度条
 //        setPosWay1();
         min.setText(new StringBuffer().append(progesss.getProgress()).append("min"));
+
 
         //柱状图
         ArrayList<BarEntry> values = new ArrayList<>();
@@ -73,6 +76,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     }
 
     public void getView() {
+        calendarView=(CalendarView)findViewById(R.id.calendarView);
         l1= (LinearLayout) findViewById(R.id.view_weekoccupy);
         l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
         l3=(LinearLayout)findViewById(R.id.view_totaloccupy);
@@ -113,15 +117,10 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
             return ;
         }
         if(scrollState == ScrollState.UP){
-            ViewGroup.LayoutParams lp;
-            lp= linearLayout.getLayoutParams();
-            lp.height=70;
-            linearLayout.setLayoutParams(lp);
+            linearLayout.set
+
         }else if(scrollState == ScrollState.UP){
-            ViewGroup.LayoutParams lp;
-            lp= linearLayout.getLayoutParams();
-            lp.height=150;
-            linearLayout.setLayoutParams(lp);
+
         }
     }
 //    //进度条
