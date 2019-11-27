@@ -54,6 +54,8 @@
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
+        <activity android:name=".ModifyPage" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

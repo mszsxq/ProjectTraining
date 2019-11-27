@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.catchtime.R;
-import com.example.catchtime.chart.InitBarChart;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -64,7 +62,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
 //            values.add(new BarEntry(i,val,getResources().getDrawable()));
             values.add(new BarEntry(i,val));
         }
-        new InitBarChart((BarChart) barCharts,values,this);
+//
 
         //折线图
         lineView.setData(
@@ -112,16 +110,18 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
+<<<<<<< HEAD
         if(linearLayout==null){
             Log.e("liner","null");
             return ;
         }
         if(scrollState == ScrollState.UP){
-            linearLayout.set
 
         }else if(scrollState == ScrollState.UP){
 
         }
+=======
+>>>>>>> 66b5ad9a792b49121b50ebab508399c9ea96f769
     }
 //    //进度条
 //    private void setPosWay1() {

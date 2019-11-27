@@ -16,6 +16,7 @@
         android:text="设置"></TextView>
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/white"
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -161,10 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/time"></ImageView>
+
         </RelativeLayout>
     </LinearLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

@@ -19,11 +19,11 @@
             android:layout_marginLeft="15dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
-        <TextView
+        <ImageView
+            android:id="@+id/addactivity"
+            android:src="@drawable/bigadd"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="new"
-            android:textSize="20dp"
             android:layout_alignParentRight="true"
             android:textColor="@color/design_default_color_primary_dark"
             android:layout_gravity="center"
