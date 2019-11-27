@@ -4,8 +4,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
+import com.example.catchtime.R;
 import com.example.catchtime.notimportant.DemoBase;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -23,6 +30,11 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.util.ArrayList;
 
 public class InitPieChart  extends DemoBase implements OnChartValueSelectedListener {
+    private Button add;
+    private Button change;
+    private Button data;
+    private LinearLayout linearLayout;
+    private View fragment;
     private PieChart chart;
     private ArrayList<PieEntry> entries;
     private Context context;
@@ -30,10 +42,16 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
     public void setCenterString(String centerString){
         this.centerString=centerString;
     }
-    public InitPieChart(PieChart chart, ArrayList<PieEntry> entries, Context context){
+    public InitPieChart(PieChart chart, ArrayList<PieEntry> entries, Context context
+                    ,Button add,Button change,Button data,LinearLayout linearLayout){
         this.chart=chart;
         this.entries=entries;
         this.context=context;
+
+        this.add=add;
+        this.change=change;
+        this.data=data;
+        this.linearLayout=linearLayout;
 
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
@@ -57,7 +75,7 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
 
         chart.setRotationAngle(5);
         // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
+        chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);//设置每个扇形可以显示
 
 //         chart.setUnit(" €");
@@ -84,7 +102,17 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         chart.setEntryLabelTextSize(12f);
 
         setData(entries);//设置数据函数
+
+//        getViews();
     }
+
+//    private void getViews() {
+//        fragment = LayoutInflater.from(context).inflate(R.layout.accountfragment,null);
+//        add=fragment.findViewById(R.id.chartpie_paint);
+//        change=fragment.findViewById(R.id.chartpie_add);
+//        data = fragment.findViewById(R.id.chartpie_data);
+//        linearLayout=fragment.findViewById(R.id.linear);
+//    }
 
     private void setData(ArrayList<PieEntry> entries) {
 //        ArrayList<PieEntry> entries = new ArrayList<>();
@@ -170,10 +198,30 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
+        linearLayout.setVisibility(View.VISIBLE);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("按钮","选中");
+            }
+        });
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("按钮","改变");
+            }
+        });
+        data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("按钮","数据");
+            }
+        });
     }
 
     public void onNothingSelected() {
         Log.i("PieChart", "nothing selected");
+        linearLayout.setVisibility(View.INVISIBLE);
     }
 
     public void onStartTrackingTouch(SeekBar seekBar) {}

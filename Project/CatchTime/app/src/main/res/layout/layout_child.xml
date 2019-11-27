@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="450dp">
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/piechart"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/linear"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <Button
+            android:id="@+id/add"
+            android:text="add"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <Button
+            android:id="@+id/change"
+            android:text="change"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <Button
+            android:text="data"
+            android:id="@+id/data"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+</RelativeLayout>

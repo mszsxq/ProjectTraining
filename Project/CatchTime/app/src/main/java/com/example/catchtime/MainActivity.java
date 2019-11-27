@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (getSupportActionBar() != null){
-            getSupportActionBar().hide();
-        }
+       if (getSupportActionBar() != null){
+           getSupportActionBar().hide();
+       }
 
         intiView();
         initBottomBar();

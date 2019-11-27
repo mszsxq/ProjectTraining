@@ -1,9 +1,7 @@
 package com.example.catchtime.fragment;
 
-
 import android.os.Build;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,9 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class ActivitiesFragment extends Fragment {
@@ -35,6 +32,8 @@ public class ActivitiesFragment extends Fragment {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,14 +55,17 @@ public class ActivitiesFragment extends Fragment {
         Map<String,Object> map1=new HashMap<String,Object>();
         map1.put("img",R.drawable.study);
         map1.put("name","学习");
+        map1.put("bak_color",R.color.gray);
         list.add(map1);
         Map<String,Object> map2=new HashMap<String,Object>();
         map2.put("img",R.drawable.paly);
         map2.put("name","游戏");
+        map2.put("bak_color",R.color.red_2);
         list.add(map2);
         Map<String,Object> map3=new HashMap<String,Object>();
         map3.put("img",R.drawable.walk);
         map3.put("name","行走");
+        map3.put("bak_color",R.color.colorAccent);
         list.add(map3);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){

@@ -13,8 +13,7 @@
             android:layout_height="25dp"
             android:src="@drawable/study"
             android:layout_centerVertical="true"
-            android:background="@color/colorAccent"
-            />
+            android:background="@color/colorAccent" />
         <TextView
             android:id="@+id/name_activity"
             android:layout_width="60dp"
@@ -32,10 +31,4 @@
             android:src="@drawable/rightjt"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
-<!--    <View-->
-<!--        android:layout_width="fill_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:background="@color/gray"/>-->
 </RelativeLayout>
