@@ -1,10 +1,6 @@
 package com.example.catchtime.fragment;
-
-<<<<<<< HEAD
 import android.graphics.drawable.Drawable;
-=======
 import android.content.Intent;
->>>>>>> a36c7fe77113029a3061855a59cc1acf55ad4baf
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.DirectionalViewPager;
@@ -16,7 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
+import com.example.catchtime.ChartPie.ChartPie;
 import com.example.catchtime.ChartPie.ChartPieBean;
 import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
@@ -24,15 +20,12 @@ import com.example.catchtime.R;
 import com.example.catchtime.chart.InitPieChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieEntry;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class AccountFragment extends Fragment {
     private List<ChartPieBean> pieBeanList;
     private LinearLayout lineLayoutList;
@@ -51,12 +44,8 @@ public class AccountFragment extends Fragment {
     private  ViewAdapter viewAdapter;
     private SingleViewAdapter singleViewAdapter;
     private ViewGroup mView;
-
-<<<<<<< HEAD
-=======
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
->>>>>>> a36c7fe77113029a3061855a59cc1acf55ad4baf
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,7 +53,6 @@ public class AccountFragment extends Fragment {
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
         initData();
-<<<<<<< HEAD
         Log.e("test", "初始化第0个页面");
         //扇形图
         childAt = inflater.inflate(R.layout.item_chart_pie, container, false);
@@ -76,7 +64,6 @@ public class AccountFragment extends Fragment {
         //ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
         //chartPie.setData(pieBeanList).start();
         // chartPie.start();
-=======
         Log.e("test","初始化第0个页面");
         //底部的曲线图
         Window window=this.getActivity().getWindow();
@@ -86,11 +73,11 @@ public class AccountFragment extends Fragment {
         ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
         chartPie.setData(pieBeanList).start();
         chartPie.start();
->>>>>>> a36c7fe77113029a3061855a59cc1acf55ad4baf
         return childAt;
     }
 
     private void registerViews() {
+        
         buttonYear.setOnClickListener(listener);
         buttonWeek.setOnClickListener(listener);
         buttonMonth.setOnClickListener(listener);

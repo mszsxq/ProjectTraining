@@ -59,10 +59,7 @@
             android:enabled="true"
             android:process=":remote">
         </service>
-<<<<<<< HEAD
         <!--<activity android:name=".TestButton" />-->
-=======
->>>>>>> 56cc1c006fa24fe14c1e342f14353e2cf5a44616
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />
