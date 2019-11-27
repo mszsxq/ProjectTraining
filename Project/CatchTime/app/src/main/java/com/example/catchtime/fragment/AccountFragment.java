@@ -81,7 +81,6 @@ public class AccountFragment extends Fragment {
     }
 
     private void registerViews() {
-        
         buttonYear.setOnClickListener(listener);
         buttonWeek.setOnClickListener(listener);
         buttonMonth.setOnClickListener(listener);
@@ -90,8 +89,6 @@ public class AccountFragment extends Fragment {
         right.setOnClickListener(listener);
     }
         childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
-
-
         ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
         ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.VERTICAL);
@@ -99,8 +96,6 @@ public class AccountFragment extends Fragment {
         ultraViewPager.setAdapter(adapter);
 //        getView();
         getViews();
-
-
 
         return childAt;
     }
