@@ -1,18 +1,24 @@
 package com.example.catchtime.chart;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
+import com.example.catchtime.Add_detailPage;
+import com.example.catchtime.ModifyPage;
 import com.example.catchtime.R;
+import com.example.catchtime.activity.ActivitiesDetail;
+import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.notimportant.DemoBase;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,29 +36,31 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.util.ArrayList;
 
 public class InitPieChart  extends DemoBase implements OnChartValueSelectedListener {
-    private Button add;
-    private Button change;
-    private Button data;
-    private LinearLayout linearLayout;
+    private ImageButton add;
+    private ImageButton change;
+    private ImageButton data;
+    private RelativeLayout linearLayout;
     private View fragment;
+    private int flag;//表示显示的是第几个位置
     private PieChart chart;
     private ArrayList<PieEntry> entries;
     private Context context;
     private String centerString;
+    private int flag1;//用来表示年月周日
     public void setCenterString(String centerString){
         this.centerString=centerString;
     }
     public InitPieChart(PieChart chart, ArrayList<PieEntry> entries, Context context
-                    ,Button add,Button change,Button data,LinearLayout linearLayout){
+                    ,ImageButton add,ImageButton change,ImageButton data,RelativeLayout linearLayout,int flag,int flag1){
         this.chart=chart;
         this.entries=entries;
         this.context=context;
-
+        this.flag=flag;
         this.add=add;
         this.change=change;
         this.data=data;
         this.linearLayout=linearLayout;
-
+        this.flag1=flag1;
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -103,26 +111,10 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
 
         setData(entries);//设置数据函数
 
-//        getViews();
     }
 
-//    private void getViews() {
-//        fragment = LayoutInflater.from(context).inflate(R.layout.accountfragment,null);
-//        add=fragment.findViewById(R.id.chartpie_paint);
-//        change=fragment.findViewById(R.id.chartpie_add);
-//        data = fragment.findViewById(R.id.chartpie_data);
-//        linearLayout=fragment.findViewById(R.id.linear);
-//    }
 
     private void setData(ArrayList<PieEntry> entries) {
-//        ArrayList<PieEntry> entries = new ArrayList<>();
-//
-//        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-//        // the chart.
-//        for (int i = 0; i < count ; i++) {
-//            PieEntry pieEntry=new PieEntry((float) ((Math.random() * range) + range / 5),"测试",getResources().getDrawable(R.drawable.marker2));
-//            entries.add(pieEntry);
-//        }
 
         PieDataSet dataSet = new PieDataSet(entries, "");//设置显示的扇形列表
         dataSet.setDrawIcons(true);//设置是否显示图标
@@ -181,12 +173,6 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         }else {
              s = new SpannableString(centerString);
         }
-//        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-//        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-//        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-//        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
-//        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-//        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
         return s;
     }
 
@@ -198,25 +184,33 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
-        linearLayout.setVisibility(View.VISIBLE);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("按钮","选中");
-            }
-        });
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("按钮","改变");
-            }
-        });
-        data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("按钮","数据");
-            }
-        });
+        if (flag1==0){
+            linearLayout.setVisibility(View.VISIBLE);
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("按钮","点击了第"+flag+"天的选中");
+                    Intent intent=new Intent(context, ModifyPage.class);
+                    context.startActivity(intent);
+                }
+            });
+            change.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("按钮","点击了第"+flag+"天的改变");
+                    Intent intent=new Intent(context, Add_detailPage.class);
+                    context.startActivity(intent);
+                }
+            });
+            data.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("按钮","点击了第"+flag+"天的数据");
+                    Intent intent=new Intent(context, ActivitiesDetail.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     public void onNothingSelected() {

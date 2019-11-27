@@ -16,11 +16,14 @@ import android.view.Window;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.catchtime.Login;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
+import com.example.catchtime.activity.AddActivity;
+import com.example.catchtime.activity.AddActivityDetial;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +51,14 @@ public class ActivitiesFragment extends Fragment {
         //存放数据的list；
         final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
         listView=(ListView)view.findViewById(R.id.listview);
+        ImageView imageView=view.findViewById(R.id.addactivity);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(view.getContext(), AddActivityDetial.class);
+                startActivity(intent);
+            }
+        });
         Button button1=view.findViewById(R.id.jump_login);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

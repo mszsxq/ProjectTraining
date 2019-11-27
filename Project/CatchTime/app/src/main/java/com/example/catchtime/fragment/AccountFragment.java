@@ -1,7 +1,6 @@
 package com.example.catchtime.fragment;
 
 import android.graphics.drawable.Drawable;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.DirectionalViewPager;
@@ -15,13 +14,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.catchtime.ChartPie.ChartPie;
 import com.example.catchtime.ChartPie.ChartPieBean;
 import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
-import com.example.catchtime.chart.InitPieChart;
-import com.github.mikephil.charting.charts.PieChart;
+import com.example.catchtime.chart.PerPieEntry;
 import com.github.mikephil.charting.data.PieEntry;
 import com.tmall.ultraviewpager.UltraViewPager;
 
@@ -29,7 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +57,6 @@ public class AccountFragment extends Fragment {
 
 
         //扇形图
-        childAt = inflater.inflate(R.layout.item_chart_pie, container, false);
         Log.e("test","初始化第0个页面");
         Window window=this.getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.gray));
@@ -70,17 +65,20 @@ public class AccountFragment extends Fragment {
 
         ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
         ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.VERTICAL);
-        adapter = new UltraPagerAdapter(false);
+        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+        ArrayList<PerPieEntry> list=new ArrayList<>();
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        adapter = new UltraPagerAdapter(false,list,getContext(),0);
         ultraViewPager.setAdapter(adapter);
 //        getView();
         getViews();
-
-
-
         return childAt;
     }
-
 
     private void getViews() {
         ButtonClickListener buttonClickListener=new ButtonClickListener();
@@ -117,7 +115,15 @@ public class AccountFragment extends Fragment {
                         buttonMonth.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
-                        adapter = new UltraPagerAdapter(false);
+//                        List<PieEntry> entryList;
+                        ArrayList<PerPieEntry> list=new ArrayList<>();
+                        list.add(new PerPieEntry());
+                        list.add(new PerPieEntry());
+                        list.add(new PerPieEntry());
+                        list.add(new PerPieEntry());
+                        list.add(new PerPieEntry());
+                        list.add(new PerPieEntry());
+                        adapter = new UltraPagerAdapter(false,list,getContext(),0);
                         ultraViewPager.setAdapter(adapter);
                         break;
                     case R.id.button_week:
@@ -126,7 +132,9 @@ public class AccountFragment extends Fragment {
                         buttonMonth.setBackground(defDrawable);
                         buttonDay.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
-                        adapter = new UltraPagerAdapter(false);
+                        ArrayList<PerPieEntry> list1=new ArrayList<>();
+                        list1.add(new PerPieEntry());
+                        adapter = new UltraPagerAdapter(false,list1,getContext(),1);
                         ultraViewPager.setAdapter(adapter);
                         break;
                     case R.id.button_month:
@@ -135,7 +143,9 @@ public class AccountFragment extends Fragment {
                         buttonDay.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
-                        adapter = new UltraPagerAdapter(false);
+                        ArrayList<PerPieEntry> list2=new ArrayList<>();
+                        adapter = new UltraPagerAdapter(false,list2,getContext(),2);
+                        list2.add(new PerPieEntry());
                         ultraViewPager.setAdapter(adapter);
                         break;
                     case R.id.button_year:
@@ -144,7 +154,9 @@ public class AccountFragment extends Fragment {
                         buttonMonth.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonDay.setBackground(defDrawable);
-                        adapter = new UltraPagerAdapter(false);
+                        ArrayList<PerPieEntry> list3=new ArrayList<>();
+                        list3.add(new PerPieEntry());
+                        adapter = new UltraPagerAdapter(false,list3,getContext(),3);
                         ultraViewPager.setAdapter(adapter);
                         break;
                     case R.id.chartpie_header_left:

@@ -73,7 +73,6 @@ public class TestFragment extends Fragment {
             PieEntry pieEntry = new PieEntry((float) ((Math.random() * 5) + 5 / 5), " 测试", getResources().getDrawable(R.drawable.marker2));
             entries.add(pieEntry);
         }
-//        new InitPieChart(chart, entries, this.getContext());
     }
 
 

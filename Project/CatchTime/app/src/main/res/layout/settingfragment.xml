@@ -15,6 +15,7 @@
         android:background="@color/white"
         android:text="设置"></TextView>
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:background=""
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -81,14 +82,14 @@
                 android:textSize="18sp"
                 android:text="添加活动">
             </TextView>
-            <ImageView
-                android:id="@+id/add_activity"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/right">
-            </ImageView>
+<!--            <ImageView-->
+<!--                android:id="@+id/add_activity"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:src="@drawable/right">-->
+<!--            </ImageView>-->
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/settings"
@@ -161,10 +162,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/time"></ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/time"></ImageView>-->
         </RelativeLayout>
     </LinearLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
