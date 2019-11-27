@@ -56,9 +56,39 @@ public class UserDao {
 			}
 		}
 	}
-//	public int register(String phone,String password) {
-//		String sql = "Insert into user(user_id,phone,password) value(?,?)";
-//	}
+	public int register(String phone,String password) {
+		String sql = "Insert into user(phone,password) value(?,?)";
+		int n = 0;
+		Connection conn = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, phone);
+			ps.setString(2, password);
+			
+			n = ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return n;
+	}
 	public int addUser(User user){
 		String sql = "Insert into user(user_id,phone,password,username,register_date,moto,image) value(?,?,?,?,?,?,?)";
 		Connection conn = null;
@@ -97,7 +127,7 @@ public class UserDao {
 		return n;
 	}
 	public int UpdateUserMoto(String moto,int user_id) {
-		String sql = "update tbl_cart set moto=? where user_id=?";
+		String sql = "update user set moto=? where user_id=?";
 		Connection conn = null;
 		int n = 0;
 		try {
@@ -124,7 +154,7 @@ public class UserDao {
 		return n;
 	}
 	public int UpdateUserImage(String image,int user_id) {
-		String sql = "update tbl_cart set image=? where user_id=?";
+		String sql = "update user set image=? where user_id=?";
 		Connection conn = null;
 		int n = 0;
 		try {
@@ -151,7 +181,7 @@ public class UserDao {
 		return n;
 	}
 	public int UpdateUserPassword(String password,int user_id) {
-		String sql = "update tbl_cart set password=? where user_id=?";
+		String sql = "update user set password=? where user_id=?";
 		Connection conn = null;
 		int n = 0;
 		try {
