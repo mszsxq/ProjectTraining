@@ -1,5 +1,6 @@
 package com.example.catchtime;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,10 +8,15 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.TransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
+
 import androidx.appcompat.app.AppCompatActivity;
 public class Login extends AppCompatActivity {
     private TextView btn_login;
@@ -20,6 +26,7 @@ public class Login extends AppCompatActivity {
     private TextView full;
     private EditText user_pwd;
     private ImageView eyes;
+    private Button btlog;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
 
@@ -72,8 +79,47 @@ public class Login extends AppCompatActivity {
         full=findViewById(R.id.full);
         user_pwd=findViewById(R.id.user_pwd);
         eyes=findViewById(R.id.eyes);
+        btlog=findViewById(R.id.btn_log);
+        btlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getaa();
+            }
+        });
+
     }
-   class CustomOnclickListener implements View.OnClickListener{
+
+    private void getaa() {
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.btn_log), "", "")
+                        // All options below are optional
+
+                        .outerCircleColor(R.color.green)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                        .targetCircleColor(R.color.white)   // Specify a color for the target circle
+                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextColor(R.color.white)      // Specify the color of the title text
+                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextColor(R.color.red)  // Specify the color of the description text
+                        .textColor(R.color.blue)            // Specify a color for both the title and description text
+                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(true)                   // Whether to tint the target view's color
+                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+//                        .icon()                     // Specify a custom drawable to draw as the target
+                        .targetRadius(50),                  // Specify the target radius (in dp)
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+//                        doSomething();
+                    }
+                });
+    }
+
+    class CustomOnclickListener implements View.OnClickListener{
 
        @Override
        public void onClick(View v) {
@@ -86,6 +132,7 @@ public class Login extends AppCompatActivity {
                            R.anim.in,//进入动画
                            R.anim.out//出去动画
                    );
+                   finish();
                    break;
                case R.id.btn_fpwd://改变密码输入框是否可见
                    Intent intent1=new Intent();

@@ -75,6 +75,7 @@ public class Register extends AppCompatActivity {
                     intent.setClass(Register.this, Login.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in,R.anim.out);
+                    finish();
                     break;
                 case R.id.eyes1:
                     if(isHideFirst==true){

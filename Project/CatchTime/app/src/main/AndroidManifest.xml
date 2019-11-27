@@ -55,6 +55,7 @@
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
+        <activity android:name=".location.ChangeLocal" />
 
         <service
             android:name="com.baidu.location.f"
