@@ -15,7 +15,7 @@
         android:background="@color/white"
         android:text="设置"></TextView>
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
-        android:background=""
+        android:background="#F2EEEE"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
