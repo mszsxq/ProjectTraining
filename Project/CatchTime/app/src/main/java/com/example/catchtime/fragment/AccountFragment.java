@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.catchtime.ChartPie.ChartPie;
 import com.example.catchtime.ChartPie.ChartPieBean;
@@ -22,10 +23,12 @@ import com.example.catchtime.R;
 import com.example.catchtime.chart.InitPieChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieEntry;
+import com.tmall.ultraviewpager.UltraViewPager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
@@ -47,6 +50,8 @@ public class AccountFragment extends Fragment {
     private  ViewAdapter viewAdapter;
     private SingleViewAdapter singleViewAdapter;
     private ViewGroup mView;
+    private UltraViewPager ultraViewPager;
+    private PagerAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -55,108 +60,118 @@ public class AccountFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-//        return super.onCreateView(inflater, container, savedInstanceState);
         //扇形图
         childAt = inflater.inflate(R.layout.item_chart_pie, container, false);
-//        getViews();
-//        registerViews();
-//        setChartPieData();
-//        showPager();
-        //ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
-        //chartPie.setData(pieBeanList).start();
-        // chartPie.start();
         Log.e("test","初始化第0个页面");
-        //底部的曲线图
         Window window=this.getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.gray));
-        View childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
+        childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
 
-        //lineLayoutList.addView(childAt);
-//        ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
-//        chartPie.setData(pieBeanList).start();
-//        chartPie.start();
+
+        ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
+        ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.VERTICAL);
+        adapter = new UltraPagerAdapter(false);
+        ultraViewPager.setAdapter(adapter);
+//        getView();
+        getViews();
+
+
+
         return childAt;
     }
 
-//    private void registerViews() {
-//        buttonYear.setOnClickListener(listener);
-//        buttonWeek.setOnClickListener(listener);
-//        buttonMonth.setOnClickListener(listener);
-//        buttonDay.setOnClickListener(listener);
-//        left.setOnClickListener(listener);
-//        right.setOnClickListener(listener);
-//    }
 
-//    private void getViews() {
-//        buttonDay = childAt.findViewById(R.id.button_day);
-//        buttonWeek = childAt.findViewById(R.id.button_week);
-//        buttonMonth = childAt.findViewById(R.id.button_month);
-//        buttonYear = childAt.findViewById(R.id.button_year);
-//        listener = new ButtonClickListener();
-//        left=childAt.findViewById(R.id.chartpie_header_left);
-//        right = childAt.findViewById(R.id.chartpir_header_right);
-//    }
+    private void getViews() {
+        ButtonClickListener buttonClickListener=new ButtonClickListener();
+        buttonDay = childAt.findViewById(R.id.button_day);
+        buttonWeek = childAt.findViewById(R.id.button_week);
+        buttonMonth = childAt.findViewById(R.id.button_month);
+        buttonYear = childAt.findViewById(R.id.button_year);
+        left=childAt.findViewById(R.id.chartpie_header_left);
+        right = childAt.findViewById(R.id.chartpir_header_right);
+        buttonDay.setOnClickListener(buttonClickListener);
+        buttonMonth.setOnClickListener(buttonClickListener);
+        buttonWeek.setOnClickListener(buttonClickListener);
+        buttonYear.setOnClickListener(buttonClickListener);
+        right.setOnClickListener(buttonClickListener);
+        left.setOnClickListener(buttonClickListener);
+        RelativeLayout relativeLayout=childAt.findViewById(R.id.chartpie_choose);
+        relativeLayout.setOnClickListener(new ButtonClickListener());
+    }
 
-//    class ButtonClickListener implements View.OnClickListener {
-//        @Override
-//        public void onClick(View view) {
-//            Drawable defDrawable = getResources().getDrawable(R.drawable.bt_shape_default);
-//            Drawable drawable = getResources().getDrawable(R.drawable.bt_shape);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                switch (view.getId()) {
-//                    case R.id.button_day:
-//                        view.setBackground(drawable);
-//                        buttonMonth.setBackground(defDrawable);
-//                        buttonWeek.setBackground(defDrawable);
-//                        buttonYear.setBackground(defDrawable);
-//                        break;
-//                    case R.id.button_week:
-//                        view.setBackground(drawable);
-//                        buttonMonth.setBackground(defDrawable);
-//                        buttonDay.setBackground(defDrawable);
-//                        buttonYear.setBackground(defDrawable);
-//                       showSinglePager();
-//                        Log.i("周","zhou");
-//                        break;
-//                    case R.id.button_month:
-//                        view.setBackground(drawable);
-//                        buttonDay.setBackground(defDrawable);
-//                        buttonWeek.setBackground(defDrawable);
-//                        buttonYear.setBackground(defDrawable);
-//                        showSinglePager();
-//                        break;
-//                    case R.id.button_year:
-//                        view.setBackground(drawable);
-//                        buttonMonth.setBackground(defDrawable);
-//                        buttonWeek.setBackground(defDrawable);
-//                        buttonDay.setBackground(defDrawable);
-//                        showSinglePager();
-//                        break;
-//                    case R.id.chartpie_header_left:
-//                        int position=viewPager.getCurrentItem();
-//                        if(position!=0){
-//                            viewPager.setCurrentItem(position-1);
-//                        }else{
-//                            viewPager.setCurrentItem(0);
-//                        }
-//                        Log.i("左边",position+"");
-//                        break;
-//                    case R.id.chartpir_header_right:
-//                        int rposition=viewPager.getCurrentItem();
-//                        if(rposition!=6){
-//                            viewPager.setCurrentItem(rposition+1);
-//                        }else{
-//                            viewPager.setCurrentItem(6);
-//                        }
-//                        Log.i("右边",rposition+"");
-//                        break;
-//                }
-//            }
-//
-//        }
-//
-//
-//    }
+    class ButtonClickListener implements View.OnClickListener {
+
+        //日周年月的切换由改变适配器来实现
+        @Override
+        public void onClick(View view) {
+            Log.e("点击","时间");
+            System.out.println("anniu dianji点击");
+            Drawable defDrawable = getResources().getDrawable(R.drawable.bt_shape_default);
+            Drawable drawable = getResources().getDrawable(R.drawable.bt_shape);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                switch (view.getId()) {
+                    case R.id.button_day:
+                        Log.e("按钮","day");
+                        view.setBackground(drawable);
+                        buttonMonth.setBackground(defDrawable);
+                        buttonWeek.setBackground(defDrawable);
+                        buttonYear.setBackground(defDrawable);
+                        adapter = new UltraPagerAdapter(false);
+                        ultraViewPager.setAdapter(adapter);
+                        break;
+                    case R.id.button_week:
+                        Log.e("按钮","week");
+                        view.setBackground(drawable);
+                        buttonMonth.setBackground(defDrawable);
+                        buttonDay.setBackground(defDrawable);
+                        buttonYear.setBackground(defDrawable);
+                        adapter = new UltraPagerAdapter(false);
+                        ultraViewPager.setAdapter(adapter);
+                        break;
+                    case R.id.button_month:
+                        Log.e("按钮","month");
+                        view.setBackground(drawable);
+                        buttonDay.setBackground(defDrawable);
+                        buttonWeek.setBackground(defDrawable);
+                        buttonYear.setBackground(defDrawable);
+                        adapter = new UltraPagerAdapter(false);
+                        ultraViewPager.setAdapter(adapter);
+                        break;
+                    case R.id.button_year:
+                        Log.e("按钮","year");
+                        view.setBackground(drawable);
+                        buttonMonth.setBackground(defDrawable);
+                        buttonWeek.setBackground(defDrawable);
+                        buttonDay.setBackground(defDrawable);
+                        adapter = new UltraPagerAdapter(false);
+                        ultraViewPager.setAdapter(adapter);
+                        break;
+                    case R.id.chartpie_header_left:
+                        int position=ultraViewPager.getCurrentItem();
+                        if(position!=0){
+                            ultraViewPager.setCurrentItem(position-1);
+                        }else{
+                            ultraViewPager.setCurrentItem(0);
+                        }
+                        Log.i("左边",position+"");
+                        break;
+                    case R.id.chartpir_header_right:
+                        int rposition=ultraViewPager.getCurrentItem();
+                        if(rposition!=6){
+                            ultraViewPager.setCurrentItem(rposition+1);
+                        }else{
+                            ultraViewPager.setCurrentItem(6);
+                        }
+                        Log.i("右边",rposition+"");
+                        break;
+                }
+            }
+
+        }
+
+
+    }
 
 
 //    private void initData() {
