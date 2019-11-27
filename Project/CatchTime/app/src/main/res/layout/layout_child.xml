@@ -10,32 +10,37 @@
         android:id="@+id/piechart"
         android:layout_width="match_parent"
         android:layout_height="400dp"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="15dp"
         android:id="@+id/linear"
         android:orientation="horizontal"
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <Button
+        <ImageButton
+            android:src="@drawable/bi"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/shape"
             android:id="@+id/add"
             android:text="add"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <ImageButton
+            android:src="@drawable/jiahao"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape"
             android:id="@+id/change"
-            android:text="change"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-        <Button
-            android:text="data"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <ImageButton
+            android:src="@drawable/zhuzhuang"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/shape"
             android:id="@+id/data"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

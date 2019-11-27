@@ -3,6 +3,7 @@ package com.example.catchtime.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class AddActivity extends SwipeBackActivity {
     private SwipeLayout swipeLayout;
     private List<String> list;
     private List<String> listName;
+    private List<String> listNColor;
     private ListView mListView;
     private TextView btnex;
     private TextView btnfin;
@@ -45,17 +47,29 @@ public class AddActivity extends SwipeBackActivity {
         }
 
         list=new ArrayList<String>();
-        list.add("bike");
         list.add("onfeet");
-        list.add("phone");
-        list.add("biaoqian");
-        list.add("alocal");
-        list.add("addloc");
+        list.add("onfeet");
+        list.add("onfeet");
+        list.add("onfeet");
+        list.add("onfeet");
+        list.add("onfeet");
         listName = new ArrayList<String>();
-        listName.add("学习");listName.add("走路");listName.add("读书");listName.add("睡觉");listName.add("吃饭");listName.add("娱乐");
+        listName.add("学习");
+        listName.add("走路");
+        listName.add("读书");
+        listName.add("睡觉");
+        listName.add("吃饭");
+        listName.add("娱乐");
+        listNColor = new ArrayList<String>();
+        listNColor.add("#FF906E");
+        listNColor.add("#E17E1A");
+        listNColor.add("#71B100");
+        listNColor.add("#FFABAB");
+        listNColor.add("#678BFD");
+        listNColor.add("#E17E1A");
 
         mListView= (ListView) findViewById(R.id.swipe_listview);
-        ListViewAdapter listViewAdapter=new ListViewAdapter(this,list,listName);
+        ListViewAdapter listViewAdapter=new ListViewAdapter(this,list,listName,listNColor);
         mListView.setAdapter(listViewAdapter);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
@@ -80,11 +94,13 @@ public class AddActivity extends SwipeBackActivity {
         private Context mContext;
         private List<String> list;
         private List<String> listName;
+        private List<String> listColor;
         private int pos;
-        public  ListViewAdapter(Context context,List<String> list,List<String> listName){
+        public  ListViewAdapter(Context context,List<String> list,List<String> listName,List<String> listColor){
             this.mContext=context;
             this.list=list;
             this.listName=listName;
+            this.listColor=listColor;
         }
         @Override
         public int getSwipeLayoutResourceId(int position) {
@@ -120,6 +136,7 @@ public class AddActivity extends SwipeBackActivity {
             ImageView imageView=convertView.findViewById(R.id.add_activity_imageview);
             ImageView tubiao=convertView.findViewById(R.id.add_activity_imageview);
             ImageView del=convertView.findViewById(R.id.delete);
+            tubiao.setBackgroundColor(Color.parseColor(listColor.get(position)));
             int imid = getResources().getIdentifier(list.get(position), "drawable", getPackageName());
             tubiao.setImageResource(imid);
             TextView textView=convertView.findViewById(R.id.add_activity_text_view);

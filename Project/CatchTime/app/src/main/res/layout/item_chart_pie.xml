@@ -30,12 +30,13 @@
             android:src="@drawable/header_right"
             android:layout_toRightOf="@+id/chartpie_header_date"/>
 <ImageView
+    android:layout_marginTop="10dp"
     android:id="@+id/chartpie_date"
-    android:layout_width="30dp"
-    android:layout_height="48dp"
+    android:layout_width="20dp"
+    android:layout_height="32dp"
     android:src="@drawable/date"
     android:layout_alignParentRight="true"
-    android:layout_marginRight="8dp"
+    android:layout_marginRight="15dp"
     />
     </RelativeLayout>
 <RelativeLayout
@@ -95,7 +96,7 @@
             android:id="@+id/ultra_viewpager"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/white" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.catchtime;
 
 import androidx.appcompat.app.AppCompatActivity;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -12,7 +13,7 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-public class Add_detailPage extends AppCompatActivity implements View.OnClickListener {
+public class Add_detailPage extends SwipeBackActivity implements View.OnClickListener {
     private TextView btnbegin;
     private TextView btnover;
     private Calendar cal;
