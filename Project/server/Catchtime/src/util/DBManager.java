@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBManager {
 	private final String DRIVER_STR = "com.mysql.jdbc.Driver";
-	private final String CONN_STR = "jdbc:mysql://localhost:3306/catchtime";
+	private final String CONN_STR = "jdbc:mysql://localhost:3306/catchtime?useUnicode=true&characterEncoding=utf-8";
 	private final String USER = "root";
 	private final String PWD = "";
 	private static DBManager dbManager;
