@@ -26,7 +26,15 @@ public class InitBarChart extends DemoBase {
         this.entries = entries;
         this.context = context;
 
-
+        if (entries==null||entries.size()==0){
+            entries=new ArrayList<BarEntry>();
+            for (int i = 0; i < 10; i++) {
+                float multi = (100 + 1);
+                float val = (float) (Math.random() * multi) + multi / 3;
+//            values.add(new BarEntry(i, val, getResources().getDrawable(R.drawable.marker2)));//表示为是否显示条形柱上面的图标
+                entries.add(new BarEntry(i, val));
+            }
+        }
         chart.getDescription().setEnabled(true);
 
         chart.setMaxVisibleValueCount(60);//设置最大显示列数

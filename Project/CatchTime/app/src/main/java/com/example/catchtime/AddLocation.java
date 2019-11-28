@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -25,7 +28,9 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.example.catchtime.activity.AddActivity;
+import com.example.catchtime.location.ChangeLocal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -38,6 +43,8 @@ public class AddLocation extends AppCompatActivity {
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private TextView local;
+    private ImageButton changeLocal;
+    private List<String> poiss;
 
 
     @Override
@@ -47,10 +54,11 @@ public class AddLocation extends AppCompatActivity {
         setContentView(R.layout.add_location);
         mapView = findViewById(R.id.bmapView);
         local = findViewById(R.id.aloc_ed_local);
+        changeLocal=findViewById(R.id.changelocal);
+        Log.i("sss","11111111");Toast.makeText(this,"ssss",Toast.LENGTH_SHORT);
         initializeMap();
         hideLogo();
         zoomLevelOp();
-        //定位操作
         LocationOption();
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
@@ -62,7 +70,7 @@ public class AddLocation extends AppCompatActivity {
                 finish();
             }
         });
-        TextView confirm = findViewById(R.id.aloc_tv_confirm);
+        Button confirm = findViewById(R.id.aloc_tv_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +86,16 @@ public class AddLocation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        changeLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),ChangeLocal.class);
+                intent.putExtra("poi",poiss.toString());
+                intent.putExtra("resource",0);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     private void initializeMap() {
         baiduMap = mapView.getMap();
@@ -89,8 +107,7 @@ public class AddLocation extends AppCompatActivity {
         baiduMap.setMyLocationEnabled(true);
         locationClientOption = new LocationClientOption();
         locationClientOption.setOpenGps(true);
-        locationClientOption.setScanSpan(1000);
-        SDKInitializer.setCoordType(CoordType.GCJ02);
+        locationClientOption.setCoorType("bd09ll");
         locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         locationClientOption.setIsNeedAddress(true);
         locationClientOption.setIsNeedLocationDescribe(true);
@@ -101,19 +118,22 @@ public class AddLocation extends AppCompatActivity {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 String addr = bdLocation.getAddrStr();
-                Log.i("mmy","地址"+addr);
                 local.setText(addr);
+                String locastring=getIntent().getStringExtra("local1");
+                if (locastring!=null){
+                    local.setText(locastring);
+                }
                 double lat = bdLocation.getLatitude();
                 double lng = bdLocation.getLongitude();
-                Log.i("mmy","纬度"+lat+";经度"+lng);
                 List<Poi> pois = bdLocation.getPoiList();
+                poiss=new ArrayList<>();
                 for (Poi p:pois){
                     String name = p.getName();
                     String pAddr = p.getAddr();
-                    Log.i("mmy","POI:"+name+":"+pAddr);
+                    Log.i("mmy"+poiss.size(),"POI:"+name+":"+pAddr);
+                    poiss.add("name"+name);
                 }
                 String time = bdLocation.getTime();
-                Log.i("mmy","时间："+time);
                 showLocOnMap(lat,lng);
             }
         });

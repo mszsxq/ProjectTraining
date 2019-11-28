@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="80dp"
@@ -26,6 +26,7 @@
             android:gravity="center" />
     </LinearLayout>
     <LinearLayout
+        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -43,6 +44,7 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
+                    android:layout_marginLeft="10dp"
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/phone"
@@ -82,6 +84,8 @@
                 android:orientation="horizontal"
                 android:paddingBottom="7dp">
                 <ImageView
+                    android:layout_marginLeft="10dp"
+
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/yanzheng"
@@ -104,6 +108,8 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
                 <ImageView
+                    android:layout_marginLeft="10dp"
+
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/stock"
@@ -130,10 +136,10 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="注册"
-            android:textColor="@color/white"
+            android:textColor="@color/alpha"
             android:layout_marginTop="15dp"
-            android:background="@color/orange"
+            android:background="@drawable/shape1"
             android:textSize="20dp"/>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

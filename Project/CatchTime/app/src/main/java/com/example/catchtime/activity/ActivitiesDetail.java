@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.catchtime.R;
+import com.example.catchtime.chart.InitBarChart;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -44,7 +45,8 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
         //why 不能放在上面
-        color =getResources().getColor(R.color.orange_1);
+        String colorstring= getIntent().getStringExtra("colortype");
+        color =getResources().getIdentifier(colorstring, "color", getPackageName());
         getView();
         setListener();
         setColor();
@@ -79,12 +81,13 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
         l3=(LinearLayout)findViewById(R.id.view_totaloccupy);
         lineView2 =(LineView)findViewById(R.id.lineView2);
-        barCharts= findViewById(R.id.barchar);
+        barCharts= (BarChart)findViewById(R.id.barchar);
         lineView=(LineView) findViewById(R.id.lineView);
         back = (ImageView) findViewById(R.id.acdetails_back);
         progesss = (ProgressBar) findViewById(R.id.progesss1);
         min = (TextView) findViewById(R.id.min1);
         linearLayout = (LinearLayout) findViewById(R.id.topbar);
+        new InitBarChart((BarChart) barCharts,null,this);
     }
     public void setListener(){
         back.setOnClickListener(new MyListener());
