@@ -112,10 +112,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
 
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-<<<<<<< HEAD
-=======
 
->>>>>>> 4e397161b2ed23d378bc3fc498e138eec2891bff
         if(linearLayout==null){
             Log.e("liner","null");
             return ;
