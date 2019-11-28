@@ -17,17 +17,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/wleft" />
 
-        <TextView
-            android:id="@+id/aloc_tv_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:text="确认"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -44,33 +34,63 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/aloc_rt_footer"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp">
-        <ImageView
-            android:id="@+id/aloc_iv_local"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/alocal"/>
-        <EditText
-            android:id="@+id/aloc_ed_local"
-            android:layout_width="300dp"
-            android:layout_marginLeft="40dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/aloc_iv_local"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/alocal"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/aloc_ed_local"
+                android:layout_width="210dp"
+                android:layout_toRightOf="@id/aloc_iv_local"
+                android:layout_height="wrap_content"/>
+            <ImageButton
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/changelocal"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/whitebi"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/aloc_iv_thing"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/stuh"
+                android:layout_marginTop="50dp"/>
+            <EditText
+                android:layout_centerVertical="true"
+                android:id="@+id/aloc_ed_name"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="50dp"/>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/aloc_tv_confirm"
+            android:text="确定"
+            android:background="@drawable/shape1"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <ImageView
-            android:id="@+id/aloc_iv_thing"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/stuh"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/aloc_iv_local"/>
-        <EditText
-            android:id="@+id/aloc_ed_name"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_below="@+id/aloc_iv_local"
-            android:layout_marginTop="50dp"/>
+
     </RelativeLayout>
 </RelativeLayout>
