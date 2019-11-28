@@ -1,10 +1,13 @@
 package com.example.catchtime;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ZoomControls;
@@ -27,7 +30,9 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.daimajia.swipe.SwipeLayout;
+import com.example.catchtime.location.ChangeLocal;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -45,6 +50,10 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
+    private RelativeLayout localrelative;
+    private TextView localtv;
+    private List<String> localname;
+    private Button buttonconf;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,120 +63,87 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         mapView = (MapView) findViewById(R.id.bbmapView);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
+        localrelative= (RelativeLayout) findViewById(R.id.localrelative);
+        localtv= (TextView) findViewById(R.id.tvcontent);
+        view1 = (TextView) findViewById(R.id.time_start);
+        view2 = (TextView) findViewById(R.id.time_end);
+        view1.setOnClickListener((View.OnClickListener) this);
+        view2.setOnClickListener((View.OnClickListener) this);
+        localrelative.setOnClickListener(this);
+        buttonconf= (Button) findViewById(R.id.buttonconf);
+        buttonconf.setOnClickListener(this);
         locationOption();
         initializeMap();
         hideLogo();
         zoomLevelOp();
         getbeginDate();
-        view1 = (TextView) findViewById(R.id.time_start);
-        view2 = (TextView) findViewById(R.id.time_end);
-        view1.setOnClickListener((View.OnClickListener) this);
         getoverDate();
-        view2.setOnClickListener((View.OnClickListener) this);
-
+        localtv.setText("选择地点");
     }
     private void getoverDate() {
-
         cal = Calendar.getInstance();
-
         hour = cal.get(Calendar.HOUR);
-
         min = cal.get(Calendar.MINUTE);
-
     }
 
     @Override
 
     public void onClick(View view) {
-
         switch (view.getId()) {
-
             case R.id.time_start:
-
                 TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
-
                     @Override
-
                     public void onTimeSet(TimePicker timePicker, int hour, int min) {
-
                         if (hour < 10 && min < 10) {
-
                             view1.setText("0" + hour + ":" + "0" + min);
-
                         } else if (hour < 10) {
-
                             view1.setText("0" + hour + ":" + min);
-
                         } else if (min < 10) {
-
                             view1.setText(hour + ":" + "0" + min);
-
                         } else {
-
                             view1.setText(hour + ":" + min);
-
                         }
-
                     }
-
                 };
-
                 TimePickerDialog dialog = new TimePickerDialog(this, TimePickerDialog.THEME_HOLO_LIGHT, listener, hour, min, true);
-
                 dialog.show();
-
                 break;
-
+            case R.id.localrelative:
+                Intent intent=new Intent(view.getContext(), ChangeLocal.class);
+                intent.putExtra("poi",localname.toString());
+                intent.putExtra("resource",1);
+                startActivity(intent);
+                break;
+            case R.id.buttonconf:
+                    finish();
+                break;
             case R.id.time_end:
-
                 TimePickerDialog.OnTimeSetListener listener1 = new TimePickerDialog.OnTimeSetListener() {
-
                     @Override
-
                     public void onTimeSet(TimePicker timePicker, int hour, int min) {
-
                         if (hour < 10 && min < 10) {
-
                             view2.setText("0" + hour + ":" + "0" + min);
-
                         } else if (hour < 10) {
-
                             view2.setText("0" + hour + ":" + min);
-
                         } else if (min < 10) {
-
                             view2.setText(hour + ":" + "0" + min);
-
                         } else {
-
                             view2.setText(hour + ":" + min);
-
                         }
-
                     }
-
                 };
-
                 TimePickerDialog dialog1 = new TimePickerDialog(this, TimePickerDialog.THEME_HOLO_LIGHT, listener1, hour, min, true);
-
                 dialog1.show();
-
                 break;
-
             default:
-
                 break;
         }
     }
 
     private void getbeginDate() {
-
         cal = Calendar.getInstance();
-
         hour = cal.get(Calendar.HOUR);
-
         min = cal.get(Calendar.MINUTE);
-
     }
     private void locationOption() {
         //1. 创建定位服务客户端类的对象
@@ -178,14 +154,16 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         //设置定位参数
         //打开GPS
         locationClientOption.setOpenGps(true);
+        locationClientOption.setCoorType("bd09ll");
         //设置定位间隔时间
-        locationClientOption.setScanSpan(1000);
+//        locationClientOption.setScanSpan(1000);
         //设置定位坐标系
-        SDKInitializer.setCoordType(CoordType.GCJ02);
+//        SDKInitializer.setCoordType(CoordType.GCJ02);
         //设置定位模式:高精度模式
         locationClientOption.setLocationMode(
                 LocationClientOption.LocationMode.Hight_Accuracy
         );
+
         //需要定位的地址数据
         locationClientOption.setIsNeedAddress(true);
         //需要地址描述
@@ -201,30 +179,28 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                 new BDAbstractLocationListener() {
                     @Override
                     public void onReceiveLocation(BDLocation bdLocation) {
-                        //获取定位详细数据
-                        //获取地址信息
                         String addr = bdLocation.getAddrStr();
-                        Log.i("lww", "地址：" + addr);
-                        //获取经纬度
                         double lat = bdLocation.getLatitude();
                         double lng = bdLocation.getLongitude();
-                        Log.i("lww", "纬度："+lat+";经度："+lng);
-                        //获取周边POI信息
+                        localname=new ArrayList<>();
                         List<Poi> pois = bdLocation.getPoiList();
                         for (Poi p:pois) {
                             String name = p.getName();
+                            localname.add("name"+name);
                             String pAddr = p.getId();
-                            Log.i("lww", "POI:" + name+":"+pAddr);
                         }
-                        String time = bdLocation.getTime();
-                        Log.i("lww", time);
+                        localtv.setText(addr);
+                        String l=getIntent().getStringExtra("local1");
+                        if (l!=null){
+                            localtv.setText(l);
+                        }
                         showLocOnMap(lat, lng);
                     }
                 }
         );
     }
     private void showLocOnMap(double lat, double lng) {
-        //  获取定位图标
+        //  获取定位图标setCoorType
         BitmapDescriptor icon = BitmapDescriptorFactory
                 .fromResource(R.drawable.waters);
         //设置显示方式
@@ -237,8 +213,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         //应用显示方式
         baiduMap.setMyLocationConfiguration(config);
         LatLng latLng = new LatLng(
-                lat + 0.00374531687912,
-                lng + 0.008774687519);
+                lat , lng );
         //显示
         MyLocationData locData = new MyLocationData
                 .Builder()

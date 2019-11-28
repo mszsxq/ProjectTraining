@@ -1,19 +1,14 @@
 package com.example.catchtime.fragment;
 
 import android.os.Build;
-import android.os.Build;
 
-import android.os.Build;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.Window;
+
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -89,6 +84,7 @@ public class ActivitiesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ActivitiesDetail.class);
+                intent.putExtra("colortype",list.get(position).get("bak_color").toString());
                 startActivity(intent);
             }
         });
