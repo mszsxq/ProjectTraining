@@ -84,6 +84,7 @@ public class ActivitiesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ActivitiesDetail.class);
+                intent.putExtra("colortype",list.get(position).get("bak_color").toString());
                 startActivity(intent);
             }
         });

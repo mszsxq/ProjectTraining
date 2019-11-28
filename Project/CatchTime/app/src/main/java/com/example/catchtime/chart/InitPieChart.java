@@ -61,6 +61,12 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         this.data=data;
         this.linearLayout=linearLayout;
         this.flag1=flag1;
+        if (entries==null||entries.size()==0){
+            for (int i = 0; i < 5 ; i++) {
+                PieEntry pieEntry=new PieEntry((float) ((Math.random() * 5) + 5 / 5),"测试",getResources().getDrawable(R.drawable.marker2));
+                entries.add(pieEntry);
+            }
+        }
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -74,9 +80,9 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         chart.setHoleColor(Color.WHITE);//中间空白圆的颜色
 
         chart.setTransparentCircleColor(Color.WHITE);
-        chart.setTransparentCircleAlpha(110);
+        chart.setTransparentCircleAlpha(50);
 
-        chart.setHoleRadius(58f);
+        chart.setHoleRadius(50f);//设置中间圆的大小
         chart.setTransparentCircleRadius(61f);
 
         chart.setDrawCenterText(true);//设置显示中间字体
