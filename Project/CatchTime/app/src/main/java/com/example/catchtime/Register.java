@@ -3,6 +3,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,6 +19,19 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.catchtime.entity.User;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import androidx.appcompat.app.AppCompatActivity;
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
@@ -33,12 +48,32 @@ public class Register extends AppCompatActivity {
     private Button countdown;
     private Button register;
     private EditText et;
+    private String phone;
+    private String password;
+    private Handler handler;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
     private CustomOnclickListner listner;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        handler= new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                String info = (String) msg.obj;
+                Log.e("mmy",info);
+                if(info.equals("注册成功")){
+                    Intent intent=new Intent();
+                    intent.setClass(Register.this, Login.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in,R.anim.out);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
         BmobSMS.initialize(Register.this, "c6cdff9c3ade26719c30c17eb8f38d4b");
         getviews();
         registers();
@@ -105,7 +140,7 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             countdown.setBackgroundResource(R.color.orange_dark);
-                            countdown.setTextColor(R.color.white);
+                            countdown.setTextColor(getResources().getColor(R.color.white));
                             countdown.setText(millisUntilFinished / 1000 + "秒");
                         }
 
@@ -114,13 +149,13 @@ public class Register extends AppCompatActivity {
                         public void onFinish() {
                             countdown.setClickable(true);
                             countdown.setBackgroundResource(R.color.gray);
-                            countdown.setTextColor(R.color.orange_dark);
+                            countdown.setTextColor(getResources().getColor(R.color.orange_dark));
                             countdown.setText("重新发送");
                             countdown.setEnabled(true);
                         }
                     }.start();
                     Log.e("MESSAGE:", "4");
-                    String phone = full_re.getText().toString();
+                    phone = full_re.getText().toString();
                     Log.e("mmy",phone);
                     BmobSMS.requestSMSCode(Register.this,phone, "注册验证码", new RequestSMSCodeListener() {
                         @Override
@@ -151,17 +186,16 @@ public class Register extends AppCompatActivity {
                     break;
                 case R.id.re_btn_register:
                     String number = et.getText().toString();
+                    phone = full_re.getText().toString();
+                    password = user_pwd1.getText().toString();
+//                    RegisterUser(phone,password);
                     if (!TextUtils.isEmpty(number)) {
-                        BmobSMS.verifySmsCode(Register.this, full_re.getText().toString(), number, new VerifySMSCodeListener() {
+                        BmobSMS.verifySmsCode(Register.this, phone, number, new VerifySMSCodeListener() {
                             @Override
                             public void done(BmobException ex) {
                                 if (ex == null) {//短信验证码已验证成功
                                     Log.e("bmob", "验证通过");
-                                    Intent intent=new Intent();
-                                    intent.setClass(Register.this, Login.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.in,R.anim.out);
-                                    finish();
+                                    RegisterUser(phone,password);
                                 } else {
                                     Log.e("bmob", "验证失败：code =" + ex.getErrorCode() + ",msg = " + ex.getLocalizedMessage());
                                 }
@@ -171,5 +205,37 @@ public class Register extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void RegisterUser(String phone, String password) {
+        User user = new User(phone,password);
+        Gson gson = new Gson();
+        String client = gson.toJson(user);
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.2.246:8080/Catchtime/UserController?client="+client);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Log.e("ww",info);
+                    wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private void wrapperMessage(String info) {
+        Message msg = Message.obtain();
+        msg.obj = info;
+        handler.sendMessage(msg);
     }
 }
