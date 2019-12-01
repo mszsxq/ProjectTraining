@@ -188,7 +188,7 @@ public class Register extends AppCompatActivity {
                     String number = et.getText().toString();
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
-//                    RegisterUser(phone,password);
+                    //RegisterUser(phone,password);
                     if (!TextUtils.isEmpty(number)) {
                         BmobSMS.verifySmsCode(Register.this, phone, number, new VerifySMSCodeListener() {
                             @Override
@@ -215,7 +215,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.2.246:8080/Catchtime/UserController?client="+client);
+                    URL url = new URL("http://192.168.43.169:8080/Catchtime/UserController?client="+client);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
