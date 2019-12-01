@@ -9,8 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import activity.activity_entity;
+import entity.Activity;
 import util.DBManager;
 
 /**
@@ -23,7 +22,6 @@ public class ActivityDao {
 		Connection conn= null;
 		String table = id+"_activity";
 		PreparedStatement pst = null;
-		PreparedStatement pst1 = null;
 		String sql = "CREATE TABLE "+table+" (activity_id int not null, "
 				+ "activity_name varchar(50), icon_id smallint,"
 				+ "primary key(activity_id),foreign key(icon_id) references icon(icon_id));";
@@ -46,15 +44,15 @@ public class ActivityDao {
 //			pst1.close();
 		}
 	}
-	public void insertData(String activity_name,int icon_id) throws ClassNotFoundException {
+	public void insertData(int userId,String activity_name,int icon_id) throws ClassNotFoundException, SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
-		PreparedStatement pst2 = null;
 		ResultSet rs=null;
 		int location_id=0;
-		String allNum="select * from ol_activity;";
-		String s = "insert into ol_activity values(?,?,?);";
+		String table=userId+"_activity";
+		String allNum="select * "+table;
+		String s = "insert into "+table+" values(?,?,?);";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst1 = conn.prepareStatement(allNum);
@@ -67,19 +65,22 @@ public class ActivityDao {
 			pst.setString(2, activity_name);
 			pst.setInt(3, icon_id);
 			int i = pst.executeUpdate();
-			
 			if(i>0) {
 				System.out.println("插入成功");
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			conn.close();
+			pst1.close();
 		}
 	}
-	public void delete(int i) throws SQLException {
+	public void delete(int userId,int i) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
-		String sql1 = "delete from ol_activity where icon_id = ?;";
+		String table=userId+"_activity";
+		String sql1 = "delete from "+table+" where icon_id = ?;";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst1 = conn.prepareStatement(sql1);
@@ -95,15 +96,20 @@ public class ActivityDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst1.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
-	public void updateName(int id,int icon_id) throws SQLException{
+	public void updateName(int userId,int id,int icon_id) throws SQLException{
 		Connection conn= null;
 		PreparedStatement pst = null;
-		String sql ="update ol_activity set icon_id=? where activity_id = ?";
+		String table=userId+"_activity";
+		String sql ="update "+table+" set icon_id=? where activity_id = ?";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst = conn.prepareStatement(sql);
@@ -116,23 +122,28 @@ public class ActivityDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public List<activity_entity> findAll() {
+	public List<Activity> findAll(int userId) {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
 		ResultSet rs1=null;
-		List<activity_entity> list=new ArrayList<activity_entity>();
+		String table=userId+"_activity";
+		List<Activity> list=new ArrayList<Activity>();
 		try {
 			conn = DBManager.getInstance().getConnection();
-			pst = conn.prepareStatement("select * from ol_activity;");
+			pst = conn.prepareStatement("select * from "+table);
 			rs = pst.executeQuery();
 			while(rs.next()) {
-				activity_entity activity = new activity_entity();
+				Activity activity = new Activity();
 				activity.setActivity_name(rs.getString(2));
 				int icon_id = rs.getInt(3);
 				pst1 = conn.prepareStatement("select * from icon where icon_id = ?");
@@ -152,22 +163,30 @@ public class ActivityDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
-	public activity_entity findSingle(int id) {
+	public Activity findSingle(int userId,int id) {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
 		ResultSet rs1=null;
-		activity_entity activity = null;
+		String table=userId+"_activity";
+		Activity activity = null;
 		try {
 			conn = DBManager.getInstance().getConnection();
-			pst = conn.prepareStatement("select * from ol_activity where activity_id=?;");
+			pst = conn.prepareStatement("select * from "+table+" where activity_id=?;");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
-			activity = new activity_entity();
+			activity = new Activity();
 			activity.setActivity_id(id);
 			while(rs.next()) {
 				activity.setActivity_name(rs.getString(2));
@@ -185,6 +204,13 @@ public class ActivityDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return activity;
 	}

@@ -31,14 +31,6 @@ public class LocationController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		LocationDao loDao = new LocationDao();
-		try {
-			loDao.findSingle(1);
-			loDao.findAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
