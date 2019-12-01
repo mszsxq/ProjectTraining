@@ -51,7 +51,7 @@ public class ActivityDao {
 		ResultSet rs=null;
 		int location_id=0;
 		String table=userId+"_activity";
-		String allNum="select * "+table;
+		String allNum="select * from "+table;
 		String s = "insert into "+table+" values(?,?,?);";
 		try {
 			conn = DBManager.getInstance().getConnection();
@@ -145,17 +145,19 @@ public class ActivityDao {
 			while(rs.next()) {
 				Activity activity = new Activity();
 				activity.setActivity_name(rs.getString(2));
+				activity.setActivity_id(rs.getInt(1));
 				int icon_id = rs.getInt(3);
 				pst1 = conn.prepareStatement("select * from icon where icon_id = ?");
 				pst1.setInt(1,icon_id);
 				rs1 = pst1.executeQuery();
 				while(rs1.next()) {
+					activity.setIcon_id(rs1.getInt(1));
 					activity.setIcon_name(rs1.getString(2));
 					activity.setIcon_color(rs1.getString(3));
 				}
 				list.add(activity);		
 			}
-			System.out.println(list.get(1).toString());
+			System.out.println(list.get(0).toString());
 			return list;
 			} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
