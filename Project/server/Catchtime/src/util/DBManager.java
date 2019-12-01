@@ -10,7 +10,6 @@ public class DBManager {
 	private final String USER = "root";
 	private final String PWD = "";
 	private static DBManager dbManager;
-	
 	private Connection conn;
 	
 	public DBManager() {

@@ -46,47 +46,43 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     implementation 'com.danikula:videocache:2.7.1'
-
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/BaiduLBS_Android.jar')
-    implementation files('libs\\BaiduLBS_Android.jar')
-
     //swipeback
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     //observablescrollview
     implementation 'com.github.ksoichiro:android-observablescrollview:1.5.2'
-
     //AsymmetricGridView
     implementation 'com.felipecsl.asymmetricgridview:library:2.0.1'
-
     //edittext
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
-
     //Android Swipe Layout
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:21.0.0'
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:20.+'
-    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
-
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
     implementation 'com.android.support:appcompat-v7:25.3.1'
     implementation 'com.android.support:appcompat-v7:25.3.1'
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
-
     //viewpager
-//    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:2.0.24'
-//    implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
-//    implementation 'com.github.lsjwzh.RecyclerViewPager:lib:v1.2.0@aar'
-    implementation ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+    //    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:2.0.24'
+    //    implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
+    //    implementation 'com.github.lsjwzh.RecyclerViewPager:lib:v1.2.0@aar'
+    implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+    implementation files('libs/BmobSDK_3.7.4_20190523.jar')
+    implementation files('libs/rxandroid-2.1.0.jar')
+    implementation files('libs/rxjava-2.2.2.jar')
+    implementation files('libs/okio-2.1.0.jar')
+    implementation files('libs/gson-2.8.5.jar')
 
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
 }
