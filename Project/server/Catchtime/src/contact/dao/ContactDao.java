@@ -12,9 +12,10 @@ public class ContactDao {
 	private Connection conn;
 	private PreparedStatement ps=null;
 	
-	public void createContact() throws ClassNotFoundException, SQLException {
+	public void createContact(int id) throws ClassNotFoundException, SQLException {
 		conn = DBManager.getInstance().getConnection();
-		String sql="create table 01_contact(location_id int,activity_id int,primary key(location_id,activity_id))";
+		String table = id+"_contact";
+		String sql="create table "+table+"(location_id int,activity_id int,primary key(location_id,activity_id))";
 		ps=conn.prepareStatement(sql);
 		ps.executeUpdate();
 	}

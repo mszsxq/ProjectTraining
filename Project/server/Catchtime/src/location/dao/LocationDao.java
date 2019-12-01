@@ -19,10 +19,11 @@ import util.DBManager;
  *
  */
 public class LocationDao {
-	public void createTable() throws SQLException {
+	public void createTable(int id) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
-		String sql = "CREATE TABLE ol_location (location_id int not null, "
+		String table = id+"_location";
+		String sql = "CREATE TABLE "+table+" (location_id int not null, "
 				+ "location_name varchar(50), location_lat double,location_lng double,"
 				+"location_range int,location_detailed varchar(50),"
 				+ "primary key(location_id));";

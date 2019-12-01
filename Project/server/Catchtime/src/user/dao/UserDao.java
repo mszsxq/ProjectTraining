@@ -56,8 +56,28 @@ public class UserDao {
 			}
 		}
 	}
-	public int register(String phone,String password) {
-		String sql = "Insert into user(phone,password) value(?,?)";
+	public int countUser() {
+		String sql = "select count(*) from user";
+		Connection con = null;
+		int n = 0;
+		try {
+			con = DBManager.getInstance().getConnection();
+			PreparedStatement pstm = con.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
+	public int register(int id,String phone,String password,String time) {
+		String sql = "Insert into user(user_id,phone,password,register_date) value(?,?,?,?)";
 		int n = 0;
 		Connection conn = null;
 		try {
@@ -71,9 +91,10 @@ public class UserDao {
 		}
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, phone);
-			ps.setString(2, password);
-			
+			ps.setString(2, phone);
+			ps.setString(3, password);
+			ps.setInt(1, id);
+			ps.setString(4, time);
 			n = ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {

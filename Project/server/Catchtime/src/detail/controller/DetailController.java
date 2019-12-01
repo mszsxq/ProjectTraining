@@ -29,8 +29,6 @@ public class DetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DetailDao detailDao = new DetailDao();
-		detailDao.createTable();
 	}
 
 	/**

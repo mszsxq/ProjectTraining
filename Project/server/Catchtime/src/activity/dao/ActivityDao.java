@@ -18,12 +18,13 @@ import util.DBManager;
  *
  */
 public class ActivityDao {
-	public void createTable() throws SQLException {
+	public void createTable(int id) throws SQLException {
 //		String add = "alter table ol_activity add constraint lll foreign key(icon_id) REFERENCES icon(icon_id);";
 		Connection conn= null;
+		String table = id+"_activity";
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
-		String sql = "CREATE TABLE ol_activity (activity_id int not null, "
+		String sql = "CREATE TABLE "+table+" (activity_id int not null, "
 				+ "activity_name varchar(50), icon_id smallint,"
 				+ "primary key(activity_id),foreign key(icon_id) references icon(icon_id));";
 		try {
