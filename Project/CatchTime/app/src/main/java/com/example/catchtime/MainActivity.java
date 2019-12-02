@@ -56,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     private void initFragment(@Nullable int i) {
         //初始化fragment
 
@@ -113,10 +109,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
         }
         //
-
         transaction.commit();
     }
-
     private void hideFragments(FragmentTransaction transaction) {
         if (mAccountFragment != null) {
             transaction.hide(mAccountFragment);

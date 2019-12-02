@@ -24,8 +24,8 @@
 		<backupmode>pbmTemporary</backupmode>
 	</configurationfile>
 	<execution>
-		<count>0</count>
-		<overalltime>0:42:53.138</overalltime>
+		<count>1</count>
+		<overalltime>5:42:25.406</overalltime>
 	</execution>
 	<general>
 		<executionaction>0</executionaction>
@@ -139,8 +139,8 @@
 	<window>
 		<main>
 			<position>
-				<x>604</x>
-				<y>255</y>
+				<x>339</x>
+				<y>326</y>
 			</position>
 			<size>
 				<x>225</x>
