@@ -51,8 +51,6 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
         Log.e("test","初始化第0个页面");
@@ -61,8 +59,8 @@ public class AccountFragment extends Fragment {
         View childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
         //lineLayoutList.addView(childAt);
         ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
-        chartPie.setData(pieBeanList).start();
-        chartPie.start();
+//        chartPie.setData(pieBeanList).start();
+//        chartPie.start();
         return childAt;
     }
 

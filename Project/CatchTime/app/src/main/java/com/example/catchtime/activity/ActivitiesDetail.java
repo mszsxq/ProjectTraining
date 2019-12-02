@@ -97,7 +97,6 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         l1.setBackgroundColor(color);
         l2.setBackgroundColor(color);
         l3.setBackgroundColor(color);
-
     }
 
     @Override

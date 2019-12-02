@@ -1,7 +1,12 @@
 import org.w3c.dom.DOMImplementation
 
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    appKey "2d4d06534acde"
+    appSecret "9c16982effef39c9b388528a6687592f"
+    SMSSDK {}
+}
 android {
     sourceSets {
         main {
@@ -38,7 +43,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -66,7 +75,6 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.android.support:appcompat-v7:25.3.1'
     implementation 'com.android.support:appcompat-v7:25.3.1'
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
