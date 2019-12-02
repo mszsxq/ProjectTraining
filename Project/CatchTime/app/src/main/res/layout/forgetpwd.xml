@@ -48,6 +48,7 @@
                     android:inputType="phone"
                     android:hint="请输入手机号" />
                 <Button
+                    android:id="@+id/btn_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orange"
@@ -75,6 +76,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <EditText
+                    android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@null"
@@ -145,6 +147,7 @@
             </LinearLayout>
         </LinearLayout>
         <Button
+            android:id="@+id/btn_update"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="重置密码"

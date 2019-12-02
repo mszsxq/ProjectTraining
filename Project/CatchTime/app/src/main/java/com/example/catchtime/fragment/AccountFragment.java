@@ -1,5 +1,4 @@
 package com.example.catchtime.fragment;
-
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import com.example.catchtime.ChartPie.ChartPie;
 
 import com.example.catchtime.ChartPie.ChartPieBean;
 import com.example.catchtime.ChartPie.SingleViewAdapter;
@@ -21,15 +21,13 @@ import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
 import com.github.mikephil.charting.data.PieEntry;
 import com.tmall.ultraviewpager.UltraViewPager;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
-
+import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
-
 public class AccountFragment extends Fragment {
     private List<ChartPieBean> pieBeanList;
     private LinearLayout lineLayoutList;
@@ -42,7 +40,6 @@ public class AccountFragment extends Fragment {
     private View childAt;
     private DirectionalViewPager viewPager;
     private View root;
-
     private  ViewAdapter viewAdapter;
     private SingleViewAdapter singleViewAdapter;
     private ViewGroup mView;
@@ -54,29 +51,16 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        return super.onCreateView(inflater, container, savedInstanceState);
 
-
-        //扇形图
         Log.e("test","初始化第0个页面");
         Window window=this.getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.gray));
-        childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
-
-
-        ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
-        ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
-        ArrayList<PerPieEntry> list=new ArrayList<>();
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        adapter = new UltraPagerAdapter(false,list,getContext(),0);
-        ultraViewPager.setAdapter(adapter);
-//        getView();
-        getViews();
+        View childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
+        //lineLayoutList.addView(childAt);
+        ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
+//        chartPie.setData(pieBeanList).start();
+//        chartPie.start();
         return childAt;
     }
 
