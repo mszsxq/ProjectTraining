@@ -43,7 +43,7 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.WRITE_SMS"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+<!--    <uses-permission android:name="android.permission.READ_CONTACTS" />-->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <application
         android:allowBackup="true"
@@ -71,13 +71,12 @@
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
         <activity android:name=".location.ChangeLocal" />
-        <activity android:name="com.example.catchtime.setting.UserInfor"/>
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">
         </service>
+        <service android:name=".backgroundService.LocationService" />
         <!--<activity android:name=".TestButton" />-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
