@@ -46,7 +46,11 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         setContentView(R.layout.activities_detail);
         //why 不能放在上面
         String colorstring= getIntent().getStringExtra("colortype");
-        color =getResources().getIdentifier(colorstring, "color", getPackageName());
+        if(colorstring==null){
+            color =getResources().getIdentifier("bg", "color", getPackageName());
+        }else {
+            color =getResources().getIdentifier(colorstring, "color", getPackageName());
+        }
         getView();
         setListener();
         setColor();

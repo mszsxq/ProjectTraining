@@ -222,12 +222,28 @@ public class Register extends AppCompatActivity {
 
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
+<<<<<<< HEAD
                     String number = et.getText().toString();
                     if (number.equals("")){
                         Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
                     }else{
                         submitVerificationCode("86", phone,number);
                         RegisterUser(phone,password);
+=======
+                    RegisterUser(phone,password);
+                    if (!TextUtils.isEmpty(number)) {
+                        BmobSMS.verifySmsCode(Register.this, phone, number, new VerifySMSCodeListener() {
+                            @Override
+                            public void done(BmobException ex) {
+                                if (ex == null) {//短信验证码已验证成功
+                                    Log.e("bmob", "验证通过");
+                                    RegisterUser(phone,password);
+                                } else {
+                                    Log.e("bmob", "验证失败：code =" + ex.getErrorCode() + ",msg = " + ex.getLocalizedMessage());
+                                }
+                            }
+                        });
+>>>>>>> 5f1f6b428efffd522c4ab104741e6a82aa7927e0
                     }
                     break;
             }
@@ -243,7 +259,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.43.169:8080/Catchtime/UserController?client="+client);
+                    URL url = new URL("http://10.7.82.38:8080/Catchtime/UserController?client="+client);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

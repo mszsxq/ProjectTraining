@@ -102,16 +102,18 @@
                     android:src="@drawable/closeeye" />
             </LinearLayout>
         </LinearLayout>
+
         <Button
 
             android:id="@+id/btn_log"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="登录"
-            android:textColor="@color/alpha"
             android:layout_marginTop="15dp"
             android:background="@drawable/shape1"
-            android:textSize="20dp"/>
+            android:text="登录"
+            android:textColor="@color/alpha"
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/btn_fpwd"
             android:layout_width="300dp"
