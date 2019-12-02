@@ -85,7 +85,6 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.android.support:appcompat-v7:25.3.1'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
     implementation files('libs/BmobSDK_3.7.4_20190523.jar')
     implementation files('libs/rxandroid-2.1.0.jar')
@@ -103,10 +102,28 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> ffeff96708174e4eadfbd2f61d5159e5f1de4aeb
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
     implementation 'com.android.support:multidex:1.0.0'
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
+>>>>>>> 197f20d34e054312523175c1c08c209466151a0a
+>>>>>>> 1a37074478b9a3db90941c74e86dbeadeaf144d4
+=======
+    implementation 'com.android.support:multidex:1.0.0'
+
+>>>>>>> a53db30f10af06bc77c345893360d53268bfe4dd
+>>>>>>> ffeff96708174e4eadfbd2f61d5159e5f1de4aeb
+>>>>>>> a09f0836946d526c964322f4be4fb2b10eed39e8
 }

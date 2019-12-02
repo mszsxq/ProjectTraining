@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import com.example.catchtime.ChartPie.ChartPie;
-
 import com.example.catchtime.ChartPie.ChartPieBean;
 import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
@@ -21,11 +19,11 @@ import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
 import com.github.mikephil.charting.data.PieEntry;
 import com.tmall.ultraviewpager.UltraViewPager;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
 public class AccountFragment extends Fragment {
@@ -45,25 +43,33 @@ public class AccountFragment extends Fragment {
     private ViewGroup mView;
     private UltraViewPager ultraViewPager;
     private PagerAdapter adapter;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return super.onCreateView(inflater, container, savedInstanceState);
 
+        //扇形图
         Log.e("test","初始化第0个页面");
         Window window=this.getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.gray));
-        View childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
-        //lineLayoutList.addView(childAt);
-        ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
-//        chartPie.setData(pieBeanList).start();
-//        chartPie.start();
+        childAt = inflater.inflate(R.layout.item_chart_pie, container,false);
+        ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
+        ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+        ArrayList<PerPieEntry> list=new ArrayList<>();
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        list.add(new PerPieEntry());
+        adapter = new UltraPagerAdapter(false,list,getContext(),0);
+        ultraViewPager.setAdapter(adapter);
+//        getView();
+        getViews();
         return childAt;
     }
-
     private void getViews() {
         ButtonClickListener buttonClickListener=new ButtonClickListener();
         buttonDay = childAt.findViewById(R.id.button_day);
@@ -81,9 +87,7 @@ public class AccountFragment extends Fragment {
         RelativeLayout relativeLayout=childAt.findViewById(R.id.chartpie_choose);
         relativeLayout.setOnClickListener(new ButtonClickListener());
     }
-
     class ButtonClickListener implements View.OnClickListener {
-
         //日周年月的切换由改变适配器来实现
         @Override
         public void onClick(View view) {
@@ -168,8 +172,6 @@ public class AccountFragment extends Fragment {
 
 
     }
-
-
 //    private void initData() {
 //        pieBeanList = new ArrayList<>();
 //        pieBeanList.add(new ChartPieBean(3090, "运动", R.color.main_green, R.drawable.run));

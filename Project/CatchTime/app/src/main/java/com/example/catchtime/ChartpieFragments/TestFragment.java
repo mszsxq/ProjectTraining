@@ -1,23 +1,15 @@
 package com.example.catchtime.ChartpieFragments;
 
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.catchtime.R;
-import com.example.catchtime.chart.InitPieChart;
-import com.example.catchtime.fragment.AccountFragment;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
