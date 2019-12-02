@@ -13,6 +13,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.SpatialRelationUtil;
+import com.example.catchtime.MainActivity;
 import com.xdandroid.hellodaemon.AbsWorkService;
 
 import java.util.ArrayList;
@@ -29,6 +30,12 @@ public class LocationService extends AbsWorkService {
     private LocationClientOption locationClientOption;
     private int stepingsec=0;//运动的秒数
     private LatLng centerLatLng;
+    /*根据用户的位置需要
+    * 进行数据库改变的要求
+    *   用户产生了长时间的行走（时间大于3分钟或者运动的距离大于300米）
+    *   用户已经不在当前地点的范围之中
+    *   用户进入陌生地点需要进行弹窗
+    * */
     @Override
     public Boolean shouldStopService(Intent intent, int flags, int startId) {
         return null;
@@ -68,7 +75,7 @@ public class LocationService extends AbsWorkService {
                 }else{;
                     stepingsec=0;
                 }
-                
+
                 perbdlocation=bdLocation;
             }
         });
