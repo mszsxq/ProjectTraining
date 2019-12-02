@@ -105,4 +105,14 @@ dependencies {
         transitive = true
     }
 
+<<<<<<< HEAD
+=======
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+<<<<<<< HEAD
+    implementation 'com.xdandroid:hellodaemon:+'
+
+=======
+    implementation 'com.android.support:multidex:1.0.0'
+>>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
+>>>>>>> 197f20d34e054312523175c1c08c209466151a0a
 }
