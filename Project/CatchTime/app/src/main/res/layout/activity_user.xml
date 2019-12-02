@@ -49,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:text="颠三倒四"></TextView>
+            android:textSize="16sp"></TextView>
         <TextView
             android:id="@+id/user_phone"
             android:layout_below="@id/user_name"
@@ -58,8 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:text="123456899">
+            android:textSize="16sp">
         </TextView>
         <TextView
             android:id="@+id/user_infor"
@@ -68,8 +66,7 @@
             android:layout_below="@id/user_phone"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:textSize="16sp"
-            android:text="    您已在线26天，21天养成一个习惯，坚持下去！您会发现一个不一样的自己。">
+            android:textSize="16sp">
         </TextView>
     </RelativeLayout>
 

@@ -54,7 +54,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoTitle">
-        <activity android:name=".setting.UserInfor"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
         <activity android:name=".Add_detailPage"></activity>
         <activity android:name=".MainActivity">
@@ -72,6 +71,7 @@
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
         <activity android:name=".location.ChangeLocal" />
+        <activity android:name="com.example.catchtime.setting.UserInfor"/>
 
         <service
             android:name="com.baidu.location.f"
