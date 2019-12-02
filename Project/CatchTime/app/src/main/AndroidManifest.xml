@@ -54,7 +54,6 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitle"
         android:usesCleartextTraffic="true">
-        <activity android:name=".setting.UserInfor"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
         <activity android:name=".Add_detailPage"></activity>
         <activity android:name=".MainActivity">
