@@ -97,10 +97,7 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
-<<<<<<< HEAD
     implementation 'com.xdandroid:hellodaemon:+'
 
-=======
     implementation 'com.android.support:multidex:1.0.0'
->>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
 }
