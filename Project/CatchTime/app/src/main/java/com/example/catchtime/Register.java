@@ -227,13 +227,11 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
-<<<<<<< HEAD
                     if (number.equals("")){
                         Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
                     }else {
                         submitVerificationCode("86", phone, number);
                         RegisterUser(phone, password);
-=======
                     if (number.equals("")) {
                         Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                     } else {
@@ -241,7 +239,6 @@ public class Register extends AppCompatActivity {
                         RegisterUser(phone, password);
                     }
                         break;
->>>>>>> 7c9018c2d9286ff017406c0cffbf5c4a36fee391
                     }
             }
         }

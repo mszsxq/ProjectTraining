@@ -89,7 +89,6 @@ dependencies {
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
     implementation files('libs/BmobSDK_3.7.4_20190523.jar')
     implementation files('libs/rxandroid-2.1.0.jar')
-    implementation files('libs/rxjava-2.2.2.jar')
     implementation files('libs/okio-2.1.0.jar')
     implementation files('libs/gson-2.8.5.jar')
 
@@ -105,10 +104,9 @@ dependencies {
         transitive = true
     }
 
-<<<<<<< HEAD
-=======
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
+<<<<<<< HEAD
 
     implementation 'com.android.support:multidex:1.0.0'
 <<<<<<< HEAD
@@ -116,4 +114,8 @@ dependencies {
 >>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
 >>>>>>> 197f20d34e054312523175c1c08c209466151a0a
 >>>>>>> 1a37074478b9a3db90941c74e86dbeadeaf144d4
+=======
+    implementation 'com.android.support:multidex:1.0.0'
+
+>>>>>>> a53db30f10af06bc77c345893360d53268bfe4dd
 }
