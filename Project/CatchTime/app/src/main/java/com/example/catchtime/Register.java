@@ -219,31 +219,14 @@ public class Register extends AppCompatActivity {
                     user_pwd1.setSelection(index);
                     break;
                 case R.id.re_btn_register:
-
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
-<<<<<<< HEAD
                     String number = et.getText().toString();
                     if (number.equals("")){
                         Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
-                    }else{
-                        submitVerificationCode("86", phone,number);
-                        RegisterUser(phone,password);
-=======
-                    RegisterUser(phone,password);
-                    if (!TextUtils.isEmpty(number)) {
-                        BmobSMS.verifySmsCode(Register.this, phone, number, new VerifySMSCodeListener() {
-                            @Override
-                            public void done(BmobException ex) {
-                                if (ex == null) {//短信验证码已验证成功
-                                    Log.e("bmob", "验证通过");
-                                    RegisterUser(phone,password);
-                                } else {
-                                    Log.e("bmob", "验证失败：code =" + ex.getErrorCode() + ",msg = " + ex.getLocalizedMessage());
-                                }
-                            }
-                        });
->>>>>>> 5f1f6b428efffd522c4ab104741e6a82aa7927e0
+                    }else {
+                        submitVerificationCode("86", phone, number);
+                        RegisterUser(phone, password);
                     }
                     break;
             }
