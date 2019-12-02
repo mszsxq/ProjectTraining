@@ -17,6 +17,7 @@ import com.example.catchtime.MainActivity;
 import com.example.catchtime.bean.LocationBean;
 import com.xdandroid.hellodaemon.AbsWorkService;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +107,9 @@ public class LocationService extends AbsWorkService {
     }
 
 
-    private List<LocationBean> getLocations(String userId){
+    private List<LocationBean> getLocations(String userId) throws MalformedURLException {
         List<LocationBean> locationBeans=new ArrayList<>();
-        URL
+        URL url=new URL("");
         return locationBeans;
     }
 
