@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import activity.activity_entity;
-import location.Location_entity;
+import entity.Location;
 import util.DBManager;
 
 /**
@@ -19,10 +18,11 @@ import util.DBManager;
  *
  */
 public class LocationDao {
-	public void createTable() throws SQLException {
+	public void createTable(int id) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
-		String sql = "CREATE TABLE ol_location (location_id int not null, "
+		String table = id+"_location";
+		String sql = "CREATE TABLE "+table+" (location_id int not null, "
 				+ "location_name varchar(50), location_lat double,location_lng double,"
 				+"location_range int,location_detailed varchar(50),"
 				+ "primary key(location_id));";
@@ -38,17 +38,22 @@ public class LocationDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public void insertData(String name,double lat,double lng,int range,String detail) throws SQLException {
+	public void insertData(int userId,String name,double lat,double lng,int range,String detail) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
+		String table =userId+"_location";
 		int id=0;
-		String allNum="select * from ol_location;";
+		String allNum="select * from "+table+";";
 		String s = "insert into ol_location values(?,?,?,?,?,?);";
 		try {
 			conn = DBManager.getInstance().getConnection();
@@ -76,14 +81,19 @@ public class LocationDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	public void changeInfor(int id,String locationName,double lat,double lng,int range,String detail) {
+	public void changeInfor(int userId,int id,String locationName,double lat,double lng,int range,String detail) {
 		Connection conn= null;
 		PreparedStatement pst = null;
-		String sql = "update ol_location set location_name = ?,location_lat = ?"
+		String table=userId+"_location";
+		String sql = "update "+table+" set location_name = ?,location_lat = ?"
 				+ ",location_lng = ?,location_range = ?,location_detailed = ? where location_id = ?;";
 		try {
 			conn = DBManager.getInstance().getConnection();
@@ -104,13 +114,21 @@ public class LocationDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
-	public void delete(int i) throws SQLException {
+	public void delete(int userId,int i) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
-		String sql = "delete from ol_location where location_id = ?";
+		String table=userId+"_location";
+		String sql = "delete from "+table+" where location_id = ?";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst = conn.prepareStatement(sql);
@@ -126,22 +144,27 @@ public class LocationDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
-	public List<Location_entity> findAll() throws SQLException {
+	public List<Location> findAll(int userId) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		ResultSet rs=null;
-		List<Location_entity> list = new ArrayList<Location_entity>();
+		String table=userId+"_location";
+		List<Location> list = new ArrayList<Location>();
 		try {
 			conn = DBManager.getInstance().getConnection();
-			pst = conn.prepareStatement("select * from ol_location");
+			pst = conn.prepareStatement("select * from "+table);
 			rs = pst.executeQuery();
 			while(rs.next()) {
-				Location_entity location = new Location_entity();
+				Location location = new Location();
 				location.setLocationId(rs.getInt(1));
 				location.setLocationName(rs.getString(2));
 				location.setLocationLat(rs.getDouble(3));
@@ -158,23 +181,28 @@ public class LocationDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
-	public Location_entity findSingle(int i) throws SQLException {
+	public Location findSingle(int userId,int i) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		ResultSet rs=null;
-		Location_entity location = null;
+		Location location = null;
+		String table=userId+"_location";
 		try {
 			conn = DBManager.getInstance().getConnection();
-			pst = conn.prepareStatement("select * from ol_location where location_id = ?");
+			pst = conn.prepareStatement("select * from "+table+" where location_id = ?");
 			pst.setInt(1,i );
 			rs = pst.executeQuery();
 			while(rs.next()) {
-				location = new Location_entity();
+				location = new Location();
 				location.setLocationName(rs.getString(2));
 				location.setLocationLat(rs.getDouble(3));
 				location.setLocationLng(rs.getDouble(4));
@@ -190,8 +218,12 @@ public class LocationDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return location;
 	}

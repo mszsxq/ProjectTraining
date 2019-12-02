@@ -13,10 +13,11 @@ import entity.User;
 import util.DBManager;
 
 public class DetailDao {
-	public void createTable() {
+	public void createTable(int id) {
+		String table = id+"detail_tablename";
 		try {
 			Connection conn = DBManager.getInstance().getConnection();
-			String sql = "create table detail_tablename(detail_id int primary key,activity_id int,loaction_id int,begin_time varchar(40),finish_time varchar(40))";
+			String sql = "create table "+table+"(detail_id int primary key,activity_id int,loaction_id int,begin_time varchar(40),finish_time varchar(40))";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.executeUpdate();
 			ps.close();

@@ -60,6 +60,7 @@
                     android:inputType="phone"
                     />
                 <Button
+                    android:id="@+id/re_btn_countdown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orange"
@@ -92,6 +93,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <EditText
+                    android:id="@+id/re_et"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@null"
@@ -133,6 +135,7 @@
             </LinearLayout>
         </LinearLayout>
         <Button
+            android:id="@+id/re_btn_register"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="注册"
