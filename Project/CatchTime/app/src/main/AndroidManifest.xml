@@ -54,7 +54,6 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitle"
         android:usesCleartextTraffic="true">
-        <activity android:name=".setting.UserInfor"></activity>
         <activity android:name=".activity.ActivitiesDetail"></activity>
         <activity android:name=".Add_detailPage"></activity>
         <activity android:name=".MainActivity">
@@ -77,6 +76,7 @@
             android:enabled="true"
             android:process=":remote">
         </service>
+        <service android:name=".backgroundService.LocationService" />
         <!--<activity android:name=".TestButton" />-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

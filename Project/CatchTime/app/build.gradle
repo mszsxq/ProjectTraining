@@ -102,8 +102,25 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffeff96708174e4eadfbd2f61d5159e5f1de4aeb
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
+<<<<<<< HEAD
 
     implementation 'com.android.support:multidex:1.0.0'
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
+>>>>>>> 197f20d34e054312523175c1c08c209466151a0a
+>>>>>>> 1a37074478b9a3db90941c74e86dbeadeaf144d4
+=======
+    implementation 'com.android.support:multidex:1.0.0'
+
+>>>>>>> a53db30f10af06bc77c345893360d53268bfe4dd
+>>>>>>> ffeff96708174e4eadfbd2f61d5159e5f1de4aeb
 }
