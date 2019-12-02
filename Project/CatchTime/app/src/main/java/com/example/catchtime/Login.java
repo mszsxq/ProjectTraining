@@ -2,11 +2,14 @@ package com.example.catchtime;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.TransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +17,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.catchtime.entity.User;
+import com.example.catchtime.setting.UserInfor;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 public class Login extends AppCompatActivity {
@@ -27,6 +43,7 @@ public class Login extends AppCompatActivity {
     private EditText user_pwd;
     private ImageView eyes;
     private Button btlog;
+    private Handler handler;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
 
@@ -36,6 +53,38 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         getViews();
         registers();
+        btlog = findViewById(R.id.btn_log);
+        btlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessage();
+            }
+        });
+
+
+        //显示服务器返回的数据
+        handler= new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                String info = (String)msg.obj;
+                if("密码错误".equals(info)){
+                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                }else{
+                    Gson gson=new Gson();
+                    User usering = new User();
+                    usering = gson.fromJson(info,User.class);
+                    Intent intent = new Intent(Login.this, UserInfor.class);
+                    intent.putExtra("name",usering.getUsername());
+                    intent.putExtra("moto",usering.getMoto());
+                    intent.putExtra("image",usering.getImage());
+                    intent.putExtra("phone",usering.getPhone());
+                    intent.putExtra("time",usering.getRegister_date());
+                    startActivity(intent);
+
+                }
+            }
+        };
         //监听号码输入框的字数
         user_number.addTextChangedListener(new TextWatcher() {
             CharSequence input;
@@ -79,13 +128,14 @@ public class Login extends AppCompatActivity {
         full=findViewById(R.id.full);
         user_pwd=findViewById(R.id.user_pwd);
         eyes=findViewById(R.id.eyes);
-        btlog=findViewById(R.id.btn_log);
-        btlog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getaa();
-            }
-        });
+//        btlog=findViewById(R.id.btn_log);
+//        btlog.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                getaa();
+//                sendMessage();
+//            }
+//        });
 
     }
 
@@ -160,5 +210,39 @@ public class Login extends AppCompatActivity {
 
        }
    }
-
+    //向服务器发送数据
+    private void sendMessage() {
+        String num = user_number.getText().toString();
+        String pwd = user_pwd.getText().toString();
+        User user = new User(num,pwd);
+        Gson gson = new Gson();
+        String client = gson.toJson(user);
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.43.81:8080/Catchtime/LoginController?client="+client);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    if(null!=info) {
+                        Log.e("ww", info);
+                        wrapperMessage(info);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    private void wrapperMessage(String info){
+        Message msg = Message.obtain();
+        msg.obj = info;
+        handler.sendMessage(msg);
+    }
 }

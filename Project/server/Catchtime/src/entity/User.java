@@ -15,6 +15,14 @@ public class User {
 	public User() {
 		
 	}
+	
+	public User(int user_id, String phone, String password) {
+		super();
+		this.user_id = user_id;
+		this.phone = phone;
+		this.password = password;
+	}
+
 	public User(int user_id, String phone, String password, String username, String register_date, String moto,
 			String image) {
 		super();

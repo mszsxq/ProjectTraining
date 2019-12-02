@@ -1,6 +1,6 @@
-package activity;
+package entity;
 
-public class activity_entity {
+public class Activity {
 	private int activity_id;
 	private int icon_id;
 	private String icon_name;

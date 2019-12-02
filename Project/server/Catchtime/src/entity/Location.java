@@ -1,6 +1,6 @@
-package location;
+package entity;
 
-public class Location_entity {
+public class Location {
 	private int locationId;
 	private String locationName;
 	private Double locationLat;

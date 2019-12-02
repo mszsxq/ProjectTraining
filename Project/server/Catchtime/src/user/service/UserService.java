@@ -11,9 +11,9 @@ import user.dao.UserDao;
  *
  */
 public class UserService {
-	public int addUser(String phone,String password) {
+	public int addUser(int id,String phone,String password,String time) {
 		UserDao userDao = new UserDao();
-		int n = userDao.register(phone, password);
+		int n = userDao.register(id,phone, password,time);
 		return n;
 	}
 }
