@@ -1,8 +1,19 @@
 import org.w3c.dom.DOMImplementation
 
 apply plugin: 'com.android.application'
+// 添加插件
+apply plugin: 'com.mob.sdk'
 
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2d447922e6d83"
+    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
+    SMSSDK {}
+}
 android {
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -25,6 +36,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -85,6 +97,10 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
+<<<<<<< HEAD
     implementation 'com.xdandroid:hellodaemon:+'
 
+=======
+    implementation 'com.android.support:multidex:1.0.0'
+>>>>>>> 11c7a5e19ea8fcf32b4254c3ad6031aaef78d749
 }

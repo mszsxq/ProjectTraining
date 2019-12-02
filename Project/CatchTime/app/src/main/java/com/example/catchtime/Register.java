@@ -1,8 +1,6 @@
 package com.example.catchtime;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -22,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
+import com.mob.MobSDK;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,12 +32,17 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import androidx.appcompat.app.AppCompatActivity;
-import cn.bmob.sms.BmobSMS;
-import cn.bmob.sms.exception.BmobException;
-import cn.bmob.sms.listener.RequestSMSCodeListener;
-import cn.bmob.sms.listener.VerifySMSCodeListener;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+
+import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
+import static com.mob.wrappers.SMSSDKWrapper.getVerificationCode;
+import static com.mob.wrappers.SMSSDKWrapper.submitVerificationCode;
 
 public class Register extends AppCompatActivity {
+    private final String TAG="--Register--";
+    public String country="86";
+    private static final int CODE_REPEAT=1;
     private TextView btn_login;
     private TextView btn_register;
     private EditText full_re;
@@ -51,9 +55,26 @@ public class Register extends AppCompatActivity {
     private String phone;
     private String password;
     private Handler handler;
+    private boolean tag=true;
+    private int i=60;
+    private EventHandler eh;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
     private CustomOnclickListner listner;
+    private Handler handler1=new Handler(){
+        public void handleMessage(Message msg){
+            switch (msg.arg1){
+                case 0:
+                    //客户端验证成功，可以进行注册,返回校验的手机和国家代码phone/country
+                    Toast.makeText(Register.this,msg.obj.toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    //获取验证码成功
+                    Toast.makeText(Register.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
@@ -74,9 +95,41 @@ public class Register extends AppCompatActivity {
                 }
             }
         };
-        BmobSMS.initialize(Register.this, "c6cdff9c3ade26719c30c17eb8f38d4b");
+        MobSDK.init(this,"2d447922e6d83","1b0cbc51ed6aeff1e94ecf5f4187cebb");
         getviews();
         registers();
+        eh=new EventHandler(){
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    //回调完成
+                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                        //提交验证码成功
+                        Message msg = new Message();
+                        msg.arg1 = 0;
+                        msg.obj = data;
+                        handler1.sendMessage(msg);
+                        Log.d(TAG, "提交验证码成功");
+                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                        Message msg = new Message();
+                        //获取验证码成功
+                        msg.arg1 = 1;
+                        msg.obj = "获取验证码成功";
+                        handler1.sendMessage(msg);
+                        Log.d(TAG, "获取验证码成功");
+                    }
+                } else {
+                    Message msg = new Message();
+                    //返回支持发送验证码的国家列表
+                    msg.arg1 = 3;
+                    msg.obj = "验证失败";
+                    handler1.sendMessage(msg);
+                    Log.d(TAG, "验证失败");
+                    ((Throwable) data).printStackTrace();
+                }
+            }
+        };
+        SMSSDK.registerEventHandler(eh); //注册短信回调
         // 监听号码输入框的字数
         full_re.addTextChangedListener(new TextWatcher() {
             CharSequence input;
@@ -132,41 +185,22 @@ public class Register extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.re_btn_countdown:
-                    // 将按钮设置为不可用状态
-                    countdown.setEnabled(false);
-                    // 启动倒计时的服务
-                    new CountDownTimer(60000, 1000) {
-                        @SuppressLint("ResourceAsColor")
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            countdown.setBackgroundResource(R.color.orange_dark);
-                            countdown.setTextColor(getResources().getColor(R.color.white));
-                            countdown.setText(millisUntilFinished / 1000 + "秒");
-                        }
-
-                        @SuppressLint("ResourceAsColor")
-                        @Override
-                        public void onFinish() {
-                            countdown.setClickable(true);
-                            countdown.setBackgroundResource(R.color.gray);
-                            countdown.setTextColor(getResources().getColor(R.color.orange_dark));
-                            countdown.setText("重新发送");
-                            countdown.setEnabled(true);
-                        }
-                    }.start();
-                    Log.e("MESSAGE:", "4");
                     phone = full_re.getText().toString();
-                    Log.e("mmy",phone);
-                    BmobSMS.requestSMSCode(Register.this,phone, "注册验证码", new RequestSMSCodeListener() {
-                        @Override
-                        public void done(Integer smsId, BmobException ex) {
-                            if (ex == null) {//验证码发送成功
-                                Log.e("bmob", "短信id：" + smsId);//用于查询本次短信发送详情
-                            }else {
-                                Log.e("bmob","errorCode = "+ex.getErrorCode()+",errorMsg = "+ex.getLocalizedMessage());
-                            }
+                    if(phone.equals("")){
+                        Toast.makeText(Register.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
+                    }else{
+                        //填写了手机号码
+                        if(isMobileNO(phone)){
+                            //如果手机号码无误，则发送验证请求
+                            countdown.setClickable(true);
+                            changeBtnGetCode();
+                            getSupportedCountries();
+                            getVerificationCode("86",phone);
+                        }else{
+                            //手机号格式有误
+                            Toast.makeText(Register.this,"手机号格式错误，请检查",Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
                     break;
                 case R.id.eyes1:
                     if(isHideFirst==true){
@@ -185,10 +219,18 @@ public class Register extends AppCompatActivity {
                     user_pwd1.setSelection(index);
                     break;
                 case R.id.re_btn_register:
-                    String number = et.getText().toString();
+
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
-                    //RegisterUser(phone,password);
+<<<<<<< HEAD
+                    String number = et.getText().toString();
+                    if (number.equals("")){
+                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
+                    }else{
+                        submitVerificationCode("86", phone,number);
+                        RegisterUser(phone,password);
+=======
+                    RegisterUser(phone,password);
                     if (!TextUtils.isEmpty(number)) {
                         BmobSMS.verifySmsCode(Register.this, phone, number, new VerifySMSCodeListener() {
                             @Override
@@ -201,6 +243,7 @@ public class Register extends AppCompatActivity {
                                 }
                             }
                         });
+>>>>>>> 5f1f6b428efffd522c4ab104741e6a82aa7927e0
                     }
                     break;
             }
@@ -211,11 +254,12 @@ public class Register extends AppCompatActivity {
         User user = new User(phone,password);
         Gson gson = new Gson();
         String client = gson.toJson(user);
+        Log.e("mmy",client);
         new Thread(){
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.43.169:8080/Catchtime/UserController?client="+client);
+                    URL url = new URL("http://10.7.82.38:8080/Catchtime/UserController?client="+client);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -237,5 +281,53 @@ public class Register extends AppCompatActivity {
         Message msg = Message.obtain();
         msg.obj = info;
         handler.sendMessage(msg);
+    }
+    private boolean isMobileNO(String sphone) {
+        String telRegex = "[1][358]\\d{9}";
+        if (TextUtils.isEmpty(sphone))
+            return false;
+        else
+            return sphone.matches(telRegex);
+    }
+    private void changeBtnGetCode() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                if (tag) {
+                    while (i > 0) {
+                        i--;
+                        //如果活动为空
+                        if (Register.this == null) {
+                            break;
+                        }
+                        Register.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                countdown.setText("获取验证码(" + i + ")");
+                                countdown.setClickable(false);
+                            }
+                        });
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    tag = false;
+                }
+                i = 60;
+                tag = true;
+                if (Register.this != null) {
+                    Register.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            countdown.setText("获取验证码");
+                            countdown.setClickable(true);
+                        }
+                    });
+                }
+            }
+        };
+        thread.start();
     }
 }

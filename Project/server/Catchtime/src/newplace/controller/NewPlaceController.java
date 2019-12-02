@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import newplace.dao.NewPlaceDao;
+
 /**
  * Servlet implementation class NewPlaceController
  */
@@ -27,7 +29,14 @@ public class NewPlaceController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		NewPlaceDao npd = new NewPlaceDao();
+//		npd.createTable(02);
+//		npd.insert(01, 01, "dss", 1, 102, 120, 50);
+		npd.insert(02, "ds",125, 120, 50);
+//		npd.update(01, 01);
+//		npd.update(01, 01);
+//		npd.update(01, 02);
+		
 	}
 
 	/**
