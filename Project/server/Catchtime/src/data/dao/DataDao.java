@@ -116,7 +116,7 @@ public class DataDao {
 			while(rs.next()) {
 				all_data=new All_data();
 				all_data.setData_id(rs.getInt(1));
-				all_data.setData(rs.getString(2));
+				all_data.setDate(rs.getString(2));
 				all_data.setActivity_name(rs.getString(3));
 				all_data.setActivity_data(rs.getString(4));
 			}

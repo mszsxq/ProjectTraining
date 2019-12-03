@@ -1,5 +1,13 @@
-/entity/
 /Servlet/
+/activity/
+/contact/
+/data/
+/detail/
+/entity/
+/icon/
+/location/
+/login/
+/newplace/
 /user/
 /usertable/
-/data/
+/util/

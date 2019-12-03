@@ -41,8 +41,9 @@ public class All_data {
 	@Override
 	public String toString() {
 		return "All_data [data_id=" + data_id + ", activity_name=" + activity_name + ", activity_data=" + activity_data
-				+ ", data=" + date + "]";
+				+ ", date=" + date + "]";
 	}
+
 	
 
 }
