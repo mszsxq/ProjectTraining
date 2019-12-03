@@ -16,4 +16,7 @@ public class UserService {
 		int n = userDao.register(id,phone, password,time);
 		return n;
 	}
+	public String querryUsername(int id) {
+		return new UserDao().querryById(id).getUsername();
+	}
 }
