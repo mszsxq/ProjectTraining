@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import entity.All_data;
 import util.DBManager;
@@ -130,4 +131,40 @@ public class DataDao {
 		return all_data;
 		
 	}
+	//查询近七天某项活动的时间
+	public List<All_data> activityRecently(String table_name, String activity_name) {
+		List<All_data> list=null;
+	
+		Connection conn =null;
+		ResultSet rs = null;
+		String sql ="select * from ? where date between current_date()-7 and sysdate() and activity_name=?";
+		try {
+			conn=DBManager.getInstance().getConnection();
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setString(1,table_name);
+			ps.setString(2,activity_name);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				All_data all_data = new All_data();
+				all_data.setData_id(rs.getInt(1));
+				all_data.setData(rs.getString(2));
+				all_data.setActivity_name(rs.getString(3));
+				all_data.setActivity_data(rs.getString(4));
+				list.add(all_data);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 }
