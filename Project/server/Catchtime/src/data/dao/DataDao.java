@@ -138,11 +138,13 @@ public class DataDao {
 		Connection conn =null;
 		ResultSet rs = null;
 //		String sql ="select * from "+table_name+" where date between current_date()-7 and sysdate() and activity_name=?";
-		String sql ="select * from "+table_name;
+//		String sql ="select * from "+table_name;
+		String sql ="select * from "+table_name+" where activity_name=? and  date_sub(curdate(), interval 7 day) <= date(date);";
+
 		try {
 			conn=DBManager.getInstance().getConnection();
 			PreparedStatement ps=conn.prepareStatement(sql);
-//			ps.setString(1,activity_name);
+			ps.setString(1,activity_name);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				All_data all_data = new All_data();
