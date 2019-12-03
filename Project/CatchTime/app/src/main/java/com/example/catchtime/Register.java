@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
-import com.mob.MobSDK;
+//import com.mob.MobSDK;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,15 +29,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-import cn.bmob.sms.BmobSMS;
-import cn.bmob.sms.exception.BmobException;
-import cn.bmob.sms.listener.RequestSMSCodeListener;
-import cn.bmob.sms.listener.VerifySMSCodeListener;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
-import static com.mob.wrappers.SMSSDKWrapper.getVerificationCode;
-import static com.mob.wrappers.SMSSDKWrapper.submitVerificationCode;
+//import cn.bmob.sms.BmobSMS;
+//import cn.bmob.sms.exception.BmobException;
+//import cn.bmob.sms.listener.RequestSMSCodeListener;
+//import cn.bmob.sms.listener.VerifySMSCodeListener;
+//import cn.smssdk.EventHandler;
+//import cn.smssdk.SMSSDK;
+//import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
+//import static com.mob.wrappers.SMSSDKWrapper.getVerificationCode;
+//import static com.mob.wrappers.SMSSDKWrapper.submitVerificationCode;
 public class Register extends AppCompatActivity {
     private final String TAG = "--Register--";
     public String country = "86";
@@ -56,7 +56,7 @@ public class Register extends AppCompatActivity {
     private Handler handler;
     private boolean tag = true;
     private int i = 60;
-    private EventHandler eh;
+//    private EventHandler eh;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
     private CustomOnclickListner listner;
@@ -95,41 +95,41 @@ public class Register extends AppCompatActivity {
                 }
             }
         };
-        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+        //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
         getviews();
         registers();
-        eh = new EventHandler() {
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                if (result == SMSSDK.RESULT_COMPLETE) {
-                    //回调完成
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                        //提交验证码成功
-                        Message msg = new Message();
-                        msg.arg1 = 0;
-                        msg.obj = data;
-                        handler1.sendMessage(msg);
-                        Log.d(TAG, "提交验证码成功");
-                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        Message msg = new Message();
-                        //获取验证码成功
-                        msg.arg1 = 1;
-                        msg.obj = "获取验证码成功";
-                        handler1.sendMessage(msg);
-                        Log.d(TAG, "获取验证码成功");
-                    }
-                } else {
-                    Message msg = new Message();
-                    //返回支持发送验证码的国家列表
-                    msg.arg1 = 3;
-                    msg.obj = "验证失败";
-                    handler1.sendMessage(msg);
-                    Log.d(TAG, "验证失败");
-                    ((Throwable) data).printStackTrace();
-                }
-            }
-        };
-        SMSSDK.registerEventHandler(eh); //注册短信回调
+//        eh = new EventHandler() {
+//            @Override
+//            public void afterEvent(int event, int result, Object data) {
+//                if (result == SMSSDK.RESULT_COMPLETE) {
+//                    //回调完成
+//                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                        //提交验证码成功
+//                        Message msg = new Message();
+//                        msg.arg1 = 0;
+//                        msg.obj = data;
+//                        handler1.sendMessage(msg);
+//                        Log.d(TAG, "提交验证码成功");
+//                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+//                        Message msg = new Message();
+//                        //获取验证码成功
+//                        msg.arg1 = 1;
+//                        msg.obj = "获取验证码成功";
+//                        handler1.sendMessage(msg);
+//                        Log.d(TAG, "获取验证码成功");
+//                    }
+//                } else {
+//                    Message msg = new Message();
+//                    //返回支持发送验证码的国家列表
+//                    msg.arg1 = 3;
+//                    msg.obj = "验证失败";
+//                    handler1.sendMessage(msg);
+//                    Log.d(TAG, "验证失败");
+//                    ((Throwable) data).printStackTrace();
+//                }
+//            }
+//        };
+//        SMSSDK.registerEventHandler(eh); //注册短信回调
         // 监听号码输入框的字数
         full_re.addTextChangedListener(new TextWatcher() {
             CharSequence input;
@@ -189,24 +189,24 @@ public class Register extends AppCompatActivity {
                     overridePendingTransition(R.anim.in, R.anim.out);
                     finish();
                     break;
-                case R.id.re_btn_countdown:
-                    phone = full_re.getText().toString();
-                    if (phone.equals("")) {
-                        Toast.makeText(Register.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //填写了手机号码
-                        if (isMobileNO(phone)) {
-                            //如果手机号码无误，则发送验证请求
-                            countdown.setClickable(true);
-                            changeBtnGetCode();
-                            getSupportedCountries();
-                            getVerificationCode("86", phone);
-                        } else {
-                            //手机号格式有误
-                            Toast.makeText(Register.this, "手机号格式错误，请检查", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    break;
+//                case R.id.re_btn_countdown:
+//                    phone = full_re.getText().toString();
+//                    if (phone.equals("")) {
+//                        Toast.makeText(Register.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        //填写了手机号码
+//                        if (isMobileNO(phone)) {
+//                            //如果手机号码无误，则发送验证请求
+//                            countdown.setClickable(true);
+//                            changeBtnGetCode();
+//                            getSupportedCountries();
+//                            getVerificationCode("86", phone);
+//                        } else {
+//                            //手机号格式有误
+//                            Toast.makeText(Register.this, "手机号格式错误，请检查", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    break;
                 case R.id.eyes1:
                     if (isHideFirst == true) {
                         eyes1.setImageResource(R.drawable.openeye);
@@ -227,19 +227,21 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
-                    if (number.equals("")){
-                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
-                    }else {
-                        submitVerificationCode("86", phone, number);
-                        RegisterUser(phone, password);
-                    if (number.equals("")) {
-                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                    } else {
-                        submitVerificationCode("86", phone, number);
-                        RegisterUser(phone, password);
-                    }
-                        break;
-                    }
+                    RegisterUser(phone, password);
+
+//                    if (number.equals("")){
+//                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
+//                    }else {
+//                        submitVerificationCode("86", phone, number);
+//                        RegisterUser(phone, password);
+//                    if (number.equals("")) {
+//                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        submitVerificationCode("86", phone, number);
+//                        RegisterUser(phone, password);
+//                    }
+                    break;
+                }
             }
         }
 
@@ -326,4 +328,3 @@ public class Register extends AppCompatActivity {
             thread.start();
         }
     }
-}
