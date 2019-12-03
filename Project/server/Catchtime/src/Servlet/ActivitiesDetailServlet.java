@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import entity.User;
 import user.service.UserService;
+import usertable.dao.UserTableDao;
+import usertable.service.UserTableService;
 
 /**
  * Servlet implementation class ActivitiesDetailServlet
@@ -31,8 +33,12 @@ public class ActivitiesDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		int id =Integer.valueOf(request.getParameter("id"));
 		int  id =1;
-	
-	
+		String activityname ="cycle";
+		UserTableService userTableService =new UserTableService();
+		String name = userTableService.querryDayTableById(id);
+		
+		
+		
 //		User user =new User(1,"133","ps","zsx","1999","eat","d");
 		
 		

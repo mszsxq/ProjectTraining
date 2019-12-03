@@ -81,10 +81,7 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
-<<<<<<< HEAD
 
-=======
->>>>>>> a517dcc868ba149f07f1ce14c8a89a28f1a9b894
     implementation files('libs/gson-2.8.5.jar')
 
     implementation 'com.android.support:multidex:1.0.0'
@@ -98,23 +95,12 @@ dependencies {
         transitive = true
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
-=======
-   implementation 'cn.bmob.android:bmob-sms:1.0.1'
->>>>>>> a517dcc868ba149f07f1ce14c8a89a28f1a9b894
-    implementation 'com.xdandroid:hellodaemon:+'
 
-    implementation 'com.android.support:multidex:1.0.0'
 
-    implementation 'com.android.support:multidex:1.0.0'
-
-}
->>>>>>> 8053e1716435cec90dfc69dfea02aac7ca9d548e
