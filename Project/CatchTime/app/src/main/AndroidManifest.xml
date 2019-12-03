@@ -71,6 +71,8 @@
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
         <activity android:name=".location.ChangeLocal" />
+        <activity android:name=".setting.UserInfor"/>
+        <activity android:name=".activity.AddDefaultAddress"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
