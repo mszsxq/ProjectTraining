@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import data.service.DataService;
 import entity.All_data;
 import entity.User;
@@ -39,20 +41,18 @@ public class ActivitiesDetailServlet extends HttpServlet {
 		int  id =1;
 		String activityName ="cycle";
 		List<All_data> list =null;
-		UserTableService userTableService =new UserTableService();
+		UserTableService userTableService =new UserTableService();	
 		String tableName = userTableService.querryDayTableById(id);
 		DataService dataService =new DataService();
 		list =dataService.activityRecently(tableName, activityName);
 		if(list==null) {
 		System.out.println("未查到数据");
 		}else {
-			for(All_data da :list) {
-				System.out.println(da);
-			}
+			Gson gson =new Gson();
+			String liststr =gson.toJson(list);
+			System.out.println(liststr);
 		}
-		
-//		User user =new User(1,"133","ps","zsx","1999","eat","d");
-		
+	
 		
 	}
 
