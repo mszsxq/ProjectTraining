@@ -22,7 +22,7 @@ public class DataDao {
 		Connection conn=null;
 		try {
 			conn=DBManager.getInstance().getConnection();
-			String sql="create table ? (data_id int,data varchar(50) not null,activity_name varchar(50) not null,activity_data varchar(50),primary key(data_id,activity_name))";
+			String sql="create table ? (data_id int,date varchar(50) not null,activity_name varchar(50) not null,activity_data varchar(50),primary key(data_id,activity_name))";
 			PreparedStatement p=conn.prepareStatement(sql);
 			p.setString(1, table_name);
 			n=p.executeUpdate();	
