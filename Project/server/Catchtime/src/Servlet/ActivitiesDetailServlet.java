@@ -31,9 +31,8 @@ public class ActivitiesDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		int id =Integer.valueOf(request.getParameter("id"));
 		int  id =1;
-		UserService userService =new UserService();
-		String name =userService.querryUsername(id);
-		System.out.println(name);
+	
+	
 //		User user =new User(1,"133","ps","zsx","1999","eat","d");
 		
 		
