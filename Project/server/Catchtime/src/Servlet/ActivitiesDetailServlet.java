@@ -33,8 +33,8 @@ public class ActivitiesDetailServlet extends HttpServlet {
 		int  id =1;
 		UserService userService =new UserService();
 		String name =userService.querryUsername(id);
-		
-		User user =new User(1,"133","ps","zsx","1999","eat","d");
+		System.out.println(name);
+//		User user =new User(1,"133","ps","zsx","1999","eat","d");
 		
 		
 	}

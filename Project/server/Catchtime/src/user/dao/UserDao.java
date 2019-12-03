@@ -230,7 +230,7 @@ public class UserDao {
 	}
 	public User querryById(int id) {
 		User user =null;
-		String sql="select * from user where id =?";
+		String sql="select * from user where user_id =?";
 		Connection conn =null;
 		try {
 			conn =DBManager.getInstance().getConnection();
