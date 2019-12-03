@@ -3,8 +3,10 @@
  */
 package data.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.DataDao;
 import entity.All_data;
 
 /**
@@ -13,8 +15,9 @@ import entity.All_data;
  */
 public class DataService {
 	public List<All_data>  activityRecently (String table_name,String activity_name){
-		List<All_data>  list =null;
-		
+		List<All_data>  list =new ArrayList<>();
+		DataDao  dao = new DataDao();
+		list = dao.activityRecently(table_name, activity_name);
 		return list;
 	}
 

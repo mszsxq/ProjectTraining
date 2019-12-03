@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.All_data;
@@ -133,21 +134,20 @@ public class DataDao {
 	}
 	//查询近七天某项活动的时间
 	public List<All_data> activityRecently(String table_name, String activity_name) {
-		List<All_data> list=null;
-	
+		List<All_data> list= new ArrayList() ;
 		Connection conn =null;
 		ResultSet rs = null;
-		String sql ="select * from ? where date between current_date()-7 and sysdate() and activity_name=?";
+//		String sql ="select * from "+table_name+" where date between current_date()-7 and sysdate() and activity_name=?";
+		String sql ="select * from "+table_name;
 		try {
 			conn=DBManager.getInstance().getConnection();
 			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setString(1,table_name);
-			ps.setString(2,activity_name);
+//			ps.setString(1,activity_name);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				All_data all_data = new All_data();
 				all_data.setData_id(rs.getInt(1));
-				all_data.setData(rs.getString(2));
+				all_data.setDate(rs.getString(2));
 				all_data.setActivity_name(rs.getString(3));
 				all_data.setActivity_data(rs.getString(4));
 				list.add(all_data);
