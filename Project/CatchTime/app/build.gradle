@@ -86,9 +86,7 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
-    implementation files('libs/BmobSDK_3.7.4_20190523.jar')
-    implementation files('libs/rxandroid-2.1.0.jar')
-    implementation files('libs/okio-2.1.0.jar')
+
     implementation files('libs/gson-2.8.5.jar')
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
@@ -103,7 +101,6 @@ dependencies {
         transitive = true
     }
 
-   implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
     implementation 'com.android.support:multidex:1.0.0'
