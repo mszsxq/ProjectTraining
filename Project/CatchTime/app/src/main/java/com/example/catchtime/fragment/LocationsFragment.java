@@ -18,6 +18,7 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.catchtime.AddLocation;
+import com.example.catchtime.NewPalce;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.activity.AddActivityDetial;

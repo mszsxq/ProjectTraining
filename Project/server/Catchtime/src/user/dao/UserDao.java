@@ -228,4 +228,36 @@ public class UserDao {
 		}
 		return n;
 	}
+	public User querryById(int id) {
+		User user =null;
+		String sql="select * from user where user_id =?";
+		Connection conn =null;
+		try {
+			conn =DBManager.getInstance().getConnection();
+			PreparedStatement ps =conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				int id1 =rs.getInt(1);
+				String phone =rs.getString(2);
+				String password =rs.getString(3);
+				String username =rs.getString(4);
+				String register_date =rs.getString(5);
+				String moto =rs.getString(6);
+				String image =rs.getString(7);
+				user = new User(id,phone,password,username,register_date,moto,image);
+			}
+		}catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
 }

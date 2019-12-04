@@ -2,6 +2,7 @@ package com.example.catchtime.activity;
 
 import android.os.Bundle;
 
+import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,6 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
-        //why 不能放在上面
         String colorstring= getIntent().getStringExtra("colortype");
         if(colorstring==null){
             color =getResources().getIdentifier("bg", "color", getPackageName());

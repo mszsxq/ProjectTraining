@@ -1,4 +1,5 @@
 package com.example.catchtime.fragment;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
 import com.github.mikephil.charting.data.PieEntry;
 import com.tmall.ultraviewpager.UltraViewPager;
 
@@ -253,3 +257,5 @@ public class AccountFragment extends Fragment {
 //    }
 
 }
+
+
