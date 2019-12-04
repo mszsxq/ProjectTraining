@@ -13,14 +13,19 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.SpatialRelationUtil;
+import com.example.catchtime.MainActivity;
+import com.example.catchtime.bean.LocationBean;
 import com.xdandroid.hellodaemon.AbsWorkService;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 
 public class LocationService extends AbsWorkService {
+    private String internetIp;
     private String LocationName;
     private BDLocation perbdlocation;
     private BaiduMap mBaiduMap;
@@ -29,6 +34,12 @@ public class LocationService extends AbsWorkService {
     private LocationClientOption locationClientOption;
     private int stepingsec=0;//运动的秒数
     private LatLng centerLatLng;
+    /*根据用户的位置需要
+    * 进行数据库改变的要求
+    *   用户产生了长时间的行走（时间大于3分钟或者运动的距离大于300米）
+    *   用户已经不在当前地点的范围之中
+    *   用户进入陌生地点需要进行弹窗
+    * */
     @Override
     public Boolean shouldStopService(Intent intent, int flags, int startId) {
         return null;
@@ -42,7 +53,7 @@ public class LocationService extends AbsWorkService {
         mBaiduMap.setMyLocationEnabled(true);
         locationClientOption = new LocationClientOption();
         locationClientOption.setOpenGps(true);
-        locationClientOption.setScanSpan(5000);//每五秒进行一次扫描
+        locationClientOption.setScanSpan(10000);//每五秒进行一次扫描
         locationClientOption.setCoorType("bd09ll");
         locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         locationClientOption.setIsNeedAddress(true);
@@ -63,12 +74,12 @@ public class LocationService extends AbsWorkService {
                 }
                 String time = bdLocation.getTime();
                 double distance=distance(bdLocation.getLatitude(),bdLocation.getLongitude(),perbdlocation.getLatitude(),perbdlocation.getLongitude());
-                if (distance>=2){//正常人的步行速度大概为1米每秒
-                    stepingsec+=5;
+                if (distance>=5){//正常人的步行速度大概为1米每秒
+                    stepingsec+=10;
                 }else{;
                     stepingsec=0;
                 }
-                
+
                 perbdlocation=bdLocation;
             }
         });
@@ -95,6 +106,12 @@ public class LocationService extends AbsWorkService {
 
     }
 
+
+    private List<LocationBean> getLocations(String userId) throws MalformedURLException {
+        List<LocationBean> locationBeans=new ArrayList<>();
+        URL url=new URL("");
+        return locationBeans;
+    }
 
     double distance(double lat1, double lon1, double lat2, double lon2)
     {

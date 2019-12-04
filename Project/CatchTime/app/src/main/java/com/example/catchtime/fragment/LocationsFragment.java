@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.catchtime.AddLocation;
+import com.example.catchtime.NewPalce;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.entity.Location;

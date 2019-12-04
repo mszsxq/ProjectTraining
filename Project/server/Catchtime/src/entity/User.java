@@ -1,9 +1,6 @@
 package entity;
 
 public class User {
-<<<<<<< HEAD
-
-=======
 	private int user_id;
 	private String phone;
 	private String password;
@@ -77,6 +74,4 @@ public class User {
 		this.image = image;
 	}
 	
-	
->>>>>>> c756119a9d51676fd86336e5bc149eac56418032
 }

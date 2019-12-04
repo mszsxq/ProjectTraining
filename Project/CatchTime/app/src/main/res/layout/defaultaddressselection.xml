@@ -29,44 +29,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:text="常用地址选择"
-                android:textSize="30dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:text="家"
                 android:textSize="20dp" />
-            <ImageView
-                android:layout_marginLeft="60dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
         </LinearLayout>
-        <LinearLayout
+        <ListView
+            android:id="@+id/def_lv"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:text="学校"
-                android:textSize="20dp" />
-            <ImageView
-                android:layout_marginLeft="60dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
-        </LinearLayout>
-
-
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </RelativeLayout>
