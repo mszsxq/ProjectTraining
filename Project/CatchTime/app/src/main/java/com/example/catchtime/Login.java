@@ -1,5 +1,6 @@
 package com.example.catchtime;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.catchtime.entity.User;
 import com.example.catchtime.setting.UserInfor;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,8 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 public class Login extends AppCompatActivity {
     private TextView btn_login;
@@ -46,11 +43,11 @@ public class Login extends AppCompatActivity {
     private Handler handler;
     //默认密码输入框为隐藏的
     private boolean isHideFirst = true;
-
     private CustomOnclickListener listener;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
         getViews();
         registers();
         btlog = findViewById(R.id.btn_log);
@@ -60,27 +57,37 @@ public class Login extends AppCompatActivity {
                 sendMessage();
             }
         });
-
-
         //显示服务器返回的数据
         handler= new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 String info = (String)msg.obj;
+                Log.e("1","ok?");
+                Log.e("info",info);
                 if("密码错误".equals(info)){
                     Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
                 }else{
                     Gson gson=new Gson();
                     User usering = new User();
+                    Log.e("2","ok?");
                     usering = gson.fromJson(info,User.class);
+
+                    int id=usering.getUser_id();
+                    Log.e("3","ok?");
+                    SharedPreferences.Editor editor=p.edit();
+                    editor.putInt("user_id",id);
+                    editor.commit();
+                    Log.e("id",""+id);
+                    Log.e("4","ok?");
                     Intent intent = new Intent(Login.this, UserInfor.class);
-                    intent.putExtra("name",usering.getUsername());
-                    intent.putExtra("moto",usering.getMoto());
-                    intent.putExtra("image",usering.getImage());
-                    intent.putExtra("phone",usering.getPhone());
-                    intent.putExtra("time",usering.getRegister_date());
                     startActivity(intent);
+//                    intent.putExtra("name",usering.getUsername());
+//                    intent.putExtra("moto",usering.getMoto());
+//                    intent.putExtra("image",usering.getImage());
+//                    intent.putExtra("phone",usering.getPhone());
+//                    intent.putExtra("time",usering.getRegister_date());
+
 
                 }
             }
@@ -143,7 +150,6 @@ public class Login extends AppCompatActivity {
         TapTargetView.showFor(this,                 // `this` is an Activity
                 TapTarget.forView(findViewById(R.id.btn_log), "", "")
                         // All options below are optional
-
                         .outerCircleColor(R.color.green)      // Specify a color for the outer circle
                         .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
                         .targetCircleColor(R.color.white)   // Specify a color for the target circle
@@ -184,12 +190,12 @@ public class Login extends AppCompatActivity {
                    );
                    finish();
                    break;
-               case R.id.btn_fpwd://改变密码输入框是否可见
+               case R.id.btn_fpwd:
                    Intent intent1=new Intent();
                    intent1.setClass(Login.this, Forgetpwd.class);
                    startActivity(intent1);
                    break;
-               case R.id.eyes:
+               case R.id.eyes://改变密码输入框是否可见
                    if(isHideFirst==true){
                        eyes.setImageResource(R.drawable.openeye);
                        HideReturnsTransformationMethod method=HideReturnsTransformationMethod.getInstance();
@@ -221,7 +227,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.43.81:8080/Catchtime/LoginController?client="+client);
+                    URL url = new URL("http://192.168.43.65:8080/Catchtime/LoginController?client="+client);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

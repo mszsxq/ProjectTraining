@@ -58,8 +58,6 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         //进度条
 //        setPosWay1();
         min.setText(new StringBuffer().append(progesss.getProgress()).append("min"));
-
-
         //柱状图
         ArrayList<BarEntry> values = new ArrayList<>();
         for(int i=0;i<10;i++){

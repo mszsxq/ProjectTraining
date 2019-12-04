@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -98,6 +99,7 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
+
 //        eh=new EventHandler(){
 //            @Override
 //            public void afterEvent(int event, int result, Object data) {
