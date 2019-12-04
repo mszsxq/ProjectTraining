@@ -50,7 +50,6 @@
     <color name="line_blue_alpha">#53F8C6</color>
     <color name="line_red0">#FF7952</color>
     <color name="line_red0_alpha">#FFA77D</color>
-
     <drawable name="transparent">#00000000</drawable>
     <drawable name="list_item_bg_normal">#FFFFFF</drawable>
     <drawable name="list_item_bg_select">#ECF0F1</drawable>

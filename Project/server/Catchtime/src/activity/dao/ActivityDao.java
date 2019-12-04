@@ -44,7 +44,7 @@ public class ActivityDao {
 //			pst1.close();
 		}
 	}
-	public void insertData(int userId,String activity_name,int icon_id) throws ClassNotFoundException, SQLException {
+	public int insertData(int userId,String activity_name,int icon_id) throws ClassNotFoundException, SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
@@ -67,6 +67,7 @@ public class ActivityDao {
 			int i = pst.executeUpdate();
 			if(i>0) {
 				System.out.println("插入成功");
+				return i;
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -75,6 +76,7 @@ public class ActivityDao {
 			conn.close();
 			pst1.close();
 		}
+		return 0;
 	}
 	public void delete(int userId,int i) throws SQLException {
 		Connection conn= null;

@@ -1,13 +1,19 @@
 package newplace.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.NewLocation;
 import newplace.dao.NewPlaceDao;
+import newplace.service.NewPlaceService;
 
 /**
  * Servlet implementation class NewPlaceController
@@ -29,13 +35,25 @@ public class NewPlaceController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		NewPlaceDao npd = new NewPlaceDao();
-//		npd.createTable(02);
-//		npd.insert(01, 01, "dss", 1, 102, 120, 50);
-		npd.insert(02, "ds",125, 120, 50);
-//		npd.update(01, 01);
-//		npd.update(01, 01);
-//		npd.update(01, 02);
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		String info=request.getParameter("info");
+		NewPlaceService nps= new NewPlaceService();
+		List<NewLocation> list = new ArrayList<>();
+		switch(info) {
+			case "create":
+				break;
+			case "findall":
+				break;
+			case "update":
+				break;
+			case "insert":
+				break;
+			case "findSingle":
+				break;
+			case "delete":
+				break;
+		}
 		
 	}
 
