@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 package com.example.catchtime.fragment;
 
 import android.graphics.drawable.Drawable;
@@ -259,3 +261,4 @@ public class AccountFragment extends Fragment {
 }
 
 
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f

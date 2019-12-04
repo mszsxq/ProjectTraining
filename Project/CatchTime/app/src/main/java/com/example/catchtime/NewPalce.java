@@ -17,7 +17,7 @@ public class NewPalce extends AppCompatActivity implements View.OnClickListener,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ceshi);
+        setContentView(R.layout.newplacepopup);
         button = findViewById(R.id.button);
         button1 = findViewById(R.id.ceshi);
         button1.setOnClickListener(new View.OnClickListener() {

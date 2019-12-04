@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import location.dao.LocationDao;
+import location.service.LocationService;
 
 /**
  * Servlet implementation class LocationController
@@ -30,7 +31,37 @@ public class LocationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		String infor=request.getParameter("info");
+		LocationService ls = new LocationService();
+		System.out.println(infor);
+		switch(infor) {
+			case "insert":
+				String detailName=request.getParameter("detailName");
+				String locationName = request.getParameter("locationName");
+				String lat = request.getParameter("lat");
+				double lat1=Double.parseDouble(lat);
+				String lng = request.getParameter("lng");
+				double lng1=Double.parseDouble(lng);
+				int i=ls.insertTo(01,locationName, "det", lat1, lng1);
+				if(i>0) {
+					response.getWriter().print("suc");
+				}else {
+					response.getWriter().print("false");
+				}
+				break;
+			case "create":
+				break;
+			case "findall":
+				break;
+			case "update":
+				break;
+			case "findSingle":
+				break;
+			case "delete":
+				break;
+		}
 	}
 
 	/**
