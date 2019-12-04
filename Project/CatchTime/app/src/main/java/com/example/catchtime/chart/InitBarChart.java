@@ -1,8 +1,10 @@
 package com.example.catchtime.chart;
 
 import android.content.Context;
+import android.os.Handler;
 import android.widget.SeekBar;
 
+import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.notimportant.DemoBase;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -21,7 +23,7 @@ public class InitBarChart extends DemoBase {
     private Context context;
 
 
-    public InitBarChart(BarChart chart, ArrayList<BarEntry> entries, Context context) {
+    public InitBarChart(BarChart chart, ArrayList<BarEntry> entries, ActivitiesDetail context) {
         this.chart = chart;
         this.entries = entries;
         this.context = context;
