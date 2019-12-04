@@ -94,26 +94,10 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         getView();
         setListener();
         setColor();
-<<<<<<< HEAD
         sendMessage();
 
 
     }
-=======
-        progesss.setProgress(20);
-        //进度条
-//        setPosWay1();
-        min.setText(new StringBuffer().append(progesss.getProgress()).append("min"));
-        //柱状图
-        ArrayList<BarEntry> values = new ArrayList<>();
-        for(int i=0;i<10;i++){
-            float multi =(100+1);
-            float val = (float)(Math.random()*multi)+multi/3;
-//            values.add(new BarEntry(i,val,getResources().getDrawable()));
-            values.add(new BarEntry(i,val));
-        }
-//
->>>>>>> e2375be026e9d36c03a45e2c2edcefb351439b66
 
     private void showData() {
         listWeekly();
