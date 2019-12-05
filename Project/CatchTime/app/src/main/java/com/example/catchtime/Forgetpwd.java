@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
-import android.text.TextUtils;
+//import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -25,10 +25,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
+//import cn.bmob.sms.BmobSMS;
+//import cn.bmob.sms.exception.BmobException;
+//import cn.bmob.sms.listener.RequestSMSCodeListener;
+//import cn.bmob.sms.listener.VerifySMSCodeListener;
+=======
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static cn.smssdk.SMSSDK.getVerificationCode;
@@ -55,8 +63,13 @@ public class Forgetpwd extends AppCompatActivity {
 //    private EventHandler eh;
     private int i=60;
     private CustomOnclickListner listner;
+<<<<<<< HEAD
+    private final String appKey="2d4d06534acde";
+    private final String appSercret="9c16982effef39c9b388528a6687592f";
+=======
 //    private final String appKey="2d447922e6d83";
 //    private final String appSercret="1b0cbc51ed6aeff1e94ecf5f4187cebb";
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //    private Handler handlern=new Handler(){
 //        public void handleMessage(Message msg){
 //            switch (msg.arg1){
@@ -94,6 +107,10 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
+<<<<<<< HEAD
+
+=======
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //        eh=new EventHandler(){
 //            @Override
 //            public void afterEvent(int event, int result, Object data) {
@@ -230,15 +247,32 @@ public class Forgetpwd extends AppCompatActivity {
                     phone=user_phone.getText().toString().trim();
                     pwd2=user_pwd2.getText().toString().trim();
                     pwd3=user_pwd3.getText().toString().trim();
+<<<<<<< HEAD
+                    if(pwd2.equals(pwd3)){
+                        forgetpwdnew(phone,pwd2);
+                    }else{
+                        Log.e("error","两次密码请输入相同的数据");
+                    }
+
+=======
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //                    if(number.equals("")){
 //                        Toast.makeText(Forgetpwd.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else{
 //                        submitVerificationCode("86", phone,number);
+<<<<<<< HEAD
+//                        if(pwd2.equals(pwd3)){
+//                            forgetpwdnew(phone,pwd2);
+//                        }else{
+//                            Log.e("error","两次密码请输入相同的数据");
+//                        }
+=======
                         if(pwd2.equals(pwd3)){
                             forgetpwdnew(phone,pwd2);
                         }else{
                             Log.e("error","两次密码请输入相同的数据");
                         }
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //                    }
                     break;
             }
@@ -270,58 +304,58 @@ public class Forgetpwd extends AppCompatActivity {
             }
         }.start();
     }
-    private void changeBtnGetCode() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                if (tag) {
-                    while (i > 0) {
-                        i--;
-                        //如果活动为空
-                        if (Forgetpwd.this == null) {
-                            break;
-                        }
-                        Forgetpwd.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                btn_code.setText("获取验证码(" + i + ")");
-                                btn_code.setClickable(false);
-                            }
-                        });
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    tag = false;
-                }
-                i = 60;
-                tag = true;
-                if (Forgetpwd.this != null) {
-                    Forgetpwd.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            btn_code.setText("获取验证码");
-                            btn_code.setClickable(true);
-                        }
-                    });
-                }
-            }
-        };
-        thread.start();
-    }
+//    private void changeBtnGetCode() {
+//        Thread thread = new Thread() {
+//            @Override
+//            public void run() {
+//                if (tag) {
+//                    while (i > 0) {
+//                        i--;
+//                        //如果活动为空
+//                        if (Forgetpwd.this == null) {
+//                            break;
+//                        }
+//                        Forgetpwd.this.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                btn_code.setText("获取验证码(" + i + ")");
+//                                btn_code.setClickable(false);
+//                            }
+//                        });
+//                        try {
+//                            Thread.sleep(1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    tag = false;
+//                }
+//                i = 60;
+//                tag = true;
+//                if (Forgetpwd.this != null) {
+//                    Forgetpwd.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            btn_code.setText("获取验证码");
+//                            btn_code.setClickable(true);
+//                        }
+//                    });
+//                }
+//            }
+//        };
+//        thread.start();
+//    }
     private void wrapperMessage(String info) {
         Message msg = Message.obtain();
         msg.arg1=4;
         msg.obj = info;
         handler.sendMessage(msg);
     }
-    private boolean isMobileNO(String phone) {
-        String telRegex = "[1][358]\\d{9}";
-        if (TextUtils.isEmpty(phone))
-            return false;
-        else
-            return phone.matches(telRegex);
-    }
+//    private boolean isMobileNO(String phone) {
+//        String telRegex = "[1][358]\\d{9}";
+//        if (TextUtils.isEmpty(phone))
+//            return false;
+//        else
+//            return phone.matches(telRegex);
+//    }
 }
