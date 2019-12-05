@@ -108,6 +108,14 @@ public class ActivitiesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Button button2 =view.findViewById(R.id.detail);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(view.getContext(),ActivitiesDetail.class);
+                startActivity(intent);
+            }
+        });
         Button button1=view.findViewById(R.id.jump_login);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
