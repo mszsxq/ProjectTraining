@@ -1,13 +1,24 @@
 import org.w3c.dom.DOMImplementation
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
 //// 添加插件
 //// 在MobSDK的扩展中注册SMSSDK的相关信息
 
 // 添加插件
 // 在MobSDK的扩展中注册SMSSDK的相关信息
+<<<<<<< HEAD
 
+=======
+>>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+>>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
+>>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
 //MobSDK {
 //    appKey "2d447922e6d83"
 //    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
@@ -103,7 +114,20 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
+}
+=======
+<<<<<<< HEAD
+>>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
@@ -118,3 +142,4 @@ dependencies {
 }
 
 
+>>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
