@@ -1,13 +1,13 @@
 import org.w3c.dom.DOMImplementation
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
-<<<<<<< HEAD
+
 //// 添加插件
 //// 在MobSDK的扩展中注册SMSSDK的相关信息
-=======
+
 // 添加插件
 // 在MobSDK的扩展中注册SMSSDK的相关信息
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
 //MobSDK {
 //    appKey "2d447922e6d83"
 //    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
@@ -86,13 +86,13 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
-<<<<<<< HEAD
-    implementation files('libs/gson-2.8.5.jar')
-=======
 
     implementation files('libs/gson-2.8.5.jar')
 
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
+    implementation files('libs/gson-2.8.5.jar')
+
+
     implementation 'com.android.support:multidex:1.0.0'
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
@@ -103,16 +103,16 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
-<<<<<<< HEAD
-    implementation 'cn.bmob.android:bmob-sms:1.0.1'
-    implementation 'com.xdandroid:hellodaemon:+'
-=======
-
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }

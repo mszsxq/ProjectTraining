@@ -29,13 +29,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
+
 //import cn.bmob.sms.BmobSMS;
 //import cn.bmob.sms.exception.BmobException;
 //import cn.bmob.sms.listener.RequestSMSCodeListener;
 //import cn.bmob.sms.listener.VerifySMSCodeListener;
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
@@ -98,11 +97,11 @@ public class Register extends AppCompatActivity {
                 }
             }
         };
-<<<<<<< HEAD
+
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
-=======
+
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
         getviews();
         registers();
 //        eh = new EventHandler() {
@@ -235,16 +234,14 @@ public class Register extends AppCompatActivity {
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
                     RegisterUser(phone, password);
-<<<<<<< HEAD
 
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
 //                    if (number.equals("")){
 //                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else {
 //                        submitVerificationCode("86", phone, number);
 //                        RegisterUser(phone, password);
-<<<<<<< HEAD
+
 //                    if (number.equals("")) {
 //                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
 //                    } else {
@@ -253,11 +250,10 @@ public class Register extends AppCompatActivity {
 //                    }
                     break;
                 }
-=======
+
 //                    }
-                        break;
-                    }
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
+
             }
         }
 
@@ -343,8 +339,8 @@ public class Register extends AppCompatActivity {
             };
             thread.start();
         }
-<<<<<<< HEAD
-    }
-=======
+
+
+
 }
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
+
