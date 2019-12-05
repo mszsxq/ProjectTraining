@@ -1,6 +1,8 @@
 package com.example.catchtime.fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +11,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.catchtime.R;
+import com.example.catchtime.entity.Activity;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import androidx.recyclerview.widget.RecyclerView;
 class MyAdapterActivities extends BaseAdapter {
     private Context context;
-    private List<Map<String,Object>> data;
+    private List<Activity> data;
     private LayoutInflater layoutInflater;
     private int itemLayoutId;
     private ImageView img_activity;
     private TextView name_activity;
-    public MyAdapterActivities(Context context, List<Map<String,Object>> data,int itemLayoutId){
+    public MyAdapterActivities(Context context, List<Activity> data,int itemLayoutId){
         this.context=context;
         this.data=data;
         this.itemLayoutId=itemLayoutId;
     }
-
 
     @Override
     public int getCount() {
@@ -46,15 +50,34 @@ class MyAdapterActivities extends BaseAdapter {
         if(null==convertView){
             LayoutInflater inflater=LayoutInflater.from(context);
             convertView=inflater.inflate(itemLayoutId,null);
+            img_activity=convertView.findViewById(R.id.img_activity);
+            name_activity=convertView.findViewById(R.id.name_activity);
         }
+        Log.e("1","ok?");
         //获得每个item的对象
-        img_activity=convertView.findViewById(R.id.img_activity);
-        name_activity=convertView.findViewById(R.id.name_activity);
-
-        img_activity.setImageResource((Integer)data.get(position).get("img"));
-        img_activity.setBackgroundColor((Integer) data.get(position).get("bak_color"));
-        name_activity.setText((String)data.get(position).get("name"));
-
+        img_activity.setImageResource(data.get(position).getImage());
+        img_activity.setBackgroundColor(data.get(position).getColor());
+        name_activity.setText(data.get(position).getActivity_name());
+        Log.e("2","ok?");
+        Log.e("3",name_activity.getText().toString());
+        Log.e("4",data.get(position).getIcon_name());
+        Log.e("5",data.get(position).getIcon_color());
         return convertView;
+    }
+    private int getDrawableID(String str) {
+        try {
+            String name = str;
+            Field field = R.drawable.class.getField(name);
+            int DrawableID = 0;
+            DrawableID = field.getInt(new R.drawable());
+            return DrawableID;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

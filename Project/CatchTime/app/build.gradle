@@ -2,8 +2,21 @@ import org.w3c.dom.DOMImplementation
 
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
+<<<<<<< HEAD
+//// 添加插件
+//// 在MobSDK的扩展中注册SMSSDK的相关信息
 // 添加插件
 // 在MobSDK的扩展中注册SMSSDK的相关信息
+=======
+
+//// 添加插件
+//// 在MobSDK的扩展中注册SMSSDK的相关信息
+
+// 添加插件
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //MobSDK {
 //    appKey "2d447922e6d83"
 //    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
@@ -76,15 +89,26 @@ dependencies {
     //Android Swipe Layout
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:21.0.0'
-    //noinspection GradleCompatible
+    //noinspection GradleCompatible    vv    bb
     implementation 'com.android.support:support-v4:20.+'
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+<<<<<<< HEAD
+    implementation files('libs/gson-2.8.5.jar')
 
     implementation files('libs/gson-2.8.5.jar')
 
+=======
+
+    implementation files('libs/gson-2.8.5.jar')
+
+
+    implementation files('libs/gson-2.8.5.jar')
+
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
     implementation 'com.android.support:multidex:1.0.0'
     //process button
     implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
@@ -95,7 +119,27 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+<<<<<<< HEAD
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
+}
+=======
+
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
@@ -103,3 +147,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
+>>>>>>> c3fb87b1b7f6112de4879ce5cf8ef07536c0efea

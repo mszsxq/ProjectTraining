@@ -65,12 +65,19 @@
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
+<<<<<<< HEAD
         <activity android:name=".location.ChangeLocal" />
         <activity android:name=".setting.UserInfor" />
         <activity android:name=".activity.AddDefaultAddress" />
 
+=======
+        <activity android:name=".locations.ChangeLocal" />
+        <activity android:name=".setting.UserInfor"/>
+        <activity android:name=".activity.AddDefaultAddress"/>
+        <activity android:name=".activity.DefaultAddress"/>
+>>>>>>> c3fb87b1b7f6112de4879ce5cf8ef07536c0efea
         <service
-            android:name="com.baidu.location.f"
+            android:name="com.baidu.locations.f"
             android:enabled="true"
             android:process=":remote"></service>
         <service android:name=".backgroundService.LocationService" /> <!-- <activity android:name=".TestButton" /> -->
