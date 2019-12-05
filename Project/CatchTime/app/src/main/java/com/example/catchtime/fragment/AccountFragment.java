@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 package com.example.catchtime.fragment;
 
 import android.graphics.drawable.Drawable;
@@ -19,12 +22,18 @@ import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
+<<<<<<< HEAD
+=======
 
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 import com.github.mikephil.charting.data.PieEntry;
 import com.tmall.ultraviewpager.UltraViewPager;
 
@@ -259,6 +268,9 @@ public class AccountFragment extends Fragment {
 //        }
 //        new InitPieChart(chart, entries, this.getContext());
 //    }
+<<<<<<< HEAD
+}
+=======
 
 }
 
@@ -266,3 +278,4 @@ public class AccountFragment extends Fragment {
 
 
 
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
