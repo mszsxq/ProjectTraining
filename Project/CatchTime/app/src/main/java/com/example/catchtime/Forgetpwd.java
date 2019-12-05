@@ -34,6 +34,10 @@ import androidx.appcompat.app.AppCompatActivity;
 //import cn.bmob.sms.exception.BmobException;
 //import cn.bmob.sms.listener.RequestSMSCodeListener;
 //import cn.bmob.sms.listener.VerifySMSCodeListener;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static cn.smssdk.SMSSDK.getVerificationCode;
@@ -101,6 +105,10 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //        eh=new EventHandler(){
 //            @Override
 //            public void afterEvent(int event, int result, Object data) {
