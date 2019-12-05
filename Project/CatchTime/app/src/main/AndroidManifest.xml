@@ -70,11 +70,12 @@
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
-        <activity android:name=".location.ChangeLocal" />
+        <activity android:name=".locations.ChangeLocal" />
         <activity android:name=".setting.UserInfor"/>
         <activity android:name=".activity.AddDefaultAddress"/>
+        <activity android:name=".activity.DefaultAddress"/>
         <service
-            android:name="com.baidu.location.f"
+            android:name="com.baidu.locations.f"
             android:enabled="true"
             android:process=":remote">
         </service>

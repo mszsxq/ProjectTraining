@@ -1,8 +1,6 @@
 import org.w3c.dom.DOMImplementation
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
-// 添加插件
-// 在MobSDK的扩展中注册SMSSDK的相关信息
 //MobSDK {
 //    appKey "2d447922e6d83"
 //    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
@@ -94,20 +92,9 @@ dependencies {
         transitive = true
     }
 
-<<<<<<< HEAD
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
 
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
-=======
-   implementation 'cn.bmob.android:bmob-sms:1.0.1'
-    implementation 'com.xdandroid:hellodaemon:+'
-
-    implementation 'com.android.support:multidex:1.0.0'
-
-    implementation 'com.android.support:multidex:1.0.0'
-
-}
->>>>>>> 8053e1716435cec90dfc69dfea02aac7ca9d548e
