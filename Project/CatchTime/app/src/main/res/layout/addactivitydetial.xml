@@ -73,9 +73,10 @@
         android:id="@+id/gridlist"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:numColumns="4"
-        android:columnWidth="80dp"
+        android:numColumns="5"
+        android:columnWidth="60dp"
         android:layout_marginTop="95dp"
+        android:background="@color/text_color_8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </GridView>
@@ -100,6 +101,7 @@
             float:fletPadding="10dp">
 
             <EditText
+                android:id="@+id/etActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="活动名称" />

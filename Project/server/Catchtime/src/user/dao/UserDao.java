@@ -230,6 +230,7 @@ public class UserDao {
 		}
 		return n;
 	}
+<<<<<<< HEAD
 	public int findDays(int user_id) throws ParseException {
 		String sql = "select register_date from user where user_id=?";
 		Connection conn = null;
@@ -254,18 +255,44 @@ public class UserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+=======
+	public User querryById(int id) {
+		User user =null;
+		String sql="select * from user where user_id =?";
+		Connection conn =null;
+		try {
+			conn =DBManager.getInstance().getConnection();
+			PreparedStatement ps =conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				int id1 =rs.getInt(1);
+				String phone =rs.getString(2);
+				String password =rs.getString(3);
+				String username =rs.getString(4);
+				String register_date =rs.getString(5);
+				String moto =rs.getString(6);
+				String image =rs.getString(7);
+				user = new User(id,phone,password,username,register_date,moto,image);
+			}
+		}catch (SQLException | ClassNotFoundException e) {
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
+<<<<<<< HEAD
 				rs.close();
 				ps.close();
+=======
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 				DBManager.getInstance().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
 		return days;
 	}
 	
@@ -300,4 +327,8 @@ public class UserDao {
             }
         
     }
+=======
+		return user;
+	}
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 }

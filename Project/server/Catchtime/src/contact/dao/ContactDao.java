@@ -19,9 +19,10 @@ public class ContactDao {
 		ps=conn.prepareStatement(sql);
 		ps.executeUpdate();
 	}
-	public int addIcon(Contact contact) throws ClassNotFoundException, SQLException{
+	public int addIcon(int userId,Contact contact) throws ClassNotFoundException, SQLException{
 		conn = DBManager.getInstance().getConnection();
-		String sql="insert into icon (location_id,activity_id) values(?,?)";
+		String table = userId+"_contact";
+		String sql="insert into "+table+" (location_id,activity_id) values(?,?)";
 		ps=conn.prepareStatement(sql);
 		ps.setInt(1, contact.getLocation_Id());
         ps.setInt(2, contact.getActivity_Id());

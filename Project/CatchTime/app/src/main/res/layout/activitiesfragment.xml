@@ -41,6 +41,12 @@
         android:text="借用跳转登录页面"
         android:layout_below="@id/line"
         />
+    <Button
+        android:text="详情跳转"
+        android:layout_above="@id/jump_login"
+        android:id="@+id/detail"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

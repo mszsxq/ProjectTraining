@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,8 +29,17 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.example.catchtime.activity.AddActivity;
+import com.example.catchtime.activity.AddActivityDetial;
 import com.example.catchtime.location.ChangeLocal;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +53,15 @@ public class AddLocation extends AppCompatActivity {
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private TextView local;
+    private EditText editText;
+    private double lat;
+    private double lng;
+    private ImageView thing;
     private ImageButton changeLocal;
     private List<String> poiss;
+    private Button confirm;
+    private ImageView back;
+    private CustomListener listener;
 
 
     @Override
@@ -53,8 +70,6 @@ public class AddLocation extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_location);
         mapView = findViewById(R.id.bmapView);
-        local = findViewById(R.id.aloc_ed_local);
-        changeLocal=findViewById(R.id.changelocal);
         Log.i("sss","11111111");Toast.makeText(this,"ssss",Toast.LENGTH_SHORT);
         initializeMap();
         hideLogo();
@@ -63,39 +78,25 @@ public class AddLocation extends AppCompatActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        ImageView back = findViewById(R.id.aloc_iv_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        Button confirm = findViewById(R.id.aloc_tv_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        ImageView thing = findViewById(R.id.aloc_iv_thing);
-        thing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), AddActivity.class);
-                startActivity(intent);
-            }
-        });
-        changeLocal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(),ChangeLocal.class);
-                intent.putExtra("poi",poiss.toString());
-                intent.putExtra("resource",0);
-                startActivity(intent);
-                finish();
-            }
-        });
+        init();
+        initListener();
+    }
+
+    private void initListener() {
+        listener = new CustomListener();
+        confirm.setOnClickListener(listener);
+        back.setOnClickListener(listener);
+        thing.setOnClickListener(listener);
+        changeLocal.setOnClickListener(listener);
+    }
+
+    public void init(){
+        local = findViewById(R.id.aloc_ed_local);
+        editText = findViewById(R.id.aloc_ed_name);
+        changeLocal=findViewById(R.id.changelocal);
+        confirm=findViewById(R.id.aloc_tv_confirm);
+        back = findViewById(R.id.aloc_iv_back);
+        thing = findViewById(R.id.aloc_iv_thing);
     }
     private void initializeMap() {
         baiduMap = mapView.getMap();
@@ -123,8 +124,8 @@ public class AddLocation extends AppCompatActivity {
                 if (locastring!=null){
                     local.setText(locastring);
                 }
-                double lat = bdLocation.getLatitude();
-                double lng = bdLocation.getLongitude();
+                lat = bdLocation.getLatitude();
+                lng = bdLocation.getLongitude();
                 List<Poi> pois = bdLocation.getPoiList();
                 poiss=new ArrayList<>();
                 for (Poi p:pois){
@@ -192,5 +193,41 @@ public class AddLocation extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mapView.onPause();
+    }
+    class CustomListener implements  View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.aloc_tv_confirm:
+                    if(editText.getText().toString().length()==0){
+                        Toast.makeText(getApplicationContext(),"请输入地点名称",Toast.LENGTH_LONG).show();
+                    }else{
+                        Intent intent=new Intent(view.getContext(), AddActivityDetial.class);
+                        intent.putExtra("locationName",editText.getText().toString().trim());
+                        intent.putExtra("detailName",local.getText().toString().trim());
+                        intent.putExtra("lat",lat);
+                        intent.putExtra("lng",lng);
+                        Log.e("ss",editText.getText().toString().trim()+local.getText().toString().trim()+"100"+lng);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                    break;
+                    case R.id.aloc_iv_back:
+                        finish();
+                        break;
+                case R.id.aloc_iv_thing:
+                    Intent intent2 = new Intent();
+                    intent2.setClass(getApplicationContext(), AddActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.changelocal:
+                    Intent intent1=new Intent(view.getContext(),ChangeLocal.class);
+                    intent1.putExtra("poi",poiss.toString());
+                    intent1.putExtra("resource",0);
+                    startActivity(intent1);
+                    break;
+            }
+        }
     }
 }
