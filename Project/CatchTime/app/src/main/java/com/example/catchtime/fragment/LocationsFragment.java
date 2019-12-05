@@ -1,8 +1,5 @@
 package com.example.catchtime.fragment;
-<<<<<<< HEAD
 
-=======
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,10 +16,10 @@ import android.widget.TextView;
 import com.example.catchtime.AddLocation;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
-<<<<<<< HEAD
+
 import com.example.catchtime.entity.Locations;
 
-=======
+
 import com.example.catchtime.entity.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +32,7 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
+
 import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
@@ -44,11 +41,10 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class LocationsFragment extends Fragment {
-<<<<<<< HEAD
+
 
     private List<Locations> locations = new ArrayList<>();
-=======
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
+
     private MyAdapterLocation myAdapter;
     private Handler handler;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -60,7 +56,6 @@ public class LocationsFragment extends Fragment {
         View view=inflater.inflate(R.layout.locationfragment,null);
         Window window = getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.green));
-<<<<<<< HEAD
         Locations locations = new Locations();
         locations.setLocName("河北师范大学软件学院");
         locations.setLocThing("学院");
@@ -90,7 +85,7 @@ public class LocationsFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ActivitiesDetail.class);
                 startActivity(intent);
-=======
+
         //存放数据的list
         final List<Location> locations=new ArrayList<>();
         getData();
@@ -119,7 +114,7 @@ public class LocationsFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
+
             }
         };
         TextView addloc = view.findViewById(R.id.loc_btn_addloc);

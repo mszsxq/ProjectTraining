@@ -31,7 +31,7 @@ public class Location {
     }
     public void setLocationLng(Double locationLng) {
         this.locationLng = locationLng;
-<<<<<<< HEAD
+
     }
     public int getLocationRange() {
         return locationRange;
@@ -44,8 +44,7 @@ public class Location {
     }
     public void setLocationDetail(String locationDetail) {
         this.locationDetail = locationDetail;
-=======
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
+
     }
     public int getLocationRange() {
         return locationRange;

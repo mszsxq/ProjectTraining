@@ -241,21 +241,15 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
-<<<<<<< HEAD
+
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), DefaultAddress.class);
                     startActivity(intent1);
 //                    RegisterUser(phone, password);
-=======
+
                     RegisterUser(phone, password);
 
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
->>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
 //                    if (number.equals("")){
 //                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else {
@@ -272,19 +266,16 @@ public class Register extends AppCompatActivity {
                 }
 
 //                    }
-<<<<<<< HEAD
 
 
-=======
-<<<<<<< HEAD
+
+
 //                        break;
 //                    }
-=======
+
                         break;
                     }
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
->>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
+
             }
         }
 
@@ -370,18 +361,13 @@ public class Register extends AppCompatActivity {
             };
             thread.start();
         }
-<<<<<<< HEAD
 
 
 
-=======
-<<<<<<< HEAD
+
     }
-=======
-<<<<<<< HEAD
+
     }
-=======
->>>>>>> 3dc9b4fda1c4de0f87e683ce3bb16fefc898956f
->>>>>>> 9a2d551ff7a1b35b0d02c4f5d9860fb1e18a1f2f
+
 }
 
