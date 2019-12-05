@@ -261,7 +261,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
 
     //向服务器发送数据
     private void sendMessage() {
-        new Thread(){
+       Thread t= new Thread(){
             @Override
             public void run() {
                 try {
@@ -282,7 +282,13 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
                     e.printStackTrace();
                 }
             }
-        }.start();
+        } ;
+       t.start();
+//        try {
+//            t.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
     private void wrapperMessage(String info){
         Message msg = Message.obtain();

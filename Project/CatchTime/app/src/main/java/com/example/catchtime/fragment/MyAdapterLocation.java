@@ -12,18 +12,15 @@ import com.example.catchtime.R;
 
 import com.example.catchtime.entity.Location;
 
-import com.example.catchtime.entity.Locations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapterLocation extends BaseAdapter {
     private Context context;
-    private List<Locations> contents = new ArrayList<>();
+    private List<Location> contents = new ArrayList<>();
     private int itemLayoutId;
 
-
-    public MyAdapterLocation(Context context, List<Locations> contents, int itemLayoutId){
 
     public MyAdapterLocation(Context context, List<Location> contents, int itemLayoutId){
 

@@ -273,8 +273,7 @@ public class Register extends AppCompatActivity {
 //                        break;
 //                    }
 
-                        break;
-                    }
+
 
             }
         }
@@ -365,9 +364,9 @@ public class Register extends AppCompatActivity {
 
 
 
-    }
 
-    }
+
+
 
 }
 
