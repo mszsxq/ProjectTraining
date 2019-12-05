@@ -52,7 +52,7 @@ public class LocationDao {
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
 		String table =userId+"_location";
-		int id=0;
+		int location_id=0;
 		String allNum="select * from "+table+";";
 		String s = "insert into "+table+" values(?,?,?,?,?,?);";
 		try {
@@ -60,10 +60,10 @@ public class LocationDao {
 			pst1 = conn.prepareStatement(allNum);
 			rs = pst1.executeQuery();
 			while(rs.next()) {
-				id = rs.getInt(1);
+				location_id = rs.getInt(1);
 			}
 			pst = conn.prepareStatement(s);
-			pst.setInt(1,id+1);
+			pst.setInt(1,++location_id);
 			pst.setString(2, name);
 			pst.setDouble(3, lat);
 			pst.setDouble(4, lng);
@@ -71,7 +71,7 @@ public class LocationDao {
 			pst.setString(6, detail);
 			int i = pst.executeUpdate();
 			if(i>0) {
-				return 1;
+				return location_id;
 			}
 			
 			} catch (ClassNotFoundException e) {

@@ -36,22 +36,27 @@ public class ActivityController extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String infor=request.getParameter("info");
-		System.out.println(infor);
 		ActivityService ls = new ActivityService();
+//		try {
+//			new ActivityDao().createTable(01);
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		switch(infor) {
 			case "create":
 				break;
 			case "insert":
-				System.out.println(infor);
 				String activityName=request.getParameter("activityName");
 				System.out.println(activityName);
 				String iconId = request.getParameter("iconId");
-				int id = Integer.parseInt(iconId);
-				System.out.println(iconId);
+				int iconid = Integer.parseInt(iconId);
 				try {
-					int i= ls.insertTo(01,activityName,id);
-					if(i>0) {
-						response.getWriter().print("suc");
+					int id= ls.insertTo(01,activityName,iconid);
+					if(id>0) {
+						System.out.println(id);
+						response.getWriter().print(id);
+						
 					}else {
 						response.getWriter().print("false");
 					}

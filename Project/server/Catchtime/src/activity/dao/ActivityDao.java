@@ -61,13 +61,12 @@ public class ActivityDao {
 				location_id = rs.getInt(1);
 			}
 			pst = conn.prepareStatement(s);
-			pst.setInt(1,location_id+1);
+			pst.setInt(1,++location_id);
 			pst.setString(2, activity_name);
 			pst.setInt(3, icon_id);
 			int i = pst.executeUpdate();
 			if(i>0) {
-				System.out.println("插入成功");
-				return i;
+				return location_id;
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block

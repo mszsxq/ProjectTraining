@@ -35,7 +35,12 @@ public class LocationController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String infor=request.getParameter("info");
 		LocationService ls = new LocationService();
-		System.out.println(infor);
+//		try {
+//			new LocationDao().createTable(01);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		switch(infor) {
 			case "insert":
 				String detailName=request.getParameter("detailName");
@@ -44,9 +49,10 @@ public class LocationController extends HttpServlet {
 				double lat1=Double.parseDouble(lat);
 				String lng = request.getParameter("lng");
 				double lng1=Double.parseDouble(lng);
-				int i=ls.insertTo(01,locationName, "det", lat1, lng1);
-				if(i>0) {
-					response.getWriter().print("suc");
+				int id=ls.insertTo(01,locationName, "det", lat1, lng1);
+				if(id>0) {
+					System.out.println(id);
+					response.getWriter().print(id);
 				}else {
 					response.getWriter().print("false");
 				}

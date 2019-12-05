@@ -1,4 +1,5 @@
 import org.w3c.dom.DOMImplementation
+
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
 // 添加插件
@@ -48,8 +49,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-repositories{
-    flatDir{
+repositories {
+    flatDir {
         dirs 'libs' //就是你放aar的目录地址
     }
 }
@@ -102,5 +103,3 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
-
-
