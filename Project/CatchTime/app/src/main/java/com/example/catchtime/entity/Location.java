@@ -43,8 +43,12 @@ public class Location {
     }
     public void setLocationDetail(String locationDetail) {
         this.locationDetail = locationDetail;
+<<<<<<< HEAD
 
     }
 
+=======
+    }
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 }
 

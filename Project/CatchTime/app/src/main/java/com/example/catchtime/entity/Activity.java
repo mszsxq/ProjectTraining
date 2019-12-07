@@ -1,13 +1,21 @@
 package com.example.catchtime.entity;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 public class Activity {
     private int activity_id;
     private int icon_id;
     private String icon_name;
     private String icon_color;
     private String activity_name;
+<<<<<<< HEAD
     private int image;
     private int color;
+=======
+    private int Image;
+    private int Color;
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 
     public Activity() {
 
@@ -20,6 +28,7 @@ public class Activity {
 
 
 
+<<<<<<< HEAD
     public int getColor() {
         return color;
     }
@@ -69,3 +78,9 @@ public class Activity {
     }
 }
 
+=======
+    public void setColor(int color) {
+        Color = color;
+    }
+}
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0

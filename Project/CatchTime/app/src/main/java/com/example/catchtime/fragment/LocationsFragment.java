@@ -40,9 +40,14 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class LocationsFragment extends Fragment {
-
+<<<<<<< HEAD
+=======
 
     private List<Location> locations = new ArrayList<>();
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
+
+
+    private List<Location> location = new ArrayList<>();
 
     private MyAdapterLocation myAdapter;
     private Handler handler;
@@ -56,7 +61,51 @@ public class LocationsFragment extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第2个页面");
         View view=inflater.inflate(R.layout.locationfragment,null);
+<<<<<<< HEAD
 
+=======
+        Window window = getActivity().getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.green));
+        //存放数据的list
+        final List<Location> locations=new ArrayList<>();
+        getData();
+
+        handler=new Handler() {
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                String info = (String) msg.obj;
+                Type type=new TypeToken<List<Location>>(){}.getType();
+                Gson gson=new Gson();
+                Log.e("infooo",info);
+                List<Location> list = gson.fromJson(info.trim(),type);
+                for(int i=0;i<list.size();i++){
+                    Location location=new Location();
+                    location.setLocationName(list.get(i).getLocationName());
+                    locations.add(location);
+                }
+                myAdapter = new MyAdapterLocation(getActivity(),locations,R.layout.item_location);
+                ListView listView = view.findViewById(R.id.loc_lv_local);
+                listView.setAdapter(myAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), ActivitiesDetail.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
+        TextView addloc = view.findViewById(R.id.loc_btn_addloc);
+        addloc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), AddLocation.class);
+                startActivity(intent);
+            }
+        });
+>>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
         return view;
     }
     private void getData() {
