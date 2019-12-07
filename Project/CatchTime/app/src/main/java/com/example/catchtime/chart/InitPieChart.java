@@ -33,9 +33,14 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class InitPieChart  extends DemoBase implements OnChartValueSelectedListener {
+    private ArrayList<Integer> colors = new ArrayList<>();
     private ImageButton add;
     private ImageButton change;
     private ImageButton data;
@@ -46,12 +51,13 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
     private ArrayList<PieEntry> entries;
     private Context context;
     private String centerString;
+    private boolean check;
     private int flag1;//用来表示年月周日
     public void setCenterString(String centerString){
         this.centerString=centerString;
     }
     public InitPieChart(PieChart chart, ArrayList<PieEntry> entries, Context context
-                    ,ImageButton add,ImageButton change,ImageButton data,RelativeLayout linearLayout,int flag,int flag1){
+                    ,ImageButton add,ImageButton change,ImageButton data,RelativeLayout linearLayout,int flag,int flag1,ArrayList<Integer> colors,boolean check){
         this.chart=chart;
         this.entries=entries;
         this.context=context;
@@ -61,12 +67,14 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         this.data=data;
         this.linearLayout=linearLayout;
         this.flag1=flag1;
-        if (entries==null||entries.size()==0){
-            for (int i = 0; i < 5 ; i++) {
-                PieEntry pieEntry=new PieEntry((float) ((Math.random() * 5) + 5 / 5),"测试",getResources().getDrawable(R.drawable.marker2));
-                entries.add(pieEntry);
-            }
-        }
+        this.colors=colors;
+        this.check=check;
+//        if (entries==null||entries.size()==0){
+////            for (int i = 0; i < 5 ; i++) {
+////                PieEntry pieEntry=new PieEntry((float) ((Math.random() * 5) + 5 / 5),"测试",getResources().getDrawable(R.drawable.marker2));
+////                entries.add(pieEntry);
+////            }
+////        }
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -74,7 +82,12 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         chart.setDragDecelerationFrictionCoef(0.95f);
 
         chart.setCenterTextTypeface(tfLight);
-        chart.setCenterText(generateCenterSpannableText());
+        if(check){
+            chart.setCenterText("CatchTime");
+        }else{
+            chart.setCenterText("上一周的数据还没有收集完成");
+        }
+
 
         chart.setDrawHoleEnabled(true);//设置中间空白圆是否显示
         chart.setHoleColor(Color.WHITE);//中间空白圆的颜色
@@ -124,30 +137,30 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
 
         PieDataSet dataSet = new PieDataSet(entries, "");//设置显示的扇形列表
         dataSet.setDrawIcons(true);//设置是否显示图标
-        dataSet.setSliceSpace(0);
-        dataSet.setIconsOffset(new MPPointF(0, 0));//设置图标显示的位置
-        dataSet.setSelectionShift(5f);//设置点击时突出的部分大小
+        dataSet.setSliceSpace(1);
+        dataSet.setIconsOffset(new MPPointF(1, 1));//设置图标显示的位置
+        dataSet.setSelectionShift(8f);//设置点击时突出的部分大小
 
         // add a lot of colors
 
-        ArrayList<Integer> colors = new ArrayList<>();
+//        ArrayList<Integer> colors = new ArrayList<>();
+//
+//        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.LIBERTY_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.PASTEL_COLORS)
+//            colors.add(c);
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
+//        colors.add(ColorTemplate.getHoloBlue());
 
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
@@ -190,32 +203,59 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
+        linearLayout.setVisibility(View.VISIBLE);
+        add.setBackgroundColor(colors.get(h.getDataSetIndex()));
         if (flag1==0){
-            linearLayout.setVisibility(View.VISIBLE);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.i("按钮","点击了第"+flag+"天的选中");
                     Intent intent=new Intent(context, ModifyPage.class);
+                    String value=entries.get((int) h.getX()).getLabel();
+                    String[] list = value.split("/");
+                    intent.putExtra("activity_name",list[0]);
+                    Log.i("检测",list[0]);
+                    chart.setCenterText(list[0]+"\n"+list[1]);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(new Date());
+                    calendar.add(calendar.DATE,-flag);
+                    String date= sdf.format(calendar.getTime());
+                    intent.putExtra("date",date);
                     context.startActivity(intent);
                 }
             });
+            change.setBackgroundColor(colors.get(h.getDataSetIndex()));
             change.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.i("按钮","点击了第"+flag+"天的改变");
                     Intent intent=new Intent(context, Add_detailPage.class);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(new Date());
+                    calendar.add(calendar.DATE,-flag);
+                    String date= sdf.format(calendar.getTime());
+                    intent.putExtra("date",date);
                     context.startActivity(intent);
                 }
             });
+
             data.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.i("按钮","点击了第"+flag+"天的数据");
                     Intent intent=new Intent(context, ActivitiesDetail.class);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(new Date());
+                    calendar.add(calendar.DATE,-flag);
+                    String date= sdf.format(calendar.getTime());
+                    intent.putExtra("date",date);
                     context.startActivity(intent);
                 }
             });
+            data.setBackgroundColor(colors.get(h.getDataSetIndex()));
         }
     }
 

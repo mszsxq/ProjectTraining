@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,12 @@ public class AddActivityDetial extends SwipeBackActivity {
     private GridView mGridView;
     public MyAdapter mMyadapter;
     private List<String> names;
-//    private List<String> colorNames;
+    private List<String> colorNames;
     private TextView btnfin;
     private TextView btnex;
     private EditText editText;
-//    private String iconName;
-//    private String iconColor;
+    private int locationId;
+    private int activityId;
     private String activityName;
     private String locationName;
     private String detailName;
@@ -63,8 +64,17 @@ public class AddActivityDetial extends SwipeBackActivity {
             super.handleMessage(msg);
             String info = (String) msg.obj;
             switch (msg.what){
+                case 100:
+                    locationId=Integer.parseInt(info);
+                    Log.e("locationId",locationId+"");
+                    break;
                 case 200:
-                    Log.e("ss",info);
+                    activityId=Integer.parseInt(info);
+                    Log.e("activityId",activityId+"");
+                    break;
+                case 300:
+                    Log.e("suc",info);
+                    break;
             }
         }
     };
@@ -81,13 +91,16 @@ public class AddActivityDetial extends SwipeBackActivity {
         lat = intent.getDoubleExtra("lat",0.00);
         lng = intent.getDoubleExtra("lng",0.00);
         names=new ArrayList<>();
-        names.add("onfeet");names.add("onfeet");names.add("onfeet");names.add("onfeet");names.add("onfeet");names.add("onfeet");names.add("onfeet");
-        names.add("onfeet");names.add("onfeet");names.add("onfeet");
+        names.add("walk");names.add("paly");names.add("walk");names.add("study");names.add("walk");names.add("study");names.add("walk");
+        names.add("paly");names.add("study");names.add("paly");
+        colorNames=new ArrayList<>();
+        colorNames.add("main_orange");colorNames.add("main_body");colorNames.add("main_blue");colorNames.add("main_red");colorNames.add("main_blue_press");
+        colorNames.add("text_color_1");colorNames.add("text_color_red");colorNames.add("title_color_blue");colorNames.add("red_5");colorNames.add("red_5");
         editText = (EditText) findViewById(R.id.etActivity);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
         mGridView= (GridView) findViewById(R.id.gridlist);
-        mMyadapter=new MyAdapter(names,this);
+        mMyadapter=new MyAdapter(names,colorNames,this);
         mGridView.setAdapter(mMyadapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -114,6 +127,8 @@ public class AddActivityDetial extends SwipeBackActivity {
                 }else if (detailName!=null){
                     sendToServer();
                     sendToServer1();
+                    SystemClock.sleep(1000);
+                    sendToServer2();
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), AddLocation.class);
                     startActivity(intent1);
@@ -125,6 +140,29 @@ public class AddActivityDetial extends SwipeBackActivity {
         });
     }
 
+    private void sendToServer2() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String u="&activityId="+activityId+"&locationId="+locationId;
+                    URL url = new URL("http://192.168.137.1:8080/Catchtime/ContactController?info=insert"+u);
+                    Log.e("text","300000dsd");
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Log.e("105",info);
+                    wrapperMessage(info,300);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
     private void sendToServer1() {
         new Thread(new Runnable() {
             @Override
@@ -132,12 +170,12 @@ public class AddActivityDetial extends SwipeBackActivity {
                 try {
                     String u="&activityName="+activityName+"&iconId="+pos+1;
                     URL url = new URL("http://192.168.137.1:8080/Catchtime/ActivityController?info=insert"+u);
-                    Log.e("text","t");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    Log.e("85",info);
+                    activityId=Integer.parseInt(info);
+                    Log.e("85",activityId+"");
                     wrapperMessage(info,200);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -156,13 +194,13 @@ public class AddActivityDetial extends SwipeBackActivity {
                 try {
                     String u="&locationName="+locationName+"&detailName="+detailName+"&lat="+lat+"&lng="+lng;
                     URL url = new URL("http://192.168.137.1:8080/Catchtime/LocationController?info=insert"+u);
-                    Log.e("text","tt");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    Log.e("dd",info);
-                    wrapperMessage(info,200);
+                    locationId=Integer.parseInt(info);
+                    Log.e("dd",locationId+"");
+                    wrapperMessage(info,100);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -181,12 +219,14 @@ public class AddActivityDetial extends SwipeBackActivity {
     }
 }
 class MyAdapter extends BaseAdapter {
-    private List<String> list;  //表示图片的名称  从而通过名称获得资源id
+    private List<String> list;
+    private List<String> colorList;//表示图片的名称  从而通过名称获得资源id
     private Context context;
     private int i=-1;
     private static int getViewTimes = 0;
-    public MyAdapter(List<String> list, Context context) {
+    public MyAdapter(List<String> list,List<String> colorList, Context context) {
         this.list = list;
+        this.colorList=colorList;
         this.context = context;
     }
     public MyAdapter(List<String> list, Context context,int i) {
@@ -219,7 +259,9 @@ class MyAdapter extends BaseAdapter {
         }
         Resources res=context.getResources();
         int picid = res.getIdentifier(list.get(position),"drawable",context.getPackageName());
+//        int color = res.getIdentifier(colorList.get(position),"color",context.getPackageName());
         imageView.setImageResource(picid);
+//        imageView.setBackgroundColor(context.getResources().getColor(R.color.+colorList.get(p)));
         if (i==position){
             imageView.setBackgroundColor(context.getResources().getColor(R.color.gray));
         }

@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <ImageView
+                android:id="@+id/location"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="10dp"
@@ -42,34 +43,70 @@
             <TextView
                 android:id="@+id/tvcontent"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/location"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:text="选择地点"
-                android:textSize="16dp"/>
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/jiantou"/>
+                android:layout_height="40dp"
+                android:textSize="16dp"
+                android:paddingLeft="10dp"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="10dp" />
-            <EditText
-                android:layout_marginLeft="30dp"
+            <TextView
+                android:id="@+id/location_name"
+                android:layout_toRightOf="@+id/image"
                 android:layout_width="250dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:textSize="20dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"/>
             <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/jiantou"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           >
+            <TextView
+
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="@color/gray"
+                android:paddingTop="10dp"
+                android:text="事件"
+                android:textSize="20dp"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/clickActivity"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="10dp" />
+            <TextView
+                android:id="@+id/activity_name"
+                android:layout_toRightOf="@+id/icon"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"/>
+            <ImageView
+
                 android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -94,7 +131,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:textSize="20dp"
-                android:hint="start"
+                android:hint="开始时间"
                 android:paddingTop="10dp"/>
         </RelativeLayout>
         <RelativeLayout
@@ -113,7 +150,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:textSize="20dp"
-                android:hint="end"
+                android:hint="结束时间"
                 android:paddingTop="10dp"/>
         </RelativeLayout>
         <Button

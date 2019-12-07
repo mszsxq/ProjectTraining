@@ -1,4 +1,5 @@
 import org.w3c.dom.DOMImplementation
+
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
 
@@ -59,8 +60,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-repositories{
-    flatDir{
+repositories {
+    flatDir {
         dirs 'libs' //就是你放aar的目录地址
     }
 }
@@ -92,6 +93,13 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> 9d8e9f26f924664a88696719a3ef29b91196afff
     implementation files('libs/gson-2.8.5.jar')
 
     implementation files('libs/gson-2.8.5.jar')
@@ -101,6 +109,7 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
 
 
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
     implementation files('libs/gson-2.8.5.jar')
 
 
@@ -114,6 +123,36 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+<<<<<<< HEAD
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
+<<<<<<< HEAD
+=======
+}
+=======
+
+
+    implementation 'cn.bmob.android:bmob-sms:1.0.1'
+    implementation 'com.xdandroid:hellodaemon:+'
+
+
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
+>>>>>>> 9d8e9f26f924664a88696719a3ef29b91196afff
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
@@ -121,3 +160,18 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
+>>>>>>> c3fb87b1b7f6112de4879ce5cf8ef07536c0efea
+>>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
+>>>>>>> 9d8e9f26f924664a88696719a3ef29b91196afff
