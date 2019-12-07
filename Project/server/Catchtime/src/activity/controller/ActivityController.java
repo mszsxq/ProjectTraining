@@ -2,6 +2,7 @@ package activity.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
 import activity.dao.ActivityDao;
 import activity.service.ActivityService;
 import entity.Activity;
@@ -69,6 +73,15 @@ public class ActivityController extends HttpServlet {
 					e.printStackTrace();
 				}
 			case "findall":
+					System.out.println(2);
+					Gson gson = new Gson();
+					int userId = gson.fromJson("1", int.class);
+					List<Activity> list = new ArrayList<>();
+					ActivityDao dao = new ActivityDao();
+					list = dao.findAll(userId);
+					String aclist = gson.toJson(list);
+					System.out.println(aclist);
+					response.getWriter().print(aclist);
 				break;
 			case "update":
 				break;

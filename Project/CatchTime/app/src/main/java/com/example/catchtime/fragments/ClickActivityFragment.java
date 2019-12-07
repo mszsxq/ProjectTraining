@@ -78,6 +78,7 @@ public class ClickActivityFragment extends AppCompatActivity {
                     int img=getDrawableID(str);
                     activity.setImage(img);
                     activity.setActivity_name(list.get(i).getActivity_name());
+                    activity.setActivity_id(list.get(i).getActivity_id());
                     String string=new String();
                     string=list.get(i).getIcon_color();
                     int color=getColorID(string);
@@ -88,15 +89,18 @@ public class ClickActivityFragment extends AppCompatActivity {
                 Log.e("info",info);
                 listView=findViewById(R.id.listview);
                 listView.setAdapter(new MyAdapterActivities(getApplicationContext(),lists,R.layout.activitiesfragment_litem));
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getApplicationContext(), ModifyPage.class);
                         intent.putExtra("iconId",lists.get(position).getIcon_id());
                         intent.putExtra("iconName",lists.get(position).getIcon_name());
-                        intent.putExtra("color",lists.get(position).getColor());
+                        intent.putExtra("color",lists.get(position).getIcon_color());
                         intent.putExtra("activity_name",lists.get(position).getActivity_name());
+                        intent.putExtra("activity_id",lists.get(position).getActivity_id());
+                        Log.i("检测","id"+lists.get(position).getActivity_id());
                         setResult(200,intent);
                         finish();
                     }
@@ -105,7 +109,9 @@ public class ClickActivityFragment extends AppCompatActivity {
             }
         };
 
+
     }
+
 
 
     //由图片名称转换为资源文件
@@ -147,7 +153,7 @@ public class ClickActivityFragment extends AppCompatActivity {
             public void run() {
                 int userid=1;
                 try {
-                    URL url = new URL("http://10.7.89.69:8080/Catchtime/ActivityController?userid="+userid);
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/ActivityController?userid="+userid+"&info=findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

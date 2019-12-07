@@ -3,6 +3,7 @@ package com.example.catchtime.chart;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,12 +53,14 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
     private Context context;
     private String centerString;
     private boolean check;
+    private int size;
     private int flag1;//用来表示年月周日
+    private int type;
     public void setCenterString(String centerString){
         this.centerString=centerString;
     }
     public InitPieChart(PieChart chart, ArrayList<PieEntry> entries, Context context
-                    ,ImageButton add,ImageButton change,ImageButton data,RelativeLayout linearLayout,int flag,int flag1,ArrayList<Integer> colors,boolean check){
+                    ,ImageButton add,ImageButton change,ImageButton data,RelativeLayout linearLayout,int flag,int flag1,ArrayList<Integer> colors,boolean check,int size,int type){
         this.chart=chart;
         this.entries=entries;
         this.context=context;
@@ -69,6 +72,8 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         this.flag1=flag1;
         this.colors=colors;
         this.check=check;
+        this.size=size;
+        this.type=type;
 //        if (entries==null||entries.size()==0){
 ////            for (int i = 0; i < 5 ; i++) {
 ////                PieEntry pieEntry=new PieEntry((float) ((Math.random() * 5) + 5 / 5),"测试",getResources().getDrawable(R.drawable.marker2));
@@ -85,7 +90,7 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         if(check){
             chart.setCenterText("CatchTime");
         }else{
-            chart.setCenterText("上一周的数据还没有收集完成");
+            chart.setCenterText("上一个周期的数据还没有收集完成");
         }
 
 
@@ -167,7 +172,7 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
 
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter(chart));
-        data.setValueTextSize(11f);
+        data.setValueTextSize(15f);
         data.setValueTextColor(Color.WHITE);
         data.setValueTypeface(tfLight);
         chart.setData(data);
@@ -203,59 +208,67 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
-        linearLayout.setVisibility(View.VISIBLE);
-        add.setBackgroundColor(colors.get(h.getDataSetIndex()));
-        if (flag1==0){
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("按钮","点击了第"+flag+"天的选中");
-                    Intent intent=new Intent(context, ModifyPage.class);
-                    String value=entries.get((int) h.getX()).getLabel();
-                    String[] list = value.split("/");
-                    intent.putExtra("activity_name",list[0]);
-                    Log.i("检测",list[0]);
-                    chart.setCenterText(list[0]+"\n"+list[1]);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(new Date());
-                    calendar.add(calendar.DATE,-flag);
-                    String date= sdf.format(calendar.getTime());
-                    intent.putExtra("date",date);
-                    context.startActivity(intent);
-                }
-            });
-            change.setBackgroundColor(colors.get(h.getDataSetIndex()));
-            change.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("按钮","点击了第"+flag+"天的改变");
-                    Intent intent=new Intent(context, Add_detailPage.class);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(new Date());
-                    calendar.add(calendar.DATE,-flag);
-                    String date= sdf.format(calendar.getTime());
-                    intent.putExtra("date",date);
-                    context.startActivity(intent);
-                }
-            });
+        if(type==0) {
+            linearLayout.setVisibility(View.VISIBLE);
+            GradientDrawable drawable = (GradientDrawable) add.getBackground();
+            drawable.setColor(colors.get((int) h.getX()));
+            if (flag1 == 0) {
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("按钮", "点击了第" + flag + "天的选中");
+                        Intent intent = new Intent();
+                        intent.setClass(context, ModifyPage.class);
+                        String value = entries.get((int) h.getX()).getLabel();
+                        String[] list = value.split("/");
+                        intent.putExtra("activity_name", list[0]);
+                        Log.i("检测", list[0]);
+                        chart.setCenterText(list[0] + "\n" + list[1]);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Calendar calendar = new GregorianCalendar();
+                        calendar.setTime(new Date());
+                        calendar.add(calendar.DATE, -(size - flag - 1));
+                        String date = sdf.format(calendar.getTime());
+                        intent.putExtra("date", date);
+                        context.startActivity(intent);
 
-            data.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("按钮","点击了第"+flag+"天的数据");
-                    Intent intent=new Intent(context, ActivitiesDetail.class);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(new Date());
-                    calendar.add(calendar.DATE,-flag);
-                    String date= sdf.format(calendar.getTime());
-                    intent.putExtra("date",date);
-                    context.startActivity(intent);
-                }
-            });
-            data.setBackgroundColor(colors.get(h.getDataSetIndex()));
+                    }
+                });
+
+                GradientDrawable drawable1 = (GradientDrawable) change.getBackground();
+                drawable1.setColor(colors.get((int) h.getX()));
+                change.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("按钮", "点击了第" + flag + "天的改变");
+                        Intent intent = new Intent(context, Add_detailPage.class);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Calendar calendar = new GregorianCalendar();
+                        calendar.setTime(new Date());
+                        calendar.add(calendar.DATE, -(size - flag - 1));
+                        String date = sdf.format(calendar.getTime());
+                        intent.putExtra("date", date);
+                        context.startActivity(intent);
+                    }
+                });
+
+                data.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("按钮", "点击了第" + flag + "天的数据");
+                        Intent intent = new Intent(context, ActivitiesDetail.class);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                        Calendar calendar = new GregorianCalendar();
+                        calendar.setTime(new Date());
+                        calendar.add(calendar.DATE, -(size - flag - 1));
+                        String date = sdf.format(calendar.getTime());
+                        intent.putExtra("date", date);
+                        context.startActivity(intent);
+                    }
+                });
+                GradientDrawable drawable2 = (GradientDrawable) data.getBackground();
+                drawable2.setColor(colors.get((int) h.getX()));
+            }
         }
     }
 

@@ -138,18 +138,19 @@ public class showCart extends HttpServlet {
 			}
 		}else if(type ==1) {
 			String theDate = request.getParameter("date");
-			HashMap<String,Integer> weekHashList = activityDao.findWeekRecord(user_id, theDate);
+			HashMap<String,String> weekHashList = activityDao.findWeekRecord(user_id, theDate);
 			Set set2=weekHashList.entrySet();
 			Iterator it2=set2.iterator();
 		     while(it2.hasNext()){
 		            Map.Entry me=(Map.Entry)it2.next();
 		            chartData cd = new chartData();
-		            if((int)me.getKey()!=404) {
+		            if(!me.getKey().equals("404")) {
+		            int name=activityDao.findActivityId(user_id,(String) me.getKey());
 		            int id=activityDao.findActivityId(user_id,(String) me.getKey());
 					cd.setName((String) me.getKey());
 					cd.setId(id);
-		            cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
-		            Activity activity = activityDao.findSingle(user_id,(int) me.getKey());
+					cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
+		            Activity activity = activityDao.findSingle(user_id,name);
 			        cd.setIcon(activity.getIcon_name());
 			        cd.setColor(activity.getIcon_color());
 		            }else {
@@ -164,18 +165,19 @@ public class showCart extends HttpServlet {
 		      }
 		}else if(type ==2) {
 			String theDate = request.getParameter("date");
-			HashMap<String,Integer> monthHashList =activityDao.findMonthRecord(user_id, theDate);
+			HashMap<String,String> monthHashList =activityDao.findMonthRecord(user_id, theDate);
 			Set set2=monthHashList.entrySet();
 			Iterator it2=set2.iterator();
 		     while(it2.hasNext()){
 		            Map.Entry me=(Map.Entry)it2.next();
 		            chartData cd = new chartData();
-		            if((int)me.getKey()!=404) {
+		            if(!me.getKey().equals("404")) {
+		            	int name=activityDao.findActivityId(user_id,(String) me.getKey());
 		            int id=activityDao.findActivityId(user_id,(String) me.getKey());
 					cd.setName((String) me.getKey());
 					cd.setId(id);
-		            cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
-		            Activity activity = activityDao.findSingle(user_id,(int) me.getKey());
+					cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
+		            Activity activity = activityDao.findSingle(user_id,name);
 			        cd.setIcon(activity.getIcon_name());
 			        cd.setColor(activity.getIcon_color());
 		            }else {
@@ -191,18 +193,19 @@ public class showCart extends HttpServlet {
 			
 		}else {
 			String theDate = request.getParameter("date");
-			HashMap<String,Integer> yearHashList =activityDao.findYearRecord(user_id, theDate);
+			HashMap<String,String> yearHashList =activityDao.findYearRecord(user_id, theDate);
 			Set set2=yearHashList.entrySet();
 			Iterator it2=set2.iterator();
 		     while(it2.hasNext()){
 		            Map.Entry me=(Map.Entry)it2.next();
 		            chartData cd = new chartData();
-		            if((int)me.getKey()!=404) {
+		            if(!me.getKey().equals("404")) {
+		            	int name=activityDao.findActivityId(user_id,(String) me.getKey());
 		            int id=activityDao.findActivityId(user_id,(String) me.getKey());
 					cd.setName((String) me.getKey());
 					cd.setId(id);
-		            cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
-		            Activity activity = activityDao.findSingle(user_id,(int) me.getKey());
+					cd.setTime((String) activityDao.fomat((long) Integer.parseInt((String) me.getValue())));
+		            Activity activity = activityDao.findSingle(user_id,(int) name);
 			        cd.setIcon(activity.getIcon_name());
 			        cd.setColor(activity.getIcon_color());
 		            }else {

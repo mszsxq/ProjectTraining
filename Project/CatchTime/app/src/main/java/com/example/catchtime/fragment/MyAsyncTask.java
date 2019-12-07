@@ -56,7 +56,7 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
     protected void onPostExecute(ArrayList<PieEntry> entries) {
         super.onPostExecute(entries);
         new InitPieChart(pieChart, entries, context, layout.findViewById(R.id.add), layout.findViewById(R.id.change), layout.findViewById(R.id.data),
-                layout.findViewById(R.id.linear), position, 0, colors,true);
+                layout.findViewById(R.id.linear), position, 0, colors,true,size,type);
         viewGroup.addView(layout);
     }
 
@@ -78,19 +78,13 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
         Log.i("检测","进入"+list.size());
         for(int i=0;i<list.size();i++) {
             int time = 0;
-            SimpleDateFormat sdf = new SimpleDateFormat("HH-mm");
-            Date date = null;
-            try {
-                date = sdf.parse(list.get(i).getTime());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            int hour = date.getHours() * 60;
-            int minute = date.getMinutes();
+            String[] sp = (list.get(i).getTime()).split("-");
+            int hour =Integer.parseInt(sp[0]) * 60;
+            int minute = Integer.parseInt(sp[1]);
             time = hour + time;
             PieEntry pieEntry = new PieEntry(time, list.get(i).getName() + "/" + list.get(i).getTime(), context.getResources().getDrawable(getDrawableID(list.get(i).getIcon())));
             entries.add(pieEntry);
-            colors.add(context.getResources().getColor(R.color.line_yellow_alpha));
+            colors.add(context.getResources().getColor(getColorID(list.get(i).getColor())));
             Log.i("检测", hour + "-" + minute + "-" + time);
             Log.i("检测", "colors" + list.get(i).getColor());
         }

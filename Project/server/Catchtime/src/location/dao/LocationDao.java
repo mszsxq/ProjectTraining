@@ -46,24 +46,24 @@ public class LocationDao {
 			}
 		}
 	}
-	public int insertData(int userId,String name,double lat,double lng,int range,String detail) throws SQLException {
+	public void insertData(int userId,String name,double lat,double lng,int range,String detail) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
 		String table =userId+"_location";
-		int location_id=0;
+		int id=0;
 		String allNum="select * from "+table+";";
-		String s = "insert into "+table+" values(?,?,?,?,?,?);";
+		String s = "insert into ol_location values(?,?,?,?,?,?);";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst1 = conn.prepareStatement(allNum);
 			rs = pst1.executeQuery();
 			while(rs.next()) {
-				location_id = rs.getInt(1);
+				id = rs.getInt(1);
 			}
 			pst = conn.prepareStatement(s);
-			pst.setInt(1,++location_id);
+			pst.setInt(1,id+1);
 			pst.setString(2, name);
 			pst.setDouble(3, lat);
 			pst.setDouble(4, lng);
@@ -71,7 +71,7 @@ public class LocationDao {
 			pst.setString(6, detail);
 			int i = pst.executeUpdate();
 			if(i>0) {
-				return location_id;
+				System.out.println("插入成功");
 			}
 			
 			} catch (ClassNotFoundException e) {
@@ -88,7 +88,6 @@ public class LocationDao {
 				e.printStackTrace();
 			}
 		}
-		return 0;
 	}
 	public void changeInfor(int userId,int id,String locationName,double lat,double lng,int range,String detail) {
 		Connection conn= null;
@@ -154,6 +153,37 @@ public class LocationDao {
 		}
 		
 	}
+	public List<String> findAllLoc(int userId) throws SQLException {
+		Connection conn= null;
+		PreparedStatement pst = null;
+		ResultSet rs=null;
+		String table=userId+"_location";
+		List<String> list = new ArrayList<>();
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString("location_name"));
+			}
+			return list;
+			} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	public List<Location> findAll(int userId) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;

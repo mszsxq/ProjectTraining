@@ -2,6 +2,8 @@ package activity.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,18 +37,31 @@ public class changeActivityAfter extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		ActivityDao ad = new ActivityDao();
+		//int user_id = Integer.parseInt(request.getParameter("userId"));
 		int user_id = Integer.parseInt(request.getParameter("userId"));
 		int activity_id = Integer.parseInt(request.getParameter("activityId"));
 		int icon_id = Integer.parseInt(request.getParameter("iconId"));
 		String old_Name = request.getParameter("oldName");
+		String date = request.getParameter("date");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+		String location_name =request.getParameter("locationName");
+		String today = sdf.format(new Date());
 		int old_id =0;
 		if(!old_Name.equals("404")) {
 			old_id= ad.findActivityId(user_id, old_Name);
+		}else {
+			old_id = 404;
 		}
-		old_id = 404;
-		int location_id = Integer.parseInt(request.getParameter("locationId"));
+		int location_id = ad.findLocationId(user_id,location_name);
+		if(today.equals(date)) {
+			ad.updateDta(user_id, activity_id, location_id, icon_id, old_id,today);
+		}else {
+			String activity_name = ad.findActivityName(user_id, activity_id);
+			System.out.println("¼ì²â"+user_id+"--"+activity_name+"-"+old_Name+"--"+date);
+			ad.updateDayDta(user_id,date,activity_name, old_Name);
+			ad.updateDta(user_id, activity_id, location_id, icon_id, old_id,date);
+		}
 		
-		ad.updateDta(user_id, activity_id, location_id, icon_id, old_id);
 	}
 
 	/**

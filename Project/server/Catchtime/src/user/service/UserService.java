@@ -16,5 +16,4 @@ public class UserService {
 		int n = userDao.register(id,phone, password,time);
 		return n;
 	}
-	
 }

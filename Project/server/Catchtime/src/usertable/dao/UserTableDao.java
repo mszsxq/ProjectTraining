@@ -50,7 +50,7 @@ public class UserTableDao {
 	//根据user_id查询
 	
 	public User_table findusertableByuserid(int id) {
-		ResultSet rs=null;
+		ResultSet rs;
 		User_table usertable=null;
 		PreparedStatement pstm = null;
 		

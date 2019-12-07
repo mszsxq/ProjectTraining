@@ -4,7 +4,7 @@
 package activity.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -230,6 +230,37 @@ public class ActivityDao {
 		return activity;
 	}
 	
+	public int findLocationId(int userId,String name) {
+		int id=0;
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_location";
+		Activity activity = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table+" where location_name = ?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				id=rs.getInt("location_id");
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return id;
+	}
 	public HashMap<Integer,Long> findDetailData(int user_id,String date) throws ParseException{
 		Connection conn= null;
 		PreparedStatement pst1 = null;
@@ -244,8 +275,8 @@ public class ActivityDao {
 		String sql2 = "select activity_name from "+table2+" where activity_id = ?"; 
 		String sql3 = "select * from "+table1+" where activity_id = 404";
 		HashMap<Integer,Long> hashList = new  HashMap<Integer,Long>();
-		String lastEndTime = date+"-00-00";
-		String lastTime=date+"23-59";
+		String lastEndTime = date+" 00:00:00";
+		String lastTime=date+" 23:59:59";
 		long allTime=0;
 		String name=null;
 		try {
@@ -273,7 +304,7 @@ public class ActivityDao {
 			try {
 				pst1.setString(1,date+"%");
 				rs1=pst1.executeQuery();
-				String sdf = "yyyy-MM-dd-HH-mm";
+				String sdf = "yyyy-MM-dd HH:mm:ss";
 				while(rs1.next()) {
 					int id = rs1.getInt("activity_id");
 					String start = rs1.getString("begin_time");
@@ -294,7 +325,7 @@ public class ActivityDao {
 				
 				rs3=pst3.executeQuery();
 				while(rs3.next()) {
-					String sdf1 = "yyyy-MM-dd-HH-mm";
+					String sdf1 = "yyyy-MM-dd HH:mm:ss";
 					String start = rs3.getString("begin_time");
 					String end = rs3.getString("finish_time");
 					long ans = dateDiff(start,end,sdf1);
@@ -459,7 +490,14 @@ public class ActivityDao {
 			while(rs1.next()) {
 				allTime = rs1.getString("activity_data");
 				name = rs1.getString("activity_name");
-				hashList.put(name,allTime);
+				if(hashList.containsKey(name)) {
+					String ans = hashList.get(name);
+					allTime =(Integer.parseInt(allTime)+Integer.parseInt(ans))+"";
+					hashList.put(name,allTime);
+				}else {
+					hashList.put(name,allTime);
+				}
+				
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -481,23 +519,23 @@ public class ActivityDao {
 		
 	}
 	
-	public HashMap<String,Integer> findWeekRecord(int user_id,String date){
+	public HashMap<String,String> findWeekRecord(int user_id,String date){
 		List<String> days = new ArrayList<String>();
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
 		String table1=user_id+"_dayrecord";
 		String sql1 = "select * from "+table1+" where data = ?";
-		HashMap<String,Integer> hashList = new  HashMap<String,Integer>();
-		long allTime=0;
+		HashMap<String,String> hashList = new  HashMap<String,String>();
+		int allTime=0;
 		String name = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date weekDays;
 		try {
 			weekDays = (Date) sdf.parse(date);
-			Calendar calendar = new GregorianCalendar();
-	        calendar.setTime(weekDays);
 	        for(int i=0;i<7;i++) {
+	        	Calendar calendar = new GregorianCalendar();
+		        calendar.setTime(weekDays);
 	        	calendar.add(calendar.DATE,-i);
 		        days.add(sdf.format(calendar.getTime()));
 	        }
@@ -513,13 +551,14 @@ public class ActivityDao {
 				rs1=pst1.executeQuery();
 				while(rs1.next()) {
 					try {
-						allTime = addData(rs1.getString("activity_data"),"HH-mm");
+						allTime = addData(rs1.getString("activity_data"));
 						name = rs1.getString("activity_name");
 						if(hashList.containsKey(name)) {
-							int ans = hashList.get(name);
-							hashList.put(name,(int) allTime+ans);
+							int ans = addData(hashList.get(name));
+							allTime = allTime+ans;
+							hashList.put(name,allTime+"");
 						}else {
-							hashList.put(name,(int) allTime);
+							hashList.put(name,""+allTime);
 						}
 						
 					} catch (ParseException e) {
@@ -550,23 +589,23 @@ public class ActivityDao {
 		
 	}
 	
-	public HashMap<String,Integer> findMonthRecord(int user_id,String date){
+	public HashMap<String,String> findMonthRecord(int user_id,String date){
 		List<String> days = new ArrayList<String>();
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
 		String table1=user_id+"_dayrecord";
 		String sql1 = "select * from "+table1+" where data = ?";
-		HashMap<String,Integer> hashList = new  HashMap<String,Integer>();
-		long allTime=0;
+		HashMap<String,String> hashList = new  HashMap<String,String>();
+		int allTime=0;
 		String name = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date weekDays;
 		try {
 			weekDays = (Date) sdf.parse(date);
-			Calendar calendar = new GregorianCalendar();
-	        calendar.setTime(weekDays);
-	        for(int i=0;i<30;i++) {
+			for(int i=0;i<30;i++) {
+	        	Calendar calendar = new GregorianCalendar();
+		        calendar.setTime(weekDays);
 	        	calendar.add(calendar.DATE,-i);
 		        days.add(sdf.format(calendar.getTime()));
 	        }
@@ -582,13 +621,14 @@ public class ActivityDao {
 				rs1=pst1.executeQuery();
 				while(rs1.next()) {
 					try {
-						allTime = addData(rs1.getString("activity_data"),"HH-mm");
+						allTime = addData(rs1.getString("activity_data"));
 						name = rs1.getString("activity_name");
 						if(hashList.containsKey(name)) {
-							int ans = hashList.get(name);
-							hashList.put(name,(int) allTime+ans);
+							int ans = addData(hashList.get(name));
+							allTime = allTime+ans;
+							hashList.put(name,allTime+"");
 						}else {
-							hashList.put(name,(int) allTime);
+							hashList.put(name,""+allTime);
 						}
 						
 					} catch (ParseException e) {
@@ -618,23 +658,23 @@ public class ActivityDao {
 		return hashList;
 		
 	}
-	public HashMap<String,Integer> findYearRecord(int user_id,String date){
+	public HashMap<String,String> findYearRecord(int user_id,String date){
 		List<String> days = new ArrayList<String>();
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
 		String table1=user_id+"_dayrecord";
 		String sql1 = "select * from "+table1+" where data = ?";
-		HashMap<String,Integer> hashList = new  HashMap<String,Integer>();
-		long allTime=0;
+		HashMap<String,String> hashList = new  HashMap<String,String>();
+		int allTime=0;
 		String name = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date weekDays;
 		try {
 			weekDays = (Date) sdf.parse(date);
-			Calendar calendar = new GregorianCalendar();
-	        calendar.setTime(weekDays);
-	        for(int i=0;i<365;i++) {
+			for(int i=0;i<365;i++) {
+	        	Calendar calendar = new GregorianCalendar();
+		        calendar.setTime(weekDays);
 	        	calendar.add(calendar.DATE,-i);
 		        days.add(sdf.format(calendar.getTime()));
 	        }
@@ -650,13 +690,14 @@ public class ActivityDao {
 				rs1=pst1.executeQuery();
 				while(rs1.next()) {
 					try {
-						allTime = addData(rs1.getString("activity_data"),"HH-mm");
+						allTime = addData(rs1.getString("activity_data"));
 						name = rs1.getString("activity_name");
 						if(hashList.containsKey(name)) {
-							int ans = hashList.get(name);
-							hashList.put(name,(int) allTime+ans);
+							int ans = addData(hashList.get(name));
+							allTime = allTime+ans;
+							hashList.put(name,allTime+"");
 						}else {
-							hashList.put(name,(int) allTime);
+							hashList.put(name,""+allTime);
 						}
 						
 					} catch (ParseException e) {
@@ -738,14 +779,10 @@ public class ActivityDao {
    
 	}
 	
-	public long addData(String time,String format) throws ParseException {
-        // 按照传入的格式生成一个simpledateformate对象
-        SimpleDateFormat sd = new SimpleDateFormat(format);   
+	public int addData(String time) throws ParseException {  
         long nm = 1000 * 60;// 一分钟的毫秒数
         long diff;
-
-        diff = sd.parse(time).getTime();
-        long min = diff/ nm;// 计算差多少分钟
+       int min = Integer.parseInt(time);
      
         return min;
         
@@ -772,7 +809,7 @@ public class ActivityDao {
 		String sql2 = "select * from icon where icon_id = ?;";
 		String sql3 = "select * from "+table3+" where location_id = ?;";
 		String sql4 = "select * from "+table4+" where activity_id = ?;";
-		String sql5 = "select * from "+table5+" where activity_id = ? and location_id = ? and begin_time like ?;";
+		String sql5 = "select * from "+table5+" where activity_id =? and location_id = ? and begin_time like ?";
 		int activity_id=0;
 		int location_id=0;
 		activity_location al = new activity_location();
@@ -789,8 +826,8 @@ public class ActivityDao {
 				pst2.setInt(1,icon_id);
 				rs2=pst2.executeQuery();
 				while(rs2.next()) {
-					al.setColor("R.color."+rs2.getString("color"));
-					al.setIcon("R.drawable."+rs2.getString("icon_address"));
+					al.setColor(rs2.getString("color"));
+					al.setIcon(rs2.getString("icon_address"));
 				}
 				pst4 = conn.prepareStatement(sql4);
 				pst4.setInt(1,activity_id);
@@ -811,7 +848,7 @@ public class ActivityDao {
 				pst5 = conn.prepareStatement(sql5);
 				pst5.setInt(1,activity_id);
 				pst5.setInt(2,location_id);
-				pst5.setString(3,date);
+				pst5.setString(3,date+"%");
 				rs5=pst5.executeQuery();
 				System.out.println("activity"+activity_id+"location"+location_id+"date"+date);
 				while(rs5.next()) {
@@ -841,9 +878,9 @@ public class ActivityDao {
 		
 	}
 	
-	public int updateDta(int user_id,int activity_id,int location_id,int icon_id,int old_id) {
+	public int updateDta(int user_id,int activity_id,int location_id,int icon_id,int old_id,String date) {
 		String table = user_id+"_detaildata";
-		String sql = "update "+table+" set activity_id=? and location_id = ? and icon_id = ? where activity_id=?";
+		String sql = "update "+table+" set activity_id=? and location_id = ?  where activity_id=? and begin_time like ?";
 		Connection conn = null;
 		int n = 0;
 		try {
@@ -851,8 +888,38 @@ public class ActivityDao {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,activity_id);
 			ps.setInt(2, location_id);
-			ps.setInt(3, icon_id);
-			ps.setInt(4, old_id);
+			ps.setInt(3, old_id);
+			ps.setString(4,date+"%");
+			n = ps.executeUpdate();
+			ps.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return n;
+		
+	}
+	public int updateDayDta(int user_id,String date,String activity_name,String old_name) {
+		String table = user_id+"_dayrecord";
+		String sql = "update "+table+" set activity_name = ?  where activity_name = ? and data like ?";
+		Connection conn = null;
+		int n = 0;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,activity_name);
+			ps.setString(2,old_name);
+			ps.setString(3,date+"%");
 			n = ps.executeUpdate();
 			ps.close();
 		} catch (ClassNotFoundException e) {

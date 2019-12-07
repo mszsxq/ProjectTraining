@@ -8,6 +8,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,9 +38,11 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.daimajia.swipe.SwipeLayout;
+import com.example.catchtime.chart.InitPieChart;
 import com.example.catchtime.entity.activity_location;
 import com.example.catchtime.entity.chartData;
 import com.example.catchtime.fragments.ClickActivityFragment;
+import com.example.catchtime.fragments.ClickLocationFragment;
 import com.example.catchtime.location.ChangeLocal;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.gson.Gson;
@@ -80,29 +83,48 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
     private BaiduMap baiduMap;
     private RelativeLayout localrelative;
     private RelativeLayout clickActivity;
+    private RelativeLayout location;
     private TextView localtv;
     private List<String> localname;
     private Button buttonconf;
     private int updataActivity;
-    private int updateLocation;
+    private String updateLocation;
     private int updataIcon;
     private String  oldName;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            String info = (String) msg.obj;
-            Gson gson = new Gson();
-            al = gson.fromJson(info, activity_location.class);
-            showMarkerOption();
-            localtv.setText(al.getDetailAdd());
-            location_name.setText(al.getLocation_name());
-            activity_name.setText(al.getActivity_name());
-            view1.setText(al.getStartTime());
-            view2.setText(al.getEndTime());
-            icon.setImageResource(getDrawableID(al.getIcon()));
-            icon.setBackgroundColor(getColorID(al.getColor()));
-            Log.i("检测","al"+al.toString());
+            switch(msg.what){
+                case 0:
+                    String info = (String) msg.obj;
+                    Gson gson = new Gson();
+                    al = gson.fromJson(info, activity_location.class);
+                    showLocOnMap(al.getLat(),al.getLng());
+                    localtv.setText(al.getDetailAdd());
+                    location_name.setText(al.getLocation_name());
+                    activity_name.setText(al.getActivity_name());
+                    view1.setText(al.getStartTime());
+                    view2.setText(al.getEndTime());
+                    icon.setImageResource(getDrawableID(al.getIcon()));
+                    icon.setBackgroundColor(getColorID(al.getColor()));
+                    updateLocation=al.getLocation_name();
+                    Log.i("检测","al"+al.toString());
+                    break;
+                case 1:
+                    Bundle bundle = (Bundle) msg.obj;
+                    updataActivity = bundle.getInt("activityId");
+                    icon.setImageResource(getDrawableID(bundle.getString("iconName")));
+                    icon.setBackgroundColor(getColorID(bundle.getString("color")));
+                    activity_name.setText(bundle.getString("activityName"));
+                    updataIcon = bundle.getInt("iconId");
+                    break;
+                case 2:
+                    Bundle bundle1 = (Bundle) msg.obj;
+                    updateLocation = bundle1.getString("locationName");
+                    break;
+            }
+
         }
     };
 
@@ -123,18 +145,47 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         getbeginDate();
         getoverDate();
     }
+
+    private void showLocOnMap(double lat, double lng) {
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.locstar);
+        MyLocationConfiguration config = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.COMPASS,
+                false,
+                icon);
+        baiduMap.setMyLocationConfiguration(config);
+        MyLocationData locData = new MyLocationData
+                .Builder()
+                .latitude(lat)
+                .longitude(lng)
+                .build();
+        baiduMap.setMyLocationData(locData);
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
+        baiduMap.animateMapStatus(msu);
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == 200 && requestCode ==100){
-            updataActivity  = Integer.parseInt(data.getStringExtra("activity_id"));
-            String B = data.getStringExtra("iconName");
-            String color = data.getStringExtra("color");
-            icon.setImageResource(getDrawableID(B));
-            icon.setBackgroundColor(getColorID(color));
-            activity_name.setText(data.getStringExtra("activity_name"));
-            updataIcon=Integer.parseInt(data.getStringExtra("iconId"));
+        if(resultCode==200){
+            Message msg = new Message();
+            Bundle bundle = new Bundle();
+            bundle.putString("iconName",data.getStringExtra("iconName"));
+            bundle.putInt("activityId",data.getIntExtra("activity_id",0));
+            bundle.putString("color",data.getStringExtra("color"));
+            bundle.putString("activityName",data.getStringExtra("activity_name"));
+            bundle.putInt("iconId",data.getIntExtra("iconId",0));
+            Log.i("检测","data"+bundle.getInt("activityId")+"b"+data.getIntExtra("activity_id",0));
+            msg.obj=bundle;
+            msg.what=1;
+            handler.sendMessage(msg);
+        }else if(resultCode ==300){
+            Message msg = new Message();
+            Bundle bundle = new Bundle();
+            bundle.putString("locationName",data.getStringExtra("locationName"));
+            msg.obj=bundle;
+            msg.what=2;
+            handler.sendMessage(msg);
         }
+
+
     }
     private int getDrawableID(String str) {
         try {
@@ -192,6 +243,8 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         activity_name= (TextView) findViewById(R.id.activity_name);
         clickActivity= (RelativeLayout) findViewById(R.id.clickActivity);
         clickActivity.setOnClickListener(this);
+        location = (RelativeLayout) findViewById(R.id.location_layout);
+        location.setOnClickListener(this);
     }
     @Override
 
@@ -222,7 +275,11 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.buttonconf:
+                updateLocation=location_name.getText().toString().trim();
                 changeToServer(updataIcon,updataActivity,updateLocation,oldName);
+                Intent intent1 = new Intent();
+                intent1.setClass(this, MainActivity.class);
+                startActivity(intent1);
                 finish();
                 break;
             case R.id.time_end:
@@ -248,17 +305,22 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                 intentFra.setClass(this, ClickActivityFragment.class);
                 startActivityForResult(intentFra,100);
                 break;
+            case R.id.location:
+                Intent intentLoc = new Intent();
+                intentLoc.setClass(this, ClickLocationFragment.class);
+                startActivityForResult(intentLoc,200);
+                break;
             default:
                 break;
         }
     }
 
-    private void changeToServer(int iconId,int activityId,int locationId,String oldName) {
+    private void changeToServer(int iconId,int activityId,String locationId,String oldName) {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationId="+locationId+"&iconId="+iconId+"&oldName="+oldName+"");
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationName="+locationId+"&iconId="+iconId+"&oldName="+oldName+"&userId="+1+"&date="+date+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -273,7 +335,6 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             }
         }.start();
     }
-
     private void getbeginDate() {
         cal = Calendar.getInstance();
         hour = cal.get(Calendar.HOUR);
@@ -323,7 +384,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         baiduMap.setMaxAndMinZoomLevel(19, 13);
         //设置默认比例为200m
         MapStatusUpdate msu = MapStatusUpdateFactory
-                .zoomTo(16);
+                .zoomTo(18);
         baiduMap.setMapStatus(msu);
     }
     private void initializeMap() {
@@ -332,39 +393,40 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         baiduMap.setTrafficEnabled(true);
     }
 
-    private void showMarkerOption() {
-        //1. 创建标注覆盖物显示位置的LatLng对象
-        final LatLng latLng = new LatLng(al.getLat(), al.getLng());
-        //2. 创建标注覆盖物对象
-        BitmapDescriptor icon =
-                BitmapDescriptorFactory.fromResource(
-                        R.mipmap.locstar);
-        OverlayOptions markerOption =
-                new MarkerOptions()
-                        .draggable(true)
-                        .alpha(0.8f)//透明度
-                        .icon(icon)//覆盖物图标
-                        .position(latLng)//覆盖物位置
-                        .rotate(45)//旋转角度，逆时针为正
-                        .perspective(true);//是否支持近大远小效果
-        //3. 把标注覆盖物添加到地图上
-        Overlay myMarker = baiduMap.addOverlay(markerOption);
-
-        //4. 给覆盖物添加监听器
-        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                //显示经纬度坐标
-                double lat = latLng.latitude;
-                double lng = latLng.longitude;
-                Toast.makeText(
-                        getApplicationContext(),
-                        latLng.toString(),
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-    }
+//    private void showMarkerOption() {
+//        //1. 创建标注覆盖物显示位置的LatLng对象
+//        final LatLng latLng = new LatLng(al.getLat(), al.getLng());
+//        //2. 创建标注覆盖物对象
+//        BitmapDescriptor icon =
+//                BitmapDescriptorFactory.fromResource(
+//                        R.mipmap.locstar);
+//        OverlayOptions markerOption =
+//                new MarkerOptions()
+//                        .draggable(true)
+//                        .alpha(0.8f)//透明度
+//                        .icon(icon)//覆盖物图标
+//                        .position(latLng)//覆盖物位置
+//                        .rotate(45)//旋转角度，逆时针为正
+//                        .perspective(true);//是否支持近大远小效果
+//        //3. 把标注覆盖物添加到地图上
+//        Overlay myMarker = baiduMap.addOverlay(markerOption);
+//
+//        //4. 给覆盖物添加监听器
+//        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                //显示经纬度坐标
+//                double lat = latLng.latitude;
+//                double lng = latLng.longitude;
+//                Toast.makeText(
+//                        getApplicationContext(),
+//                        latLng.toString(),
+//                        Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
+//        showLocOnMap(al.getLat(),al.getLng());
+//    }
     private void toServer(){
         new Thread() {
             @Override
@@ -389,6 +451,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
     private void wrapperMessage(String info){
         Message msg = Message.obtain();
         msg.obj = info;
+        msg.what=0;
         handler.sendMessage(msg);
     }
 }

@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 package com.example.catchtime.fragment;
 
 import android.graphics.drawable.Drawable;
@@ -29,24 +23,14 @@ import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
-<<<<<<< HEAD
 import com.example.catchtime.entity.User;
 import com.example.catchtime.entity.chartData;
 import com.example.catchtime.fragment.UltraPagerAdapter;
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.gson.Gson;
 import com.tmall.ultraviewpager.UltraViewPager;
@@ -56,6 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -110,6 +95,21 @@ public class AccountFragment extends Fragment {
             adapter = new UltraPagerAdapter(false,list,getContext(),0,true,0,"");
             ultraViewPager.setAdapter(adapter);
             ultraViewPager.setCurrentItem(num-1);
+            ultraViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                //只实现自己想要的回调
+                @Override
+                public void onPageSelected(int position) {
+                    Log.e("SimplePageChange-Select", "position:" + position);
+                    //给标题textview设置对应标题，设置时机在这里
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(new Date());
+                    calendar.add(calendar.DATE,-(num-position-1));
+                    String date2= sdf.format(calendar.getTime());
+                    datee.setText(date2);
+                }
+            });
+
         }
     };
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -153,6 +153,7 @@ public class AccountFragment extends Fragment {
     }
     class ButtonClickListener implements View.OnClickListener {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         //日周年月的切换由改变适配器来实现
         @Override
         public void onClick(View view) {
@@ -184,6 +185,8 @@ public class AccountFragment extends Fragment {
                         ultraViewPager.setCurrentItem(num-1);
                         break;
                     case R.id.button_week:
+                        String dat = sdf.format(new Date());
+                        datee.setText(dat);
                         Log.e("按钮","week");
                         view.setBackground(drawable);
                         buttonMonth.setBackground(defDrawable);
@@ -199,7 +202,7 @@ public class AccountFragment extends Fragment {
                             Calendar calendar = new GregorianCalendar();
                             calendar.setTime(new Date());
                             calendar.add(calendar.DATE,-a);
-                            String date2= sdf.format(calendar.getTime());
+                            String date2= sdf2.format(calendar.getTime());
                             ArrayList<PerPieEntry> list1=new ArrayList<>();
                             list1.add(new PerPieEntry());
                             adapter = new UltraPagerAdapter(false,list1,getContext(),1,true,1,date2);
@@ -208,6 +211,8 @@ public class AccountFragment extends Fragment {
 
                         break;
                     case R.id.button_month:
+                        String datt = sdf.format(new Date());
+                        datee.setText(datt);
                         Log.e("按钮","month");
                         view.setBackground(drawable);
                         buttonDay.setBackground(defDrawable);
@@ -223,7 +228,7 @@ public class AccountFragment extends Fragment {
                             Calendar calendar = new GregorianCalendar();
                             calendar.setTime(new Date());
                             calendar.add(calendar.DATE,-a);
-                            String date2= sdf.format(calendar.getTime());
+                            String date2= sdf2.format(calendar.getTime());
                             ArrayList<PerPieEntry> list2=new ArrayList<>();
                             list2.add(new PerPieEntry());
                             adapter = new UltraPagerAdapter(false,list2,getContext(),2,true,2,date2);
@@ -232,6 +237,8 @@ public class AccountFragment extends Fragment {
 
                         break;
                     case R.id.button_year:
+                        String da = sdf.format(new Date());
+                        datee.setText(da);
                         Log.e("按钮","year");
                         view.setBackground(drawable);
                         buttonMonth.setBackground(defDrawable);
@@ -247,7 +254,7 @@ public class AccountFragment extends Fragment {
                             Calendar calendar = new GregorianCalendar();
                             calendar.setTime(new Date());
                             calendar.add(calendar.DATE,-a);
-                            String date2= sdf.format(calendar.getTime());
+                            String date2= sdf2.format(calendar.getTime());
                             ArrayList<PerPieEntry> list3=new ArrayList<>();
                             list3.add(new PerPieEntry());
                             adapter = new UltraPagerAdapter(false,list3,getContext(),3,true,3,date2);
@@ -258,18 +265,13 @@ public class AccountFragment extends Fragment {
                     case R.id.chartpie_header_left:
                         int position=ultraViewPager.getCurrentItem();
                         if(position!=0){
-                            ultraViewPager.setCurrentItem(position-1);
-                            Date date=null;
-                            try {
-                                date = sdf.parse(datee.getText().toString().trim());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+
                             Calendar calendar = new GregorianCalendar();
-                            calendar.setTime(date);
-                            calendar.add(calendar.DATE,-1);
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-(num-position-1));
                             String date2= sdf.format(calendar.getTime());
                             datee.setText(date2);
+                            ultraViewPager.setCurrentItem(position-1);
                         }else{
                             ultraViewPager.setCurrentItem(0);
                         }
@@ -278,18 +280,13 @@ public class AccountFragment extends Fragment {
                     case R.id.chartpir_header_right:
                         int rposition=ultraViewPager.getCurrentItem();
                         if(rposition!=num-1){
-                            ultraViewPager.setCurrentItem(rposition+1);
-                            Date date=null;
-                            try {
-                                date = sdf.parse(datee.getText().toString().trim());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
                             Calendar calendar = new GregorianCalendar();
-                            calendar.setTime(date);
-                            calendar.add(calendar.DATE,1);
-                            String date3= sdf.format(calendar.getTime());
-                            datee.setText(date3);
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-(num-rposition-1));
+                            String date2= sdf.format(calendar.getTime());
+                            datee.setText(date2);
+                            ultraViewPager.setCurrentItem(rposition+1);
+
                         }else{
                             ultraViewPager.setCurrentItem(num-1);
                         }
@@ -410,21 +407,6 @@ public class AccountFragment extends Fragment {
 //        }
 //        new InitPieChart(chart, entries, this.getContext());
 //    }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-}
-=======
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 
 }
 
-
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
