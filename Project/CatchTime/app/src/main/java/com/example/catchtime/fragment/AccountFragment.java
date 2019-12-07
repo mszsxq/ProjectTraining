@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 package com.example.catchtime.fragment;
 
 import android.graphics.drawable.Drawable;
@@ -29,24 +22,12 @@ import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
-<<<<<<< HEAD
 import com.example.catchtime.entity.User;
 import com.example.catchtime.entity.chartData;
 import com.example.catchtime.fragment.UltraPagerAdapter;
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
 import com.example.catchtime.fragment.UltraPagerAdapter;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.gson.Gson;
 import com.tmall.ultraviewpager.UltraViewPager;
@@ -410,21 +391,4 @@ public class AccountFragment extends Fragment {
 //        }
 //        new InitPieChart(chart, entries, this.getContext());
 //    }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 }
-=======
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d
-
-}
-
-
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
->>>>>>> 2d3f4686c22d2fe3876988538701c5bf0261d76d

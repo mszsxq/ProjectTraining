@@ -33,18 +33,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //import cn.bmob.sms.BmobSMS;
 //import cn.bmob.sms.exception.BmobException;
 //import cn.bmob.sms.listener.RequestSMSCodeListener;
 //import cn.bmob.sms.listener.VerifySMSCodeListener;
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
@@ -111,16 +103,13 @@ public class Register extends AppCompatActivity {
                 }
             }
         };
-<<<<<<< HEAD
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
-=======
 
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
         getviews();
         registers();
 //        eh = new EventHandler() {
@@ -252,18 +241,10 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), DefaultAddress.class);
                     startActivity(intent1);
 //                    RegisterUser(phone, password);
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
                     RegisterUser(phone, password);
 
 
@@ -272,10 +253,6 @@ public class Register extends AppCompatActivity {
 //                    }else {
 //                        submitVerificationCode("86", phone, number);
 //                        RegisterUser(phone, password);
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
 //                    if (number.equals("")) {
 //                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
 //                    } else {
@@ -284,8 +261,6 @@ public class Register extends AppCompatActivity {
 //                    }
                     break;
                 }
-<<<<<<< HEAD
-=======
 
 //                    }
 
@@ -297,7 +272,6 @@ public class Register extends AppCompatActivity {
 
 
 
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
             }
         }
 
@@ -383,17 +357,5 @@ public class Register extends AppCompatActivity {
             };
             thread.start();
         }
-<<<<<<< HEAD
+
     }
-=======
-
-
-
-
-
-
-
-
-}
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472

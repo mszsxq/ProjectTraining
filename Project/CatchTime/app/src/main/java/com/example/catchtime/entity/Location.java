@@ -31,10 +31,6 @@ public class Location {
     }
     public void setLocationLng(Double locationLng) {
         this.locationLng = locationLng;
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
     }
     public int getLocationRange() {
         return locationRange;
@@ -47,14 +43,6 @@ public class Location {
     }
     public void setLocationDetail(String locationDetail) {
         this.locationDetail = locationDetail;
-<<<<<<< HEAD
-=======
-
->>>>>>> f814d9a6ed1f52f622f796c1cb7a4a35699cb472
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> e972afd3aa1e096a57299fd5301bf35546bb97f4
 }
 
