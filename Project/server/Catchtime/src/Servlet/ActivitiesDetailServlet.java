@@ -54,7 +54,7 @@ public class ActivitiesDetailServlet extends HttpServlet {
 		list1=dataService.activityMonthly(tableName, activityName);
 		String liststr="";
 		System.out.println(list1.toString());
-		if(list1==null) {
+		if(list1==null) { 	
 		System.out.println("未查到数据");
 		}else {
 			Gson gson =new Gson();

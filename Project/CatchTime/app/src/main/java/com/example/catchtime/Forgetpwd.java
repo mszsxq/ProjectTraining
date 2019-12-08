@@ -101,10 +101,7 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 //        eh=new EventHandler(){
 //            @Override
 //            public void afterEvent(int event, int result, Object data) {

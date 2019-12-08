@@ -68,8 +68,8 @@
         <activity android:name=".location.ChangeLocal" />
         <activity android:name=".setting.UserInfor" />
         <activity android:name=".activity.AddDefaultAddress" />
-<<<<<<< HEAD
-        <activity android:name=".fragments.ClickActivityFragment"/>
+
+<!--        <activity android:name=".fragments.ClickActivityFragment"/>-->
 
         <activity android:name=".activity.DefaultAddress"/>
 

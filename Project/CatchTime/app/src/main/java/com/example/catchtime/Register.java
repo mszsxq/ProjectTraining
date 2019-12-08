@@ -33,10 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 //import cn.bmob.sms.BmobSMS;
 //import cn.bmob.sms.exception.BmobException;
 //import cn.bmob.sms.listener.RequestSMSCodeListener;
@@ -109,10 +106,7 @@ public class Register extends AppCompatActivity {
         };
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 
@@ -279,10 +273,7 @@ public class Register extends AppCompatActivity {
 //                    }
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
             }
         }
 
@@ -369,9 +360,8 @@ public class Register extends AppCompatActivity {
             thread.start();
         }
 
-<<<<<<< HEAD
+
 }
 
-=======
-    }
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
+
+
