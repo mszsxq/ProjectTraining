@@ -143,7 +143,7 @@ public class ActivitiesFragment extends Fragment {
             Field field=R.color.class.getField(color);
             int ColorID=0;
             ColorID=field.getInt(new R.color());
-            return ColorID;
+            return ColorID;//colorID就是R.color.name
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
             return 0;

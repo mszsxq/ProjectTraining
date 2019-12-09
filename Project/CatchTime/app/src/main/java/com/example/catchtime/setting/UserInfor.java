@@ -44,9 +44,9 @@ public class UserInfor extends SwipeBackActivity {
             getSupportActionBar().hide();
         }
         getViews();
-//        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
-//        int value=p.getInt("user_id",0);
-//        Log.e("value",value+"");
+        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
+        int value=p.getInt("user_id",0);
+        Log.e("value",value+"");
         Intent intent = getIntent();
 //        Date date = new Date();
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒 E");

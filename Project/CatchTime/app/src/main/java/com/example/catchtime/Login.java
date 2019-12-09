@@ -50,6 +50,9 @@ public class Login extends AppCompatActivity {
         SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
         getViews();
         registers();
+        //------------------
+
+        //---------------
         btlog = findViewById(R.id.btn_log);
         btlog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +214,6 @@ public class Login extends AppCompatActivity {
                    int index=user_pwd.getText().toString().length();
                    user_pwd.setSelection(index);
                    break;
-
            }
 
        }

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp">
@@ -16,74 +20,62 @@
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/blue"
-                    android:id="@+id/newpalece_text_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:textSize="20dp"
-                    android:text="名称:"/>
-                <TextView
-                    android:id="@+id/newpalece_text_getname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="locationName"
-                    android:layout_toRightOf="@+id/newpalece_text_name"
-                    android:textSize="20dp" />
-                <TextView
-                    android:textColor="@color/blue"
-                    android:id="@+id/newpalece_text_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="地点事件:"
-                    android:layout_marginTop="20dp"
-                    android:layout_below="@+id/newpalece_text_name"
-                    android:textSize="20dp" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:layout_toRightOf="@+id/newpalece_text_place"
-                    android:layout_below="@+id/newpalece_text_name"
-                    android:textSize="20dp"
-                    />
-                <Button
-                    android:id="@+id/newpalece_text_button"
-                    android:text="学习"
-                    android:background="@drawable/hh"
-                    android:layout_width="90dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@+id/newpalece_text_place"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp" />
-                <Button
-                    android:text="娱乐"
-                    android:background="@drawable/hh"
-                    android:id="@+id/newpalece_text_button1"
-                    android:layout_width="95dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@+id/newpalece_text_place"
-                    android:layout_toRightOf="@+id/newpalece_text_button"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp" />
-                <Button
-                    android:text="运动"
-                    android:background="@drawable/hh"
-                    android:layout_width="95dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@+id/newpalece_text_place"
-                    android:layout_toRightOf="@+id/newpalece_text_button1"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp" />
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/newpalece_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:textSize="20dp"
+            android:text="名称:"/>
+        <TextView
+            android:id="@+id/newpalece_text_getname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="locationName"
+            android:layout_toRightOf="@+id/newpalece_text_name"
+            android:textSize="20dp" />
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/newpalece_text_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="地点事件:"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/newpalece_text_name"
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/act"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/newpalece_text_place"
+            android:layout_below="@+id/newpalece_text_name"
+            android:textSize="20dp"
+            />
     </RelativeLayout>
-
-    <View
+        <LinearLayout
+            android:id="@+id/btnl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+        <Button
+            android:id="@+id/add_act"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/hh"
+            android:text="自定义 +"
+            android:textColor="@color/green"
+            android:textSize="15dp"
+            />
+        <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#cecece" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,4 +106,4 @@
             android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>
-
+</ScrollView>

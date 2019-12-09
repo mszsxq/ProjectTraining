@@ -121,6 +121,4 @@
             android:layout_marginTop="20dp"
             android:text="忘记密码？"/>
     </LinearLayout>
-
-
 </RelativeLayout>

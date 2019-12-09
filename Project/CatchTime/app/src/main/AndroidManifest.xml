@@ -73,6 +73,8 @@
         <activity android:name=".location.ChangeLocal" />
         <activity android:name=".setting.UserInfor"/>
         <activity android:name=".activity.AddDefaultAddress"/>
+        <activity android:name=".NewPlacePopup"/>
+        <activity android:name=".NewPalce"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

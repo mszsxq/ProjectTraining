@@ -30,13 +30,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
 //import cn.bmob.sms.BmobSMS;
 //import cn.bmob.sms.exception.BmobException;
 //import cn.bmob.sms.listener.RequestSMSCodeListener;
 //import cn.bmob.sms.listener.VerifySMSCodeListener;
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static cn.smssdk.SMSSDK.getVerificationCode;
@@ -63,13 +60,11 @@ public class Forgetpwd extends AppCompatActivity {
 //    private EventHandler eh;
     private int i=60;
     private CustomOnclickListner listner;
-<<<<<<< HEAD
+
     private final String appKey="2d4d06534acde";
     private final String appSercret="9c16982effef39c9b388528a6687592f";
-=======
 //    private final String appKey="2d447922e6d83";
 //    private final String appSercret="1b0cbc51ed6aeff1e94ecf5f4187cebb";
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //    private Handler handlern=new Handler(){
 //        public void handleMessage(Message msg){
 //            switch (msg.arg1){
@@ -107,10 +102,7 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
-<<<<<<< HEAD
 
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //        eh=new EventHandler(){
 //            @Override
 //            public void afterEvent(int event, int result, Object data) {
@@ -224,7 +216,10 @@ public class Forgetpwd extends AppCompatActivity {
                     int index3=user_pwd3.getText().toString().length();
                     user_pwd3.setSelection(index3);
                     break;
-//                case R.id.btn_code:
+                case R.id.btn_code:
+                    Intent intent=new Intent();
+                    intent.setClass(Forgetpwd.this,NewPalce.class);
+                    startActivity(intent);
 //                    phone=user_phone.getText().toString().trim();
 //                    if(phone.equals("")){
 //                        Toast.makeText(Forgetpwd.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
@@ -241,38 +236,27 @@ public class Forgetpwd extends AppCompatActivity {
 //                            Toast.makeText(Forgetpwd.this,"手机号格式错误，请检查",Toast.LENGTH_SHORT).show();
 //                        }
 //                    }
-//                    break;
+                    break;
                 case R.id.btn_update:
                     String number=code.getText().toString();
                     phone=user_phone.getText().toString().trim();
                     pwd2=user_pwd2.getText().toString().trim();
                     pwd3=user_pwd3.getText().toString().trim();
-<<<<<<< HEAD
                     if(pwd2.equals(pwd3)){
                         forgetpwdnew(phone,pwd2);
                     }else{
                         Log.e("error","两次密码请输入相同的数据");
                     }
 
-=======
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //                    if(number.equals("")){
 //                        Toast.makeText(Forgetpwd.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else{
 //                        submitVerificationCode("86", phone,number);
-<<<<<<< HEAD
 //                        if(pwd2.equals(pwd3)){
 //                            forgetpwdnew(phone,pwd2);
 //                        }else{
 //                            Log.e("error","两次密码请输入相同的数据");
 //                        }
-=======
-                        if(pwd2.equals(pwd3)){
-                            forgetpwdnew(phone,pwd2);
-                        }else{
-                            Log.e("error","两次密码请输入相同的数据");
-                        }
->>>>>>> 245c252d28ba7733c36da4bf9d7a1897457ac72f
 //                    }
                     break;
             }
