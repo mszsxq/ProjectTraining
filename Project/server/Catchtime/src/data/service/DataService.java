@@ -32,7 +32,7 @@ public class DataService {
 		DataDao dataDao = new DataDao();
 		int n = dataDao.countData(id);
 		ActivityService activityService = new ActivityService();
-		name = activityService.insertData();
+		name = activityService.insertData(id);
 		SimpleDateFormat format11= new SimpleDateFormat("yyyy-MM-dd");
 		String data = format11.format(new Date());
 		for(int i = 0;i<name.size();i++) {
