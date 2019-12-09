@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
+//import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -105,11 +105,14 @@ public class Register extends AppCompatActivity {
         };
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+<<<<<<< HEAD
 
 
         //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
 
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+=======
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
 
         getviews();
         registers();
@@ -153,7 +156,6 @@ public class Register extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 input = s;
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 full.setText(String.format("%d/11", input.length()));
@@ -242,18 +244,21 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
+                    RegisterUser(phone, password);
+                    RegisterUser(phone, password);
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), DefaultAddress.class);
                     startActivity(intent1);
 //                    RegisterUser(phone, password);
                     RegisterUser(phone, password);
 
-
 //                    if (number.equals("")){
 //                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else {
 //                        submitVerificationCode("86", phone, number);
 //                        RegisterUser(phone, password);
+//                        break;
+//                    }
 //                    if (number.equals("")) {
 //                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
 //                    } else {
@@ -262,6 +267,8 @@ public class Register extends AppCompatActivity {
 //                    }
                     break;
                 }
+//                    }
+
 
 //                    }
 
@@ -356,6 +363,10 @@ public class Register extends AppCompatActivity {
             };
             thread.start();
         }
+    }
 
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
 

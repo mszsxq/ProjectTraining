@@ -93,6 +93,31 @@ public class ActivityDao {
 		}
 		return 0;
 	}
+	public int findId(int userId,String name) {
+		int n=0;
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_activity";
+		try {
+			conn=DBManager.getInstance().getConnection();
+			pst=conn.prepareStatement("select activity_id from"+table+"where activity_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				n=rs.getInt(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
 	public void delete(int userId,int i) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
@@ -233,14 +258,42 @@ public class ActivityDao {
 		}
 		return activity;
 	}
+<<<<<<< HEAD
+	public Activity findSingleforname(int userId,String name) {
+=======
 	
 	public int findLocationId(int userId,String name) {
 		int id=0;
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs=null;
 		ResultSet rs1=null;
+<<<<<<< HEAD
+		String table=userId+"_activity";
+		Activity activity = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table+" where activity_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			activity = new Activity();
+			activity.setActivity_name(name);
+			while(rs.next()) {
+				activity.setActivity_id(rs.getInt(1));
+				activity.setIcon_id(rs.getInt(3));
+			}
+			pst1 = conn.prepareStatement("select * from icon where icon_id = ?;");
+			pst1.setInt(1,activity.getIcon_id());
+			rs1 = pst1.executeQuery();
+			while(rs1.next()) {
+				activity.setIcon_name(rs1.getString(2));
+				activity.setIcon_color(rs1.getString(3));
+			}
+			return activity;
+		} catch (ClassNotFoundException | SQLException e) {
+=======
 		String table=userId+"_location";
 		Activity activity = null;
 		try {
@@ -881,7 +934,7 @@ public class ActivityDao {
 		
 		
 	}
-	
+
 	public int updateDta(int user_id,int activity_id,int location_id,int icon_id,int old_id,String date) {
 		String table = user_id+"_detaildata";
 		String sql = "update "+table+" set activity_id=? and location_id = ?  where activity_id=? and begin_time like ?";
@@ -930,6 +983,7 @@ public class ActivityDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -940,6 +994,7 @@ public class ActivityDao {
 				e.printStackTrace();
 			}
 		}
+		return activity;
 		return n;
 		
 	}

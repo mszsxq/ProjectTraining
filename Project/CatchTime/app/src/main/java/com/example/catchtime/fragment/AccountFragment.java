@@ -1,5 +1,4 @@
 package com.example.catchtime.fragment;
-
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,12 +24,25 @@ import com.example.catchtime.chart.PerPieEntry;
 import com.example.catchtime.entity.User;
 import com.example.catchtime.entity.chartData;
 import com.example.catchtime.fragment.UltraPagerAdapter;
+<<<<<<< HEAD
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
 import com.example.catchtime.fragment.UltraPagerAdapter;
 import com.example.catchtime.fragment.UltraPagerAdapter;
 
 import com.example.catchtime.fragment.UltraPagerAdapter;
+=======
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.gson.Gson;
 import com.tmall.ultraviewpager.UltraViewPager;
@@ -410,3 +422,7 @@ public class AccountFragment extends Fragment {
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d

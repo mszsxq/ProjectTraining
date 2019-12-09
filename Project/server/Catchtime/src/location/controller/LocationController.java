@@ -1,4 +1,4 @@
-package location.controller;
+﻿package location.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -30,7 +30,42 @@ public class LocationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+
+		LocationDao dao=new LocationDao();
+		List<Location> locations=new ArrayList<Location>();
+		PrintWriter writer = response.getWriter();
+		int id=1;//Android传过来的userid
+		try {
+			locations=dao.findAll(id);
+			Gson gson=new Gson();
+			String gs=gson.toJson(locations);
+			System.out.print(gs);
+			writer.write(gs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		PrintWriter out = response.getWriter();
+		String loc = request.getParameter("loc");
+		String id = request.getParameter("id");
+		System.out.println(loc);
+		System.out.println(id);
+		Type type = new TypeToken<Location>(){}.getType();
+		Type type1 = new TypeToken<Integer>(){}.getType();
+		Gson gson = new Gson();
+		Location location = new Location();
+		location = gson.fromJson(loc,type);
+		int a = gson.fromJson(id,type1);
+		LocationService locationService = new LocationService();
+		int i = locationService.InsertDefaultLocation(a, location);
+		if(i>0) {
+			out.write("添加成功");
+		}else {
+			out.write("添加失败");
+		}
 	}
 
 	/**

@@ -52,33 +52,60 @@
         <activity android:name=".activity.ActivitiesDetail" />
         <activity android:name=".Add_detailPage" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".AddLocation" />
+        <activity android:name=".activity.AddActivityDetial" />
+        <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddLocation" />
-        <activity android:name=".activity.AddActivityDetial" />
-        <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
+        <activity android:name=".setting.UserInfor"/>
+<<<<<<< HEAD
+        <activity android:name=".activity.AddDefaultAddress"/>
+        <activity android:name=".NewPlacePopup"/>
+        <activity android:name=".NewPalce"/>
+=======
         <activity android:name=".location.ChangeLocal" />
+<<<<<<< HEAD
+        <activity android:name=".Add_Page_Activity"/>
+        <activity android:name=".Add_Page_Location"/>
+=======
         <activity android:name=".setting.UserInfor" />
         <activity android:name=".activity.AddDefaultAddress" />
+<<<<<<< HEAD
         <activity android:name=".fragments.ClickActivityFragment"/>
+=======
+
+<!--        <activity android:name=".fragments.ClickActivityFragment"/>-->
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
 
         <activity android:name=".activity.DefaultAddress"/>
 
         <!--<service
             android:name="com.baidu.locations.f"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
 
         <activity android:name=".fragments.ClickActivityFragment"/>
         <activity android:name=".activity.DefaultAddress"/>
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
+>>>>>>> fa49c2915b4db995610a63934a8649676d10c02e
         <service
             android:name="com.baidu.location.f"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 850fe2f302fea9bb2c73c578e12c8222cacc877d
             android:enabled="true"
             android:process=":remote"></service>-->
         <service android:name=".backgroundService.LocationService" /> <!-- <activity android:name=".TestButton" /> -->

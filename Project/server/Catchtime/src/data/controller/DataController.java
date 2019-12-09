@@ -26,8 +26,22 @@ public class DataController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String user_id = request.getParameter("id");
+		Gson gson = new Gson();
+		Type type=new TypeToken<User>(){}.getType();
+		int id = gson.fromJson(user_id, type);
+		//添加每项活动的总时间;
+		List<All_data> datas = new ArrayList<All_data>();
+		DataService dataService = new DataService();
+		datas = dataService.InsertActivityTime(id);
+		DataDao dataDao = new DataDao();
+		for(int i = 0;i<datas.size();i++) {
+			dataDao.addalldata(id,datas.get(i).getData_id(), datas.get(i).getData(),datas.get(i).getActivity_name(), datas.get(i).getActivity_data());
+			System.out.println("添加成功"+i);
+		}
 	}
 
 	/**

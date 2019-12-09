@@ -27,7 +27,31 @@ public class ContactController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String location_name="学习";//Android传过来的name
+		String activity_name="学院";//Android传过来的name
+		int activity_id=0;
+		int location_id=0;
+		int user_id=1;//Android传过来的id
+		ContactDao dao=new ContactDao();
+		LocationDao dao2=new LocationDao();
+		ActivityDao dao1=new ActivityDao();
+		activity_id=dao1.findId(user_id, activity_name);
+		location_id=dao2.findId(user_id,location_name);
+		Contact contact=new Contact();
+		contact.setActivity_Id(activity_id);
+		contact.setLocation_Id(location_id);
+		try {
+			int a=dao.addContact(user_id,contact);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

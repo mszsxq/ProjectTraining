@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textSize="20sp"
-            android:text="添加"></TextView>
+            android:text="添加"/>
+
         <ImageView
+            android:id="@+id/ok_activity"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/duigou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"></ImageView>
+            android:layout_marginRight="10dp"
+            android:src="@drawable/zcnduigou" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl2"
@@ -49,21 +51,22 @@
     <RelativeLayout
         android:id="@+id/rl3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/white"
         android:layout_below="@id/rl2">
-        <ImageView
-            android:id="@+id/iv1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
-        </ImageView>
-        <EditText
+        <TextView
             android:id="@+id/et1"
             android:layout_width="match_parent"
             android:textSize="18sp"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/address_jiantou"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/jiantou"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl4"
@@ -75,21 +78,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="做什么"
+            android:text="活动"
             android:textSize="18sp"
-            android:textColor="@color/black"></TextView>
+            android:textColor="@color/black"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/white"
         android:layout_below="@id/rl4">
-        <EditText
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/blue"
+            android:layout_centerVertical="true"/>
+        <TextView
             android:id="@+id/et2"
             android:textSize="18sp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/activity_jiantou"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/jiantou"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl6"
@@ -102,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="事件"
+            android:text="时间"
             android:textColor="@color/black"></TextView>
     </RelativeLayout>
     <RelativeLayout
@@ -110,14 +128,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl6">
-        <TextView
-            android:id="@+id/tx_begin"
+        <ListView
+            android:id="@+id/list_start"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="起始时间"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:background="@color/white"></TextView>
+            android:layout_height="100dp" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl8"
@@ -125,15 +139,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_below="@id/rl7">
-        <TextView
-            android:id="@+id/tx_end"
+<!--        <TextView-->
+<!--            android:id="@+id/tx_end"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@color/white"-->
+<!--            android:hint="结束时间"-->
+<!--            android:gravity="left|center"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp">-->
+<!--        </TextView>-->
+        <ListView
+            android:id="@+id/list_end"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="结束时间"
-            android:textColor="@color/black"
-            android:textSize="18sp">
-        </TextView>
+            android:layout_height="100dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -143,7 +162,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="笔记"
+            android:text="今天也要加油鸭！！！"
             android:textSize="18sp">
         </TextView>
     </RelativeLayout>
@@ -152,15 +171,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-        <EditText
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             android:background="@color/white"
             android:enabled="true"
             android:gravity="top"
             android:inputType="textMultiLine"
             android:maxLines="10"
             android:scrollbars="vertical"
-            android:textSize="18sp"></EditText>
+            android:scaleType="center"
+            android:src="@drawable/timetime"/>
     </RelativeLayout>
 </RelativeLayout>

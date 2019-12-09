@@ -1,5 +1,4 @@
 package com.example.catchtime.activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

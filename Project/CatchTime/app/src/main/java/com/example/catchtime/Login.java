@@ -50,6 +50,9 @@ public class Login extends AppCompatActivity {
         SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
         getViews();
         registers();
+        //------------------
+
+        //---------------
         btlog = findViewById(R.id.btn_log);
         btlog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +84,15 @@ public class Login extends AppCompatActivity {
                     Log.e("id",""+id);
                     Log.e("4","ok?");
                     Intent intent = new Intent(Login.this, UserInfor.class);
+<<<<<<< HEAD
+                    intent.putExtra("name",usering.getUsername());
+                    intent.putExtra("moto",usering.getMoto());
+                    intent.putExtra("image",usering.getImage());
+                    intent.putExtra("phone",usering.getPhone());
+                    intent.putExtra("time",usering.getRegister_date());
+                    intent.putExtra("id",usering.getUser_id());
+                    startActivity(intent);
+=======
                     startActivity(intent);
 //                    intent.putExtra("name",usering.getUsername());
 //                    intent.putExtra("moto",usering.getMoto());
@@ -89,6 +101,7 @@ public class Login extends AppCompatActivity {
 //                    intent.putExtra("time",usering.getRegister_date());
 
 
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
                 }
             }
         };
@@ -211,7 +224,6 @@ public class Login extends AppCompatActivity {
                    int index=user_pwd.getText().toString().length();
                    user_pwd.setSelection(index);
                    break;
-
            }
 
        }

@@ -39,6 +39,17 @@ public class ActivityController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		
+		ActivityDao ad=new ActivityDao();
+		List<Activity> list=new ArrayList<Activity>();
+		PrintWriter writer = response.getWriter();
+//		int id=request.getParameter("userid");//Android传过来的user id；
+		list=ad.findAll(1);
+		Gson gson=new Gson();
+		String gs=gson.toJson(list);
+		System.out.print(gs);
+		writer.write(gs);
+
 		String infor=request.getParameter("info");
 		ActivityService ls = new ActivityService();
 //		try {
@@ -92,6 +103,7 @@ public class ActivityController extends HttpServlet {
 			case "delete":
 				break;
 		}
+	
 	
 	}
 

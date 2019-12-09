@@ -30,10 +30,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-//import cn.bmob.sms.BmobSMS;
-//import cn.bmob.sms.exception.BmobException;
-//import cn.bmob.sms.listener.RequestSMSCodeListener;
-//import cn.bmob.sms.listener.VerifySMSCodeListener;
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static cn.smssdk.SMSSDK.getVerificationCode;
@@ -60,6 +56,7 @@ public class Forgetpwd extends AppCompatActivity {
 //    private EventHandler eh;
     private int i=60;
     private CustomOnclickListner listner;
+
     private final String appKey="2d4d06534acde";
     private final String appSercret="9c16982effef39c9b388528a6687592f";
 //    private final String appKey="2d447922e6d83";
@@ -214,7 +211,10 @@ public class Forgetpwd extends AppCompatActivity {
                     int index3=user_pwd3.getText().toString().length();
                     user_pwd3.setSelection(index3);
                     break;
-//                case R.id.btn_code:
+                case R.id.btn_code:
+                    Intent intent=new Intent();
+                    intent.setClass(Forgetpwd.this,NewPalce.class);
+                    startActivity(intent);
 //                    phone=user_phone.getText().toString().trim();
 //                    if(phone.equals("")){
 //                        Toast.makeText(Forgetpwd.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
@@ -231,18 +231,18 @@ public class Forgetpwd extends AppCompatActivity {
 //                            Toast.makeText(Forgetpwd.this,"手机号格式错误，请检查",Toast.LENGTH_SHORT).show();
 //                        }
 //                    }
-//                    break;
+                    break;
                 case R.id.btn_update:
                     String number=code.getText().toString();
                     phone=user_phone.getText().toString().trim();
                     pwd2=user_pwd2.getText().toString().trim();
                     pwd3=user_pwd3.getText().toString().trim();
+                    forgetpwdnew(phone,pwd2);
                     if(pwd2.equals(pwd3)){
                         forgetpwdnew(phone,pwd2);
                     }else{
                         Log.e("error","两次密码请输入相同的数据");
                     }
-
 //                    if(number.equals("")){
 //                        Toast.makeText(Forgetpwd.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else{
