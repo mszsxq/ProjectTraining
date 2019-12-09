@@ -1,7 +1,7 @@
 package com.example.catchtime;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+//import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
-import com.mob.MobSDK;
+//import com.mob.MobSDK;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,15 +29,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
-import cn.bmob.sms.BmobSMS;
-import cn.bmob.sms.exception.BmobException;
-import cn.bmob.sms.listener.RequestSMSCodeListener;
-import cn.bmob.sms.listener.VerifySMSCodeListener;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import static cn.smssdk.SMSSDK.getVerificationCode;
-import static cn.smssdk.SMSSDK.submitVerificationCode;
-import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
+//import cn.smssdk.EventHandler;
+//import cn.smssdk.SMSSDK;
+//import static cn.smssdk.SMSSDK.getVerificationCode;
+//import static cn.smssdk.SMSSDK.submitVerificationCode;
+//import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
 public class Forgetpwd extends AppCompatActivity {
     private final String TAG="--Forgetpwd--";
     private TextView full;
@@ -56,29 +52,29 @@ public class Forgetpwd extends AppCompatActivity {
     //默认密码输入框为隐藏的
     public String phone;
     private boolean isHideFirst = true;
-    private EventHandler eh;
+//    private EventHandler eh;
     private int i=60;
     private CustomOnclickListner listner;
     private final String appKey="2d4d06534acde";
     private final String appSercret="9c16982effef39c9b388528a6687592f";
-    private Handler handlern=new Handler(){
-        public void handleMessage(Message msg){
-            switch (msg.arg1){
-                case 0:
-                    //客户端验证成功，可以进行注册,返回校验的手机和国家代码phone/country
-                    Toast.makeText(Forgetpwd.this,msg.obj.toString(),Toast.LENGTH_SHORT).show();
-                    break;
-                case 1:
-                    //获取验证码成功
-                    Toast.makeText(Forgetpwd.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };
+//    private Handler handlern=new Handler(){
+//        public void handleMessage(Message msg){
+//            switch (msg.arg1){
+//                case 0:
+//                    //客户端验证成功，可以进行注册,返回校验的手机和国家代码phone/country
+//                    Toast.makeText(Forgetpwd.this,msg.obj.toString(),Toast.LENGTH_SHORT).show();
+//                    break;
+//                case 1:
+//                    //获取验证码成功
+//                    Toast.makeText(Forgetpwd.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+//                    break;
+//            }
+//        }
+//    };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpwd);
-        MobSDK.init(this,appKey,appSercret);
+//        MobSDK.init(this,appKey,appSercret);
 
         handler= new Handler(){
             @Override
@@ -98,39 +94,39 @@ public class Forgetpwd extends AppCompatActivity {
             }
         };
         getviews();
-        eh=new EventHandler(){
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                if(result==SMSSDK.RESULT_COMPLETE){
-                    //回调完成
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                        //提交验证码成功
-                        Message msg = new Message();
-                        msg.arg1 = 0;
-                        msg.obj = data;
-                        handlern.sendMessage(msg);
-                        Log.d(TAG, "提交验证码成功");
-                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        Message msg = new Message();
-                        //获取验证码成功
-                        msg.arg1 = 1;
-                        msg.obj = "获取验证码成功";
-                        handlern.sendMessage(msg);
-                        Log.d(TAG, "获取验证码成功");
-                    }
-                }else{
-                    Message msg = new Message();
-                    //返回支持发送验证码的国家列表
-                    msg.arg1 = 3;
-                    msg.obj = "验证失败";
-                    handlern.sendMessage(msg);
-                    Log.d(TAG, "验证失败");
-                    ((Throwable) data).printStackTrace();
-                }
-
-            }
-        };
-        SMSSDK.registerEventHandler(eh); //注册短信回调
+//        eh=new EventHandler(){
+//            @Override
+//            public void afterEvent(int event, int result, Object data) {
+//                if(result==SMSSDK.RESULT_COMPLETE){
+//                    //回调完成
+//                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                        //提交验证码成功
+//                        Message msg = new Message();
+//                        msg.arg1 = 0;
+//                        msg.obj = data;
+//                        handlern.sendMessage(msg);
+//                        Log.d(TAG, "提交验证码成功");
+//                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+//                        Message msg = new Message();
+//                        //获取验证码成功
+//                        msg.arg1 = 1;
+//                        msg.obj = "获取验证码成功";
+//                        handlern.sendMessage(msg);
+//                        Log.d(TAG, "获取验证码成功");
+//                    }
+//                }else{
+//                    Message msg = new Message();
+//                    //返回支持发送验证码的国家列表
+//                    msg.arg1 = 3;
+//                    msg.obj = "验证失败";
+//                    handlern.sendMessage(msg);
+//                    Log.d(TAG, "验证失败");
+//                    ((Throwable) data).printStackTrace();
+//                }
+//
+//            }
+//        };
+//        SMSSDK.registerEventHandler(eh); //注册短信回调
 
         registers();
 //        BmobSMS.initialize(Forgetpwd.this, "c6cdff9c3ade26719c30c17eb8f38d4b");
@@ -212,39 +208,40 @@ public class Forgetpwd extends AppCompatActivity {
                     int index3=user_pwd3.getText().toString().length();
                     user_pwd3.setSelection(index3);
                     break;
-                case R.id.btn_code:
-                    phone=user_phone.getText().toString().trim();
-                    if(phone.equals("")){
-                        Toast.makeText(Forgetpwd.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
-                    }else{
-                        //填写了手机号码
-                        if(isMobileNO(phone)){
-                            //如果手机号码无误，则发送验证请求
-                            btn_code.setClickable(true);
-                            changeBtnGetCode();
-                            getSupportedCountries();
-                            getVerificationCode("86",phone);
-                        }else{
-                            //手机号格式有误
-                            Toast.makeText(Forgetpwd.this,"手机号格式错误，请检查",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    break;
+//                case R.id.btn_code:
+//                    phone=user_phone.getText().toString().trim();
+//                    if(phone.equals("")){
+//                        Toast.makeText(Forgetpwd.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
+//                    }else{
+//                        //填写了手机号码
+//                        if(isMobileNO(phone)){
+//                            //如果手机号码无误，则发送验证请求
+//                            btn_code.setClickable(true);
+//                            changeBtnGetCode();
+//                            getSupportedCountries();
+//                            getVerificationCode("86",phone);
+//                        }else{
+//                            //手机号格式有误
+//                            Toast.makeText(Forgetpwd.this,"手机号格式错误，请检查",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    break;
                 case R.id.btn_update:
                     String number=code.getText().toString();
                     phone=user_phone.getText().toString().trim();
                     pwd2=user_pwd2.getText().toString().trim();
                     pwd3=user_pwd3.getText().toString().trim();
-                    if(number.equals("")){
-                        Toast.makeText(Forgetpwd.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
-                    }else{
-                        submitVerificationCode("86", phone,number);
-                        if(pwd2.equals(pwd3)){
-                            forgetpwdnew(phone,pwd2);
-                        }else{
-                            Log.e("error","两次密码请输入相同的数据");
-                        }
-                    }
+                    forgetpwdnew(phone,pwd2);
+//                    if(number.equals("")){
+//                        Toast.makeText(Forgetpwd.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
+//                    }else{
+//                        submitVerificationCode("86", phone,number);
+//                        if(pwd2.equals(pwd3)){
+//                            forgetpwdnew(phone,pwd2);
+//                        }else{
+//                            Log.e("error","两次密码请输入相同的数据");
+//                        }
+//                    }
                     break;
             }
         }

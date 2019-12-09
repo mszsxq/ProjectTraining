@@ -100,6 +100,7 @@
             float:fletPadding="10dp">
 
             <EditText
+                android:id="@+id/ac_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="活动名称" />

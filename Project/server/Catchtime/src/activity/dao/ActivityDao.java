@@ -216,4 +216,44 @@ public class ActivityDao {
 		}
 		return activity;
 	}
+	public Activity findSingleforname(int userId,String name) {
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_activity";
+		Activity activity = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table+" where activity_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			activity = new Activity();
+			activity.setActivity_name(name);
+			while(rs.next()) {
+				activity.setActivity_id(rs.getInt(1));
+				activity.setIcon_id(rs.getInt(3));
+			}
+			pst1 = conn.prepareStatement("select * from icon where icon_id = ?;");
+			pst1.setInt(1,activity.getIcon_id());
+			rs1 = pst1.executeQuery();
+			while(rs1.next()) {
+				activity.setIcon_name(rs1.getString(2));
+				activity.setIcon_color(rs1.getString(3));
+			}
+			return activity;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return activity;
+	}
 }

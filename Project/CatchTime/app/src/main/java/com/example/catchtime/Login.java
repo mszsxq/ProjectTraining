@@ -80,8 +80,8 @@ public class Login extends AppCompatActivity {
                     intent.putExtra("image",usering.getImage());
                     intent.putExtra("phone",usering.getPhone());
                     intent.putExtra("time",usering.getRegister_date());
+                    intent.putExtra("id",usering.getUser_id());
                     startActivity(intent);
-
                 }
             }
         };

@@ -19,6 +19,7 @@ import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.activity.AddActivityDetial;
+import com.example.catchtime.entity.Activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class ActivitiesFragment extends Fragment {
         Log.e("test","初始化第1个页面");
         view=inflater.inflate( R.layout.activitiesfragment,container,false);
         //存放数据的list；
-        final List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+        final List<Activity> list=new ArrayList<Activity>();
         listView=(ListView)view.findViewById(R.id.listview);
         ImageView imageView=view.findViewById(R.id.addactivity);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -62,29 +63,13 @@ public class ActivitiesFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        //准备数据源：
-        Map<String,Object> map1=new HashMap<String,Object>();
-        map1.put("img",R.drawable.study);
-        map1.put("name","学习");
-        map1.put("bak_color",R.color.gray);
-        list.add(map1);
-        Map<String,Object> map2=new HashMap<String,Object>();
-        map2.put("img",R.drawable.paly);
-        map2.put("name","游戏");
-        map2.put("bak_color",R.color.red_2);
-        list.add(map2);
-        Map<String,Object> map3=new HashMap<String,Object>();
-        map3.put("img",R.drawable.walk);
-        map3.put("name","行走");
-        map3.put("bak_color",R.color.colorAccent);
-        list.add(map3);
         listView.setAdapter(new MyAdapterActivities(getActivity(),list,R.layout.activitiesfragment_litem));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ActivitiesDetail.class);
-                intent.putExtra("colortype",list.get(position).get("bak_color").toString());
+                intent.putExtra("colortype",list.get(position).getIcon_name());
                 startActivity(intent);
             }
         });

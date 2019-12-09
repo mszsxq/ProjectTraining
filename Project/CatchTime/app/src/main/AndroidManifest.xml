@@ -70,7 +70,10 @@
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
+        <activity android:name=".setting.UserInfor"/>
         <activity android:name=".location.ChangeLocal" />
+        <activity android:name=".Add_Page_Activity"/>
+        <activity android:name=".Add_Page_Location"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

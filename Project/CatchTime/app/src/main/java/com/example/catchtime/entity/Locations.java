@@ -1,6 +1,6 @@
 package com.example.catchtime.entity;
 
-public class Location {
+public class Locations {
     private String locName;
     private String locThing;
 
