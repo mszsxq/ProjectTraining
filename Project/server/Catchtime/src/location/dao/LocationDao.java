@@ -46,7 +46,7 @@ public class LocationDao {
 			}
 		}
 	}
-	public void insertData(int userId,String name,double lat,double lng,int range,String detail) throws SQLException {
+	public int insertData(int userId,String name,double lat,double lng,int range,String detail) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;
 		PreparedStatement pst1 = null;
@@ -54,7 +54,7 @@ public class LocationDao {
 		String table =userId+"_location";
 		int id=0;
 		String allNum="select * from "+table+";";
-		String s = "insert into ol_location values(?,?,?,?,?,?);";
+		String s = "insert into "+table+" values(?,?,?,?,?,?);";
 		try {
 			conn = DBManager.getInstance().getConnection();
 			pst1 = conn.prepareStatement(allNum);
@@ -63,7 +63,7 @@ public class LocationDao {
 				id = rs.getInt(1);
 			}
 			pst = conn.prepareStatement(s);
-			pst.setInt(1,id+1);
+			pst.setInt(1,++id);
 			pst.setString(2, name);
 			pst.setDouble(3, lat);
 			pst.setDouble(4, lng);
@@ -71,7 +71,7 @@ public class LocationDao {
 			pst.setString(6, detail);
 			int i = pst.executeUpdate();
 			if(i>0) {
-				System.out.println("插入成功");
+				return id;
 			}
 			
 			} catch (ClassNotFoundException e) {
@@ -88,6 +88,7 @@ public class LocationDao {
 				e.printStackTrace();
 			}
 		}
+		return 0;
 	}
 	public void changeInfor(int userId,int id,String locationName,double lat,double lng,int range,String detail) {
 		Connection conn= null;

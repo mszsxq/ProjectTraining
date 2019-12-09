@@ -40,11 +40,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class LocationsFragment extends Fragment {
-<<<<<<< HEAD
-=======
 
     private List<Location> locations = new ArrayList<>();
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 
 
     private List<Location> location = new ArrayList<>();
@@ -61,9 +58,6 @@ public class LocationsFragment extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第2个页面");
         View view=inflater.inflate(R.layout.locationfragment,null);
-<<<<<<< HEAD
-
-=======
         Window window = getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.green));
         //存放数据的list
@@ -105,7 +99,6 @@ public class LocationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
         return view;
     }
     private void getData() {

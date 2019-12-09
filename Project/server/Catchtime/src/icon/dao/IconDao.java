@@ -56,6 +56,30 @@ public class IconDao {
 		return icon;
 			
 	}
+	public List<Icon> queryAll() throws ClassNotFoundException, SQLException {
+		List<Icon> icon= new ArrayList<Icon>();
+		DBManager db = DBManager.getInstance();
+		conn = db.getConnection();
+		String sql = "select * from icon";
+		try {
+			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, icon_id);
+			ResultSet rst = ps.executeQuery();
+			while (rst.next()) {
+				Icon newIcon = new Icon();			
+				newIcon.setIcon_Id(rst.getInt(1));
+				newIcon.setIcon_address(rst.getString(2));
+				newIcon.setColor(rst.getString(3));
+				icon.add(newIcon);
+			}
+			db.closeConnection();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return icon;
+			
+	}
 	public String queryIconColor(int icon_id) throws ClassNotFoundException, SQLException {
 		DBManager db = DBManager.getInstance();
 		conn = db.getConnection();

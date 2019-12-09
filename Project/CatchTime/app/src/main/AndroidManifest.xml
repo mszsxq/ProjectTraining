@@ -68,20 +68,17 @@
         <activity android:name=".location.ChangeLocal" />
         <activity android:name=".setting.UserInfor" />
         <activity android:name=".activity.AddDefaultAddress" />
-<<<<<<< HEAD
         <activity android:name=".fragments.ClickActivityFragment"/>
 
         <activity android:name=".activity.DefaultAddress"/>
 
         <!--<service
             android:name="com.baidu.locations.f"
-=======
 
         <activity android:name=".fragments.ClickActivityFragment"/>
         <activity android:name=".activity.DefaultAddress"/>
         <service
             android:name="com.baidu.location.f"
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
             android:enabled="true"
             android:process=":remote"></service>-->
         <service android:name=".backgroundService.LocationService" /> <!-- <activity android:name=".TestButton" /> -->

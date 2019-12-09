@@ -84,8 +84,12 @@ public class ActivityDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
-			pst1.close();
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
@@ -729,39 +733,39 @@ public class ActivityDao {
 	}
 	
 	public long dateDiff(String startTime, String endTime, String format) throws ParseException {
-        // °´ÕÕ´«ÈëµÄ¸ñÊ½Éú³ÉÒ»¸ösimpledateformate¶ÔÏó
+        // ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½Ä¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½simpledateformateï¿½ï¿½ï¿½ï¿½
         SimpleDateFormat sd = new SimpleDateFormat(format);
-        long nd = 1000 * 24 * 60 * 60;// Ò»ÌìµÄºÁÃëÊý
-        long nh = 1000 * 60 * 60;// Ò»Ð¡Ê±µÄºÁÃëÊý
-        long nm = 1000 * 60;// Ò»·ÖÖÓµÄºÁÃëÊý
-        long ns = 1000;// Ò»ÃëÖÓµÄºÁÃëÊý
+        long nd = 1000 * 24 * 60 * 60;// Ò»ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½
+        long nh = 1000 * 60 * 60;// Ò»Ð¡Ê±ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½
+        long nm = 1000 * 60;// Ò»ï¿½ï¿½ï¿½ÓµÄºï¿½ï¿½ï¿½ï¿½ï¿½
+        long ns = 1000;// Ò»ï¿½ï¿½ï¿½ÓµÄºï¿½ï¿½ï¿½ï¿½ï¿½
         long diff;
         long day = 0;
-            // »ñµÃÁ½¸öÊ±¼äµÄºÁÃëÊ±¼ä²îÒì
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Äºï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
         diff = sd.parse(endTime).getTime()
                     - sd.parse(startTime).getTime();
-        day = diff / nd;// ¼ÆËã²î¶àÉÙÌì
-        long hour = diff % nd / nh;// ¼ÆËã²î¶àÉÙÐ¡Ê±
-        long min = diff/ nm;// ¼ÆËã²î¶àÉÙ·ÖÖÓ
-        long sec = diff/ ns;// ¼ÆËã²î¶àÉÙÃë
-            // Êä³ö½á¹û
-        System.out.println("Ê±¼äÏà²î£º" + day + "Ìì" + hour + "Ð¡Ê±" + min
-                    + "·ÖÖÓ" + sec + "Ãë¡£");
+        day = diff / nd;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        long hour = diff % nd / nh;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±
+        long min = diff/ nm;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·ï¿½ï¿½ï¿½
+        long sec = diff/ ns;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        System.out.println("Ê±ï¿½ï¿½ï¿½ï¿½î£º" + day + "ï¿½ï¿½" + hour + "Ð¡Ê±" + min
+                    + "ï¿½ï¿½ï¿½ï¿½" + sec + "ï¿½ë¡£");
         String ans=null;
         return min;
         
         
     }
 	public String fomat(long diff) {
-        long nd = 1000 * 24 * 60 * 60;// Ò»ÌìµÄºÁÃëÊý
-        long nh = 1000 * 60 * 60;// Ò»Ð¡Ê±µÄºÁÃëÊý
-        long nm = 1000 * 60;// Ò»·ÖÖÓµÄºÁÃëÊý
+        long nd = 1000 * 24 * 60 * 60;// Ò»ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½
+        long nh = 1000 * 60 * 60;// Ò»Ð¡Ê±ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½
+        long nm = 1000 * 60;// Ò»ï¿½ï¿½ï¿½ÓµÄºï¿½ï¿½ï¿½ï¿½ï¿½
 
-        long hour = diff / 60;// ¼ÆËã²î¶àÉÙÐ¡Ê±
-        long min = diff % 60;// ¼ÆËã²î¶àÉÙ·ÖÖÓ
-            // Êä³ö½á¹û
-        System.out.println("Ê±¼äÏà²î£º" + hour + "Ð¡Ê±" + min
-                    + "·ÖÖÓ" );
+        long hour = diff / 60;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±
+        long min = diff % 60;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        System.out.println("Ê±ï¿½ï¿½ï¿½ï¿½î£º" + hour + "Ð¡Ê±" + min
+                    + "ï¿½ï¿½ï¿½ï¿½" );
         String ans=null;
         if(hour>1) {
            	if(min==0) {
@@ -780,7 +784,7 @@ public class ActivityDao {
 	}
 	
 	public int addData(String time) throws ParseException {  
-        long nm = 1000 * 60;// Ò»·ÖÖÓµÄºÁÃëÊý
+        long nm = 1000 * 60;// Ò»ï¿½ï¿½ï¿½ÓµÄºï¿½ï¿½ï¿½ï¿½ï¿½
         long diff;
        int min = Integer.parseInt(time);
      
@@ -789,7 +793,7 @@ public class ActivityDao {
     }
 	
 	public activity_location findActivityLocation(int user_id,String activity_name,String date) {
-		System.out.println("²âÊÔ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		PreparedStatement pst2 = null;

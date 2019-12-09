@@ -57,11 +57,13 @@ public class ActivityController extends HttpServlet {
 				int iconid = Integer.parseInt(iconId);
 				try {
 					int id= ls.insertTo(01,activityName,iconid);
+					System.out.println(id);
 					if(id>0) {
 						System.out.println(id);
 						response.getWriter().print(id);
 						
 					}else {
+						System.out.println("失败");
 						response.getWriter().print("false");
 					}
 					break;

@@ -2,18 +2,11 @@ import org.w3c.dom.DOMImplementation
 
 apply plugin: 'com.android.application'
 //apply plugin: 'com.mob.sdk'
-<<<<<<< HEAD
-=======
 
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 //// 添加插件
 //// 在MobSDK的扩展中注册SMSSDK的相关信息
 // 添加插件
 // 在MobSDK的扩展中注册SMSSDK的相关信息
-<<<<<<< HEAD
-
-=======
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 
 //// 添加插件
 //// 在MobSDK的扩展中注册SMSSDK的相关信息
@@ -100,19 +93,12 @@ dependencies {
     //graph chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
-<<<<<<< HEAD
-
-=======
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
     implementation files('libs/gson-2.8.5.jar')
 
     implementation files('libs/gson-2.8.5.jar')
 
-<<<<<<< HEAD
     implementation files('libs/gson-2.8.5.jar')
-=======
 
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
 
     implementation files('libs/gson-2.8.5.jar')
 
@@ -129,7 +115,6 @@ dependencies {
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
-<<<<<<< HEAD
 
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
@@ -138,16 +123,10 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 
-}
 
-
-
-
-=======
 
     implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'com.xdandroid:hellodaemon:+'
     implementation 'com.android.support:multidex:1.0.0'
     implementation 'com.android.support:multidex:1.0.0'
 }
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0

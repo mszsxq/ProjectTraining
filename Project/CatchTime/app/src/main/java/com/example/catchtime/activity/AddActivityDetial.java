@@ -3,6 +3,7 @@ package com.example.catchtime.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,15 +25,26 @@ import android.widget.Toast;
 import com.baidu.mapapi.map.Marker;
 import com.example.catchtime.AddLocation;
 import com.example.catchtime.R;
+import com.example.catchtime.entity.Icon;
+import com.example.catchtime.entity.Location;
 import com.example.catchtime.fragment.LocationsFragment;
 import com.felipecsl.asymmetricgridview.library.Utils;
 import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -44,9 +56,10 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 public class AddActivityDetial extends SwipeBackActivity {
     private GridView mGridView;
-    public MyAdapter mMyadapter;
-    private List<String> names;
-    private List<String> colorNames;
+    private MyAdapter mMyadapter;
+    private List<Icon> icons=new ArrayList<>();
+    private List<String> names =new ArrayList<>();
+    private List<String> colorNames=new ArrayList<>();
     private TextView btnfin;
     private TextView btnex;
     private EditText editText;
@@ -58,26 +71,7 @@ public class AddActivityDetial extends SwipeBackActivity {
     private double lat;
     private double lng;
     private int pos=-1;//返回最终选择了哪个图片
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            String info = (String) msg.obj;
-            switch (msg.what){
-                case 100:
-                    locationId=Integer.parseInt(info);
-                    Log.e("locationId",locationId+"");
-                    break;
-                case 200:
-                    activityId=Integer.parseInt(info);
-                    Log.e("activityId",activityId+"");
-                    break;
-                case 300:
-                    Log.e("suc",info);
-                    break;
-            }
-        }
-    };
+    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,17 +79,58 @@ public class AddActivityDetial extends SwipeBackActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
+        sendToServer5();
+        handler=new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                String info = (String) msg.obj;
+                switch (msg.what){
+                    case 100:
+                        locationId=Integer.parseInt(info);
+                        Log.e("locationId",locationId+"");
+                        break;
+                    case 200:
+                        activityId=Integer.parseInt(info);
+                        Log.e("activityId",activityId+"");
+                        break;
+                    case 300:
+                        Log.e("suc",info);
+                        break;
+                    case 400:
+                        List<Icon>list=new ArrayList<>();
+                        try {
+                            JSONArray jsonArray=new JSONArray(info);
+                            for(int j=0;j<jsonArray.length();j++){
+                                String string=jsonArray.getString(j);
+                                JSONObject jsonObject=new JSONObject(string);
+                                Icon icon =new Icon(jsonObject.getInt("Icon_Id")
+                                        ,jsonObject.getString("Icon_address"),jsonObject.getString("Color"));
+                                list.add(icon);
+                            }
+                            for(int i=0;i<list.size();i++){
+                                Icon icon =list.get(i);
+                                icon.setIconId(list.get(i).getIconId());
+                                icon.setIconPic(list.get(i).getIconPic());
+                                icon.setIconColor(list.get(i).getIconColor());
+                                names.add(list.get(i).getIconPic());
+                                colorNames.add(list.get(i).getIconColor());
+                                Log.e("colorList",colorNames.toString());
+                                icons.add(icon);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+            }
+        };
         Intent intent=getIntent();
         locationName=intent.getStringExtra("locationName");
         detailName=intent.getStringExtra("detailName");
         lat = intent.getDoubleExtra("lat",0.00);
         lng = intent.getDoubleExtra("lng",0.00);
-        names=new ArrayList<>();
-        names.add("walk");names.add("paly");names.add("walk");names.add("study");names.add("walk");names.add("study");names.add("walk");
-        names.add("paly");names.add("study");names.add("paly");
         colorNames=new ArrayList<>();
-        colorNames.add("main_orange");colorNames.add("main_body");colorNames.add("main_blue");colorNames.add("main_red");colorNames.add("main_blue_press");
-        colorNames.add("text_color_1");colorNames.add("text_color_red");colorNames.add("title_color_blue");colorNames.add("red_5");colorNames.add("red_5");
         editText = (EditText) findViewById(R.id.etActivity);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
@@ -105,9 +140,10 @@ public class AddActivityDetial extends SwipeBackActivity {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mMyadapter=new MyAdapter(names,view.getContext(),position);
+                mMyadapter=new MyAdapter(names,colorNames,view.getContext(),position);
                 mGridView.setAdapter(mMyadapter);
-                pos=position;
+                pos=icons.get(position).getIconId();
+                Log.e("pos",pos+"");
             }
         });
 
@@ -125,92 +161,140 @@ public class AddActivityDetial extends SwipeBackActivity {
                 if(activityName.length()==0 || pos<0){
                     Toast.makeText(getApplicationContext(),"请输入活动名称,选择图片",Toast.LENGTH_LONG).show();
                 }else if (detailName!=null){
-                    sendToServer();
                     sendToServer1();
-                    SystemClock.sleep(1000);
                     sendToServer2();
+//                    SystemClock.sleep(1000);
+                    sendToServer3();
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), AddLocation.class);
                     startActivity(intent1);
                 }else {
-                    sendToServer1();
+                    sendToServer2();
                     finish();
                 }
             }
         });
     }
 
-    private void sendToServer2() {
+    private void sendToServer4() {
+        String u1 = "http://175.24.14.26:8080/Catchtime/ActivityController?info=insert&activityName="+activityName +"&iconId=" + pos;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String u="&activityId="+activityId+"&locationId="+locationId;
-                    URL url = new URL("http://192.168.137.1:8080/Catchtime/ContactController?info=insert"+u);
-                    Log.e("text","300000dsd");
+//                    Thread.sleep(1000);
+                    URL url = new URL(u1);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    Log.e("105",info);
+                    wrapperMessage(info, 300);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    private void sendToServer5() {
+        String u="http://175.24.14.26:8080/Catchtime/IconfindAll";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+//                    Thread.sleep(1000);
+                    URL url = new URL(u);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    wrapperMessage(info,400);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void sendToServer3() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                    Log.e("loc",locationId+"");
+                    Log.e("act",activityId+"");
+                    String u2="http://175.24.14.26:8080/Catchtime/ContactInsert?info=insert&activityId="+activityId+"&locationId="+locationId;
+                    URL url = new URL(u2);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
                     wrapperMessage(info,300);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
-
-    private void sendToServer1() {
+    private void sendToServer2() {
+        String u1="http://175.24.14.26:8080/Catchtime/ActivityController?info=insert&activityName="+activityName+"&iconId="+pos;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String u="&activityName="+activityName+"&iconId="+pos+1;
-                    URL url = new URL("http://192.168.137.1:8080/Catchtime/ActivityController?info=insert"+u);
+//                    Thread.sleep(1000);
+                    URL url = new URL(u1);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    activityId=Integer.parseInt(info);
-                    Log.e("85",activityId+"");
                     wrapperMessage(info,200);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("dd","dee");
                 }
             }
         }).start();
     }
-
-    private void sendToServer() {
+    private void sendToServer1() {
+        String u="http://175.24.14.26:8080/Catchtime/LocationInsert?info=insert&locationName="+locationName+"&detailName="+detailName+"&lat="+lat+"&lng="+lng;;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String u="&locationName="+locationName+"&detailName="+detailName+"&lat="+lat+"&lng="+lng;
-                    URL url = new URL("http://192.168.137.1:8080/Catchtime/LocationController?info=insert"+u);
+                    URL url = new URL(u);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    locationId=Integer.parseInt(info);
-                    Log.e("dd",locationId+"");
                     wrapperMessage(info,100);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("dd","dee");
                 }
             }
         }).start();
     }
-
     private void wrapperMessage(String info, int i) {
         Message message = new Message();
         message.obj=info;
@@ -229,8 +313,9 @@ class MyAdapter extends BaseAdapter {
         this.colorList=colorList;
         this.context = context;
     }
-    public MyAdapter(List<String> list, Context context,int i) {
+    public MyAdapter(List<String> list, List<String> colorList,Context context,int i) {
         this.list = list;
+        this.colorList=colorList;
         this.context = context;
         this.i=i;
     }
@@ -249,7 +334,6 @@ class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ImageView imageView;
-        Drawable cachedImage = null;
         if (null == convertView) {
             imageView = new ImageView(context);
 
@@ -257,26 +341,30 @@ class MyAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        Resources res=context.getResources();
-        int picid = res.getIdentifier(list.get(position),"drawable",context.getPackageName());
-//        int color = res.getIdentifier(colorList.get(position),"color",context.getPackageName());
-        imageView.setImageResource(picid);
-//        imageView.setBackgroundColor(context.getResources().getColor(R.color.+colorList.get(p)));
+            Resources res=context.getResources();
+//             Log.e("color",colorList.get(position));
+            int picid = res.getIdentifier(list.get(position),"drawable",context.getPackageName());
+            imageView.setImageResource(picid);
+            imageView.setBackgroundColor(getColorID(colorList.get(position)));
         if (i==position){
             imageView.setBackgroundColor(context.getResources().getColor(R.color.gray));
         }
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            //设置点击按钮
-//            @Override
-//            public void onClick(View v) {
-//                imageView.setBackgroundColor(context.getResources().getColor(R.color.gray));
-//                Log.e("sssssss","aaaaaaaaaaaa");
-////                imageView.setBackground();
-//            }
-//        });
         return imageView;
     }
-    class ViewHolder {
-        ImageView img;
+    private int getColorID(String str) {
+        String color = str;
+        Log.e("ccc",str);
+        try {
+            Field field = R.color.class.getField(color);
+            int ColorID = 0;
+            ColorID = field.getInt(new R.color());
+            return ColorID;//colorID就是R.color.name
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
