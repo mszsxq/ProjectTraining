@@ -4,7 +4,9 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,9 @@ public class UserInfor extends SwipeBackActivity {
             getSupportActionBar().hide();
         }
         getViews();
+//        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
+//        int value=p.getInt("user_id",0);
+//        Log.e("value",value+"");
         Intent intent = getIntent();
         usering_name.setText(intent.getStringExtra("name"));
         usering_phone.setText(intent.getStringExtra("phone"));

@@ -1,7 +1,11 @@
+
 package com.example.catchtime.fragment;
+
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.DirectionalViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,23 +16,58 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.example.catchtime.ChartPie.ChartPieBean;
 import com.example.catchtime.ChartPie.SingleViewAdapter;
 import com.example.catchtime.ChartPie.ViewAdapter;
 import com.example.catchtime.R;
 import com.example.catchtime.chart.PerPieEntry;
+import com.example.catchtime.entity.User;
+import com.example.catchtime.entity.chartData;
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
+import com.example.catchtime.fragment.UltraPagerAdapter;
+
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.gson.Gson;
 import com.tmall.ultraviewpager.UltraViewPager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 public class AccountFragment extends Fragment {
+   private int num=0;
     private List<ChartPieBean> pieBeanList;
     private LinearLayout lineLayoutList;
+    private TextView datee;
     private Button buttonDay;
     private Button buttonWeek;
     private Button buttonMonth;
@@ -43,6 +82,41 @@ public class AccountFragment extends Fragment {
     private ViewGroup mView;
     private UltraViewPager ultraViewPager;
     private PagerAdapter adapter;
+    private ArrayList<PerPieEntry> list;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            String object = (String) msg.obj;
+            num=Integer.valueOf(object);
+            Log.i("检测","num"+num);
+            list=new ArrayList<>();
+            int flag=0;
+            while(flag<num){
+                list.add(new PerPieEntry());
+                flag++;
+                Log.i("检测","num"+num);
+            }
+            adapter = new UltraPagerAdapter(false,list,getContext(),0,true,0,"");
+            ultraViewPager.setAdapter(adapter);
+            ultraViewPager.setCurrentItem(num-1);
+            ultraViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                //只实现自己想要的回调
+                @Override
+                public void onPageSelected(int position) {
+                    Log.e("SimplePageChange-Select", "position:" + position);
+                    //给标题textview设置对应标题，设置时机在这里
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(new Date());
+                    calendar.add(calendar.DATE,-(num-position-1));
+                    String date2= sdf.format(calendar.getTime());
+                    datee.setText(date2);
+                }
+            });
+
+        }
+    };
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -57,17 +131,8 @@ public class AccountFragment extends Fragment {
         ultraViewPager=childAt.findViewById(R.id.ultra_viewpager);
         ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
-        ArrayList<PerPieEntry> list=new ArrayList<>();
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        list.add(new PerPieEntry());
-        adapter = new UltraPagerAdapter(false,list,getContext(),0);
-        ultraViewPager.setAdapter(adapter);
-//        getView();
         getViews();
+        toServer(1);
         return childAt;
     }
     private void getViews() {
@@ -76,6 +141,10 @@ public class AccountFragment extends Fragment {
         buttonWeek = childAt.findViewById(R.id.button_week);
         buttonMonth = childAt.findViewById(R.id.button_month);
         buttonYear = childAt.findViewById(R.id.button_year);
+        datee=childAt.findViewById(R.id.chartpie_header_date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        String dat = sdf.format(new Date());
+        datee.setText(dat);
         left=childAt.findViewById(R.id.chartpie_header_left);
         right = childAt.findViewById(R.id.chartpir_header_right);
         buttonDay.setOnClickListener(buttonClickListener);
@@ -88,6 +157,8 @@ public class AccountFragment extends Fragment {
         relativeLayout.setOnClickListener(new ButtonClickListener());
     }
     class ButtonClickListener implements View.OnClickListener {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         //日周年月的切换由改变适配器来实现
         @Override
         public void onClick(View view) {
@@ -103,53 +174,108 @@ public class AccountFragment extends Fragment {
                         buttonMonth.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
+
+                        String dd = sdf.format(new Date());
+                        datee.setText(dd);
+                        ultraViewPager.setCurrentItem(num-1);
 //                        List<PieEntry> entryList;
                         ArrayList<PerPieEntry> list=new ArrayList<>();
-                        list.add(new PerPieEntry());
-                        list.add(new PerPieEntry());
-                        list.add(new PerPieEntry());
-                        list.add(new PerPieEntry());
-                        list.add(new PerPieEntry());
-                        list.add(new PerPieEntry());
-                        adapter = new UltraPagerAdapter(false,list,getContext(),0);
+                        int flag=0;
+                        while(flag<num){
+                            list.add(new PerPieEntry());
+                            flag++;
+                        }
+                        adapter = new UltraPagerAdapter(false,list,getContext(),0,true,0,"");
                         ultraViewPager.setAdapter(adapter);
+                        ultraViewPager.setCurrentItem(num-1);
                         break;
                     case R.id.button_week:
+                        String dat = sdf.format(new Date());
+                        datee.setText(dat);
                         Log.e("按钮","week");
                         view.setBackground(drawable);
                         buttonMonth.setBackground(defDrawable);
                         buttonDay.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
-                        ArrayList<PerPieEntry> list1=new ArrayList<>();
-                        list1.add(new PerPieEntry());
-                        adapter = new UltraPagerAdapter(false,list1,getContext(),1);
-                        ultraViewPager.setAdapter(adapter);
+                        if(num<=7){
+                            ArrayList<PerPieEntry> list1=new ArrayList<>();
+                            list1.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list1,getContext(),1,false,1,"");
+                            ultraViewPager.setAdapter(adapter);
+                        }else{
+                            int a = num%7;
+                            Calendar calendar = new GregorianCalendar();
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-a);
+                            String date2= sdf2.format(calendar.getTime());
+                            ArrayList<PerPieEntry> list1=new ArrayList<>();
+                            list1.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list1,getContext(),1,true,1,date2);
+                            ultraViewPager.setAdapter(adapter);
+                        }
+
                         break;
                     case R.id.button_month:
+                        String datt = sdf.format(new Date());
+                        datee.setText(datt);
                         Log.e("按钮","month");
                         view.setBackground(drawable);
                         buttonDay.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonYear.setBackground(defDrawable);
-                        ArrayList<PerPieEntry> list2=new ArrayList<>();
-                        adapter = new UltraPagerAdapter(false,list2,getContext(),2);
-                        list2.add(new PerPieEntry());
-                        ultraViewPager.setAdapter(adapter);
+                        if(num<=30){
+                            ArrayList<PerPieEntry> list2=new ArrayList<>();
+                            list2.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list2,getContext(),2,false,2,"");
+                            ultraViewPager.setAdapter(adapter);
+                        }else{
+                            int a = num%30;
+                            Calendar calendar = new GregorianCalendar();
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-a);
+                            String date2= sdf2.format(calendar.getTime());
+                            ArrayList<PerPieEntry> list2=new ArrayList<>();
+                            list2.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list2,getContext(),2,true,2,date2);
+                            ultraViewPager.setAdapter(adapter);
+                        }
+
                         break;
                     case R.id.button_year:
+                        String da = sdf.format(new Date());
+                        datee.setText(da);
                         Log.e("按钮","year");
                         view.setBackground(drawable);
                         buttonMonth.setBackground(defDrawable);
                         buttonWeek.setBackground(defDrawable);
                         buttonDay.setBackground(defDrawable);
-                        ArrayList<PerPieEntry> list3=new ArrayList<>();
-                        list3.add(new PerPieEntry());
-                        adapter = new UltraPagerAdapter(false,list3,getContext(),3);
-                        ultraViewPager.setAdapter(adapter);
+                        if(num<=365){
+                            ArrayList<PerPieEntry> list3=new ArrayList<>();
+                            list3.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list3,getContext(),3,false,3,"");
+                            ultraViewPager.setAdapter(adapter);
+                        }else{
+                            int a = num%365;
+                            Calendar calendar = new GregorianCalendar();
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-a);
+                            String date2= sdf2.format(calendar.getTime());
+                            ArrayList<PerPieEntry> list3=new ArrayList<>();
+                            list3.add(new PerPieEntry());
+                            adapter = new UltraPagerAdapter(false,list3,getContext(),3,true,3,date2);
+                            ultraViewPager.setAdapter(adapter);
+                        }
+
                         break;
                     case R.id.chartpie_header_left:
                         int position=ultraViewPager.getCurrentItem();
                         if(position!=0){
+
+                            Calendar calendar = new GregorianCalendar();
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-(num-position-1));
+                            String date2= sdf.format(calendar.getTime());
+                            datee.setText(date2);
                             ultraViewPager.setCurrentItem(position-1);
                         }else{
                             ultraViewPager.setCurrentItem(0);
@@ -158,10 +284,16 @@ public class AccountFragment extends Fragment {
                         break;
                     case R.id.chartpir_header_right:
                         int rposition=ultraViewPager.getCurrentItem();
-                        if(rposition!=6){
+                        if(rposition!=num-1){
+                            Calendar calendar = new GregorianCalendar();
+                            calendar.setTime(new Date());
+                            calendar.add(calendar.DATE,-(num-rposition-1));
+                            String date2= sdf.format(calendar.getTime());
+                            datee.setText(date2);
                             ultraViewPager.setCurrentItem(rposition+1);
+
                         }else{
-                            ultraViewPager.setCurrentItem(6);
+                            ultraViewPager.setCurrentItem(num-1);
                         }
                         Log.i("右边",rposition+"");
                         break;
@@ -172,6 +304,35 @@ public class AccountFragment extends Fragment {
 
 
     }
+    private void toServer(int user_id) {
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/ChartDate?user_id="+user_id+"");
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Log.i("检测","得到"+info);
+                   wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    private void wrapperMessage(String num){
+        Message msg = Message.obtain();
+        msg.obj =num;
+        handler.sendMessage(msg);
+    }
+
 //    private void initData() {
 //        pieBeanList = new ArrayList<>();
 //        pieBeanList.add(new ChartPieBean(3090, "运动", R.color.main_green, R.drawable.run));
@@ -252,4 +413,9 @@ public class AccountFragment extends Fragment {
 //        new InitPieChart(chart, entries, this.getContext());
 //    }
 
+
+
+
+
 }
+

@@ -153,6 +153,37 @@ public class LocationDao {
 		}
 		
 	}
+	public List<String> findAllLoc(int userId) throws SQLException {
+		Connection conn= null;
+		PreparedStatement pst = null;
+		ResultSet rs=null;
+		String table=userId+"_location";
+		List<String> list = new ArrayList<>();
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString("location_name"));
+			}
+			return list;
+			} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	public List<Location> findAll(int userId) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst = null;

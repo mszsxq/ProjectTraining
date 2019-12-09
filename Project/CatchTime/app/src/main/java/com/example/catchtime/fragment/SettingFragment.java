@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.catchtime.Add_detailPage;
+import com.example.catchtime.Login;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.setting.UserInfor;
@@ -26,6 +29,7 @@ public class SettingFragment extends Fragment {
     private RelativeLayout relativeLayout3;
     private RelativeLayout relativeLayout4;
     private customListener listener;
+    private Button unlogin;
     private View view;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -43,6 +47,7 @@ public class SettingFragment extends Fragment {
         relativeLayout2.setOnClickListener(listener);
         relativeLayout3.setOnClickListener(listener);
         relativeLayout4.setOnClickListener(listener);
+        unlogin.setOnClickListener(listener);
     }
 
     private void getViews() {
@@ -50,6 +55,7 @@ public class SettingFragment extends Fragment {
         relativeLayout2 =(RelativeLayout) view.findViewById(R.id.addactivity);
         relativeLayout3 =(RelativeLayout) view.findViewById(R.id.settings);
         relativeLayout4 =(RelativeLayout) view.findViewById(R.id.helping);
+        unlogin = view.findViewById(R.id.btn_unlogin);
     }
 
     class customListener implements View.OnClickListener{
@@ -71,6 +77,10 @@ public class SettingFragment extends Fragment {
                     startActivity(intent2);
                     break;
                 case R.id.helping:
+                    break;
+                case R.id.btn_unlogin:
+                    Intent intent3 = new Intent(view.getContext(), Login.class);
+                    startActivity(intent3);
                     break;
             }
         }

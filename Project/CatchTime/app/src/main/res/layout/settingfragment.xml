@@ -172,6 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:id="@+id/btn_unlogin"
                     android:textSize="18sp"
                     android:textColor="@color/red"
                     android:shadowColor="@color/red"

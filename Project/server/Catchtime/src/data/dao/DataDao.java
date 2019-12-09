@@ -130,6 +130,7 @@ public class DataDao {
 		return all_data;
 		
 	}
+<<<<<<< HEAD
 	public int findalldata(String tablename) {
 		All_data all_data=null;
 		List<All_data> data = new ArrayList<>();
@@ -233,4 +234,78 @@ public class DataDao {
 		return id;
 		
 	}
+=======
+	//查询近七天某项活动的时间
+		public List<All_data> activityRecently(String table_name, String activity_name) {
+			List<All_data> list= new ArrayList() ;
+			Connection conn =null;
+			ResultSet rs = null;
+//			String sql ="select * from "+table_name+" where date between current_date()-7 and sysdate() and activity_name=?";
+//			String sql ="select * from "+table_name;
+			String sql ="select * from "+table_name+" where activity_name=? and  date_sub(curdate(), interval 7 day) <= date(date);";
+
+			try {
+				conn=DBManager.getInstance().getConnection();
+				PreparedStatement ps=conn.prepareStatement(sql);
+				ps.setString(1,activity_name);
+				rs=ps.executeQuery();
+				while(rs.next()) {
+					All_data all_data = new All_data();
+					all_data.setData_id(rs.getInt(1));
+					all_data.setData(rs.getString(2));
+					all_data.setActivity_name(rs.getString(3));
+					all_data.setActivity_data(rs.getString(4));
+					list.add(all_data);
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				try {
+					rs.close();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return list;
+		}
+		//查询近一个月某项活动的时间
+			public List<All_data> activityMonthly(String table_name, String activity_name) {
+				List<All_data> list= new ArrayList() ;
+				Connection conn =null;
+				ResultSet rs = null;
+//				String sql ="select * from "+table_name+" where date between current_date()-7 and sysdate() and activity_name=?";
+//				String sql ="select * from "+table_name;
+				String sql ="select * from "+ table_name+" where activity_name=? and date_sub(curdate(), interval 30 day) <= date(date) order by date;";
+
+				try {
+					conn=DBManager.getInstance().getConnection();
+					PreparedStatement ps=conn.prepareStatement(sql);
+					ps.setString(1,activity_name);
+					rs=ps.executeQuery();
+					while(rs.next()) {
+						All_data all_data = new All_data();
+						all_data.setData_id(rs.getInt(1));
+						all_data.setData(rs.getString(2));
+						all_data.setActivity_name(rs.getString(3));
+						all_data.setActivity_data(rs.getString(4));
+						list.add(all_data);
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally{
+					try {
+						rs.close();
+						conn.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				return list;
+			}
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 }

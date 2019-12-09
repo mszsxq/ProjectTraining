@@ -11,7 +11,6 @@
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
-                    android:text="1111"
+                    android:text="locationName"
                     android:layout_toRightOf="@+id/newpalece_text_name"
                     android:textSize="20dp" />
                 <TextView
@@ -91,7 +90,6 @@
         android:layout_height="50dp"
         android:background="@color/white"
         android:orientation="horizontal">
-
         <TextView
             android:id="@+id/dialog_cancel"
             android:layout_width="0dp"
@@ -101,12 +99,10 @@
             android:text="取消"
             android:textColor="#6FBF6A"
             android:textSize="20sp" />
-
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#cecece" />
-
         <TextView
             android:id="@+id/dialog_sure"
             android:layout_width="0dp"

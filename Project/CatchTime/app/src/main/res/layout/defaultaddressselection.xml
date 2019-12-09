@@ -9,16 +9,9 @@
         android:layout_height="wrap_content"
         android:text="默认地址设置"
         android:textSize="30dp"
-        android:layout_marginLeft="110dp"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="10dp"
-        android:text="下一步"
-        android:textColor="@color/blue"
-        android:layout_toRightOf="@+id/defaultaddress_txet"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,39 +27,21 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:text="常用地址选择"
-                android:textSize="30dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:text="家"
                 android:textSize="20dp" />
-            <ImageView
-                android:layout_marginLeft="60dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
         </LinearLayout>
-        <LinearLayout
+        <ListView
+            android:id="@+id/def_lv"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:text="学校"
-                android:textSize="20dp" />
-            <ImageView
-                android:layout_marginLeft="60dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/arrowsl"/>
-        </LinearLayout>
-
-
+            android:layout_height="match_parent"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/def_tv_confirm"
+        android:text="确定"
+        android:background="@drawable/shape1"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

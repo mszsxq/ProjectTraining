@@ -17,18 +17,33 @@ import android.widget.ImageView;
 //import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.catchtime.activity.DefaultAddress;
 import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
+<<<<<<< HEAD
+=======
+import com.google.gson.reflect.TypeToken;
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 //import com.mob.MobSDK;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
+=======
+
+//import cn.bmob.sms.BmobSMS;
+//import cn.bmob.sms.exception.BmobException;
+//import cn.bmob.sms.listener.RequestSMSCodeListener;
+//import cn.bmob.sms.listener.VerifySMSCodeListener;
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 //import cn.smssdk.EventHandler;
 //import cn.smssdk.SMSSDK;
 //import static com.mob.wrappers.SMSSDKWrapper.getSupportedCountries;
@@ -80,18 +95,33 @@ public class Register extends AppCompatActivity {
                 super.handleMessage(msg);
                 String info = (String) msg.obj;
                 Log.e("mmy", info);
-                if (info.equals("注册成功")) {
+                if (!(info.equals("手机号码重复使用"))) {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<Integer>(){}.getType();
+                    int id = gson.fromJson(info,type);
                     Intent intent = new Intent();
-                    intent.setClass(Register.this, Login.class);
+                    intent.setClass(getApplicationContext(), DefaultAddress.class);
+                    intent.putExtra("id",id+"");
                     startActivity(intent);
-                    overridePendingTransition(R.anim.in, R.anim.out);
+//                    overridePendingTransition(R.anim.in, R.anim.out);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
                 }
             }
         };
+<<<<<<< HEAD
 //        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+=======
+        //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+//        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+
+
+        //MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+
+//        MobSDK.init(this, "2d447922e6d83", "1b0cbc51ed6aeff1e94ecf5f4187cebb");
+
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
         getviews();
         registers();
 //        eh = new EventHandler() {
@@ -223,14 +253,46 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
+<<<<<<< HEAD
                     RegisterUser(phone, password);
+=======
+                    Intent intent1 = new Intent();
+                    intent1.setClass(getApplicationContext(), DefaultAddress.class);
+                    startActivity(intent1);
+//                    RegisterUser(phone, password);
+                    RegisterUser(phone, password);
+
+
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 //                    if (number.equals("")){
 //                        Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
 //                    }else {
 //                        submitVerificationCode("86", phone, number);
 //                        RegisterUser(phone, password);
+<<<<<<< HEAD
 //                        break;
 //                    }
+=======
+//                    if (number.equals("")) {
+//                        Toast.makeText(Register.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        submitVerificationCode("86", phone, number);
+//                        RegisterUser(phone, password);
+//                    }
+                    break;
+                }
+
+//                    }
+
+
+
+
+//                        break;
+//                    }
+
+
+
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
             }
         }
 
@@ -243,7 +305,7 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        URL url = new URL("http://10.7.82.38:8080/Catchtime/UserController?client=" + client);
+                        URL url = new URL("http://192.168.43.169:8080/Catchtime/UserController?client=" + client);
                         URLConnection conn = url.openConnection();
                         InputStream in = conn.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -316,5 +378,9 @@ public class Register extends AppCompatActivity {
             };
             thread.start();
         }
-    }
+
+
 }
+
+
+
