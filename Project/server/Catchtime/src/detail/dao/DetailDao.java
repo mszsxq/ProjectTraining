@@ -312,4 +312,68 @@ public class DetailDao {
 		}
 		return times;
 	}
+	public List<Time> findDetails(int id,int activity_id) {
+		String table = id+"_detail_tablename";
+		List<Time> times = new ArrayList<>();
+		String sql = "select * from "+table+" where activity_id = ?";
+		try {
+			Connection conn = DBManager.getInstance().getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, activity_id);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				Time time = new Time();
+				time.setBegin_time(rs.getString("begin_time"));
+				time.setFinish_time(rs.getString("finish_time"));
+				times.add(time);
+			}
+			rs.close();
+			pstm.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return times;
+	}
+	public List<Time> findDetail() {
+		List<Time> times = new ArrayList<>();
+		String sql = "select * from 1_detail_tablename";
+		try {
+			Connection conn = DBManager.getInstance().getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				Time time = new Time();
+				time.setBegin_time(rs.getString("begin_time"));
+				time.setFinish_time(rs.getString("finish_time"));
+				times.add(time);
+			}
+			rs.close();
+			pstm.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return times;
+	}
 }
