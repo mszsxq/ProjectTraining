@@ -49,26 +49,45 @@ public class UserController extends HttpServlet {
 		UserDao userDao = new UserDao();
 		int count = userDao.countUser();
 		count = count+1;
-		String client = request.getParameter("client");
+		Gson gson = new Gson();
+		String gs = gson.toJson(count);
+		//忘记密码
+		String phone = request.getParameter("phone");
+		String pwd = request.getParameter("pwd");
+		if(phone !=null && pwd !=null) {
+			int a = userDao.UpdateUserPassword(pwd, phone);
+			if(a==1) {
+				out.write("重置成功");
+			}else {
+				out.write("重置失败");
+			}
+		}
+		//注册
+//		String client = request.getParameter("client");
+		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = df.format(new Date());
-		if(client != null) {
+//		if(client != null) {
 			Type listType=new TypeToken<User>(){}.getType();
-			Gson gson=new Gson();
-	        User user = gson.fromJson(client,listType);
+//	        User user = gson.fromJson(client,listType);
 	        UserService userService = new UserService();
-	        int n = userService.addUser(count,user.getPhone(),user.getPassword(),time);
+	        int n = userService.addUser(count,"15264327461","123456",time);
+//	        int n = userService.addUser(count,user.getPhone(),user.getPassword(),time);
 	        if(n!=0) {
-				out.write("注册成功");
+				out.write(gs);
 				LocationDao locationDao = new LocationDao();
 				ActivityDao activityDao = new ActivityDao();
 				DetailDao detailDao = new DetailDao();
 				ContactDao contactDao = new ContactDao();
+				DataDao dataDao = new DataDao();
+				NewPlaceDao newPlaceDao = new NewPlaceDao();
 				try {
 					locationDao.createTable(count);
 					activityDao.createTable(count);
 					detailDao.createTable(count);
 					contactDao.createContact(count);
+					dataDao.createdatatable(count);
+					newPlaceDao.createTable(count);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -77,9 +96,9 @@ public class UserController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}else {
-				out.write("手机号码重复使用!");
+				out.write("手机号码重复使用");
 			}
-		}
+//		}
 	}
 
 	/**

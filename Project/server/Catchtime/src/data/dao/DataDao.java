@@ -18,20 +18,20 @@ import util.DBManager;
  *
  */
 public class DataDao {
-	//鍒涘缓琛�
-	public int createdatatable(String table_name) {
+	//创建表
+	public int createdatatable(int id) {
 		int n=0;
+		String table = id+"_data";
 		Connection conn=null;
 		try {
 			conn=DBManager.getInstance().getConnection();
-			String sql="create table ? (data_id int,data varchar(50) not null,activity_name varchar(50) not null,activity_data varchar(50),primary key(data_id,activity_name))";
+			String sql="create table "+table+" (data_id int,data varchar(50) not null,activity_name varchar(50) not null,activity_data varchar(50),primary key(data_id,activity_name))";
 			PreparedStatement p=conn.prepareStatement(sql);
-			p.setString(1, table_name);
 			n=p.executeUpdate();	
 			if(n==1) {
-				System.out.print("鍒涘缓鎴愬姛");
+				System.out.print("创建成功");
 			}else {
-				System.out.print("鍒涘缓澶辫触");
+				System.out.print("创建失败");
 			}
 			return n;
 		} catch (ClassNotFoundException e) {
@@ -130,7 +130,6 @@ public class DataDao {
 		return all_data;
 		
 	}
-<<<<<<< HEAD
 	public int findalldata(String tablename) {
 		All_data all_data=null;
 		List<All_data> data = new ArrayList<>();
@@ -234,7 +233,6 @@ public class DataDao {
 		return id;
 		
 	}
-=======
 	//查询近七天某项活动的时间
 		public List<All_data> activityRecently(String table_name, String activity_name) {
 			List<All_data> list= new ArrayList() ;
@@ -307,5 +305,52 @@ public class DataDao {
 				}
 				return list;
 			}
->>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
+	public int countData(int id) {
+		String table = id+"_data";
+		String sql = "select count(*) from "+table;
+		Connection con = null;
+		int n = 0;
+		try {
+			con = DBManager.getInstance().getConnection();
+			PreparedStatement pstm = con.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
+	public int addalldata(int id,int data_id,String data,String activity_name,String activity_data) {
+		int n=0;
+		String table = id+"_data";
+		Connection conn=null;
+		try {
+			conn=DBManager.getInstance().getConnection();
+			String sql="insert into "+table+" values(?,?,?,?)";
+			PreparedStatement p=conn.prepareStatement(sql);
+			p.setInt(1, data_id);
+			p.setString(2, data);
+			p.setString(3,activity_name);
+			p.setString(4, activity_data);
+			n=p.executeUpdate();
+			if(n==1) {
+				System.out.print("插入成功");
+			}else {
+				System.out.print("插入失败");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
 }

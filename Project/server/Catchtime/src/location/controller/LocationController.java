@@ -30,7 +30,26 @@ public class LocationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String loc = request.getParameter("loc");
+		String id = request.getParameter("id");
+		System.out.println(loc);
+		System.out.println(id);
+		Type type = new TypeToken<Location>(){}.getType();
+		Type type1 = new TypeToken<Integer>(){}.getType();
+		Gson gson = new Gson();
+		Location location = new Location();
+		location = gson.fromJson(loc,type);
+		int a = gson.fromJson(id,type1);
+		LocationService locationService = new LocationService();
+		int i = locationService.InsertDefaultLocation(a, location);
+		if(i>0) {
+			out.write("添加成功");
+		}else {
+			out.write("添加失败");
+		}
 	}
 
 	/**
