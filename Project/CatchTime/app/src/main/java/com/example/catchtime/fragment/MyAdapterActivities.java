@@ -1,7 +1,10 @@
 package com.example.catchtime.fragment;
 import android.content.Context;
 import android.content.Intent;
+<<<<<<< HEAD
+=======
 import android.graphics.Bitmap;
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +20,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import androidx.recyclerview.widget.RecyclerView;
-class MyAdapterActivities extends BaseAdapter {
+public class MyAdapterActivities extends BaseAdapter {
     private Context context;
     private List<Activity> data;
     private LayoutInflater layoutInflater;

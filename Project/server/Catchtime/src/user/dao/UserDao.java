@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import entity.User;
 import util.DBManager;
@@ -228,36 +230,74 @@ public class UserDao {
 		}
 		return n;
 	}
-	public User querryById(int id) {
-		User user =null;
-		String sql="select * from user where user_id =?";
-		Connection conn =null;
+	public int findDays(int user_id) throws ParseException {
+		String sql = "select register_date from user where user_id=?";
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement ps=null;
+		int days=0;
 		try {
-			conn =DBManager.getInstance().getConnection();
-			PreparedStatement ps =conn.prepareStatement(sql);
-			ps.setInt(1,id);
-			ResultSet rs =ps.executeQuery();
+			conn = DBManager.getInstance().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user_id);
+			rs = ps.executeQuery();
 			while(rs.next()) {
-				int id1 =rs.getInt(1);
-				String phone =rs.getString(2);
-				String password =rs.getString(3);
-				String username =rs.getString(4);
-				String register_date =rs.getString(5);
-				String moto =rs.getString(6);
-				String image =rs.getString(7);
-				user = new User(id,phone,password,username,register_date,moto,image);
+				String date = rs.getString(1);
+				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+				String today = sd.format(new Date());
+				System.out.println(date+"+"+today);
+				days=(int) dateDiff(date,today,"yyyy-MM-dd");
 			}
-		}catch (SQLException | ClassNotFoundException e) {
+			return days;
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
+				rs.close();
+				ps.close();
 				DBManager.getInstance().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return user;
+		return days;
 	}
+	
+	public long dateDiff(String startTime, String endTime, String format) throws ParseException {
+        // 按照传入的格式生成一个simpledateformate对象
+        SimpleDateFormat sd = new SimpleDateFormat(format);
+        long nd = 1000 * 24 * 60 * 60;// 一天的毫秒数
+        long nh = 1000 * 60 * 60;// 一小时的毫秒数
+        long nm = 1000 * 60;// 一分钟的毫秒数
+        long ns = 1000;// 一秒钟的毫秒数
+        long diff;
+        long day = 0;
+            // 获得两个时间的毫秒时间差异
+            diff = sd.parse(endTime).getTime()
+                    - sd.parse(startTime).getTime();
+            day = diff / nd;// 计算差多少天
+            long hour = diff % nd / nh;// 计算差多少小时
+            long min = diff % nd % nh / nm;// 计算差多少分钟
+            long sec = diff % nd % nh % nm / ns;// 计算差多少秒
+            // 输出结果
+            System.out.println("时间相差：" + day + "天" + hour + "小时" + min
+                    + "分钟" + sec + "秒。");
+            if (day>=1) {
+                  return day;
+            }else {
+                if (day==0) {
+                    return 1;
+                }else {
+                    return 0;
+                }
+                
+            }
+        
+    }
 }

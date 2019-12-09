@@ -154,7 +154,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+           />
 
         <ProgressBar
             android:layout_below="@id/min1"
@@ -166,7 +166,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -192,7 +192,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+           />
 
         <ProgressBar
             android:layout_below="@id/min2"
@@ -204,7 +204,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -230,7 +230,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+            />
 
         <ProgressBar
             android:layout_below="@id/min3"
@@ -242,7 +242,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -268,7 +268,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+             />
 
         <ProgressBar
             android:layout_below="@id/min4"
@@ -280,7 +280,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -306,7 +306,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+            />
 
         <ProgressBar
             android:layout_below="@id/min5"
@@ -318,7 +318,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -344,7 +344,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+          />
 
         <ProgressBar
             android:layout_below="@id/min6"
@@ -356,7 +356,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"
@@ -382,7 +382,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min" />
+             />
 
         <ProgressBar
             android:layout_below="@id/min7"
@@ -394,7 +394,7 @@
             android:background="@drawable/myprogressbar"
             android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
             android:indeterminateOnly="false"
-            android:max="100"
+            android:max="480"
             android:maxHeight="15dp"
             android:minHeight="6dp"
             android:progress="20"

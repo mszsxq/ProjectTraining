@@ -20,7 +20,6 @@ public class User {
         this.phone = phone;
         this.password = password;
     }
-
     public User(int user_id, String phone, String password, String username, String register_date, String moto,
                 String image) {
         super();

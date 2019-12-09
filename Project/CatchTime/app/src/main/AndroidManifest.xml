@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.catchtime">
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -9,42 +10,36 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />-->
-
-<!--    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <!-- 这个权限用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- 这个权限用于访问GPS定位-->
-<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
-    <!-- 用于读取手机当前的状态-->
-<!--    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-    <!--富媒体消息需要保存在sd卡中-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-
-    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
-    <!--获取wifi网络状态的信息 -->
-    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <!--获取sd卡写的权限，用于文件上传和下载-->
-    <!--允许读取手机状态 用于创建BmobInstallation-->
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
-<!--    <uses-permission android:name="android.permission.READ_CONTACTS" />-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" /> -->
+    <!-- <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 这个权限用于访问GPS定位 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> -->
+    <!-- 用于读取手机当前的状态 -->
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- 富媒体消息需要保存在sd卡中 -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> -->
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <!-- 获取wifi网络状态的信息 -->
+    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" /> <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,34 +49,56 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitle"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ActivitiesDetail"></activity>
-        <activity android:name=".Add_detailPage"></activity>
+        <activity android:name=".activity.ActivitiesDetail" />
+        <activity android:name=".Add_detailPage" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".AddLocation" />
+        <activity android:name=".activity.AddActivityDetial" />
+        <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddLocation"/>
-        <activity android:name=".activity.AddActivityDetial" />
-        <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".ModifyPage" />
-        <activity android:name=".location.ChangeLocal" />
         <activity android:name=".setting.UserInfor"/>
+<<<<<<< HEAD
         <activity android:name=".activity.AddDefaultAddress"/>
         <activity android:name=".NewPlacePopup"/>
         <activity android:name=".NewPalce"/>
+=======
+        <activity android:name=".location.ChangeLocal" />
+<<<<<<< HEAD
+        <activity android:name=".Add_Page_Activity"/>
+        <activity android:name=".Add_Page_Location"/>
+=======
+        <activity android:name=".setting.UserInfor" />
+        <activity android:name=".activity.AddDefaultAddress" />
+
+<!--        <activity android:name=".fragments.ClickActivityFragment"/>-->
+
+        <activity android:name=".activity.DefaultAddress"/>
+
+        <!--<service
+            android:name="com.baidu.locations.f"
+
+
+        <activity android:name=".fragments.ClickActivityFragment"/>
+        <activity android:name=".activity.DefaultAddress"/>
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
+>>>>>>> fa49c2915b4db995610a63934a8649676d10c02e
         <service
             android:name="com.baidu.location.f"
+
             android:enabled="true"
-            android:process=":remote">
-        </service>
-        <service android:name=".backgroundService.LocationService" />
-        <!--<activity android:name=".TestButton" />-->
+            android:process=":remote"></service>-->
+        <service android:name=".backgroundService.LocationService" /> <!-- <activity android:name=".TestButton" /> -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="tebGOz1MjrTjra8buf2z9tN4s41zTjbh" />

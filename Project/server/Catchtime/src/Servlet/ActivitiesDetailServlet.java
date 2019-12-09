@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,23 +38,31 @@ public class ActivitiesDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int id =Integer.valueOf(request.getParameter("id"));
+		
 		int  id =1;
 		String activityName ="cycle";
-		List<All_data> list =null;
+//		int id =Integer.valueOf(request.getParameter("id"));
+//		String activityName =request.getParameter("activity");
+		System.out.println(activityName);
 		UserTableService userTableService =new UserTableService();	
 		String tableName = userTableService.querryDayTableById(id);
+		
 		DataService dataService =new DataService();
-		list =dataService.activityRecently(tableName, activityName);
-		if(list==null) {
+//		List<All_data> list =null;
+//		list =dataService.activityRecently(tableName, activityName);
+		List<All_data> list1 =null;
+		list1=dataService.activityMonthly(tableName, activityName);
+		String liststr="";
+		System.out.println(list1.toString());
+		if(list1==null) { 	
 		System.out.println("未查到数据");
 		}else {
 			Gson gson =new Gson();
-			String liststr =gson.toJson(list);
+			liststr =gson.toJson(list1);
 			System.out.println(liststr);
-		}
-	
-		
+		}	
+		PrintWriter write = response.getWriter();
+		write.write(liststr);
 	}
 
 	/**

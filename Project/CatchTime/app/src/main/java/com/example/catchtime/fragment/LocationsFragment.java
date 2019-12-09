@@ -1,4 +1,5 @@
 package com.example.catchtime.fragment;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,9 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.catchtime.AddLocation;
-import com.example.catchtime.NewPalce;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.ActivitiesDetail;
+
+import com.example.catchtime.entity.Locations;
+
+
 import com.example.catchtime.entity.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,17 +40,40 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 public class LocationsFragment extends Fragment {
+
+
+    private List<Location> locations = new ArrayList<>();
+
+
+
+    private List<Location> location = new ArrayList<>();
+
     private MyAdapterLocation myAdapter;
     private Handler handler;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //存放数据的list
+        locations=new ArrayList<>();
+        getData();
 //        return super.onCreateView(inflater, container, savedInstanceState);
         Log.e("test","初始化第2个页面");
         View view=inflater.inflate(R.layout.locationfragment,null);
+
         Window window = getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.green));
+<<<<<<< HEAD
+        myAdapter = new MyAdapterLocation(getActivity(),locations,R.layout.item_location);
+        ListView listView = view.findViewById(R.id.loc_lv_local);
+        listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ActivitiesDetail.class);
+                startActivity(intent);
+=======
         //存放数据的list
         final List<Location> locations=new ArrayList<>();
         getData();
@@ -75,6 +102,7 @@ public class LocationsFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
             }
         };
         TextView addloc = view.findViewById(R.id.loc_btn_addloc);
@@ -86,6 +114,7 @@ public class LocationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         return view;
     }
     private void getData() {
@@ -118,3 +147,4 @@ public class LocationsFragment extends Fragment {
         handler.sendMessage(msg);
     }
 }
+

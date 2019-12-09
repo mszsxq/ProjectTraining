@@ -50,47 +50,50 @@ public class ActivitiesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        Log.e("test","初始化第1个页面");
-        view=inflater.inflate( R.layout.activitiesfragment,container,false);
+        Log.e("test", "初始化第1个页面");
+        view = inflater.inflate(R.layout.activitiesfragment, container, false);
         //存放数据的list；
-        final List<Activity> lists=new ArrayList<>();
+        final List<Activity> list = new ArrayList<Activity>();
+        listView = (ListView) view.findViewById(R.id.listview);
+        final List<Activity> lists = new ArrayList<>();
         //--------------------------------------------------------------------------------------------------
         getData();
-        handler=new Handler() {
-            public void handleMessage(Message msg){
+        handler = new Handler() {
+            public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                String info=(String)msg.obj;
-                Log.e("info",info);
-                Type type=new TypeToken<List<Activity>>(){}.getType();
-                Gson gson=new Gson();
+                String info = (String) msg.obj;
+                Log.e("info", info);
+                Type type = new TypeToken<List<Activity>>() {
+                }.getType();
+                Gson gson = new Gson();
 
-                List<Activity> list = gson.fromJson(info.trim(),type);
-                Log.e("error",list.toString());
+                List<Activity> list = gson.fromJson(info.trim(), type);
+                Log.e("error", list.toString());
 
-                for(int i=0;i<list.size();i++){
-                    Activity activity=new Activity();
+                for (int i = 0; i < list.size(); i++) {
+                    Activity activity = new Activity();
                     activity.setIcon_name(list.get(i).getIcon_name());
-                    String str=new String();
-                    str=list.get(i).getIcon_name();
-                    int img=getDrawableID(str);
+                    String str = new String();
+                    str = list.get(i).getIcon_name();
+                    int img = getDrawableID(str);
                     activity.setImage(img);
                     activity.setActivity_name(list.get(i).getActivity_name());
-                    String string=new String();
-                    string=list.get(i).getIcon_color();
-                    int color=getColorID(string);
+                    String string = new String();
+                    string = list.get(i).getIcon_color();
+                    int color = getColorID(string);
                     activity.setIcon_color(list.get(i).getIcon_color());
                     activity.setColor(color);
                     lists.add(activity);
                 }
-                Log.e("info",info);
-                listView=(ListView)view.findViewById(R.id.listview);
-                listView.setAdapter(new MyAdapterActivities(getActivity(),lists,R.layout.activitiesfragment_litem));
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                Log.e("info", info);
+                listView = (ListView) view.findViewById(R.id.listview);
+                listView.setAdapter(new MyAdapterActivities(getActivity(), lists, R.layout.activitiesfragment_litem));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), ActivitiesDetail.class);
-                        intent.putExtra("colortype",lists.get(position).getColor());
+                        intent.putExtra("colortype", lists.get(position).getColor());
                         startActivity(intent);
                     }
                 });
@@ -99,27 +102,35 @@ public class ActivitiesFragment extends Fragment {
         };
 
         //----------------------------------------------------------------------------------------------------
-
-        ImageView imageView=view.findViewById(R.id.addactivity);
+        ImageView imageView = view.findViewById(R.id.addactivity);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(view.getContext(), AddActivityDetial.class);
+                Intent intent = new Intent(view.getContext(), AddActivityDetial.class);
                 startActivity(intent);
             }
         });
-        Button button1=view.findViewById(R.id.jump_login);
+        Button button2 = view.findViewById(R.id.detail);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ActivitiesDetail.class);
+                startActivity(intent);
+            }
+        });
+        Button button1 = view.findViewById(R.id.jump_login);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(view.getContext(), Login.class);
+                Intent intent = new Intent(view.getContext(), Login.class);
                 startActivity(intent);
             }
         });
 
         return view;
     }
-//由图片名称转换为资源文件
+
+    //由图片名称转换为资源文件
     private int getDrawableID(String str) {
         try {
             String name = str;
@@ -128,37 +139,38 @@ public class ActivitiesFragment extends Fragment {
             DrawableID = field.getInt(new R.drawable());
             return DrawableID;
         } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                return 0;
-            }
-        catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (NoSuchFieldException e) {
             e.printStackTrace();
             return 0;
         }
     }
-//由颜色名称转换为资源文件
-    private int getColorID(String str){
-        String color=str;
+
+    //由颜色名称转换为资源文件
+    private int getColorID(String str) {
+        String color = str;
         try {
-            Field field=R.color.class.getField(color);
-            int ColorID=0;
-            ColorID=field.getInt(new R.color());
+            Field field = R.color.class.getField(color);
+            int ColorID = 0;
+            ColorID = field.getInt(new R.color());
             return ColorID;//colorID就是R.color.name
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
             return 0;
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            return  0;
+            return 0;
         }
     }
+
     private void getData() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid=1;
+                int userid = 1;
                 try {
-                    URL url = new URL("http://192.168.43.65:8080/Catchtime/ActivityController?userid="+userid);
+                    URL url = new URL("http://192.168.43.65:8080/Catchtime/ActivityController?userid=" + userid);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -172,12 +184,11 @@ public class ActivitiesFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }).start();
     }
-    private void wrapperMessage(String info){
+
+    private void wrapperMessage(String info) {
         Message msg = Message.obtain();
         msg.obj = info;
         handler.sendMessage(msg);

@@ -4,13 +4,13 @@ public class All_data {
 	private int data_id;
 	private String activity_name;
 	private String activity_data;
-	private String date;
+	private String data;
 	public All_data(int data_id, String activity_name, String activity_data, String data) {
 		super();
 		this.data_id = data_id;
 		this.activity_name = activity_name;
 		this.activity_data = activity_data;
-		this.date = data;
+		this.data = data;
 	}
 	public All_data() {}
 	
@@ -32,18 +32,17 @@ public class All_data {
 	public void setActivity_data(String activity_data) {
 		this.activity_data = activity_data;
 	}
-	public String getDate() {
-		return date;
+	public String getData() {
+		return data;
 	}
-	public void setDate(String data) {
-		this.date = data;
+	public void setData(String data) {
+		this.data = data;
 	}
 	@Override
 	public String toString() {
 		return "All_data [data_id=" + data_id + ", activity_name=" + activity_name + ", activity_data=" + activity_data
-				+ ", date=" + date + "]";
+				+ ", data=" + data + "]";
 	}
-
 	
 
 }

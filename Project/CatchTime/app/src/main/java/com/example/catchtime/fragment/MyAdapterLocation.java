@@ -8,8 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.catchtime.R;
+
+
 import com.example.catchtime.entity.Location;
+
 import com.example.catchtime.entity.Locations;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,15 @@ public class MyAdapterLocation extends BaseAdapter {
     private List<Location> contents = new ArrayList<>();
     private int itemLayoutId;
 
+<<<<<<< HEAD
     public MyAdapterLocation(Context context, List<Location> contents, int itemLayoutId){
+=======
+
+
+
+    public MyAdapterLocation(Context context, List<Location> contents, int itemLayoutId){
+
+>>>>>>> 303e91a9e2955412334c345d4e453b12cd85385a
         this.context = context;
         this.contents = contents;
         this.itemLayoutId = itemLayoutId;
@@ -49,3 +61,4 @@ public class MyAdapterLocation extends BaseAdapter {
         return convertView;
     }
 }
+
