@@ -52,15 +52,17 @@
         <activity android:name=".activity.ActivitiesDetail" />
         <activity android:name=".Add_detailPage" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".AddLocation" />
+        <activity android:name=".activity.AddActivityDetial" />
+        <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddLocation" />
-        <activity android:name=".activity.AddActivityDetial" />
-        <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />
@@ -75,13 +77,13 @@
 
         <!--<service
             android:name="com.baidu.locations.f"
-=======
+
 
         <activity android:name=".fragments.ClickActivityFragment"/>
         <activity android:name=".activity.DefaultAddress"/>
         <service
             android:name="com.baidu.location.f"
->>>>>>> 4f3252c31414e3616ba11a6647800f9e58add2a0
+
             android:enabled="true"
             android:process=":remote"></service>-->
         <service android:name=".backgroundService.LocationService" /> <!-- <activity android:name=".TestButton" /> -->
