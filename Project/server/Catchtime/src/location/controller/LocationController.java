@@ -1,4 +1,4 @@
-package location.controller;
+﻿package location.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,6 +32,22 @@ public class LocationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
+
+		LocationDao dao=new LocationDao();
+		List<Location> locations=new ArrayList<Location>();
+		PrintWriter writer = response.getWriter();
+		int id=1;//Android传过来的userid
+		try {
+			locations=dao.findAll(id);
+			Gson gson=new Gson();
+			String gs=gson.toJson(locations);
+			System.out.print(gs);
+			writer.write(gs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
 		PrintWriter out = response.getWriter();
 		String loc = request.getParameter("loc");
 		String id = request.getParameter("id");

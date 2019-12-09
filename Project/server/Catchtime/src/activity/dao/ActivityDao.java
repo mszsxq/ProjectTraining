@@ -89,6 +89,31 @@ public class ActivityDao {
 		}
 		return 0;
 	}
+	public int findId(int userId,String name) {
+		int n=0;
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_activity";
+		try {
+			conn=DBManager.getInstance().getConnection();
+			pst=conn.prepareStatement("select activity_id from"+table+"where activity_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				n=rs.getInt(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
 	public void delete(int userId,int i) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pst1 = null;

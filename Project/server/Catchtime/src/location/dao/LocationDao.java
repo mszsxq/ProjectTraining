@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package location.dao;
@@ -88,6 +88,31 @@ public class LocationDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	public int findId(int userId,String name) {
+		int n=0;
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_location";
+		try {
+			conn=DBManager.getInstance().getConnection();
+			pst=conn.prepareStatement("select location_id from"+table+"where location_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				n=rs.getInt(1);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
 	}
 	public void changeInfor(int userId,int id,String locationName,double lat,double lng,int range,String detail) {
 		Connection conn= null;
