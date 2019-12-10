@@ -5,14 +5,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -21,10 +25,15 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.catchtime.backgroundService.MyService;
 import com.example.catchtime.backgroundService.Setting;
 import com.example.catchtime.backgroundService.wakeup.KeepAliveHandler;
+import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.Contact;
+import com.example.catchtime.entity.Location;
 import com.example.catchtime.fragment.AccountFragment;
 import com.example.catchtime.fragment.ActivitiesFragment;
 import com.example.catchtime.fragment.LocationsFragment;
 import com.example.catchtime.fragment.SettingFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -32,7 +41,17 @@ import com.xdandroid.hellodaemon.IntentWrapper;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
     private LocationsFragment mLocationsFragment;
     private SettingFragment mSettingFragment;
     private Setting setting;
+    private Handler handler;
+    private Gson gson=new Gson();
+    private List<Activity> activities;
+    private List<Location> locations;
+    private List<Contact> contacts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,17 +81,7 @@ public class MainActivity extends AppCompatActivity {
         intiView();
         initBottomBar();
         initFragment(0);
-        if (!isServiceRunning(this,"com.example.cakeshop.backgroundservice.MyService")){
-            Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
-            setting=new Setting(this);
-            setting.resetServiceWorkingTime();
-            setting.resetStartTime();
-            setting.setStartTime(System.currentTimeMillis());
-            startService(new Intent(this, MyService.class));
-//        mKeepAliveHandler=new KeepAliveHandler();
-            KeepAliveHandler.Companion.setJob(this);
-//        mKeepAliveHandler.setJob(this);
-        }
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         // 屏幕亮屏广播
@@ -82,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
-
                 if (Intent.ACTION_SCREEN_ON.equals(action)) {
 //                    Log.e("LocationService", "screen on");
                     EventBus.getDefault().post(new String("ACTION_SCREEN_ON"));
@@ -94,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
 //                    Log.e("LocationService", "user present");
                     EventBus.getDefault().post(new String("ACTION_USER_PRESENT"));
-
                 } else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())) {
 //                    Log.e("LocationService", "close system dialogs");
                     EventBus.getDefault().post(new String("ACTION_CLOSE_SYSTEM_DIALOGS"));
@@ -106,7 +118,67 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mBatInfoReceiver, filter);
         IntentWrapper.whiteListMatters(this, "轨迹跟踪服务的持续运行");
 
+        getData();
+        handler=new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                String s= (String) msg.obj;
+                List<String> list= Arrays.asList(s.split("-"));
+
+                activities=gson.fromJson(list.get(0),new TypeToken<List<Activity>>() {}.getType());
+                locations=gson.fromJson(list.get(0),new TypeToken<List<Location>>() {}.getType());
+                contacts=gson.fromJson(list.get(0),new TypeToken<List<Contact>>() {}.getType());
+                if (!isServiceRunning(getBaseContext(),"com.example.cakeshop.backgroundservice.MyService")){
+                    Toast.makeText(getBaseContext(),"Starting service..",Toast.LENGTH_SHORT).show();
+                    setting=new Setting(getBaseContext());
+                    setting.resetServiceWorkingTime();
+                    setting.resetStartTime();
+                    setting.setStartTime(System.currentTimeMillis());
+                    Intent intent1=new Intent(getBaseContext(), MyService.class);
+                    intent1.putExtra("activities",list.get(0));
+                    intent1.putExtra("locations",list.get(1));
+                    intent1.putExtra("contacts",list.get(2));
+                    startService(intent1);
+//        mKeepAliveHandler=new KeepAliveHandler();
+                    KeepAliveHandler.Companion.setJob(getBaseContext());
+//        mKeepAliveHandler.setJob(this);
+                }
+                return false;
+            }
+        });
     }
+
+    private void getData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SharedPreferences sharedPreferences=getSharedPreferences("user",MODE_PRIVATE);
+                    int id=sharedPreferences.getInt("user_id",-1);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/BackgroundServlet?userid="+id);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Log.e("wer", "df" + info);
+                    wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    private void wrapperMessage(String info){
+        Message msg = Message.obtain();
+        msg.obj = info;
+        handler.sendMessage(msg);
+    }
+
+
     public static boolean isServiceRunning(Context context, String ServiceName) {
         if (("").equals(ServiceName) || ServiceName == null)
             return false;

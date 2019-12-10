@@ -18,6 +18,9 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.mapapi.utils.SpatialRelationUtil;
 
+import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.Contact;
+import com.example.catchtime.entity.Detail;
 import com.example.catchtime.entity.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -78,6 +81,11 @@ public class MyService extends AbsWorkService {
     private static final String TAG = "LocationService";
     private final static String ACTION_START = "action_start";
     private boolean flagsleep=false;//表示今天是否睡觉睡觉的标志
+    private List<Activity> activities;
+    private List<Location> locations;
+    private List<Contact> contacts;
+    private Gson gson=new Gson();
+    private Detail detail=new Detail();
 //    private static boolean isrunning;
     /*根据用户的位置需要
      * 进行数据库改变的要求
@@ -117,6 +125,15 @@ public class MyService extends AbsWorkService {
         if (intent!=null){
             userName = intent.getStringExtra("username");
             Locations = (List<Location>) intent.getSerializableExtra("locations");
+        }
+        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
+        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
+        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
+        if (activities==null){
+            activities=new ArrayList<>();
+        }
+        if (contacts==null){
+            contacts=new ArrayList<>();
         }
         //获取常用地址 获取常用地址和活动之间的关系
         if (Locations == null) {
