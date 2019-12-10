@@ -84,7 +84,8 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
             String[] sp = (list.get(i).getTime()).split("-");
             int hour =Integer.parseInt(sp[0]) * 60;
             int minute = Integer.parseInt(sp[1]);
-            time = hour + time;
+            Log.i("检测",minute+"");
+            time = hour +minute;
             PieEntry pieEntry = new PieEntry(time, list.get(i).getName() + "/" + list.get(i).getTime(), context.getResources().getDrawable(getDrawableID(list.get(i).getIcon())));
             entries.add(pieEntry);
             colors.add(context.getResources().getColor(getColorID(list.get(i).getColor())));
