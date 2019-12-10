@@ -44,7 +44,7 @@ public class ActivityDao {
 //			 pst1 = conn.prepareStatement(add);
 //			 pst1.execute();
 			 if(i>0) {
-				 System.out.println("创建成功");
+				 System.out.println("鍒涘缓鎴愬姛");
 			 }
 			 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -129,7 +129,7 @@ public class ActivityDao {
 			pst1.setInt(1, i);
 			int m =pst1.executeUpdate();	
 			if(m>0) {
-				System.out.println("删除成功");
+				System.out.println("鍒犻櫎鎴愬姛");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -258,7 +258,46 @@ public class ActivityDao {
 		}
 		return activity;
 	}
-	public Activity findSingleforname(int userId,String name) {return null;}
+	public Activity findSingleforname(int userId,String name) {
+		Connection conn= null;
+		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		String table=userId+"_activity";
+		Activity activity = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			pst = conn.prepareStatement("select * from "+table+" where activity_name=?;");
+			pst.setString(1, name);
+			rs = pst.executeQuery();
+			activity = new Activity();
+			activity.setActivity_name(name);
+			while(rs.next()) {
+				activity.setActivity_id(rs.getInt(1));
+				activity.setIcon_id(rs.getInt(3));
+			}
+			pst1 = conn.prepareStatement("select * from icon where icon_id = ?;");
+			pst1.setInt(1,activity.getIcon_id());
+			rs1 = pst1.executeQuery();
+			while(rs1.next()) {
+				activity.setIcon_name(rs1.getString(2));
+				activity.setIcon_color(rs1.getString(3));
+			}
+			return activity;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return activity;
+	}
 	
 	public int findLocationId(int userId,String name) {
 		int id=0;
@@ -355,7 +394,7 @@ public class ActivityDao {
 		ResultSet rs1 = null;
 		ResultSet rs2=null;
 		ResultSet rs3=null;
-		String table1=user_id+"_detaildata";
+		String table1=user_id+"detail_tablename";
 		String table2 =user_id+"_activity";
 		String sql1 = "select * from "+table1+" where begin_time like ?";
 		String sql2 = "select activity_name from "+table2+" where activity_id = ?"; 
@@ -450,7 +489,7 @@ public class ActivityDao {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		PreparedStatement pst2 = null;
-		String table=user_id+"_detaildata";
+		String table=user_id+"detail_tablename";
 		String sql1 = "select count(*) from "+table+"";
 		String sql2 ="insert into "+table+" values(?,?,?,?,?)";
 		int detail_id=0;
@@ -563,7 +602,7 @@ public class ActivityDao {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
-		String table1=user_id+"_dayrecord";
+		String table1=user_id+"_data";
 		String sql1 = "select * from "+table1+" where data = ?";
 		HashMap<String,String> hashList = new  HashMap<String,String>();
 		String allTime=null;
@@ -610,7 +649,7 @@ public class ActivityDao {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
-		String table1=user_id+"_dayrecord";
+		String table1=user_id+"_data";
 		String sql1 = "select * from "+table1+" where data = ?";
 		HashMap<String,String> hashList = new  HashMap<String,String>();
 		int allTime=0;
@@ -680,7 +719,7 @@ public class ActivityDao {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
-		String table1=user_id+"_dayrecord";
+		String table1=user_id+"_data";
 		String sql1 = "select * from "+table1+" where data = ?";
 		HashMap<String,String> hashList = new  HashMap<String,String>();
 		int allTime=0;
@@ -749,7 +788,7 @@ public class ActivityDao {
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		ResultSet rs1 = null;
-		String table1=user_id+"_dayrecord";
+		String table1=user_id+"_data";
 		String sql1 = "select * from "+table1+" where data = ?";
 		HashMap<String,String> hashList = new  HashMap<String,String>();
 		int allTime=0;
@@ -815,39 +854,39 @@ public class ActivityDao {
 	}
 	
 	public long dateDiff(String startTime, String endTime, String format) throws ParseException {
-        // ���մ���ĸ�ʽ����һ��simpledateformate����
+        // 锟斤拷锟秸达拷锟斤拷母锟绞斤拷锟斤拷锟揭伙拷锟絪impledateformate锟斤拷锟斤拷
         SimpleDateFormat sd = new SimpleDateFormat(format);
-        long nd = 1000 * 24 * 60 * 60;// һ��ĺ�����
-        long nh = 1000 * 60 * 60;// һСʱ�ĺ�����
-        long nm = 1000 * 60;// һ���ӵĺ�����
-        long ns = 1000;// һ���ӵĺ�����
+        long nd = 1000 * 24 * 60 * 60;// 一锟斤拷暮锟斤拷锟斤拷锟�
+        long nh = 1000 * 60 * 60;// 一小时锟侥猴拷锟斤拷锟斤拷
+        long nm = 1000 * 60;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
+        long ns = 1000;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
         long diff;
         long day = 0;
-            // �������ʱ��ĺ���ʱ�����
+            // 锟斤拷锟斤拷锟斤拷锟绞憋拷锟侥猴拷锟斤拷时锟斤拷锟斤拷锟�
         diff = sd.parse(endTime).getTime()
                     - sd.parse(startTime).getTime();
-        day = diff / nd;// ����������
-        long hour = diff % nd / nh;// ��������Сʱ
-        long min = diff/ nm;// �������ٷ���
-        long sec = diff/ ns;// ����������
-            // ������
-        System.out.println("ʱ����" + day + "��" + hour + "Сʱ" + min
-                    + "����" + sec + "�롣");
+        day = diff / nd;// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+        long hour = diff % nd / nh;// 锟斤拷锟斤拷锟斤拷锟斤拷小时
+        long min = diff/ nm;// 锟斤拷锟斤拷锟斤拷锟劫凤拷锟斤拷
+        long sec = diff/ ns;// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+            // 锟斤拷锟斤拷锟斤拷
+        System.out.println("时锟斤拷锟斤拷睿�" + day + "锟斤拷" + hour + "小时" + min
+                    + "锟斤拷锟斤拷" + sec + "锟诫。");
         String ans=null;
         return min;
         
         
     }
 	public String fomat(long diff) {
-        long nd = 1000 * 24 * 60 * 60;// һ��ĺ�����
-        long nh = 1000 * 60 * 60;// һСʱ�ĺ�����
-        long nm = 1000 * 60;// һ���ӵĺ�����
+        long nd = 1000 * 24 * 60 * 60;// 一锟斤拷暮锟斤拷锟斤拷锟�
+        long nh = 1000 * 60 * 60;// 一小时锟侥猴拷锟斤拷锟斤拷
+        long nm = 1000 * 60;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
 
-        long hour = diff / 60;// ��������Сʱ
-        long min = diff % 60;// �������ٷ���
-            // ������
-        System.out.println("ʱ����" + hour + "Сʱ" + min
-                    + "����" );
+        long hour = diff / 60;// 锟斤拷锟斤拷锟斤拷锟斤拷小时
+        long min = diff % 60;// 锟斤拷锟斤拷锟斤拷锟劫凤拷锟斤拷
+            // 锟斤拷锟斤拷锟斤拷
+        System.out.println("时锟斤拷锟斤拷睿�" + hour + "小时" + min
+                    + "锟斤拷锟斤拷" );
         String ans=null;
         if(hour>1) {
            	if(min==0) {
@@ -866,7 +905,7 @@ public class ActivityDao {
 	}
 	
 	public int addData(String time) throws ParseException {  
-        long nm = 1000 * 60;// һ���ӵĺ�����
+        long nm = 1000 * 60;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
         long diff;
        int min = Integer.parseInt(time);
      
@@ -875,7 +914,7 @@ public class ActivityDao {
     }
 	
 	public activity_location findActivityLocation(int user_id,String activity_name,String date) {
-		System.out.println("����");
+		System.out.println("锟斤拷锟斤拷");
 		Connection conn= null;
 		PreparedStatement pst1 = null;
 		PreparedStatement pst2 = null;
@@ -890,7 +929,7 @@ public class ActivityDao {
 		String table1=user_id+"_activity";
 		String table3=user_id+"_location";
 		String table4=user_id+"_connection";
-		String table5=user_id+"_detaildata";
+		String table5=user_id+"detail_tablename";
 		String sql1 = "select * from "+table1+" where activity_name = ?;";
 		String sql2 = "select * from icon where icon_id = ?;";
 		String sql3 = "select * from "+table3+" where location_id = ?;";
@@ -965,7 +1004,7 @@ public class ActivityDao {
 	}
 
 	public int updateDta(int user_id,int activity_id,int location_id,int icon_id,int old_id,String date) {
-		String table = user_id+"_detaildata";
+		String table = user_id+"detail_tablename";
 		String sql = "update "+table+" set activity_id=? and location_id = ?  where activity_id=? and begin_time like ?";
 		Connection conn = null;
 		int n = 0;
@@ -996,7 +1035,7 @@ public class ActivityDao {
 		
 	}
 	public int updateDayDta(int user_id,String date,String activity_name,String old_name) {
-		String table = user_id+"_dayrecord";
+		String table = user_id+"_data";
 		String sql = "update "+table+" set activity_name = ?  where activity_name = ? and data like ?";
 		Connection conn = null;
 		int n = 0;
