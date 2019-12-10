@@ -83,7 +83,11 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v5.0.0" />
+            </intent-filter>
+        </service>
         <service android:name=".backgroundService.MyService" />
         <service android:name=".backgroundService.wakeup.WakeupJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
