@@ -1,4 +1,6 @@
 package com.example.catchtime.fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -137,7 +139,9 @@ public class AccountFragment extends Fragment {
         ultraViewPager.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
         getViews();
-        toServer(1);
+        SharedPreferences sp = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        int user_id = sp.getInt("user_id",0);
+        toServer(user_id);
         return childAt;
     }
     private void getViews() {

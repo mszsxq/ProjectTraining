@@ -1,6 +1,8 @@
 package com.example.catchtime;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,6 +39,7 @@ public class Add_Page_Location extends AppCompatActivity {
     private MyAdapterLocation myAdapter;
     private Handler handler;
     private ListView listView;
+    private int id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,8 @@ public class Add_Page_Location extends AppCompatActivity {
         listView = findViewById(R.id.loc_lv_local);
         final List<Location> locations=new ArrayList<>();
         getData();
+        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+        int id = sp.getInt("user_id",0);
         handler=new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -92,10 +97,8 @@ public class Add_Page_Location extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid=1;
-                //?userid="+userid
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController?useid="+id);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

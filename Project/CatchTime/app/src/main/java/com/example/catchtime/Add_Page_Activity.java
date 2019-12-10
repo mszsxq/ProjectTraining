@@ -1,6 +1,8 @@
 package com.example.catchtime;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -39,7 +41,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Add_Page_Activity extends AppCompatActivity {
     private Handler handler;
-    private String id;
+    private int id;
     private ListView listView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +50,8 @@ public class Add_Page_Activity extends AppCompatActivity {
         final List<Activity> lists=new ArrayList<>();
         Intent intent  = getIntent();
         listView=findViewById(R.id.listview);
-        id="1";
+        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+        id = sp.getInt("user_id",0);
         ImageView imageView=findViewById(R.id.addactivity);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,12 +109,11 @@ public class Add_Page_Activity extends AppCompatActivity {
     private void sendMessage() {
 //        Gson gson = new Gson();
 //        String client = gson.toJson(id);
-        String userid = "1";
         new Thread(){
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+id);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

@@ -248,6 +248,9 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
                         calendar.add(calendar.DATE, -(size - flag - 1));
                         String date = sdf.format(calendar.getTime());
                         intent.putExtra("date", date);
+                        String value = entries.get((int) h.getX()).getLabel();
+                        String[] list = value.split("/");
+                        intent.putExtra("activity_name", list[0]);
                         context.startActivity(intent);
                     }
                 });
@@ -263,6 +266,9 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
                         calendar.add(calendar.DATE, -(size - flag - 1));
                         String date = sdf.format(calendar.getTime());
                         intent.putExtra("date", date);
+                        String value = entries.get((int) h.getX()).getLabel();
+                        String[] list = value.split("/");
+                        intent.putExtra("activity_name", list[0]);
                         context.startActivity(intent);
                     }
                 });

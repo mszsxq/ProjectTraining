@@ -1,6 +1,7 @@
 package com.example.catchtime.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -48,7 +49,9 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
         this.viewGroup = viewGroup;
         this.pieChart=pieChart;
         this.size=size;
-        this.user_id = user_id;
+        SharedPreferences sp = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        int id = sp.getInt("user_id",0);
+        this.user_id = id;
         this.type=type;
         this.date =date;
     }

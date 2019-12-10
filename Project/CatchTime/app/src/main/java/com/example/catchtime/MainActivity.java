@@ -55,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
         intiView();
         initBottomBar();
         initFragment(0);
-        if (!isServiceRunning(this,"com.example.cakeshop.backgroundservice.MyService")){
-            Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
-            setting=new Setting(this);
-            setting.resetServiceWorkingTime();
-            setting.resetStartTime();
-            setting.setStartTime(System.currentTimeMillis());
-            startService(new Intent(this, MyService.class));
-//        mKeepAliveHandler=new KeepAliveHandler();
-            KeepAliveHandler.Companion.setJob(this);
-//        mKeepAliveHandler.setJob(this);
-        }
+//        if (!isServiceRunning(this,"com.example.cakeshop.backgroundservice.MyService")){
+//            Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
+//            setting=new Setting(this);
+//            setting.resetServiceWorkingTime();
+//            setting.resetStartTime();
+//            setting.setStartTime(System.currentTimeMillis());
+//            startService(new Intent(this, MyService.class));
+////        mKeepAliveHandler=new KeepAliveHandler();
+//            KeepAliveHandler.Companion.setJob(this);
+////        mKeepAliveHandler.setJob(this);
+//        }
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         // 屏幕亮屏广播

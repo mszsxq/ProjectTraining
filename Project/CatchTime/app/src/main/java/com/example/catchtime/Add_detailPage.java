@@ -2,7 +2,9 @@ package com.example.catchtime;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,29 +40,19 @@ import java.util.List;
 //import static com.mob.MobSDK.getContext;
 
 public class Add_detailPage extends SwipeBackActivity {
-    private TextView btnbegin;
-    private TextView btnover;
     private TextView locationView;
     private TextView activityView;
     private ImageView imgActivity;
     private ImageView imgLocation;
     private ImageView okActivity;
     private ImageView acImg;
-    private Calendar cal;
-    private String zhi;
-    private int hour,min;
-    private int numhour=0;
-    private int nummin=0;
-    private int user_id=1;
+    private int user_id;
     private String chuan_activity_name="xuexi";
     private int activity_id;
     private int location_id;
-    private int two = 0;
     private String location_name;
     private String time="2019-12-07";
     private String timenow;
-    private String allstarts;
-    private String allends;
     private Handler handler;
     private List<Time> timeList;
     private ListView listViewStart;
@@ -72,6 +64,10 @@ public class Add_detailPage extends SwipeBackActivity {
         timeList = new ArrayList<>();
         listViewStart = (ListView) findViewById(R.id.list_start);
         listViewEnd = (ListView) findViewById(R.id.list_end);
+        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+        user_id = sp.getInt("user_id",0);
+        Intent intent = getIntent();
+        chuan_activity_name=intent.getStringExtra("activity_name");
         sendMessage();
         getnowtime();
         //获取activity当前时间段
@@ -283,7 +279,7 @@ public class Add_detailPage extends SwipeBackActivity {
 
     //---------------------------------------------------发送time和activity_name找时间
     private void sendMessage() {
-        chuan_activity_name="xuexi";
+//        chuan_activity_name="xuexi";
         new Thread(){
             @Override
             public void run() {
@@ -308,7 +304,7 @@ public class Add_detailPage extends SwipeBackActivity {
         }.start();
     }
     private void sendMessageTime() {
-        chuan_activity_name="xuexi";
+//        chuan_activity_name="xuexi";
         Gson gson = new Gson();
         String list = gson.toJson(timeList);
         Log.e("发数据啦","准备！");
