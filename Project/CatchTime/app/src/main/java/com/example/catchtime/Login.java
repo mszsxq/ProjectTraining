@@ -50,10 +50,10 @@ public class Login extends AppCompatActivity {
         SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
         getViews();
         registers();
-        if (p.getInt("user_id",-1)!=-1){
-            Intent intent = new Intent(Login.this, UserInfor.class);
-            startActivity(intent);
-        }
+//        if (p.getInt("user_id",-1)!=-1){
+//            Intent intent = new Intent(Login.this, UserInfor.class);
+//            startActivity(intent);
+//        }
 //        Intent intent = new Intent(Login.this, MainActivity.class);
 //        startActivity(intent);
         //------------------

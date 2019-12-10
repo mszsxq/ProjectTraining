@@ -79,7 +79,7 @@ public class LoginController extends HttpServlet {
 //						request.setAttribute("usering", newUser.getUser_id());
 //						request.getRequestDispatcher("ActivityController").forward(request, response);
 					}else {
-						out.write("ÃÜÂë´íÎó");
+						out.write("å¯†ç é”™è¯¯");
 					}
 				}
 				db.closeConnection();
