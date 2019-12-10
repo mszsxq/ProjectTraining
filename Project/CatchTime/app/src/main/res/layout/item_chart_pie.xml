@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/chartpie_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageButton
+            android:id="@+id/chartpie_header_left"
+            android:background="@color/white"
+            android:layout_width="30dp"
+            android:layout_height="48dp"
+            android:src="@drawable/header_left"
+            android:layout_toLeftOf="@+id/chartpie_header_date"/>
+
+        <TextView
+            android:id="@+id/chartpie_header_date"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="2019年11月11日" />
+        <ImageButton
+            android:id="@+id/chartpir_header_right"
+            android:background="@color/white"
+            android:layout_width="30dp"
+            android:layout_height="48dp"
+            android:src="@drawable/header_right"
+            android:layout_toRightOf="@+id/chartpie_header_date"/>
+<ImageView
+    android:layout_marginTop="10dp"
+    android:id="@+id/chartpie_date"
+    android:layout_width="20dp"
+    android:layout_height="32dp"
+    android:src="@drawable/date"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="15dp"
+    />
+    </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/chartpie_choose"
+    android:layout_below="@+id/chartpie_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_day"
+            android:background="@drawable/bt_shape"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="日"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/button_week"
+            android:background="@drawable/bt_shape_default"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="周"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/button_month"
+            android:background="@drawable/bt_shape_default"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="月"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/button_year"
+            android:background="@drawable/bt_shape_default"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="年"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/chartpie_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chartpie_frame">
+
+<!--        <androidx.viewpager.widget.ViewPager-->
+<!--            android:id="@+id/viewpager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="400dp"-->
+<!--            android:clipChildren="false"/>-->
+        <com.tmall.ultraviewpager.UltraViewPager
+            android:layout_centerVertical="true"
+            android:id="@+id/ultra_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relative"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/defaultaddress_txet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认地址设置"
+        android:textSize="30dp"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-3dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:text="常用地址选择"
+                android:textSize="20dp" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/def_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/def_tv_confirm"
+        android:text="确定"
+        android:background="@drawable/shape1"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

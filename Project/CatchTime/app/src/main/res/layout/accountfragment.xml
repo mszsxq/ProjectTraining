@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        android:id="@+id/piechart"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/linear"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/chartpie_paint"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/main_paint"
+                android:layout_marginRight="20dp"/>
+            <ImageView
+                android:id="@+id/chartpie_add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/main_add"
+                android:layout_marginRight="20dp"/>
+            <ImageView
+                android:id="@+id/chartpie_data"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/main_paint"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:clickable="true">
+            <LinearLayout
+                android:id="@+id/line_layout_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutAnimation="@anim/layout_animation_vertical"
+                android:orientation="vertical"
+                android:paddingTop="10dp" />
+</LinearLayout>

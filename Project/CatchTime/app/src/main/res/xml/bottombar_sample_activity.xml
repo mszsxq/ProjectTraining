@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+
+    <tab
+        barColorWhenSelected="#FFEE87"
+        id="@+id/bb_menu_account"
+        icon="@drawable/bottombar_cycle"
+        title="记录" />
+    <tab
+        barColorWhenSelected="#4D28DCA2"
+        id="@+id/bb_menu_activity"
+        icon="@drawable/bottombar_run"
+        title="活动" />
+    <tab
+        barColorWhenSelected="#B3C4F9"
+        id="@+id/bb_menu_location"
+        icon="@drawable/bottombar_world"
+        title="地点" />
+    <tab
+        barColorWhenSelected="#CAA8FF"
+        id="@+id/bb_menu_setting"
+        icon="@drawable/bottombar_setting"
+        title="设置" />
+</tabs>

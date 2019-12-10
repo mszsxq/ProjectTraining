@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/acdetails_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/left" />
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bike"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+        <TextView
+            android:text="骑车"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/weekOccupy"
+        android:layout_below="@id/topbar"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="近几周消耗时间"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/view_weekoccupy"
+        android:layout_below="@id/weekOccupy"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <com.example.catchtime.activity.LineView
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/lastOccupy"
+        android:layout_below="@id/view_weekoccupy"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="最近一次占用时间"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/view_lastoccupy"
+        android:layout_below="@id/lastOccupy"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/toatalOccupy"
+        android:layout_below="@id/view_lastoccupy"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="总共占用时间"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/view_totaloccupy"
+        android:layout_below="@id/toatalOccupy"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+        <com.example.catchtime.activity.LineView
+            android:id="@+id/lineView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@id/view_totaloccupy"
+        android:id="@+id/dayOccupy"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="平均每天占用时间"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy1"
+        android:layout_below="@id/dayOccupy"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+      >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sun" />
+
+        <TextView
+            android:id="@+id/min1"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           />
+
+        <ProgressBar
+            android:layout_below="@id/min1"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss1"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy2"
+        android:layout_below="@id/view_dayoccupy1"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon" />
+
+        <TextView
+            android:id="@+id/min2"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           />
+
+        <ProgressBar
+            android:layout_below="@id/min2"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss2"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy3"
+        android:layout_below="@id/view_dayoccupy2"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tue" />
+
+        <TextView
+            android:id="@+id/min3"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ProgressBar
+            android:layout_below="@id/min3"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss3"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy4"
+        android:layout_below="@id/view_dayoccupy3"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Web" />
+
+        <TextView
+            android:id="@+id/min4"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+        <ProgressBar
+            android:layout_below="@id/min4"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss4"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy5"
+        android:layout_below="@id/view_dayoccupy4"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <TextView
+            android:id="@+id/min5"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ProgressBar
+            android:layout_below="@id/min5"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss5"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy6"
+        android:layout_below="@id/view_dayoccupy5"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fri" />
+
+        <TextView
+            android:id="@+id/min6"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          />
+
+        <ProgressBar
+            android:layout_below="@id/min6"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss6"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/view_dayoccupy7"
+        android:layout_below="@id/view_dayoccupy6"
+        android:layout_marginTop="20dp"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sat" />
+
+        <TextView
+            android:id="@+id/min7"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+        <ProgressBar
+            android:layout_below="@id/min7"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progesss7"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myprogressbar"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="480"
+            android:maxHeight="15dp"
+            android:minHeight="6dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/myprogressbar" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_below="@id/view_dayoccupy7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日历"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+    <CalendarView
+        android:focusedMonthDateColor="@color/blue"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/view_dayoccupy7"
+        android:id="@+id/calendarView"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+</RelativeLayout>
+</com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
