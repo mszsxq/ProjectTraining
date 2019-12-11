@@ -40,16 +40,6 @@ public class ActivityController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		
-		ActivityDao ad=new ActivityDao();
-		List<Activity> list=new ArrayList<Activity>();
-		PrintWriter writer = response.getWriter();
-//		int id=request.getParameter("userid");//Android��������user id��
-		list=ad.findAll(1);
-		Gson gson=new Gson();
-		String gs=gson.toJson(list);
-		System.out.print(gs);
-		writer.write(gs);
 
 		String infor=request.getParameter("info");
 		ActivityService ls = new ActivityService();
@@ -75,7 +65,7 @@ public class ActivityController extends HttpServlet {
 						response.getWriter().print(id);
 						
 					}else {
-						System.out.println("失败");
+						System.out.println("澶辫触");
 						response.getWriter().print("false");
 					}
 					break;
@@ -87,14 +77,17 @@ public class ActivityController extends HttpServlet {
 					e.printStackTrace();
 				}
 			case "findall":
-					System.out.println(2);
-					int userId = gson.fromJson("1", int.class);
-					list = new ArrayList<>();
-					ActivityDao dao = new ActivityDao();
-					list = dao.findAll(userId);
-					String aclist = gson.toJson(list);
-					System.out.println(aclist);
-					response.getWriter().print(aclist);
+				ActivityDao ad=new ActivityDao();
+				List<Activity> list=new ArrayList<Activity>();
+				PrintWriter writer = response.getWriter();
+				String str=request.getParameter("userid");
+				Gson gson=new Gson();
+				User user=gson.fromJson(str, User.class);
+				int id1=user.getUser_id();
+				list=ad.findAll(id1);
+				String gs=gson.toJson(list);
+				System.out.print(gs);
+				writer.write(gs);
 				break;
 			case "update":
 				break;

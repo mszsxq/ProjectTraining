@@ -45,35 +45,41 @@ public class LocationController extends HttpServlet {
 		LocationDao dao=new LocationDao();
 		List<Location> locations=new ArrayList<Location>();
 		PrintWriter writer = response.getWriter();
-		int id=1;//Android传过来的userid
-		try {
-			locations=dao.findAll(id);
-			Gson gson=new Gson();
-			String gs=gson.toJson(locations);
-			System.out.print(gs);
-			writer.write(gs);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		String str=request.getParameter("userid");
+		if(str != null) {
+			Gson gsonn=new Gson();
+			User user=gsonn.fromJson(str, User.class);
+			int id=user.getUser_id();
+			
+			try {
+				locations=dao.findAll(id);
+				Gson gson=new Gson();
+				String gs=gson.toJson(locations);
+				System.out.print(gs);
+				writer.write(gs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		PrintWriter out = response.getWriter();
 		String loc = request.getParameter("loc");
 		String id1 = request.getParameter("id");
-		System.out.println(loc);
-		System.out.println(id1);
-		Type type = new TypeToken<Location>(){}.getType();
-		Type type1 = new TypeToken<Integer>(){}.getType();
-		Gson gson = new Gson();
-		Location location = new Location();
-		location = gson.fromJson(loc,type);
-		int a = gson.fromJson(id1,type1);
-		LocationService locationService = new LocationService();
-		int i = locationService.InsertDefaultLocation(a, location);
-		if(i>0) {
-			out.write("添加成功");
-		}else {
-			out.write("添加失败");
+		if(loc != null && id1 != null) {
+			Type type = new TypeToken<Location>(){}.getType();
+			Type type1 = new TypeToken<Integer>(){}.getType();
+			Gson gson = new Gson();
+			Location location = new Location();
+			location = gson.fromJson(loc,type);
+			int a = gson.fromJson(id1,type1);
+			LocationService locationService = new LocationService();
+			int i = locationService.InsertDefaultLocation(a, location);
+			if(i>0) {
+				out.write("添加成功");
+			}else {
+				out.write("添加失败");
+			}
 		}
 	}
 

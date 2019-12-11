@@ -6,6 +6,22 @@ public class Activity {
 	private String icon_name;
 	private String icon_color;
 	private String activity_name;
+	private int image;
+    	private int color;
+
+    
+	public int getImage() {
+		return image;
+	}
+	public void setImage(int image) {
+		this.image = image;
+	}
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
+	}
 	public int getActivity_id() {
 		return activity_id;
 	}
