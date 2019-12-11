@@ -18,6 +18,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.mapapi.utils.SpatialRelationUtil;
 
+import com.example.catchtime.NewPlacePopup;
 import com.example.catchtime.entity.Activity;
 import com.example.catchtime.entity.Contact;
 import com.example.catchtime.entity.Detail;
@@ -110,32 +111,49 @@ public class MyService extends AbsWorkService {
     public Boolean shouldStopService(Intent intent, int flags, int startId) {
         return sShouldStopService;
     }
-    public static void startService(Context context) {
-    }
 
-
-    @Override
-    public void startWork(Intent intent, final int flags, int startId) {
-        Log.e("LocationService", "执行startwork 但是未调用方法");
+    private void inits(Intent intent){
         userid=getSharedPreferences("user",MODE_PRIVATE).getInt("user_id",-1);
-        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
-        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
-        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
+        String activitystring=intent.getStringExtra("activities");
+        String locationstring=intent.getStringExtra("locations");
+        String contactstring= intent.getStringExtra("contacts");
+        if (contactstring!=null){
+            activities=gson.fromJson(activitystring,new TypeToken<List<Activity>>() {}.getType());
+        }
+        if (locationstring!=null){
+            locations=gson.fromJson(locationstring,new TypeToken<List<Location>>() {}.getType());
+        }
+        if (contactstring!=null){
+            contacts=gson.fromJson(contactstring,new TypeToken<List<Contact>>() {}.getType());
+        }
         if (activities==null){
             activities=new ArrayList<>();
         }
         if (contacts==null){
             contacts=new ArrayList<>();
         }
-        //获取常用地址 获取常用地址和活动之间的关系
-        if (locations == null) {
-            locations = new ArrayList<Location>();
-            try {
-                locations=getLocations(1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//        inits(intent);
+//        return super.onStart(intent, flags, startId);
+//    }
+
+
+
+
+    @Override
+    public void startWork(Intent intent, final int flags, int startId) {
+        Log.e("LocationService", "执行startwork 但是未调用方法");
+        //初始化数据
+        if (intent!=null){
+            inits(intent);
+            Log.e("LocationService",activities.toString());
+            Log.e("LocationService",locations.toString());
+            Log.e("LocationService",contacts.toString());
         }
+
         if (latestActivityFinishTime == null) {
             latestActivityFinishTime = ft.format(new Date());
         }
@@ -143,12 +161,6 @@ public class MyService extends AbsWorkService {
             if (!EventBus.getDefault().isRegistered(this)) {
                 EventBus.getDefault().register(this);
             }
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-//        }
 
             Log.e("LocationService", "开始 执行startwork");
 
@@ -163,10 +175,7 @@ public class MyService extends AbsWorkService {
             locationClientOption.setIsNeedLocationPoiList(true);
             locationClient.setLocOption(locationClientOption);
             locationClient.start();
-//        Intent dialogIntent = new Intent(getBaseContext(), LocActivity.class);
-//        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        getApplication().startActivity(dialogIntent);
-//        Log.e("LocationService启动activity","");
+
             locationClient.registerLocationListener(new BDAbstractLocationListener() {
                 @Override
                 public void onReceiveLocation(BDLocation bdLocation) {
@@ -181,6 +190,7 @@ public class MyService extends AbsWorkService {
                     Log.e("LocationService","355555555555");
                     //如果是第一次打开APP 进行初始化地址 名称
                     if (activityName==null){
+                        Log.e("LocationService","3155555555555");
                         boolean inlocation = false;
                         for (Location locationBean : locations) {
                             if (isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())) {
@@ -209,11 +219,15 @@ public class MyService extends AbsWorkService {
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                             }
                         }
+                        Log.e("LocationService","3255555555555");
                         if (inlocation == false && inAbleLocation == false) {
                             Handler handlerThre = new Handler(Looper.getMainLooper());
                             handlerThre.post(new Runnable() {
                                 public void run() {
                                     Toast.makeText(getApplicationContext(), "此地点为新地点因此需要弹窗添加", Toast.LENGTH_LONG).show();
+                                    Intent dialogIntent = new Intent(getBaseContext(), NewPlacePopup.class);
+                                    dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getApplication().startActivity(dialogIntent);
                                     try {
                                         writeExternal(getBaseContext(), "到达新的未知地点", null);
                                     } catch (IOException e) {
@@ -228,6 +242,7 @@ public class MyService extends AbsWorkService {
                             activitybdlocation.setLatitude(bdLocation.getLatitude());
                             centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                         }
+                        Log.e("LocationService","3355555555555");
                     }
                     Log.e("LocationService","4155555555555");
                     //进行睡觉的判断
