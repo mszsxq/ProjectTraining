@@ -149,7 +149,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void startWork(Intent intent, final int flags, int startId) {
-        Log.e("LocationService", "执行startwork 但是未调用方法");
+//        Log.e("LocationService", "执行startwork 但是未调用方法");
         //初始化数据
         if (intent!=null){
             inits(intent);
@@ -166,7 +166,7 @@ public class MyService extends AbsWorkService {
                 EventBus.getDefault().register(this);
             }
 
-            Log.e("LocationService", "开始 执行startwork");
+//            Log.e("LocationService", "开始 执行startwork");
 
             locationClient = new LocationClient(getApplicationContext());
             locationClientOption = new LocationClientOption();
@@ -194,15 +194,15 @@ public class MyService extends AbsWorkService {
 
                     //如果是第一次打开APP 进行初始化地址 名称
                     if (activityName==null){
-                        Log.e("LocationService","3155555555555");
+//                        Log.e("LocationService","3155555555555");
                         boolean inlocation = false;
                         for (Location locationBean : locations) {
                             if (isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())) {
                                 inlocation = true;
                                 LocationName = locationBean.getLocationName();
-                                Log.e("LocationService",LocationName);
+//                                Log.e("LocationService",LocationName);
                                 activityName = findActivitybylocation(LocationName);//name等于与此地点相关联的活动
-                                if (activityName!=null){Log.e("LocationService",activityName);}
+//                                if (activityName!=null){Log.e("LocationService",activityName);}
                                 activitybdlocation.setLatitude(locationBean.getLocationLat());
                                 activitybdlocation.setLongitude(locationBean.getLocationLng());
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
@@ -223,7 +223,7 @@ public class MyService extends AbsWorkService {
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                             }
                         }
-                        Log.e("LocationService","3255555555555");
+//                        Log.e("LocationService","3255555555555");
                         if (inlocation == false && inAbleLocation == false) {
                             Handler handlerThre = new Handler(Looper.getMainLooper());
                             handlerThre.post(new Runnable() {
@@ -246,12 +246,12 @@ public class MyService extends AbsWorkService {
                             activitybdlocation.setLatitude(bdLocation.getLatitude());
                             centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                         }
-                        Log.e("LocationService","3355555555555");
+//                        Log.e("LocationService","3355555555555");
                     }
 
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
-                    Log.e("LocationService",new Date().getHours()+"");
+//                    Log.e("LocationService",new Date().getHours()+"");
                     usingTime += 10;
 
                     if (latestScreenPresent == null) {
@@ -472,12 +472,12 @@ public class MyService extends AbsWorkService {
 //                    }
                     }
 
-                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
+//                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
                     handlerThree.post(new Runnable() {
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "steping=" + stepingsec + ";usingtime=" + usingTime + ";againstepsec=" + againstepingsec + "    " + speed + "    " + finalDistance + "   正在进行的活动"+activityName + timeAll, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "steping=" + stepingsec + ";usingtime=" + usingTime + ";againstepsec=" + againstepingsec + "    " + speed + "    " + finalDistance + "   正在进行的活动"+activityName + timeAll, Toast.LENGTH_LONG).show();
                         }
 
                     });
@@ -525,7 +525,7 @@ public class MyService extends AbsWorkService {
         int locationId=findLocationId(locationName);
         for (Contact contact:contacts){
             if (locationId!=-1&&contact.getLocation_Id()==locationId){
-                Log.e("LocationService",contact.getLocation_Id()+"");
+//                Log.e("LocationService",contact.getLocation_Id()+"");
                 return findActivityName(contact.getActivity_Id());
             }
         }
@@ -534,7 +534,7 @@ public class MyService extends AbsWorkService {
 
     //获取用户的常用地点列表
     private List<Location> getLocations(int userId) throws IOException {
-        Log.e("LocationService","获取location列表");
+//        Log.e("LocationService","获取location列表");
 //        final List<LocationBean> locationBeans = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
@@ -615,15 +615,15 @@ public class MyService extends AbsWorkService {
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void stringEvent(String s) throws ParseException {
         if (s.equals("ACTION_SCREEN_ON")){
-            Log.e("LocationService","ACTION_SCREEN_ON");//屏幕点亮
+//            Log.e("LocationService","ACTION_SCREEN_ON");//屏幕点亮
             latestScreenOn =ft.format(new Date());
             screenFlag="ACTION_SCREEN_ON";
-            Log.e("LocationService",latestScreenOn);
+//            Log.e("LocationService",latestScreenOn);
         }
         if (s.equals("ACTION_SCREEN_OFF")){
-            Log.e("LocationService","ACTION_SCREEN_OFF");//屏幕熄灭
+//            Log.e("LocationService","ACTION_SCREEN_OFF");//屏幕熄灭
             latestScreenOff=ft.format(new Date());
-            Log.e("LocationService",latestScreenOff);
+//            Log.e("LocationService",latestScreenOff);
             if((ft.parse(latestScreenOff).getTime() - ft.parse(latestScreenPresent).getTime()) > 60000) {
                 //把活动的数据存储到 时间为latestActivityFinishTime到latestScreenPresent  活动名为activityname  地点为locationname  玩手机的时间超过一分钟进行存储
                 final String ss=latestActivityFinishTime;
@@ -659,7 +659,7 @@ public class MyService extends AbsWorkService {
             screenFlag="ACTION_SCREEN_OFF";
         }
         if (s.equals("ACTION_USER_PRESENT")){
-            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
+//            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
             latestScreenPresent=ft.format(new Date());
             //如果五点之后解锁手机就认为起床
             if (ft.parse(latestScreenPresent).getHours()>=5&&ft.parse(latestScreenPresent).getHours()<=9&&flagsleep==false){
@@ -688,15 +688,15 @@ public class MyService extends AbsWorkService {
             }
             flagsleep=true;
 //            latestActivityFinishTime=latestScreenPresent;
-            Log.e("LocationService",latestScreenPresent);
+//            Log.e("LocationService",latestScreenPresent);
             screenFlag="ACTION_USER_PRESENT";
         }
         if (s.equals("ACTION_CLOSE_SYSTEM_DIALOGS")){
-            Log.e("LocationService","ACTION_CLOSE_SYSTEM_DIALOGS");//应用缩小 后台或窗口化
+//            Log.e("LocationService","ACTION_CLOSE_SYSTEM_DIALOGS");//应用缩小 后台或窗口化
             screenFlag="ACTION_CLOSE_SYSTEM_DIALOGS";
         }
         if (s.equals("voice warm")&&flagsleep==false){
-            Log.e("LocationService","voice warm");//应用缩小 后台或窗口化
+//            Log.e("LocationService","voice warm");//应用缩小 后台或窗口化
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -727,7 +727,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void stopWork(Intent intent, int flags, int startId) {
-        Log.e("LocationService停止工作","");
+//        Log.e("LocationService停止工作","");
     }
 
     @Override
@@ -743,7 +743,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void onServiceKilled(Intent rootIntent) {
-        Log.e("LocationService被杀死","");
+//        Log.e("LocationService被杀死","");
         isrunning=false;
 //        Intent intent=new Intent(this,MyService.class);
 //        startService(intent);
