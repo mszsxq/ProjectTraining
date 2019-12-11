@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.entity.Location;
+import com.example.catchtime.entity.User;
 import com.example.catchtime.fragment.MyAdapterLocation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,6 +42,7 @@ public class Add_Page_Location extends AppCompatActivity {
     private Handler handler;
     private ListView listView;
     private int id;
+    private SharedPreferences p;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +50,8 @@ public class Add_Page_Location extends AppCompatActivity {
         listView = findViewById(R.id.loc_lv_local);
         final List<Location> locations=new ArrayList<>();
         getData();
-        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-        id = sp.getInt("user_id",0);
+        p=getSharedPreferences("user",MODE_PRIVATE);
+        id = p.getInt("user_id",0);
         handler=new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -60,15 +63,19 @@ public class Add_Page_Location extends AppCompatActivity {
                 for(int i=0;i<list.size();i++){
                     Location location=new Location();
                     location.setLocationName(list.get(i).getLocationName());
-                    location.setLocationId(list.get(i).getLocationId());
-                    location.setLocationLng(list.get(i).getLocationLng());
-                    location.setLocationLat(list.get(i).getLocationLat());
-                    location.setLocationRange(list.get(i).getLocationRange());
-                    location.setLocationDetail(list.get(i).getLocationDetail());
                     locations.add(location);
                 }
-                myAdapter = new MyAdapterLocation(getApplication(),locations,R.layout.item_location);
+                myAdapter = new MyAdapterLocation(Add_Page_Location.this,locations,R.layout.item_location);
+//                ListView listView = findViewById(R.id.loc_lv_local);
                 listView.setAdapter(myAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent();
+                        intent.setClass(Add_Page_Location.this, ActivitiesDetail.class);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,11 +101,17 @@ public class Add_Page_Location extends AppCompatActivity {
         });
     }
     private void getData() {
+        int user_id=p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(user_id);
+        Gson gson = new Gson();
+        String userid = gson.toJson(user);
+        Log.e("mm",userid);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController?useid="+id);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController?userid="+ userid);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

@@ -29,6 +29,7 @@ import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.activity.AddActivityDetial;
 import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -58,62 +59,54 @@ public class ClickActivityFragment extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.change_allactivities);
-        final List<Activity> lists=new ArrayList<>();
+        setContentView(R.layout.change_allactivities);
+        final List<Activity> lists = new ArrayList<>();
 
         getData();
-        handler=new Handler() {
-            public void handleMessage(Message msg){
+        handler = new Handler() {
+            public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                String info=(String)msg.obj;
-                Type type=new TypeToken<List<Activity>>(){}.getType();
-                Gson gson=new Gson();
-                List<Activity> list = gson.fromJson(info,type);
-                Log.e("error",list.toString());
+                String info = (String) msg.obj;
+                Log.e("info", info);
+                Type type = new TypeToken<List<Activity>>() {
+                }.getType();
+                Gson gson = new Gson();
 
-                for(int i=0;i<list.size();i++){
-                    Activity activity=new Activity();
+                List<Activity> list = gson.fromJson(info.trim(), type);
+                Log.e("error", list.toString());
+
+                for (int i = 0; i < list.size(); i++) {
+                    Activity activity = new Activity();
                     activity.setIcon_name(list.get(i).getIcon_name());
-                    String str=new String();
-                    str=list.get(i).getIcon_name();
-                    int img=getDrawableID(str);
+                    String str = new String();
+                    str = list.get(i).getIcon_name();
+                    int img = getDrawableID(str);
                     activity.setImage(img);
                     activity.setActivity_name(list.get(i).getActivity_name());
-                    activity.setActivity_id(list.get(i).getActivity_id());
-                    String string=new String();
-                    string=list.get(i).getIcon_color();
-                    int color=getColorID(string);
+                    String string = new String();
+                    string = list.get(i).getIcon_color();
+                    int color = getColorID(string);
                     activity.setIcon_color(list.get(i).getIcon_color());
                     activity.setColor(color);
                     lists.add(activity);
                 }
-                Log.e("info",info);
-                listView=findViewById(R.id.listview);
-                listView.setAdapter(new MyAdapterActivities(getApplicationContext(),lists,R.layout.activitiesfragment_litem));
-
+                Log.e("info", info);
+                listView = (ListView) findViewById(R.id.listview);
+                listView.setAdapter(new com.example.catchtime.fragment.MyAdapterActivities(getApplicationContext(), lists, R.layout.activitiesfragment_litem));
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getApplicationContext(), ModifyPage.class);
-                        intent.putExtra("iconId",lists.get(position).getIcon_id());
-                        intent.putExtra("iconName",lists.get(position).getIcon_name());
-                        intent.putExtra("color",lists.get(position).getIcon_color());
-                        intent.putExtra("activity_name",lists.get(position).getActivity_name());
-                        intent.putExtra("activity_id",lists.get(position).getActivity_id());
-                        Log.i("检测","id"+lists.get(position).getActivity_id());
-                        setResult(200,intent);
-                        finish();
+                        intent.putExtra("color", lists.get(position).getColor());
+                        intent.putExtra("activity_name", lists.get(position).getActivity_name());
+                        startActivity(intent);
                     }
                 });
 
             }
         };
-
-
     }
-
-
 
     //由图片名称转换为资源文件
     private int getDrawableID(String str) {
@@ -150,12 +143,17 @@ public class ClickActivityFragment extends AppCompatActivity {
     }
     private void getData() {
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
                 int user_id = sp.getInt("user_id",0);
+                User user=new User();
+                user.setUser_id(user_id);
+                Gson gson = new Gson();
+                String userid = gson.toJson(user);
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+user_id+"&info=findall");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid=" + userid+"&&info="+"findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -220,7 +218,7 @@ class MyAdapterActivities extends BaseAdapter {
         Log.e("1","ok?");
         //获得每个item的对象
         img_activity.setImageResource(data.get(position).getImage());
-        img_activity.setBackgroundColor(data.get(position).getColor());
+        img_activity.setBackgroundColor(convertView.getResources().getColor(data.get(position).getColor()));
         name_activity.setText(data.get(position).getActivity_name());
         Log.e("2","ok?");
         Log.e("3",name_activity.getText().toString());

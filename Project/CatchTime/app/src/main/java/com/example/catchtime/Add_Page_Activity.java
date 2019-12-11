@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.activity.AddActivityDetial;
 import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.User;
 import com.example.catchtime.fragment.MyAdapterActivities;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,6 +44,8 @@ public class Add_Page_Activity extends AppCompatActivity {
     private Handler handler;
     private int id;
     private ListView listView;
+    private String userid;
+    private SharedPreferences p;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,12 @@ public class Add_Page_Activity extends AppCompatActivity {
         final List<Activity> lists=new ArrayList<>();
         Intent intent  = getIntent();
         listView=findViewById(R.id.listview);
-        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-        id = sp.getInt("user_id",0);
+        p=getSharedPreferences("user",MODE_PRIVATE);
+        id = p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(id);
+        Gson gson = new Gson();
+        userid = gson.toJson(user);
         ImageView imageView=findViewById(R.id.addactivity);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,34 +69,47 @@ public class Add_Page_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        sendMessage();
-
-        handler=new Handler() {
-            public void handleMessage(Message msg){
+        getData();
+        handler = new Handler() {
+            public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                String info=(String)msg.obj;
-                Type type=new TypeToken<List<Activity>>(){}.getType();
-                Gson gson=new Gson();
-                List<Activity> list = gson.fromJson(info,type);
-                Log.e("error",list.toString());
-                for(int i=0;i<list.size();i++){
-                    Activity activity=new Activity();
+                String info = (String) msg.obj;
+                Log.e("info", info);
+                Type type = new TypeToken<List<Activity>>() {
+                }.getType();
+                Gson gson = new Gson();
+
+                List<Activity> list = gson.fromJson(info.trim(), type);
+                Log.e("error", list.toString());
+
+                for (int i = 0; i < list.size(); i++) {
+                    Activity activity = new Activity();
                     activity.setIcon_name(list.get(i).getIcon_name());
-                    activity.setIcon_id(list.get(i).getIcon_id());
-                    String str=list.get(i).getIcon_name();
-                    int img=getDrawableID(str);
+                    String str = new String();
+                    str = list.get(i).getIcon_name();
+                    int img = getDrawableID(str);
                     activity.setImage(img);
                     activity.setActivity_name(list.get(i).getActivity_name());
-                    activity.setActivity_id(list.get(i).getActivity_id());
-                    String string=new String();
-                    string=list.get(i).getIcon_color();
-                    int color=getColorID(string);
+                    String string = new String();
+                    string = list.get(i).getIcon_color();
+                    int color = getColorID(string);
                     activity.setIcon_color(list.get(i).getIcon_color());
                     activity.setColor(color);
                     lists.add(activity);
                 }
-                MyAdapterActivities myAdapterActivities = new MyAdapterActivities(getApplication(),lists,R.layout.activitiesfragment_litem);
-                listView.setAdapter(myAdapterActivities);
+                Log.e("info", info);
+                listView.setAdapter(new MyAdapterActivities(Add_Page_Activity.this, lists, R.layout.activitiesfragment_litem));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent();
+                        intent.setClass(Add_Page_Activity.this, ActivitiesDetail.class);
+                        intent.putExtra("color", lists.get(position).getColor());
+                        intent.putExtra("activity_name",lists.get(position).getActivity_name());
+                        startActivity(intent);
+                    }
+                });
+
             }
         };
 
@@ -106,22 +126,23 @@ public class Add_Page_Activity extends AppCompatActivity {
             }
         });
     }
-    private void sendMessage() {
+    private void getData() {
+//        int user_id=p.getInt("user_id",0);
+//        User user=new User();
+//        user.setUser_id(id);
 //        Gson gson = new Gson();
-//        String client = gson.toJson(id);
-        new Thread(){
+//        String userid = gson.toJson(user);
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+id+"&&info="+"findall");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid=" + userid+"&&info="+"findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-                    if(null!=info) {
-                        Log.e("ww", info);
-                        wrapperMessage(info);
-                    }
+                    Log.e("wer", "df" + info);
+                    wrapperMessage(info);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -130,7 +151,7 @@ public class Add_Page_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }.start();
+        }).start();
     }
     private void wrapperMessage(String info){
         Message msg = Message.obtain();

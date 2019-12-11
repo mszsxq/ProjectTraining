@@ -110,7 +110,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                     view1.setText(al.getStartTime());
                     view2.setText(al.getEndTime());
                     icon.setImageResource(getDrawableID(al.getIcon()));
-                    icon.setBackgroundColor(getColorID(al.getColor()));
+                    icon.setBackgroundColor(getResources().getColor(getColorID(al.getColor())));
                     updateLocation=al.getLocation_name();
                     Log.i("检测","al"+al.toString()+"-"+al.getLocation_name()+"-"+al.getStartTime());
                     break;
@@ -118,7 +118,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                     Bundle bundle = (Bundle) msg.obj;
                     updataActivity = bundle.getInt("activityId");
                     icon.setImageResource(getDrawableID(bundle.getString("iconName")));
-                    icon.setBackgroundColor(getColorID(bundle.getString("color")));
+                    icon.setBackgroundColor(getResources().getColor(getColorID(bundle.getString("color"))));
                     activity_name.setText(bundle.getString("activityName"));
                     updataIcon = bundle.getInt("iconId");
                     break;
