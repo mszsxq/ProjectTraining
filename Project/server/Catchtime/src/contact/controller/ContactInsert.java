@@ -40,13 +40,14 @@ public class ContactInsert extends HttpServlet {
 		int activityId=Integer.parseInt(request.getParameter("activityId"));
 		System.out.println(activityId);
 		int locationId=Integer.parseInt(request.getParameter("locationId"));
+		int userId1=Integer.parseInt(request.getParameter("userId"));
 		contact.setActivity_Id(activityId);
 		contact.setLocation_Id(locationId);
 		System.out.println("ssss");
 		switch(infor) {
 		case "insert":
 			try {
-				int i =ad.addIcon(01,contact);
+				int i =ad.addIcon(userId1,contact);
 				if(i>0) {
 					response.getWriter().print("suc");
 				}else {

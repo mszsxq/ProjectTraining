@@ -50,8 +50,9 @@ public class LocationInsert extends HttpServlet {
 			String detailName=request.getParameter("detailName");
 			double lat=Double.parseDouble(request.getParameter("lat")) ;
 			double lng=Double.parseDouble(request.getParameter("lng")) ;
+			int userId1=Integer.parseInt(request.getParameter("userId"));
 			try {
-				int id= ls.insertData(01,locationName,lat,lng,50,detailName);
+				int id= ls.insertData(userId1,locationName,lat,lng,50,detailName);
 				System.out.println(id);
 				if(id>0) {
 					response.getWriter().print(id);

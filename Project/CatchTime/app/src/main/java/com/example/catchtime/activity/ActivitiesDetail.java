@@ -1,10 +1,17 @@
 package com.example.catchtime.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -69,10 +76,15 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     private LinearLayout l1;
     private LinearLayout l2;
     private LinearLayout l3;
+    private int id;
+    private ImageView imageView;
+    private String activityName;
     private int color;
-    private String ip="http://175.24.14.26:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
+    private TextView textView;
+    private String ip="http://175.24.14.26:8080/Catchtime/ActivitiesDetailServlet?activity="+activityName+"&id="+id;
 //    private String ip="http://192.168.43.232:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
 //    private String ip="http://10.7.89.247:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
+//    private String ip="http://192.168.43.232:8080/Catchtime/ActivitiesDetailServlet?activity="+activityName+"&id="+id;
 
     private Handler handler;
     private ArrayList<All_data> list= new ArrayList<>();
@@ -82,10 +94,16 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
+        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
+        id= p.getInt("user_id",1);
+
 
         getView();
         setListener();
         init();
+        Intent i = getIntent();
+        activityName=getIntent().getStringExtra("activity_name");
+        textView.setText(activityName);
         setColor();
         sendMessage();
 
@@ -245,7 +263,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     }
 
     public void getView() {
-
+        imageView = (ImageView) findViewById(R.id.ac_icon);
         l1= (LinearLayout) findViewById(R.id.view_weekoccupy);
         l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
         l3=(LinearLayout)findViewById(R.id.view_totaloccupy);
@@ -260,7 +278,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         progesssthu=(ProgressBar) findViewById(R.id.progesss5);
         progesssfri=(ProgressBar) findViewById(R.id.progesss6);
         progessssat=(ProgressBar) findViewById(R.id.progesss7);
-
+        textView = (TextView) findViewById(R.id.activity);
         minsun = (TextView) findViewById(R.id.min1);
         minmon= (TextView) findViewById(R.id.min2);
         mintue= (TextView) findViewById(R.id.min3);
@@ -287,16 +305,24 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         }
     }
     public void setColor(){
-        String colorstring= getIntent().getStringExtra("colortype");
-        if(colorstring==null){
-            color =getResources().getIdentifier("bg", "color", getPackageName());
-        }else {
-            color =getResources().getIdentifier(colorstring, "color", getPackageName());
-        }
+        color= getIntent().getIntExtra("color",0);
+//        if(colorstring==null){
+//            color =getResources().getIdentifier("bg", "color", getPackageName());
+//        }else {
+//            color =getResources().getIdentifier(colorstring, "color", getPackageName());
+//        }
         linearLayout.setBackgroundColor(color);
         l1.setBackgroundColor(color);
         l2.setBackgroundColor(color);
         l3.setBackgroundColor(color);
+        String icon =getIntent().getStringExtra("icon");
+        byte[] img = Base64.decode(icon.getBytes(), Base64.DEFAULT);
+        Bitmap bitmap;
+        if (img != null) {
+            bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+
+            imageView.setImageBitmap(bitmap);
+        }
 
     }
 

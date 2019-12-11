@@ -2,6 +2,7 @@ package com.example.catchtime.chart;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.SpannableString;
@@ -269,6 +270,8 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
                         String value = entries.get((int) h.getX()).getLabel();
                         String[] list = value.split("/");
                         intent.putExtra("activity_name", list[0]);
+                        intent.putExtra("color",colors.get(h.getDataSetIndex()).intValue());
+                        intent.putExtra("icon", String.valueOf(entries.get(h.getDataSetIndex()).getIcon()));
                         context.startActivity(intent);
                     }
                 });

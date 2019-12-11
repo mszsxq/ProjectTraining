@@ -57,9 +57,10 @@ public class ActivityController extends HttpServlet {
 				String activityName=request.getParameter("activityName");
 				System.out.println(activityName);
 				String iconId = request.getParameter("iconId");
+				int userId1=Integer.parseInt(request.getParameter("userId"));
 				int iconid = Integer.parseInt(iconId);
 				try {
-					int id= ls.insertTo(01,activityName,iconid);
+					int id= ls.insertTo(userId1,activityName,iconid);
 					System.out.println(id);
 					if(id>0) {
 						System.out.println(id);
