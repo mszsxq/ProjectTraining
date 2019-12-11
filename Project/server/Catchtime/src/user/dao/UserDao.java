@@ -270,24 +270,24 @@ public class UserDao {
 	}
 	
 	public long dateDiff(String startTime, String endTime, String format) throws ParseException {
-        // ���մ���ĸ�ʽ����һ��simpledateformate����
+        // 锟斤拷锟秸达拷锟斤拷母锟绞斤拷锟斤拷锟揭伙拷锟絪impledateformate锟斤拷锟斤拷
         SimpleDateFormat sd = new SimpleDateFormat(format);
-        long nd = 1000 * 24 * 60 * 60;// һ��ĺ�����
-        long nh = 1000 * 60 * 60;// һСʱ�ĺ�����
-        long nm = 1000 * 60;// һ���ӵĺ�����
-        long ns = 1000;// һ���ӵĺ�����
+        long nd = 1000 * 24 * 60 * 60;// 一锟斤拷暮锟斤拷锟斤拷锟�
+        long nh = 1000 * 60 * 60;// 一小时锟侥猴拷锟斤拷锟斤拷
+        long nm = 1000 * 60;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
+        long ns = 1000;// 一锟斤拷锟接的猴拷锟斤拷锟斤拷
         long diff;
         long day = 0;
-            // �������ʱ��ĺ���ʱ�����
+            // 锟斤拷锟斤拷锟斤拷锟绞憋拷锟侥猴拷锟斤拷时锟斤拷锟斤拷锟�
             diff = sd.parse(endTime).getTime()
                     - sd.parse(startTime).getTime();
-            day = diff / nd;// ����������
-            long hour = diff % nd / nh;// ��������Сʱ
-            long min = diff % nd % nh / nm;// �������ٷ���
-            long sec = diff % nd % nh % nm / ns;// ����������
-            // ������
-            System.out.println("ʱ����" + day + "��" + hour + "Сʱ" + min
-                    + "����" + sec + "�롣");
+            day = diff / nd;// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+            long hour = diff % nd / nh;// 锟斤拷锟斤拷锟斤拷锟斤拷小时
+            long min = diff % nd % nh / nm;// 锟斤拷锟斤拷锟斤拷锟劫凤拷锟斤拷
+            long sec = diff % nd % nh % nm / ns;// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+            // 锟斤拷锟斤拷锟斤拷
+            System.out.println("时锟斤拷锟斤拷睿�" + day + "锟斤拷" + hour + "小时" + min
+                    + "锟斤拷锟斤拷" + sec + "锟诫。");
             if (day>=1) {
                   return day;
             }else {

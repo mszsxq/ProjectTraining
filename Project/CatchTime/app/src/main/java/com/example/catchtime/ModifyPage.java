@@ -1,7 +1,9 @@
 package com.example.catchtime;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -91,6 +93,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
     private String updateLocation;
     private int updataIcon;
     private String  oldName;
+    private int user_id=0;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -133,6 +136,8 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.modifypage);
+        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+        user_id = sp.getInt("user_id",0);
         Intent intent = getIntent();
         activityName=intent.getStringExtra("activity_name");
         oldName=activityName;
@@ -320,7 +325,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationName="+locationId+"&iconId="+iconId+"&oldName="+oldName+"&userId="+1+"&date="+date+"");
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationName="+locationId+"&iconId="+iconId+"&oldName="+oldName+"&userId="+user_id+"&date="+date+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -432,7 +437,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivity?activityName="+activityName+"&date="+date+"&user_id="+1+"");
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivity?activityName="+activityName+"&date="+date+"&user_id="+user_id+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

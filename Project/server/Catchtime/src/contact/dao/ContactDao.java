@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
+import entity.Activity;
 import entity.Contact;
 import util.DBManager;
 
@@ -96,5 +101,20 @@ public class ContactDao {
 		}
 		return activity;
 			
+	}
+	public List<Contact> findAll(int id) throws ClassNotFoundException, SQLException {
+		conn = DBManager.getInstance().getConnection();
+		List<Contact> contacts=new ArrayList<Contact>();
+		String table = id+"_contact";
+		PreparedStatement pst = conn.prepareStatement("select * from "+table);
+//		pst1 = conn.prepareStatement("select * from icon where icon_id = ?;");
+		ResultSet rs = pst.executeQuery();
+		while(rs.next()) {
+			Contact contact = new Contact();
+			contact.setActivity_Id(rs.getInt("activity_id"));
+			contact.setLocation_Id(rs.getInt("location_id"));
+			contacts.add(contact);		
+		}
+		return contacts;
 	}
 }

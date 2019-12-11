@@ -1,6 +1,7 @@
 package com.example.catchtime.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -48,7 +49,9 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
         this.viewGroup = viewGroup;
         this.pieChart=pieChart;
         this.size=size;
-        this.user_id = user_id;
+        SharedPreferences sp = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        int id = sp.getInt("user_id",0);
+        this.user_id = id;
         this.type=type;
         this.date =date;
     }
@@ -81,7 +84,8 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
             String[] sp = (list.get(i).getTime()).split("-");
             int hour =Integer.parseInt(sp[0]) * 60;
             int minute = Integer.parseInt(sp[1]);
-            time = hour + time;
+            Log.i("检测",minute+"");
+            time = hour +minute;
             PieEntry pieEntry = new PieEntry(time, list.get(i).getName() + "/" + list.get(i).getTime(), context.getResources().getDrawable(getDrawableID(list.get(i).getIcon())));
             entries.add(pieEntry);
             colors.add(context.getResources().getColor(getColorID(list.get(i).getColor())));

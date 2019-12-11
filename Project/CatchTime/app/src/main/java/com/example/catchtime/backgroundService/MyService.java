@@ -18,6 +18,9 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.mapapi.utils.SpatialRelationUtil;
 
+import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.Contact;
+import com.example.catchtime.entity.Detail;
 import com.example.catchtime.entity.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -78,6 +81,11 @@ public class MyService extends AbsWorkService {
     private static final String TAG = "LocationService";
     private final static String ACTION_START = "action_start";
     private boolean flagsleep=false;//表示今天是否睡觉睡觉的标志
+    private List<Activity> activities;
+    private List<Location> locations;
+    private List<Contact> contacts;
+    private Gson gson=new Gson();
+    private Detail detail=new Detail();
 //    private static boolean isrunning;
     /*根据用户的位置需要
      * 进行数据库改变的要求
@@ -117,6 +125,15 @@ public class MyService extends AbsWorkService {
         if (intent!=null){
             userName = intent.getStringExtra("username");
             Locations = (List<Location>) intent.getSerializableExtra("locations");
+        }
+        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
+        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
+        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
+        if (activities==null){
+            activities=new ArrayList<>();
+        }
+        if (contacts==null){
+            contacts=new ArrayList<>();
         }
         //获取常用地址 获取常用地址和活动之间的关系
         if (Locations == null) {
@@ -509,7 +526,8 @@ public class MyService extends AbsWorkService {
 
     //判断是否在指定的圆内
     private boolean isRange(double lat1, double lon1, double lat2, double lon2) {
-        return SpatialRelationUtil.isCircleContainsPoint(new LatLng(lat1, lon1), 100, new LatLng(lat2, lon2));
+//        return SpatialRelationUtil.isCircleContainsPoint(new LatLng(lat1, lon1), 100, new LatLng(lat2, lon2));
+        return isCircleContainsPoint(new LatLng(lat1, lon1), 100, new LatLng(lat2, lon2));
     }
 
     //判断新地点能否识别
@@ -643,7 +661,18 @@ public class MyService extends AbsWorkService {
 //        Intent intent=new Intent(this,MyService.class);
 //        startService(intent);
     }
-
+    public static boolean isCircleContainsPoint(LatLng var0, int var1, LatLng var2) {
+        if (var0 != null && var1 != 0 && var2 != null) {
+            double var3 = DistanceUtil.getDistance(var0, var2);
+            if (var3 > (double)var1) {
+                return false;
+            } else {
+                return var3 == (double)var1 ? true : true;
+            }
+        } else {
+            return false;
+        }
+    }
     public void writeExternal(Context context, String content,@Nullable String filename) throws IOException {
         if (filename==null){
             filename="catchtimetest.txt";

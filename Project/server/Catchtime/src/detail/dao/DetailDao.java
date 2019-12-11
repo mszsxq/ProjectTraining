@@ -156,10 +156,10 @@ public class DetailDao {
 		return data.size();
 		
 	}
-	public Time findDetail(int activity_id,int location_id) {
+	public Time findDetail(int id,int activity_id,int location_id) {
 		Time time = null;
 		List<Time> times = new ArrayList<>();
-		String sql = "select begin_time,finish_time from detail_tablename where activity_id = ? and location_id = ?";
+		String sql = "select begin_time,finish_time from "+id+"detail_tablename where activity_id = ? and location_id = ?";
 		try {
 			Connection conn = DBManager.getInstance().getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
@@ -313,7 +313,7 @@ public class DetailDao {
 		return times;
 	}
 	public List<Time> findDetails(int id,int activity_id) {
-		String table = id+"_detail_tablename";
+		String table = id+"detail_tablename";
 		List<Time> times = new ArrayList<>();
 		String sql = "select * from "+table+" where activity_id = ?";
 		try {
@@ -345,9 +345,9 @@ public class DetailDao {
 		}
 		return times;
 	}
-	public List<Time> findDetail() {
+	public List<Time> findDetail(int id) {
 		List<Time> times = new ArrayList<>();
-		String sql = "select * from 1_detail_tablename";
+		String sql = "select * from "+id+"detail_tablename";
 		try {
 			Connection conn = DBManager.getInstance().getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);

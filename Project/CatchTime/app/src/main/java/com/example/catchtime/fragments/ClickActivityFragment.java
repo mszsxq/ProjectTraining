@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.content.Intent;
@@ -151,9 +152,10 @@ public class ClickActivityFragment extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid=1;
+                SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+                int user_id = sp.getInt("user_id",0);
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/ActivityController?userid="+userid+"&info=findall");
+                    URL url = new URL("http://192.168.42.184:8080/Catchtime/ActivityController?userid="+user_id+"&info=findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

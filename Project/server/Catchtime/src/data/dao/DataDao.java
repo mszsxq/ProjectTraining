@@ -18,7 +18,7 @@ import util.DBManager;
  *
  */
 public class DataDao {
-	//创建表
+	//鍒涘缓琛�
 	public int createdatatable(int id) {
 		int n=0;
 		String table = id+"_data";
@@ -29,9 +29,9 @@ public class DataDao {
 			PreparedStatement p=conn.prepareStatement(sql);
 			n=p.executeUpdate();	
 			if(n==1) {
-				System.out.print("创建成功");
+				System.out.print("鍒涘缓鎴愬姛");
 			}else {
-				System.out.print("创建失败");
+				System.out.print("鍒涘缓澶辫触");
 			}
 			return n;
 		} catch (ClassNotFoundException e) {
@@ -45,23 +45,22 @@ public class DataDao {
 	}
 	
 	
-	//鎻掑叆鏁版嵁
+	//閹绘帒鍙嗛弫鐗堝祦
 	public int addalldata(String tablename,int data_id,String data,String activity_name,String activity_data) {
 		int n=0;
 		Connection conn=null;
 		try {
 			conn=DBManager.getInstance().getConnection();
-			String sql="insert into "+tablename+" values(?,?,?,?)";
+			String sql="insert into "+tablename+" values(?,curdate(),?,?)";
 			PreparedStatement p=conn.prepareStatement(sql);
 			p.setInt(1, data_id);
-			p.setString(2, data);
-			p.setString(3,activity_name);
-			p.setString(4, activity_data);
+			p.setString(2,activity_name);
+			p.setString(3, activity_data);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("鎻掑叆鎴愬姛");
+				System.out.print("閹绘帒鍙嗛幋鎰");
 			}else {
-				System.out.print("鎻掑叆澶辫触");
+				System.out.print("閹绘帒鍙嗘径杈Е");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -73,7 +72,7 @@ public class DataDao {
 		return n;
 	}
 	
-	//鍒犻櫎鏁版嵁
+	//閸掔娀娅庨弫鐗堝祦
 	public int deletealldata(String table_name,int data_id) {
 		int n=0;
 		Connection conn=null;
@@ -85,9 +84,9 @@ public class DataDao {
 			p.setInt(2, data_id);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("鍒犻櫎鎴愬姛");
+				System.out.print("閸掔娀娅庨幋鎰");
 			}else {
-				System.out.print("鍒犻櫎澶辫触");
+				System.out.print("閸掔娀娅庢径杈Е");
 			}
 			return n;
 		} catch (ClassNotFoundException e) {
@@ -100,7 +99,7 @@ public class DataDao {
 		
 		return n;
 	}
-	//鏌ヨ鏁版嵁
+	//閺屻儴顕楅弫鐗堝祦
 	public All_data findalldataBydataId(String tablename,int data_id) {
 		All_data all_data=null;
 		Connection conn=null;
@@ -233,7 +232,7 @@ public class DataDao {
 		return id;
 		
 	}
-	//查询近七天某项活动的时间
+	//鏌ヨ杩戜竷澶╂煇椤规椿鍔ㄧ殑鏃堕棿
 		public List<All_data> activityRecently(String table_name, String activity_name) {
 			List<All_data> list= new ArrayList() ;
 			Connection conn =null;
@@ -269,7 +268,7 @@ public class DataDao {
 			}
 			return list;
 		}
-		//查询近一个月某项活动的时间
+		//鏌ヨ杩戜竴涓湀鏌愰」娲诲姩鐨勬椂闂�
 			public List<All_data> activityMonthly(String table_name, String activity_name) {
 				List<All_data> list= new ArrayList() ;
 				Connection conn =null;
@@ -332,17 +331,16 @@ public class DataDao {
 		Connection conn=null;
 		try {
 			conn=DBManager.getInstance().getConnection();
-			String sql="insert into "+table+" values(?,?,?,?)";
+			String sql="insert into "+table+" values(?,curdate(),?,?)";
 			PreparedStatement p=conn.prepareStatement(sql);
 			p.setInt(1, data_id);
-			p.setString(2, data);
-			p.setString(3,activity_name);
-			p.setString(4, activity_data);
+			p.setString(2,activity_name);
+			p.setString(3, activity_data);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("插入成功");
+				System.out.print("鎻掑叆鎴愬姛");
 			}else {
-				System.out.print("插入失败");
+				System.out.print("鎻掑叆澶辫触");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
