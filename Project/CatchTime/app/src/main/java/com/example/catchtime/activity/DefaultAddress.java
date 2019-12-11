@@ -28,7 +28,9 @@ public class DefaultAddress extends AppCompatActivity {
 
         Intent intent = getIntent();
         count = intent.getStringExtra("id");
-        Log.e("mmy",count);
+        if(count!=null){
+            Log.e("mmy",count);
+        }
 
         String[] courseName = {"宿舍","学院","食堂"};
         courseNames = courseName;

@@ -3,11 +3,11 @@ import org.w3c.dom.DOMImplementation
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-//apply plugin: 'com.mob.sdk'
-//MobSDK {
-//    appKey "2d4d06534acde"
-//    appSecret "9c16982effef39c9b388528a6687592f"
-//}
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    appKey "2d4d06534acde"
+    appSecret "9c16982effef39c9b388528a6687592f"
+}
 // 添加插件
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 
@@ -23,11 +23,11 @@ apply plugin: 'kotlin-android'
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 
 
-//MobSDK {
-//    appKey "2d447922e6d83"
-//    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
-//    SMSSDK {}
-//}
+MobSDK {
+    appKey "2d447922e6d83"
+    appSecret "1b0cbc51ed6aeff1e94ecf5f4187cebb"
+    SMSSDK {}
+}
 android {
     dexOptions {
         javaMaxHeapSize '4g'

@@ -72,22 +72,19 @@ public class Login extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 String info = (String)msg.obj;
-                Log.e("1","ok?");
                 Log.e("info",info);
                 if("密码错误".equals(info)){
                     Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
                 }else{
                     Gson gson=new Gson();
                     User usering = new User();
-                    Log.e("2","ok?");
                     usering = gson.fromJson(info,User.class);
                     int id=usering.getUser_id();
-                    Log.e("3","ok?");
                     SharedPreferences.Editor editor=p.edit();
                     editor.putInt("user_id",id);
                     editor.commit();
-                    Log.e("id",""+id);
-                    Log.e("4","ok?");
+                    int a = p.getInt("user_id",0);
+                    Log.e("yz",a+"");
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     intent.putExtra("name",usering.getUsername());
                     intent.putExtra("moto",usering.getMoto());

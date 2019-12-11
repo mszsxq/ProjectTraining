@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.example.catchtime.activity.AddActivityDetial;
+import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -53,6 +55,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+
 public class CenterDialog extends Dialog implements   View.OnClickListener{
     private OnCenterItemClickListener listener;
     private Context context;      // 上下文
@@ -74,6 +79,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
     private UiSettings uiSettings;
     private TextView dialog_sure;
     private TextView newpalece_text_getname;
+    private SharedPreferences p;
     //按钮类
     @Override
     public void onClick(View view) {
@@ -169,9 +175,37 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
                 Log.e("name",location_name);
                 Log.e("name2",act_name);
 
-
+                addcontact(location_name,act_name);
             }
         });
+    }
+
+    private void addcontact(String name1, String name2) {
+        int user_id=p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(user_id);
+        Gson gson = new Gson();
+        String userid = gson.toJson(user);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid+"&&location_name"+name1+"&&activity_name"+name2);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+//                    String info = reader.readLine();
+//                    Log.e("wer", "df" + info);
+//                    wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void quxiao() {
@@ -196,10 +230,15 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
         });
     }
     private void getData() {
+        p=getContext().getSharedPreferences("user",MODE_PRIVATE);
+        int user_id=p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(user_id);
+        Gson gson = new Gson();
+        String userid = gson.toJson(user);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid=1;
                 try {
                     URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid);
                     URLConnection conn = url.openConnection();

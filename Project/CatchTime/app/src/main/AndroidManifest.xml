@@ -56,13 +56,14 @@
         </activity>
         <activity android:name=".AddLocation" />
         <activity android:name=".activity.AddActivityDetial" />
-        <activity android:name=".Login" >
+        <activity android:name=".JumpTo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login" />
         <activity android:name=".Forgetpwd" />
         <activity android:name=".Register" />
         <activity android:name=".activity.AddActivity" />

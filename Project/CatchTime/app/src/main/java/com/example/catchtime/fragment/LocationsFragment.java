@@ -1,6 +1,7 @@
 package com.example.catchtime.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import com.example.catchtime.entity.Locations;
 
 
 import com.example.catchtime.entity.Location;
+import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -39,6 +41,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class LocationsFragment extends Fragment {
 
 
@@ -46,6 +50,7 @@ public class LocationsFragment extends Fragment {
 
     private MyAdapterLocation myAdapter;
     private Handler handler;
+    private SharedPreferences p;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -59,7 +64,9 @@ public class LocationsFragment extends Fragment {
         Window window = getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.green));
         //存放数据的list
+        p=getContext().getSharedPreferences("user",MODE_PRIVATE);
         final List<Location> locations=new ArrayList<>();
+        Log.e("mm","方法调用！");
         getData();
 
         handler=new Handler() {
@@ -100,13 +107,17 @@ public class LocationsFragment extends Fragment {
         return view;
     }
     private void getData() {
+        int user_id=p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(user_id);
+        Gson gson = new Gson();
+        String userid = gson.toJson(user);
+        Log.e("mm",userid);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid=1;
-                //?userid="+userid
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LocationController?userid="+ userid);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

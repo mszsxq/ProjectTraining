@@ -81,7 +81,7 @@ public class AddDefaultAddress extends AppCompatActivity implements View.OnClick
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 String info = (String) msg.obj;
-                Log.e("mmy", info);
+                Log.e("xxx", info);
                 if(info.equals("添加成功")){
                     Toast.makeText(getApplicationContext(),"添加成功！",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
@@ -122,6 +122,7 @@ public class AddDefaultAddress extends AppCompatActivity implements View.OnClick
     }
 
     public void addDefaultAddress(String loc,String user){
+        Log.e("yz",loc+user);
         new Thread() {
             @Override
             public void run() {

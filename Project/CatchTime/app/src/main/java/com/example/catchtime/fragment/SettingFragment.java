@@ -1,8 +1,11 @@
 package com.example.catchtime.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +34,14 @@ public class SettingFragment extends Fragment {
     private customListener listener;
     private Button unlogin;
     private View view;
+    private SharedPreferences p;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         view=inflater.inflate(R.layout.settingfragment,null);
+        p = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         getViews();
         onLisener();
         return view;
@@ -79,6 +84,13 @@ public class SettingFragment extends Fragment {
                 case R.id.helping:
                     break;
                 case R.id.btn_unlogin:
+                    SharedPreferences preferences = getContext().getSharedPreferences("login", getContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = p.edit();
+                    editor.clear();
+                    preferences.edit().putBoolean("isFirstIn", true).commit();
+                    editor.commit();
+                    int a = p.getInt("user_id",0);
+                    Log.e("zy",a+"");
                     Intent intent3 = new Intent(view.getContext(), Login.class);
                     startActivity(intent3);
                     break;

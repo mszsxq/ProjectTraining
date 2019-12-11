@@ -1,4 +1,5 @@
 package com.example.catchtime.fragment;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.example.catchtime.activity.ActivitiesDetail;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.activity.AddActivityDetial;
 import com.example.catchtime.entity.Activity;
+import com.example.catchtime.entity.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -40,11 +42,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+
+import static android.content.Context.MODE_PRIVATE;
+
 public class ActivitiesFragment extends Fragment {
     View view;
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+    private SharedPreferences p;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -56,6 +62,7 @@ public class ActivitiesFragment extends Fragment {
         final List<Activity> list = new ArrayList<Activity>();
         listView = (ListView) view.findViewById(R.id.listview);
         final List<Activity> lists = new ArrayList<>();
+        p=getContext().getSharedPreferences("user",MODE_PRIVATE);
         //--------------------------------------------------------------------------------------------------
         getData();
         handler = new Handler() {
@@ -93,7 +100,8 @@ public class ActivitiesFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), ActivitiesDetail.class);
-                        intent.putExtra("colortype", lists.get(position).getColor());
+                        intent.putExtra("color", lists.get(position).getColor());
+                        intent.putExtra("activity_name",lists.get(position).getActivity_name());
                         startActivity(intent);
                     }
                 });
@@ -165,10 +173,14 @@ public class ActivitiesFragment extends Fragment {
     }
 
     private void getData() {
+        int user_id=p.getInt("user_id",0);
+        User user=new User();
+        user.setUser_id(user_id);
+        Gson gson = new Gson();
+        String userid = gson.toJson(user);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int userid = 1;
                 try {
                     URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid=" + userid);
                     URLConnection conn = url.openConnection();
