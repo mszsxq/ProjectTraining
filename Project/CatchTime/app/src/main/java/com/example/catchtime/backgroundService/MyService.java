@@ -60,7 +60,7 @@ public class MyService extends AbsWorkService {
     private LocationClientOption locationClientOption;
     private int stepingsec = 0;//运动的秒数
     private LatLng centerLatLng;//现在所在位置的中心点
-    private List<Location> Locations;
+//    private List<Location> Locations;
     private boolean flagsteping = false;//代表是否在行走
     private int usingTime = 0;//表示当前活动花费的时间
     private String retrunType;
@@ -88,6 +88,7 @@ public class MyService extends AbsWorkService {
     private List<Contact> contacts;
     private Gson gson=new Gson();
     private Detail detail=new Detail();
+    private int userid;
 //    private static boolean isrunning;
     /*根据用户的位置需要
      * 进行数据库改变的要求
@@ -112,28 +113,14 @@ public class MyService extends AbsWorkService {
     public static void startService(Context context) {
     }
 
-    @Override
-    protected int onStart(Intent intent, int flags, int startId) {
-        //加载一遍数据 location activity
-        if (intent!=null){
-            userName = intent.getStringExtra("username");
-        }
-
-        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
-        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
-        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
-        Log.e("LocationService",activities.toString()+"    "
-                +locations.toString()+"     "
-                +contacts.toString());
-        if (intent!=null){
-            return super.onStart(intent, flags, startId);
-        }
-        return 0;
-    }
 
     @Override
     public void startWork(Intent intent, final int flags, int startId) {
         Log.e("LocationService", "执行startwork 但是未调用方法");
+        userid=getSharedPreferences("user",MODE_PRIVATE).getInt("user_id",-1);
+        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
+        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
+        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
         if (activities==null){
             activities=new ArrayList<>();
         }
@@ -141,10 +128,10 @@ public class MyService extends AbsWorkService {
             contacts=new ArrayList<>();
         }
         //获取常用地址 获取常用地址和活动之间的关系
-        if (Locations == null) {
-            Locations = new ArrayList<Location>();
+        if (locations == null) {
+            locations = new ArrayList<Location>();
             try {
-                Locations=getLocations(1);
+                locations=getLocations(1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -183,25 +170,25 @@ public class MyService extends AbsWorkService {
             locationClient.registerLocationListener(new BDAbstractLocationListener() {
                 @Override
                 public void onReceiveLocation(BDLocation bdLocation) {
+                    Log.e("LocationService","155555555555");
                     if (new Date().getHours()>22){
 
                     }
+                    Log.e("LocationService","255555555555");
                     if (activitybdlocation == null) {
                         activitybdlocation = bdLocation;
                     }
+                    Log.e("LocationService","355555555555");
                     //如果是第一次打开APP 进行初始化地址 名称
                     if (activityName==null){
                         boolean inlocation = false;
-                        for (Location locationBean : Locations) {
-                            Log.e("LocationService",locationBean.toString());
-                            Log.e("LocationService",isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())+"");
-                            Log.e("LocationService",DistanceUtil.getDistance(new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude())
-                                ,new LatLng(locationBean.getLocationLat(), locationBean.getLocationLng()))+"");
-
+                        for (Location locationBean : locations) {
                             if (isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())) {
                                 inlocation = true;
                                 LocationName = locationBean.getLocationName();
+                                Log.e("LocationService",LocationName);
                                 activityName = findActivitybylocation(LocationName);//name等于与此地点相关联的活动
+                                if (activityName!=null){Log.e("LocationService",activityName);}
                                 activitybdlocation.setLatitude(locationBean.getLocationLat());
                                 activitybdlocation.setLongitude(locationBean.getLocationLng());
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
@@ -242,15 +229,18 @@ public class MyService extends AbsWorkService {
                             centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                         }
                     }
+                    Log.e("LocationService","4155555555555");
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
                     usingTime += 10;
+                    Log.e("LocationService","4255555555555");
                     if (latestScreenPresent == null) {
                         latestScreenPresent = timeAll;
                     }
-                    URL url;
+                    Log.e("LocationService","4355555555555");
                     final float speed = bdLocation.getSpeed();
                     List<Poi> pois = bdLocation.getPoiList();
+                    Log.e("LocationService","4455555555555");
 //                PoiRegion poiRegion= bdLocation.getPoiRegion();
 //                String poiDerectionDesc = poiRegion.getDerectionDesc();    //获取PoiRegion位置关系
 //                String poiRegionName = poiRegion.getName();    //获取PoiRegion名称
@@ -259,23 +249,20 @@ public class MyService extends AbsWorkService {
 //                    for (Poi poi : pois) {
 //                    Log.e("poi type:"+poi.getTags(),"poi name:"+poi.getName()+"  poi rank:"+poi.getRank()+
 //                    poi.describeContents()+"   "+poi.getId()+" "+poi.getAddr());
-                    try {
-                        writeExternal(getBaseContext(),bdLocation.getPoiRegion().getTags()+ "   "+bdLocation.getPoiRegion().getName(),"pois.txt");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        writeExternal(getBaseContext(),bdLocation.getPoiRegion().getTags()+ "   "+bdLocation.getPoiRegion().getName(),"pois.txt");
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
 //                    }
-//                double distance = distance(bdLocation.getLatitude(),//纬度
-//                        bdLocation.getLongitude(),
-//                        perbdlocation.getLatitude(),
-//                        perbdlocation.getLongitude());
-//                distance=distance(114.52938,38.003656,114.529182,38.003588);
+                    Log.e("LocationService","455555555555");
                     distance = DistanceUtil.getDistance(
                             new LatLng(bdLocation.getLongitude(),
                                     bdLocation.getLatitude()),
                             new LatLng(perbdlocation.getLongitude(),
                                     perbdlocation.getLatitude()));
+                    Log.e("LocationService","555555555555");
                     if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
+                        Log.e("LocationService","11111111111111111111");
                         stepingsec += 10;
                         if (flagsteping == false) {
                             lateststepstart = timeAll;//刚开始行走时 设置行走时间
@@ -287,15 +274,16 @@ public class MyService extends AbsWorkService {
                             isagainsteping = true;//设置为开始继续行走
                             flagagainsteping=false;
                         }
-                    } else {//速度为零并且距离为零
+                    }
+                    else {//速度为零并且距离为零
                         flagsteping = false;//取消正在行走的标志
                         lateststepend = timeAll;//设置最近一次行走停止的时间
-
+                        Log.e("LocationService","22222222222222222222");
                         if (flagagainsteping == true) {//判断是否是刚刚停止行走
                             againstepingsec += 10;//重新行走的静止时间加10
                         }
                     }
-
+                    Log.e("LocationService","655555555555");
                     if (againstepingsec > 60 && flagagainsteping == true) {//表示刚刚停止行走 但是在新地点的时间已经超过4分钟
                         againstepingsec = 0;//
                         flagagainsteping = false;//
@@ -312,7 +300,7 @@ public class MyService extends AbsWorkService {
                         });
 
                         boolean inlocation = false;
-                        for (Location locationBean : Locations) {
+                        for (Location locationBean : locations) {
                             if (isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())) {
                                 inlocation = true;
                                 LocationName = locationBean.getLocationName();
@@ -322,6 +310,7 @@ public class MyService extends AbsWorkService {
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                             }
                         }
+                        Log.e("LocationService","3333333333333333333");
                         // TODO: 2019/12/3 在这加上可识别地点的判断  方便用户进行使用
                         boolean inAbleLocation = false;
                         if (inlocation==false) {
@@ -358,6 +347,7 @@ public class MyService extends AbsWorkService {
                         }
 
                     }
+                    Log.e("LocationService","755555555555");
                     if (againstepingsec < 60 && isagainsteping == true) {//添加条件是用户进行了休息时间不到1分钟 并且继续行走
                         new Thread(new Runnable() {
                             @Override
@@ -377,7 +367,7 @@ public class MyService extends AbsWorkService {
                         isagainsteping = false;
                         flagagainsteping = false;
                     }
-
+                    Log.e("LocationService","855555555555");
                     if (flagsteping == false) {
                         //停止运动之后把行走时间存输入数据库  并且把行走的时间置零
                         if (stepingsec > 60) {//如果行走时间超过4分钟才存入到数据库
@@ -443,6 +433,7 @@ public class MyService extends AbsWorkService {
 //                        }
 //                    }
                     }
+
                     Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
@@ -453,10 +444,15 @@ public class MyService extends AbsWorkService {
 
                     });
                     perbdlocation = bdLocation;
+                    Log.e("LocationService","11111111111111111111");
+
+                    isrunning=true;
                 }
             });
+            Log.e("LocationService","11111111111111111111");
+            Log.e("LocationService","11111111111111111111");
         }
-        isrunning=true;
+        Log.e("LocationService","11111111111111111111");
     }
     private int findActivityId(String activityName){
         for (Activity activity:activities){
@@ -495,6 +491,7 @@ public class MyService extends AbsWorkService {
         int locationId=findLocationId(locationName);
         for (Contact contact:contacts){
             if (locationId!=-1&&contact.getLocation_Id()==locationId){
+                Log.e("LocationService",contact.getLocation_Id()+"");
                 return findActivityName(contact.getActivity_Id());
             }
         }
@@ -530,10 +527,10 @@ public class MyService extends AbsWorkService {
             }
         }).start();
 
-        Locations.add(new Location(1,"学院",38.003592,114.529362,0,""));
-        Locations.add(new Location(2,"食堂",38.000681,114.527188,0,""));
-        Locations.add(new Location(3,"宿舍",38.000127,114.524866,0,""));
-        return Locations;
+        locations.add(new Location(1,"学院",38.003592,114.529362,0,""));
+        locations.add(new Location(2,"食堂",38.000681,114.527188,0,""));
+        locations.add(new Location(3,"宿舍",38.000127,114.524866,0,""));
+        return locations;
     }
 
     //计算两个经纬点之间的距离

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         initBottomBar();
         initFragment(0);
 
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         // 屏幕亮屏广播
