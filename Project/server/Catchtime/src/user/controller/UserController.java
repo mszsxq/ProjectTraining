@@ -95,6 +95,12 @@ public class UserController extends HttpServlet {
 				try {
 					locationDao.createTable(count);
 					activityDao.createTable(count);
+					activityDao.insertData(count, "行走", 1);
+					activityDao.insertData(count, "睡觉", 2);
+					activityDao.insertData(count, "吃饭", 4);
+					activityDao.insertData(count, "娱乐", 3);
+					activityDao.insertData(count, "学习", 12);
+					activityDao.insertData(count, "购物", 10);
 					detailDao.createTable(count);
 					contactDao.createContact(count);
 					dataDao.createdatatable(count);
