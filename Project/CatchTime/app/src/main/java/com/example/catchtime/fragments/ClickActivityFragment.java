@@ -55,12 +55,17 @@ public class ClickActivityFragment extends AppCompatActivity {
     private ListView listView;
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
+    private String activity_name;
+    private String date;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_allactivities);
         final List<Activity> lists = new ArrayList<>();
+        Intent intent = getIntent();
+        activity_name=intent.getStringExtra("activity_name");
+        date=intent.getStringExtra("date");
 
         getData();
         handler = new Handler() {
@@ -99,10 +104,12 @@ public class ClickActivityFragment extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.setClass(getApplicationContext(), ModifyPage.class);
                         intent.putExtra("color", lists.get(position).getColor());
-                        intent.putExtra("activity_name", lists.get(position).getActivity_name());
+                        intent.putExtra("activityName", lists.get(position).getActivity_name());
                         intent.putExtra("iconId",lists.get(position).getIcon_id());
                         intent.putExtra("activityId",lists.get(position).getActivity_id());
                         intent.putExtra("iconName",lists.get(position).getIcon_name());
+                        intent.putExtra("activity_name",activity_name);
+                        intent.putExtra("date",date);
                         setResult(200);
                     }
                 });
