@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import activity.dao.ActivityDao;
 import contact.dao.ContactDao;
 import entity.Contact;
+import entity.User;
 import location.dao.LocationDao;
 
 /**

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import entity.Location;
+import entity.User;
 import location.dao.LocationDao;
 import location.service.LocationService;
 

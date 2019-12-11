@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import activity.dao.ActivityDao;
 import activity.service.ActivityService;
 import entity.Activity;
+import entity.User;
 import location.service.LocationService;
 
 /**

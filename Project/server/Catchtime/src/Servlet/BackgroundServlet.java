@@ -68,7 +68,7 @@ public class BackgroundServlet extends HttpServlet {
 		}
 		
 		Gson gson=new Gson();
-		response.getWriter().write(gson.toJson(activities)+"-"+gson.toJson(locations)+"-"+gson.toJson(contacts));
+		response.getWriter().write(gson.toJson(activities)+"----"+gson.toJson(locations)+"----"+gson.toJson(contacts));
 		
 	}
 

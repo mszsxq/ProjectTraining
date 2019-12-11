@@ -53,6 +53,8 @@ public class MyService extends AbsWorkService {
     private String userName;
     private String internetIp;//访问的ip
     private String LocationName;//位置的名称
+    private int locationId;
+    private int activityId;
     private BDLocation perbdlocation=new BDLocation();//表示前一次定位的地点
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
@@ -114,6 +116,16 @@ public class MyService extends AbsWorkService {
     protected int onStart(Intent intent, int flags, int startId) {
         //加载一遍数据 location activity
         if (intent!=null){
+            userName = intent.getStringExtra("username");
+        }
+
+        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
+        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
+        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
+        Log.e("LocationService",activities.toString()+"    "
+                +locations.toString()+"     "
+                +contacts.toString());
+        if (intent!=null){
             return super.onStart(intent, flags, startId);
         }
         return 0;
@@ -122,13 +134,6 @@ public class MyService extends AbsWorkService {
     @Override
     public void startWork(Intent intent, final int flags, int startId) {
         Log.e("LocationService", "执行startwork 但是未调用方法");
-        if (intent!=null){
-            userName = intent.getStringExtra("username");
-            Locations = (List<Location>) intent.getSerializableExtra("locations");
-        }
-        activities=gson.fromJson(intent.getStringExtra("activities"),new TypeToken<List<Activity>>() {}.getType());
-        locations=gson.fromJson(intent.getStringExtra("locations"),new TypeToken<List<Location>>() {}.getType());
-        contacts=gson.fromJson(intent.getStringExtra("contacts"),new TypeToken<List<Contact>>() {}.getType());
         if (activities==null){
             activities=new ArrayList<>();
         }
@@ -453,16 +458,45 @@ public class MyService extends AbsWorkService {
         }
         isrunning=true;
     }
-
+    private int findActivityId(String activityName){
+        for (Activity activity:activities){
+            if (activity.getActivity_name().equals(activityName)){
+                return activity.getActivity_id();
+            }
+        }
+        return -1;
+    }
+    private String findActivityName(int activityId){
+        for (Activity activity:activities){
+            if (activity.getActivity_id()==activityId){
+                return activity.getActivity_name();
+            }
+        }
+        return null;
+    }
+    private int findLocationId(String locationName){
+        for (Location location:locations){
+            if (location.getLocationName().equals(locationName)){
+                return location.getLocationId();
+            }
+        }
+        return -1;
+    }
     private String findActivitybylocation(String locationName) {
-        if (locationName.equals("食堂")){
-            return "食堂";
-        }
-        if (locationName.equals("学院")){
-            return "学院";
-        }
-        if (locationName.equals("宿舍")){
-            return "宿舍";
+//        if (locationName.equals("食堂")){
+//            return "食堂";
+//        }
+//        if (locationName.equals("学院")){
+//            return "学院";
+//        }
+//        if (locationName.equals("宿舍")){
+//            return "宿舍";
+//        }
+        int locationId=findLocationId(locationName);
+        for (Contact contact:contacts){
+            if (locationId!=-1&&contact.getLocation_Id()==locationId){
+                return findActivityName(contact.getActivity_Id());
+            }
         }
         return null;
     }
