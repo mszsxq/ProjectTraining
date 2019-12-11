@@ -100,7 +100,10 @@ public class ClickActivityFragment extends AppCompatActivity {
                         intent.setClass(getApplicationContext(), ModifyPage.class);
                         intent.putExtra("color", lists.get(position).getColor());
                         intent.putExtra("activity_name", lists.get(position).getActivity_name());
-                        startActivity(intent);
+                        intent.putExtra("iconId",lists.get(position).getIcon_id());
+                        intent.putExtra("activityId",lists.get(position).getActivity_id());
+                        intent.putExtra("iconName",lists.get(position).getIcon_name());
+                        setResult(200);
                     }
                 });
 
