@@ -70,6 +70,7 @@ public class AddActivityDetial extends SwipeBackActivity {
     private double lng;
     private Handler handler;
     private Handler handler1;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +118,19 @@ public class AddActivityDetial extends SwipeBackActivity {
                                 Log.e("colorList",colorNames.toString());
                                 icons.add(icon);
                             }
+                            mGridView= (GridView) findViewById(R.id.gridlist);
+                            mMyadapter=new MyAdapter(names,colorNames,getApplicationContext());
+                            mGridView.setAdapter(mMyadapter);
+                            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    mMyadapter=new MyAdapter(names,colorNames,view.getContext(),position);
+                                    mGridView.setAdapter(mMyadapter);
+                                    pos=icons.get(position).getIconId();
+                                    Log.e("pos",pos+"");
+                                    pos=position;
+                                }
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -129,10 +143,11 @@ public class AddActivityDetial extends SwipeBackActivity {
         detailName=intent.getStringExtra("detailName");
         lat = intent.getDoubleExtra("lat",0.00);
         lng = intent.getDoubleExtra("lng",0.00);
+        sharedPreferences=getSharedPreferences("user",MODE_PRIVATE);
+        userId=sharedPreferences.getInt("user_id",0);
         editText = (EditText) findViewById(R.id.ac_name);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
-        mGridView= (GridView) findViewById(R.id.gridlist);
 //        id = intent.getStringExtra("id");
 //        sendMessage();
         //获取Icon内容
@@ -155,20 +170,6 @@ public class AddActivityDetial extends SwipeBackActivity {
         editText = (EditText) findViewById(R.id.ac_name);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
-        mGridView= (GridView) findViewById(R.id.gridlist);
-        mMyadapter=new MyAdapter(names,colorNames,this);
-        mGridView.setAdapter(mMyadapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mMyadapter=new MyAdapter(names,colorNames,view.getContext(),position);
-                mGridView.setAdapter(mMyadapter);
-                pos=icons.get(position).getIconId();
-                Log.e("pos",pos+"");
-                pos=position;
-            }
-        });
-
         btnex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -440,7 +441,7 @@ class MyAdapter extends BaseAdapter {
             imageView.setBackgroundColor(getColorID(colorList.get(position)));
         imageView.setImageResource(picid);
         if (i==position){
-            imageView.setBackgroundColor(context.getResources().getColor(R.color.gray));
+            imageView.setBackgroundColor(getColorID(colorList.get(position)));
         }
         return imageView;
     }
