@@ -127,7 +127,6 @@ public class AddActivityDetial extends SwipeBackActivity {
                                     mMyadapter=new MyAdapter(names,colorNames,view.getContext(),position);
                                     mGridView.setAdapter(mMyadapter);
                                     pos=icons.get(position).getIconId();
-                                    Log.e("pos",pos+"");
                                     pos=position;
                                 }
                             });
@@ -148,25 +147,7 @@ public class AddActivityDetial extends SwipeBackActivity {
         editText = (EditText) findViewById(R.id.ac_name);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
-//        id = intent.getStringExtra("id");
-//        sendMessage();
-        //获取Icon内容
-//        handler1= new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//                String info = (String)msg.obj;
-//                if("添加成功".equals(info)){
-//                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Type listType=new TypeToken<List<Icon>>(){}.getType();
-//                    Gson gson=new Gson();
-//                    names = gson.fromJson(info,listType);
-//                    count = names.size();
-//                }
-//            }
-//        };
-//        iconnew = new Icon();
+
         editText = (EditText) findViewById(R.id.ac_name);
         btnex= (TextView) findViewById(R.id.btnex);
         btnfin= (TextView) findViewById(R.id.btnfin);
@@ -179,15 +160,6 @@ public class AddActivityDetial extends SwipeBackActivity {
         btnfin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(AddActivityDetial.this, Add_Page_Activity.class);
-//                intent.putExtra("acname",activity_name);
-//                Gson gson1 = new Gson();
-//                String newAcIcon = gson1.toJson(iconnew);
-//                intent.putExtra("newAcIcon",newAcIcon);
-//                addMessage();
-//                startActivity(intent);
-//                finish();
-
                 activityName=editText.getText().toString();
                 if(activityName.length()==0 || pos<0){
                     Toast.makeText(getApplicationContext(),"请输入活动名称,选择图片",Toast.LENGTH_LONG).show();
@@ -268,7 +240,7 @@ public class AddActivityDetial extends SwipeBackActivity {
 //    }
 
     private void sendToServer4() {
-        String u1 = "http://175.24.14.26:8080/Catchtime/ActivityController?info=insert&activityName="+activityName +"&iconId=" + pos+"&userId="+userId;
+        String u1 = "http://175.24.14.26:8080/Catchtime/ActivityController?info=insert&activityName="+activityName +"&iconId="+pos+"&userId="+userId;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -441,7 +413,7 @@ class MyAdapter extends BaseAdapter {
             imageView.setBackgroundColor(getColorID(colorList.get(position)));
         imageView.setImageResource(picid);
         if (i==position){
-            imageView.setBackgroundColor(getColorID(colorList.get(position)));
+            imageView.setImageAlpha(150);
         }
         return imageView;
     }
