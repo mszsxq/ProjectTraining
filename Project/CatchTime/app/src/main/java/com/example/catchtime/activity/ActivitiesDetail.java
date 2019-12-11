@@ -81,8 +81,8 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     private String activityName;
     private int color;
     private TextView textView;
-    private String ip="http://175.24.14.26:8080/Catchtime/ActivitiesDetailServlet?activity="+activityName+"&id="+id;
-//    private String ip="http://192.168.43.232:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
+
+//    private String ip="http://C:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
 //    private String ip="http://10.7.89.247:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
 //    private String ip="http://192.168.43.232:8080/Catchtime/ActivitiesDetailServlet?activity="+activityName+"&id="+id;
 
@@ -94,14 +94,12 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activities_detail);
-        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
-        id= p.getInt("user_id",1);
+
 
 
         getView();
         setListener();
         init();
-        Intent i = getIntent();
         activityName=getIntent().getStringExtra("activity_name");
         textView.setText(activityName);
         setColor();
@@ -315,26 +313,27 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         l1.setBackgroundColor(color);
         l2.setBackgroundColor(color);
         l3.setBackgroundColor(color);
-        String icon =getIntent().getStringExtra("icon");
-        byte[] img = Base64.decode(icon.getBytes(), Base64.DEFAULT);
-        Bitmap bitmap;
-        if (img != null) {
-            bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
-
-            imageView.setImageBitmap(bitmap);
-        }
-
+        int icon =getIntent().getIntExtra("icon",0);
+        imageView.setImageResource(icon);
     }
 
 
 
     //向服务器发送数据
     private void sendMessage() {
+        SharedPreferences p=getSharedPreferences("user",MODE_PRIVATE);
+        id= p.getInt("user_id",0);
+
+
+       Log.e("id11111111", String.valueOf(id));
+       Log.e("activity11111111",activityName);
+
        Thread t= new Thread(){
             @Override
             public void run() {
                 try {
-                    URL url = new URL(ip);
+
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivitiesDetailServlet?id="+id+"&&activity="+activityName);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -356,8 +355,10 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
                     e.printStackTrace();
                 }
             }
-        } ;
-       t.start();
+        };
+
+
+        t.start();
 
     }
     private void wrapperMessage(String info){

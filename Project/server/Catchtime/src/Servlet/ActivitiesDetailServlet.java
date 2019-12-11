@@ -41,9 +41,14 @@ public class ActivitiesDetailServlet extends HttpServlet {
 		
 //		int  id =1;
 //		String activityName ="cycle";
-		int id =Integer.valueOf(request.getParameter("id"));
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		String id1=request.getParameter("id");
+		int id =Integer.valueOf(id1);
 		String activityName =request.getParameter("activity");
 		System.out.println(activityName);
+		System.out.println(id);
+		
 		UserTableService userTableService =new UserTableService();	
 		String tableName = userTableService.querryDayTableById(id);
 		

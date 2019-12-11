@@ -275,7 +275,7 @@ public class DataDao {
 				ResultSet rs = null;
 //				String sql ="select * from "+table_name+" where date between current_date()-7 and sysdate() and activity_name=?";
 //				String sql ="select * from "+table_name;
-				String sql ="select * from "+ table_name+" where activity_name=? and date_sub(curdate(), interval 30 day) <= date(date) order by date;";
+				String sql ="select * from "+ table_name+" where activity_name=? and date_sub(curdate(), interval 30 day) <= date(data) order by data;";
 
 				try {
 					conn=DBManager.getInstance().getConnection();
@@ -295,7 +295,6 @@ public class DataDao {
 					e.printStackTrace();
 				}finally{
 					try {
-						rs.close();
 						conn.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
