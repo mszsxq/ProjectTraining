@@ -290,7 +290,7 @@ public class UserDao {
             System.out.println("时锟斤拷锟斤拷睿�" + day + "锟斤拷" + hour + "小时" + min
                     + "锟斤拷锟斤拷" + sec + "锟诫。");
             if (day>=1) {
-                  return day;
+                  return day+1;
             }else {
                 if (day==0) {
                     return 1;
