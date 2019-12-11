@@ -1005,16 +1005,15 @@ public class ActivityDao {
 
 	public int updateDta(int user_id,int activity_id,int location_id,int icon_id,int old_id,String date) {
 		String table = user_id+"detail_tablename";
-		String sql = "update "+table+" set activity_id=? and location_id = ?  where activity_id=? and begin_time like ?";
+		String sql = "update "+table+" set activity_id=? where activity_id=? and begin_time like ?";
 		Connection conn = null;
 		int n = 0;
 		try {
 			conn = DBManager.getInstance().getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,activity_id);
-			ps.setInt(2, location_id);
-			ps.setInt(3, old_id);
-			ps.setString(4,date+"%");
+			ps.setInt(2, old_id);
+			ps.setString(3,date+"%");
 			n = ps.executeUpdate();
 			ps.close();
 		} catch (ClassNotFoundException e) {

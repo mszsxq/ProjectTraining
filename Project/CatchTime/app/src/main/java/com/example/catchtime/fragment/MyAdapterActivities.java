@@ -55,13 +55,14 @@ public class MyAdapterActivities extends BaseAdapter {
         }
         Log.e("1","ok?");
         //获得每个item的对象
+        int color=getColorID(data.get(position).getIcon_color());
         img_activity.setImageResource(data.get(position).getImage());
-        img_activity.setBackgroundColor(data.get(position).getColor());
+        img_activity.setBackgroundColor(convertView.getResources().getColor(data.get(position).getColor()));
         name_activity.setText(data.get(position).getActivity_name());
-        Log.e("2","ok?");
         Log.e("3",name_activity.getText().toString());
         Log.e("4",data.get(position).getIcon_name());
         Log.e("5",data.get(position).getIcon_color());
+        Log.e("999",color+"");
         return convertView;
     }
     private int getDrawableID(String str) {
@@ -76,6 +77,22 @@ public class MyAdapterActivities extends BaseAdapter {
             return 0;
         }
         catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    //由颜色名称转换为资源文件
+    private int getColorID(String str) {
+        String color = str;
+        try {
+            Field field = R.color.class.getField(color);
+            int ColorID = 0;
+            ColorID = field.getInt(new R.color());
+            return ColorID;//colorID就是R.color.name
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
             return 0;
         }
