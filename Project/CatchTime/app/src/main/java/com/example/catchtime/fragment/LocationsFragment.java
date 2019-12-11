@@ -85,14 +85,14 @@ public class LocationsFragment extends Fragment {
                 myAdapter = new MyAdapterLocation(getActivity(),locations,R.layout.item_location);
                 ListView listView = view.findViewById(R.id.loc_lv_local);
                 listView.setAdapter(myAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), ActivitiesDetail.class);
-                        startActivity(intent);
-                    }
-                });
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent intent = new Intent();
+//                        intent.setClass(getActivity(), ActivitiesDetail.class);
+//                        startActivity(intent);
+//                    }
+//                });
             }
         };
         TextView addloc = view.findViewById(R.id.loc_btn_addloc);
