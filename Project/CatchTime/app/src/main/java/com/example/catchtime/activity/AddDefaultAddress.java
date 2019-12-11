@@ -229,6 +229,7 @@ public class AddDefaultAddress extends AppCompatActivity implements View.OnClick
                         location.setLocationRange(200);
                         Log.e("mmy",resl.get(position).pt.latitude+"");
                         Log.e("mmy",resl.get(position).key);
+
                     }
 
                     @Override
