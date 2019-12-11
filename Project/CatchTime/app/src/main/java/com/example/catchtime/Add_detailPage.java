@@ -47,11 +47,11 @@ public class Add_detailPage extends SwipeBackActivity {
     private ImageView okActivity;
     private ImageView acImg;
     private int user_id;
-    private String chuan_activity_name="xuexi";
+    private String chuan_activity_name;
     private int activity_id;
     private int location_id;
     private String location_name;
-    private String time="2019-12-07";
+    private String time;
     private String timenow;
     private Handler handler;
     private List<Time> timeList;
@@ -66,8 +66,12 @@ public class Add_detailPage extends SwipeBackActivity {
         listViewEnd = (ListView) findViewById(R.id.list_end);
         SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
         user_id = sp.getInt("user_id",0);
+        Log.e("id",user_id+"");
         Intent intent = getIntent();
         chuan_activity_name=intent.getStringExtra("activity_name");
+        time = intent.getStringExtra("date");
+        Log.e("name",chuan_activity_name);
+        Log.e("time",time);
         sendMessage();
         getnowtime();
         //获取activity当前时间段
@@ -116,7 +120,6 @@ public class Add_detailPage extends SwipeBackActivity {
         locationView = (TextView) findViewById(R.id.et1);
         activityView = (TextView) findViewById(R.id.et2);
         //传递user_id，向activity详情页
-        user_id=1;
         okActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -113,7 +113,7 @@ public class Add_Page_Activity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+id);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+id+"&&info="+"findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

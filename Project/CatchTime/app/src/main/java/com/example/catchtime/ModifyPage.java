@@ -112,7 +112,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
                     icon.setImageResource(getDrawableID(al.getIcon()));
                     icon.setBackgroundColor(getColorID(al.getColor()));
                     updateLocation=al.getLocation_name();
-                    Log.i("检测","al"+al.toString());
+                    Log.i("检测","al"+al.toString()+"-"+al.getLocation_name()+"-"+al.getStartTime());
                     break;
                 case 1:
                     Bundle bundle = (Bundle) msg.obj;
@@ -325,7 +325,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationName="+locationId+"&iconId="+iconId+"&oldName="+oldName+"&userId="+user_id+"&date="+date+"");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/changeActivityAfter?activityId="+activityId+"&locationName="+locationId+"&iconId="+iconId+"&oldName="+oldName+"&userId="+user_id+"&date="+date+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -437,7 +437,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/changeActivity?activityName="+activityName+"&date="+date+"&user_id="+user_id+"");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/changeActivity?activityName="+activityName+"&date="+date+"&user_id="+user_id+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

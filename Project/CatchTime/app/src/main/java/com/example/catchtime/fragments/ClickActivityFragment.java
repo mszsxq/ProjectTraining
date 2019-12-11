@@ -155,7 +155,7 @@ public class ClickActivityFragment extends AppCompatActivity {
                 SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
                 int user_id = sp.getInt("user_id",0);
                 try {
-                    URL url = new URL("http://192.168.42.184:8080/Catchtime/ActivityController?userid="+user_id+"&info=findall");
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+user_id+"&info=findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

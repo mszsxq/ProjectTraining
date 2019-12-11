@@ -143,7 +143,7 @@ public class InitPieChart  extends DemoBase implements OnChartValueSelectedListe
         PieDataSet dataSet = new PieDataSet(entries, "");//设置显示的扇形列表
         dataSet.setDrawIcons(true);//设置是否显示图标
         dataSet.setSliceSpace(1);
-        dataSet.setIconsOffset(new MPPointF(1, 1));//设置图标显示的位置
+        dataSet.setIconsOffset(new MPPointF(1, 3));//设置图标显示的位置
         dataSet.setSelectionShift(8f);//设置点击时突出的部分大小
 
         // add a lot of colors

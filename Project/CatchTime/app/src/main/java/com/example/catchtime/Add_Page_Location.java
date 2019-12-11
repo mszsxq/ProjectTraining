@@ -48,7 +48,7 @@ public class Add_Page_Location extends AppCompatActivity {
         final List<Location> locations=new ArrayList<>();
         getData();
         SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-        int id = sp.getInt("user_id",0);
+        id = sp.getInt("user_id",0);
         handler=new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);

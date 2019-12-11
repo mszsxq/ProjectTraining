@@ -928,7 +928,7 @@ public class ActivityDao {
 		ResultSet rs5 = null;
 		String table1=user_id+"_activity";
 		String table3=user_id+"_location";
-		String table4=user_id+"_connection";
+		String table4=user_id+"_contact";
 		String table5=user_id+"detail_tablename";
 		String sql1 = "select * from "+table1+" where activity_name = ?;";
 		String sql2 = "select * from icon where icon_id = ?;";
