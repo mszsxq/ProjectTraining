@@ -243,10 +243,10 @@ public class UserDao {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				String date = rs.getString(1);
-				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String today = sd.format(new Date());
 				System.out.println(date+"+"+today);
-				days=(int) dateDiff(date,today,"yyyy-MM-dd");
+				days=(int) dateDiff(date,today,"yyyy-MM-dd HH:mm:ss");
 			}
 			return days;
 			
