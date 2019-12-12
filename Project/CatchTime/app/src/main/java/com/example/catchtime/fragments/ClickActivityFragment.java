@@ -93,24 +93,27 @@ public class ClickActivityFragment extends AppCompatActivity {
                     int color = getColorID(string);
                     activity.setIcon_color(list.get(i).getIcon_color());
                     activity.setColor(color);
+                    activity.setActivity_id(list.get(i).getActivity_id());
                     lists.add(activity);
                 }
                 Log.e("info", info);
-                listView = (ListView) findViewById(R.id.listview);
+                listView = findViewById(R.id.listview);
                 listView.setAdapter(new com.example.catchtime.fragment.MyAdapterActivities(getApplicationContext(), lists, R.layout.activitiesfragment_litem));
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getApplicationContext(), ModifyPage.class);
-                        intent.putExtra("color", lists.get(position).getColor());
+                        intent.putExtra("color", lists.get(position).getIcon_color());
+                        Log.i("检测","color"+intent.getStringExtra("color"));
                         intent.putExtra("activityName", lists.get(position).getActivity_name());
                         intent.putExtra("iconId",lists.get(position).getIcon_id());
                         intent.putExtra("activityId",lists.get(position).getActivity_id());
                         intent.putExtra("iconName",lists.get(position).getIcon_name());
                         intent.putExtra("activity_name",activity_name);
                         intent.putExtra("date",date);
-                        setResult(200);
+                        setResult(200,intent);
+                        finish();
                     }
                 });
 

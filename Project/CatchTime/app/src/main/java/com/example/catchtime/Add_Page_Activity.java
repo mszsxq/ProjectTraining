@@ -85,6 +85,7 @@ public class Add_Page_Activity extends AppCompatActivity {
                 for (int i = 0; i < list.size(); i++) {
                     Activity activity = new Activity();
                     activity.setIcon_name(list.get(i).getIcon_name());
+                    activity.setActivity_id(list.get(i).getActivity_id());
                     String str = new String();
                     str = list.get(i).getIcon_name();
                     int img = getDrawableID(str);

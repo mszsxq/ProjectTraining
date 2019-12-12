@@ -112,10 +112,10 @@ public class AddDefaultAddress extends AppCompatActivity implements View.OnClick
                 String loc = gson.toJson(location);
                 String user = gson.toJson(id);
                 addDefaultAddress(loc,user);
-                Intent intent1 = new Intent();
-                intent1.setClass(getApplicationContext(),DefaultAddress.class);
-                startActivity(intent1);
-                //finish();
+//                Intent intent1 = new Intent();
+//                intent1.setClass(getApplicationContext(),DefaultAddress.class);
+//                startActivity(intent1);
+                finish();
             }
         });
 

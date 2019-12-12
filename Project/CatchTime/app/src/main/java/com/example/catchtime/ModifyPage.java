@@ -169,26 +169,18 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==200){
             Message msg = new Message();
             Bundle bundle = new Bundle();
             bundle.putString("iconName",data.getStringExtra("iconName"));
             bundle.putInt("activityId",data.getIntExtra("activity_id",0));
             bundle.putString("color",data.getStringExtra("color"));
-            bundle.putString("activityName",data.getStringExtra("activity_name"));
+            bundle.putString("activityName",data.getStringExtra("activityName"));
             bundle.putInt("iconId",data.getIntExtra("iconId",0));
             Log.i("检测","data"+bundle.getInt("activityId")+"b"+data.getIntExtra("activity_id",0));
             msg.obj=bundle;
             msg.what=1;
             handler.sendMessage(msg);
-        }else if(resultCode ==300){
-            Message msg = new Message();
-            Bundle bundle = new Bundle();
-            bundle.putString("locationName",data.getStringExtra("locationName"));
-            msg.obj=bundle;
-            msg.what=2;
-            handler.sendMessage(msg);
-        }
+
 
 
     }
@@ -308,6 +300,8 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             case R.id.clickActivity:
                 Intent intentFra = new Intent();
                 intentFra.setClass(this, ClickActivityFragment.class);
+                intentFra.putExtra("activity_name",activityName);
+                intentFra.putExtra("date",date);
                 startActivityForResult(intentFra,100);
                 break;
             case R.id.location:

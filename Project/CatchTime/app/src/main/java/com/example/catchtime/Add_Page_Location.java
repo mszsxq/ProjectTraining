@@ -63,6 +63,7 @@ public class Add_Page_Location extends AppCompatActivity {
                 for(int i=0;i<list.size();i++){
                     Location location=new Location();
                     location.setLocationName(list.get(i).getLocationName());
+                    location.setLocationId(list.get(i).getLocationId());
                     locations.add(location);
                 }
                 myAdapter = new MyAdapterLocation(Add_Page_Location.this,locations,R.layout.item_location);
