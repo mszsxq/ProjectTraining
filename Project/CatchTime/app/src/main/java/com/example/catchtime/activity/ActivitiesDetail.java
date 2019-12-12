@@ -304,15 +304,16 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     }
     public void setColor(){
         color= getIntent().getIntExtra("color",0);
+        int colorr= getResources().getColor(color);
 //        if(colorstring==null){
 //            color =getResources().getIdentifier("bg", "color", getPackageName());
 //        }else {
 //            color =getResources().getIdentifier(colorstring, "color", getPackageName());
 //        }
-        linearLayout.setBackgroundColor(color);
-        l1.setBackgroundColor(color);
-        l2.setBackgroundColor(color);
-        l3.setBackgroundColor(color);
+        linearLayout.setBackgroundColor(colorr);
+        l1.setBackgroundColor(colorr);
+        l2.setBackgroundColor(colorr);
+        l3.setBackgroundColor(colorr);
         int icon =getIntent().getIntExtra("icon",0);
         imageView.setImageResource(icon);
     }
