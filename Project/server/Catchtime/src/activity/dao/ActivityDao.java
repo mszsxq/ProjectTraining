@@ -919,22 +919,22 @@ public class ActivityDao {
 		PreparedStatement pst1 = null;
 		PreparedStatement pst2 = null;
 		PreparedStatement pst3 = null;
-		PreparedStatement pst4 = null;
+		//PreparedStatement pst4 = null;
 		PreparedStatement pst5 = null;
 		ResultSet rs1 = null;
 		ResultSet rs2 = null;
 		ResultSet rs3 = null;
-		ResultSet rs4 = null;
+		//ResultSet rs4 = null;
 		ResultSet rs5 = null;
 		String table1=user_id+"_activity";
 		String table3=user_id+"_location";
-		String table4=user_id+"_contact";
+		//String table4=user_id+"_contact";
 		String table5=user_id+"detail_tablename";
 		String sql1 = "select * from "+table1+" where activity_name = ?;";
 		String sql2 = "select * from icon where icon_id = ?;";
 		String sql3 = "select * from "+table3+" where location_id = ?;";
-		String sql4 = "select * from "+table4+" where activity_id = ?;";
-		String sql5 = "select * from "+table5+" where activity_id =? and location_id = ? and begin_time like ?";
+		//String sql4 = "select * from "+table4+" where activity_id = ?;";
+		String sql5 = "select * from "+table5+" where activity_id =?  and begin_time like ?";
 		int activity_id=0;
 		int location_id=0;
 		activity_location al = new activity_location();
@@ -954,12 +954,23 @@ public class ActivityDao {
 					al.setColor(rs2.getString("color"));
 					al.setIcon(rs2.getString("icon_address"));
 				}
-				pst4 = conn.prepareStatement(sql4);
-				pst4.setInt(1,activity_id);
-				rs4=pst4.executeQuery();
-				while(rs4.next()) {
-					location_id=rs4.getInt("location_id");
-					
+//				pst4 = conn.prepareStatement(sql4);
+//				pst4.setInt(1,activity_id);
+//				rs4=pst4.executeQuery();
+//				while(rs4.next()) {
+//					location_id=rs4.getInt("location_id");
+//					
+//				}
+				pst5 = conn.prepareStatement(sql5);
+				pst5.setInt(1,activity_id);
+				pst5.setString(2,date+"%");
+				rs5=pst5.executeQuery();
+				System.out.println("activity"+activity_id+"location"+location_id+"date"+date);
+				while(rs5.next()) {
+					al.setStartTime(rs5.getString("begin_time"));
+					al.setEndTime(rs5.getString("finish_time"));
+					location_id=rs5.getInt("location_id");
+					System.out.println("start"+rs5.getString("begin_time"));
 				}
 				pst3 = conn.prepareStatement(sql3);
 				pst3.setInt(1,location_id);
@@ -970,17 +981,7 @@ public class ActivityDao {
 					al.setDetailAdd(rs3.getString("location_detailed"));
 					al.setLocation_name(rs3.getString("location_name"));
 				}
-				pst5 = conn.prepareStatement(sql5);
-				pst5.setInt(1,activity_id);
-				pst5.setInt(2,location_id);
-				pst5.setString(3,date+"%");
-				rs5=pst5.executeQuery();
-				System.out.println("activity"+activity_id+"location"+location_id+"date"+date);
-				while(rs5.next()) {
-					al.setStartTime(rs5.getString("begin_time"));
-					al.setEndTime(rs5.getString("finish_time"));
-					System.out.println("start"+rs5.getString("begin_time"));
-				}
+				
 				System.out.println("al"+al.getStartTime()+"-"+date);
 			}
 			

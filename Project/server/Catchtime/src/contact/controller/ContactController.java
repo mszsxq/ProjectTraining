@@ -39,17 +39,23 @@ public class ContactController extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String location_name=request.getParameter("location_name");//Android传过来的name
-		String activity_name=request.getParameter("activiity_name");//Android传过来的name
+		String location_name=request.getParameter("location_name");//Android浼犺繃鏉ョ殑name
+		String activity_name=request.getParameter("activiity_name");//Android浼犺繃鏉ョ殑name
 		String str=request.getParameter("userid");
 		Gson gson=new Gson();
 		User user=gson.fromJson(str, User.class);
-		int id=user.getUser_id();//Android传过来的id
+		int id=user.getUser_id();//Android浼犺繃鏉ョ殑id
 		int activity_id=0;
 		int location_id=0;
 		ContactDao dao=new ContactDao();
 		ActivityDao dao1=new ActivityDao();
 		LocationDao dao2=new LocationDao();
+		try {
+			dao2.insertData(id, location_name, 0, 0, 0, null);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		activity_id=dao1.findId(id, activity_name);
 		location_id=dao2.findId(id,location_name);
 		Contact contact=new Contact();
