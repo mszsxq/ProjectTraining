@@ -184,8 +184,12 @@ public class MyService extends AbsWorkService {
                 @Override
                 public void onReceiveLocation(BDLocation bdLocation) {
 
-                    if (new Date().getHours()>22){
-
+                    try {
+                        if (new Date().getHours()>22&&(ft.parse(timeAll).getHours()-ft.parse(latestScreenPresent).getHours())>1){
+                            flagsleep=false;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
 
                     if (activitybdlocation == null) {
@@ -349,6 +353,9 @@ public class MyService extends AbsWorkService {
                             handlerThre.post(new Runnable() {
                                 public void run() {
                                     Toast.makeText(getApplicationContext(), "此地点为新地点因此需要弹窗添加", Toast.LENGTH_LONG).show();
+                                    Intent dialogIntent = new Intent(getBaseContext(), NewPlacePopup.class);
+                                    dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getApplication().startActivity(dialogIntent);
                                     try {
                                         writeExternal(getBaseContext(), "到达新的未知地点", null);
                                     } catch (IOException e) {
@@ -472,12 +479,13 @@ public class MyService extends AbsWorkService {
 //                    }
                     }
 
-//                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
+                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
                     handlerThree.post(new Runnable() {
                         public void run() {
 //                            Toast.makeText(getApplicationContext(), "steping=" + stepingsec + ";usingtime=" + usingTime + ";againstepsec=" + againstepingsec + "    " + speed + "    " + finalDistance + "   正在进行的活动"+activityName + timeAll, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
                         }
 
                     });
@@ -661,6 +669,12 @@ public class MyService extends AbsWorkService {
         if (s.equals("ACTION_USER_PRESENT")){
 //            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
             latestScreenPresent=ft.format(new Date());
+            if (ft.parse(latestScreenPresent).getHours()>22){
+                //弹出总结框
+                Intent dialogIntent = new Intent(getBaseContext(), TimedPopup.class);
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(dialogIntent);
+            }
             //如果五点之后解锁手机就认为起床
             if (ft.parse(latestScreenPresent).getHours()>=5&&ft.parse(latestScreenPresent).getHours()<=9&&flagsleep==false){
                 new Thread(new Runnable() {
