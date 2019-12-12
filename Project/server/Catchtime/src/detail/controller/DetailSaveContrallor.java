@@ -68,7 +68,7 @@ public class DetailSaveContrallor extends HttpServlet {
 		Date dallend=null;
 		
 		
-		//打开Dao
+		//鎵撳紑Dao
 		ContactDao tDao = new ContactDao();
 		DetailDao dDao = new DetailDao();
 		DataDao aDao = new DataDao();
@@ -89,33 +89,33 @@ public class DetailSaveContrallor extends HttpServlet {
 		System.out.println(userid);
 		System.out.println(timelike);
         if(list!=null) {
-        	System.out.println("收到的返回newActivirt"+list);
+        	System.out.println("鏀跺埌鐨勮繑鍥瀗ewActivirt"+list);
         	timelistnew = gson.fromJson(list,typenew);
             for(int i=0;i<timelistnew.size();i++) {
             	if(timelistnew.get(i).getFlag()==1) {
-            		newactime.setBegin_time(timelistnew.get(1).getBegin_time());
+            		newactime.setBegin_time(timelistnew.get(i).getBegin_time());
             		newactime.setFinish_time(timelistnew.get(i).getFinish_time());
             		pos = i;
             	}
             }
             
             
-            //现在的时间
-            DateFormat df= new SimpleDateFormat("yyyy-MM-dd");//对日期进行格式化
+            //鐜板湪鐨勬椂闂�
+            DateFormat df= new SimpleDateFormat("yyyy-MM-dd");//瀵规棩鏈熻繘琛屾牸寮忓寲
             timenow = df.format(new Date());
             
-            //获取改变旧activity的时间
+            //鑾峰彇鏀瑰彉鏃ctivity鐨勬椂闂�
             String timeold = ds.findStartAndEnd(acname, Integer.parseInt(userid), timelike);
             System.out.println(timeold);
             Type typeold=new TypeToken<List<Time>>(){}.getType();
             timelistold = gson.fromJson(timeold,typeold);
-            System.out.println("返回的其实时间"+timelistold.get(pos).getBegin_time());
-            System.out.println("返回的结束时间"+timelistold.get(pos).getFinish_time());
+            System.out.println("杩斿洖鐨勫叾瀹炴椂闂�"+timelistold.get(pos).getBegin_time());
+            System.out.println("杩斿洖鐨勭粨鏉熸椂闂�"+timelistold.get(pos).getFinish_time());
             oldactime.setBegin_time(timelistold.get(pos).getBegin_time());
             oldactime.setFinish_time(timelistold.get(pos).getFinish_time());
 
             
-            //转化data
+            //杞寲data
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             
     		try {
@@ -137,54 +137,66 @@ public class DetailSaveContrallor extends HttpServlet {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-    		//判断改变旧activity是今天还是过去
+    		//鍒ゆ柇鏀瑰彉鏃ctivity鏄粖澶╄繕鏄繃鍘�
     		if(timenow.equals(timelike)) {
-            	//是今天
-            	//更新今天新activity单条信息
+            	//鏄粖澶�
+            	//鏇存柊浠婂ぉ鏂癮ctivity鍗曟潯淇℃伅
             	
             	Contact ct = new Contact(Integer.parseInt(loid),Integer.parseInt(acid));
+            	try {
+					tDao.addContact(ct, Integer.parseInt(userid));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     			System.out.println("Detail:loid"+Integer.parseInt(loid));
     			System.out.println("Detail:acid"+Integer.parseInt(acid));
     			int detailnewid = dDao.findIdbyidandtime(Integer.parseInt(acid), timelike,Integer.parseInt(userid));
     			if(detailnewid>0) {
     				int i = dDao.upDateDetailbyDetailid(Integer.parseInt(userid),timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00", detailnewid);
-    				System.out.println("修改当天新activity成功");
+    				System.out.println("淇敼褰撳ぉ鏂癮ctivity鎴愬姛");
     			}else {
     				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00");
-    				System.out.println("增加当天新activity成功");
+    				System.out.println("澧炲姞褰撳ぉ鏂癮ctivity鎴愬姛");
     			}
-    			//更新今天旧activity
+    			//鏇存柊浠婂ぉ鏃ctivity
     			if(dstart.before(dallstart) || dend.after(dallend)) {
-    				System.out.println("非法输入");
-    				out.write("非法输入");
+    				System.out.println("闈炴硶杈撳叆");
+    				out.write("闈炴硶杈撳叆");
     			}else {
-    				//如果开始时间相同
+    				//濡傛灉寮�濮嬫椂闂寸浉鍚�
     				if((dallstart.compareTo(dstart))==0){
-                      //如果结束时间相同
+                      //濡傛灉缁撴潫鏃堕棿鐩稿悓
                       if((dallend.compareTo(dend)==0)){
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(oldactime.getBegin_time());
                     	  oldtime.setFinish_time(oldactime.getBegin_time());
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }else{
-                      //如果结束时间不同
+                      //濡傛灉缁撴潫鏃堕棿涓嶅悓
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
                     	  oldtime.setFinish_time(oldactime.getFinish_time());
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }
                   }else{
-                  //如果开始时间不同，结束时间相同
+                  //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿鐩稿悓
                       if((dallend.compareTo(dend)==0)) {
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(oldactime.getBegin_time());
                     	  oldtime.setFinish_time(timelike+" "+newactime.getBegin_time()+":00");
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }else{
-                       //如果开始时间不同，结束时间不同
+                       //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿涓嶅悓
                     	  Time oldtime1 = new Time();
                     	  Time oldtime2 = new Time();
                     	  oldtime1.setBegin_time(oldactime.getBegin_time());
@@ -192,16 +204,28 @@ public class DetailSaveContrallor extends HttpServlet {
                     	  oldtime2.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
                     	  oldtime2.setFinish_time(oldactime.getFinish_time());
                     	  ds.updatetodayMuch(acname, Integer.parseInt(userid), timelistold.get(pos).getBegin_time(), oldtime1,oldtime2);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }
                   }
     			}	
             }else {
-            //不是今天
-            	//更新以前新activity单条信息
+            //涓嶆槸浠婂ぉ
+            	//鏇存柊浠ュ墠鏂癮ctivity鍗曟潯淇℃伅
             	
             	Contact ct = new Contact(Integer.parseInt(loid),Integer.parseInt(acid));
-    			System.out.println("Detail:loid"+Integer.parseInt(loid));
+            	try {
+					tDao.addContact(ct, Integer.parseInt(userid));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	System.out.println("Detail:loid"+Integer.parseInt(loid));
     			System.out.println("Detail:acid"+Integer.parseInt(acid));
     			int detailnewid = dDao.findIdbyidandtime(Integer.parseInt(acid), timelike,Integer.parseInt(userid));
     			if(detailnewid>0) {
@@ -212,27 +236,27 @@ public class DetailSaveContrallor extends HttpServlet {
     				long num1 = aDao.finacdata(table, acn.getActivity_name(), did);
     				long num2 = (dend.getTime()-dstart.getTime())/60000;
     				long num = num1+num2;
-    				System.out.println("新添加的activity总时间时间"+num);
+    				System.out.println("鏂版坊鍔犵殑activity鎬绘椂闂存椂闂�"+num);
     				aDao.upDateNum(table,acn.getActivity_name(), timelike, String.valueOf(num));
-    				System.out.println("修改以前新activity成功");
+    				System.out.println("淇敼浠ュ墠鏂癮ctivity鎴愬姛");
     			}else {
     				String table = userid+"_data";
     				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00");
     				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
     				long num = (dend.getTime()-dstart.getTime())/60000;
-    				System.out.println("新添加的activity总时间时间"+num);
+    				System.out.println("鏂版坊鍔犵殑activity鎬绘椂闂存椂闂�"+num);
     				int ndid = aDao.findalldata(table);
     				aDao.addalldata(table, ndid+1, timelike, acn.getActivity_name(), String.valueOf(num));
-    				System.out.println("增加以前新activity成功");
+    				System.out.println("澧炲姞浠ュ墠鏂癮ctivity鎴愬姛");
     			}
-    			//更新今天旧activity
+    			//鏇存柊浠婂ぉ鏃ctivity
             	if(dstart.before(dallstart) || dend.after(dallend)) {
-            		out.write("非法输入");
-    				System.out.println("非法输入");
+            		out.write("闈炴硶杈撳叆");
+    				System.out.println("闈炴硶杈撳叆");
     			}else {
-    				//如果开始时间相同
+    				//濡傛灉寮�濮嬫椂闂寸浉鍚�
     				if((dallstart.compareTo(dstart))==0){
-                      //如果结束时间相同
+                      //濡傛灉缁撴潫鏃堕棿鐩稿悓
                       if((dallend.compareTo(dend)==0)){
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
@@ -242,12 +266,12 @@ public class DetailSaveContrallor extends HttpServlet {
                     	  long sum1 = aDao.finacdata(table,acname, did);
                     	  long sum2 = (dallend.getTime()-dallstart.getTime())/60000;
                     	  long sum = sum1-sum2;
-                    	  System.out.println("新修改的旧activity时间"+sum);
+                    	  System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿"+sum);
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
                     	  ds.updatebeforeSimple(Integer.parseInt(userid), acname, timelike, String.valueOf(sum));
-						  out.write("修改成功");
+						  out.write("淇敼鎴愬姛");
                       }else{
-                      //如果结束时间不同
+                      //濡傛灉缁撴潫鏃堕棿涓嶅悓
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
@@ -265,10 +289,10 @@ public class DetailSaveContrallor extends HttpServlet {
 							e.printStackTrace();
 						}
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-						  out.write("修改成功");
+						  out.write("淇敼鎴愬姛");
                       }
                   }else{
-                  //如果开始时间不同，结束时间相同
+                  //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿鐩稿悓
                       if((dallend.compareTo(dend)==0)) {
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
@@ -288,9 +312,9 @@ public class DetailSaveContrallor extends HttpServlet {
   							e.printStackTrace();
                     	  }
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }else{
-                       //如果开始时间不同，结束时间不同
+                       //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿涓嶅悓
                     	  String table = userid+"_data";
                     	  Time oldtime1 = new Time();
                     	  Time oldtime2 = new Time();
@@ -305,13 +329,13 @@ public class DetailSaveContrallor extends HttpServlet {
 //    							Date nof2 = sdf.parse(oldtime2.getFinish_time());
     							int did = aDao.findataid(table, acname, timelike);
     							long sum1 = aDao.finacdata(table,acname, did);
-    							System.out.println("获取到的sum1"+sum1);
+    							System.out.println("鑾峰彇鍒扮殑sum1"+sum1);
 //    							long sum2 = (nof1.getTime()-nos1.getTime())/60000;
-//    							System.out.println("新修改的旧activity时间222"+sum2);
+//    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿222"+sum2);
     							long sum3 = (dend.getTime()-dstart.getTime())/60000;
-    							System.out.println("新修改的旧activity时间333"+sum3);
+    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿333"+sum3);
     							long sum = sum1-sum3;
-    							System.out.println("新修改的旧activity时间zzz"+sum);
+    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿zzz"+sum);
     							ds.updatebeforeSimple(Integer.parseInt(userid), acname, timelike, String.valueOf(sum));
     							
 //                      	  }catch (ParseException e) {
@@ -319,7 +343,7 @@ public class DetailSaveContrallor extends HttpServlet {
 //    							e.printStackTrace();
 //                      	  }
                     	  ds.updatetodayMuch(acname, Integer.parseInt(userid), timelistold.get(pos).getBegin_time(), oldtime1,oldtime2);
-                    	  out.write("修改成功");
+                    	  out.write("淇敼鎴愬姛");
                       }
                   }
     			}	
@@ -327,7 +351,7 @@ public class DetailSaveContrallor extends HttpServlet {
             }
         }
        
-//		//更新以前单条数据
+//		//鏇存柊浠ュ墠鍗曟潯鏁版嵁
 //		else if(newtime!=null) {
 //			try {
 //				tDao.addContact(ct, Integer.parseInt(userid));
@@ -342,14 +366,14 @@ public class DetailSaveContrallor extends HttpServlet {
 //				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
 //				int did = aDao.findataid(table, acn.getActivity_name(), timelike);
 //				int j = aDao.upDateNum(table, acn.getActivity_name(), timelike, num);
-//				out.write("修改以前新activity成功");
+//				out.write("淇敼浠ュ墠鏂癮ctivity鎴愬姛");
 //			}else {
 //				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), tnewtime.getBegin_time(), tnewtime.getFinish_time());
 //				String table = userid+"_data";
 //				int iddata = aDao.findalldata(table);
 //				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
 //				aDao.addalldata(table,iddata+1,timelike,acn.getActivity_name(),num);
-//				out.write("添加以前新activity成功");
+//				out.write("娣诲姞浠ュ墠鏂癮ctivity鎴愬姛");
 //			}
 //		}
 		

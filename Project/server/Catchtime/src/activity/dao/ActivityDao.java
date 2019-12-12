@@ -284,7 +284,6 @@ public class ActivityDao {
 				activity.setIcon_name(rs1.getString(2));
 				activity.setIcon_color(rs1.getString(3));
 			}
-			return activity;
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -443,9 +442,10 @@ public class ActivityDao {
 						allTime=hashList.get(id);
 						allTime=allTime+ans;
 						hashList.put(id, allTime);
-					}
+					}else{
 					hashList.put(id, ans);
 					lastEndTime = end;
+					}
 				}
 				
 				rs3=pst3.executeQuery();
@@ -458,8 +458,10 @@ public class ActivityDao {
 						allTime=hashList.get(404);
 						allTime=allTime+ans;
 						hashList.put(404, allTime);
+					}else{
+						hashList.put(404, ans);
 					}
-					hashList.put(404, ans);
+					
 				}
 				//long wenhao = dateDiff(lastEndTime,lastTime,sdf);
 				//if(wenhao>0) {
@@ -888,7 +890,7 @@ public class ActivityDao {
         System.out.println("时锟斤拷锟斤拷睿�" + hour + "小时" + min
                     + "锟斤拷锟斤拷" );
         String ans=null;
-        if(hour>1) {
+        if(hour>=1) {
            	if(min==0) {
            		ans=(hour>=10?hour+"":"0"+hour)+"-00";
            		return ans;
