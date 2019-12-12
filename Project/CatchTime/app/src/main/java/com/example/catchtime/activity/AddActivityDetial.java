@@ -127,7 +127,6 @@ public class AddActivityDetial extends SwipeBackActivity {
                                     mMyadapter=new MyAdapter(names,colorNames,view.getContext(),position);
                                     mGridView.setAdapter(mMyadapter);
                                     pos=icons.get(position).getIconId();
-                                    pos=position;
                                 }
                             });
                         } catch (JSONException e) {
@@ -409,17 +408,17 @@ class MyAdapter extends BaseAdapter {
         }
         Resources res=context.getResources();
         int picid = res.getIdentifier(list.get(position),"drawable",context.getPackageName());
-            imageView.setImageResource(picid);
-            imageView.setBackgroundColor(getColorID(colorList.get(position)));
         imageView.setImageResource(picid);
+        Log.e("name",colorList.get(position));
+        imageView.setBackgroundColor(res.getColor(getColorID(colorList.get(position))));
         if (i==position){
-            imageView.setImageAlpha(150);
+            Log.e("i",i+"");
+            imageView.setImageAlpha(100);
         }
         return imageView;
     }
     private int getColorID(String str) {
         String color = str;
-        Log.e("ccc",str);
         try {
             Field field = R.color.class.getField(color);
             int ColorID = 0;
