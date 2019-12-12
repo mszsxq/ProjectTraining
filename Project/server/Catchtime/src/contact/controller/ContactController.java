@@ -1,4 +1,4 @@
-package contact.controller;
+﻿package contact.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,6 +42,11 @@ public class ContactController extends HttpServlet {
 		String location_name=request.getParameter("location_name");//Android浼犺繃鏉ョ殑name
 		String activity_name=request.getParameter("activiity_name");//Android浼犺繃鏉ョ殑name
 		String str=request.getParameter("userid");
+		String lats=request.getParameter("lat");
+		String lngs=request.getParameter("lng");
+		double lat=Double.parseDouble(lats);
+		double lng=Double.parseDouble(lngs);
+		String addr=request.getParameter("addr");//Android获取到的详细地址
 		Gson gson=new Gson();
 		User user=gson.fromJson(str, User.class);
 		int id=user.getUser_id();//Android浼犺繃鏉ョ殑id
@@ -51,7 +56,7 @@ public class ContactController extends HttpServlet {
 		ActivityDao dao1=new ActivityDao();
 		LocationDao dao2=new LocationDao();
 		try {
-			dao2.insertData(id, location_name, 0, 0, 0, null);
+			dao2.insertData(id, location_name, lat, lng, 300, addr);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

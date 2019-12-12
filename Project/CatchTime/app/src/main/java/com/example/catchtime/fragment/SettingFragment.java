@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.example.catchtime.Add_detailPage;
 import com.example.catchtime.Login;
+import com.example.catchtime.NewPalce;
 import com.example.catchtime.R;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.setting.UserInfor;
@@ -35,6 +36,7 @@ public class SettingFragment extends Fragment {
     private Button unlogin;
     private View view;
     private SharedPreferences p;
+    private Button tui;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -53,6 +55,7 @@ public class SettingFragment extends Fragment {
         relativeLayout3.setOnClickListener(listener);
         relativeLayout4.setOnClickListener(listener);
         unlogin.setOnClickListener(listener);
+        tui.setOnClickListener(listener);
     }
 
     private void getViews() {
@@ -61,6 +64,7 @@ public class SettingFragment extends Fragment {
         relativeLayout3 =(RelativeLayout) view.findViewById(R.id.settings);
         relativeLayout4 =(RelativeLayout) view.findViewById(R.id.helping);
         unlogin = view.findViewById(R.id.btn_unlogin);
+        tui=view.findViewById(R.id.tui);
     }
 
     class customListener implements View.OnClickListener{
@@ -94,6 +98,10 @@ public class SettingFragment extends Fragment {
                     Intent intent3 = new Intent(view.getContext(), Login.class);
                     startActivity(intent3);
                     break;
+                case R.id.tui:
+                    Intent intent9=new Intent();
+                    intent9.setClass(view.getContext(), NewPalce.class);
+                    startActivity(intent9);
             }
         }
     }

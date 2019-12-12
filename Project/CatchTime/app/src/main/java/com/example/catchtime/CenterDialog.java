@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ZoomControls;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -59,6 +60,10 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class CenterDialog extends Dialog implements   View.OnClickListener{
+    private boolean isFirst=true;
+    private String addr;
+    private double lat;
+    private double lng;
     private OnCenterItemClickListener listener;
     private Context context;      // 上下文
     private int[] listenedItems;  // 要监听的控件id
@@ -96,17 +101,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
         super(context); //dialog的样式
         this.context = context;
         this.listenedItems = listenedItems;
-        SDKInitializer.initialize(context.getApplicationContext());
-        setContentView(R.layout.newplacepopup);
-        mapView = findViewById(R.id.mapView);
-        initializeMap();
-        mapView.onResume();
-        baiduMap = mapView.getMap();
-        //设置图层定位
-        baiduMap.setMyLocationEnabled(true);
-        hideLogo();
-        zoomLevelOp();
-        locationOption();
         getData();//这个方法用来获取activity
         handler=new Handler() {
             public void handleMessage(Message msg){
@@ -137,7 +131,16 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(context.getApplicationContext());
         setContentView(R.layout.newplacepopup);
+        setContentView(R.layout.newplacepopup);
+        mapView = findViewById(R.id.mapView);
+        initializeMap();
+        //设置图层定位
+        baiduMap.setMyLocationEnabled(true);
+        hideLogo();
+        zoomLevelOp();
+        locationOption();
         btnl=findViewById(R.id.btnl);
         Window window = getWindow();
         window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置为居中
@@ -155,7 +158,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
         quxiao();
         dialog_sure=findViewById(R.id.dialog_sure);
         sure();
-        Log.e("3","okkkkkk");
+//        Log.e("3","okkkkkk");
         colors=new String[]
                 {"#CCFFFF","#FF6699","#CC6699","#CC33FF","#99CCFF","#993399","#33FFFF","#33CCCC","#990033","#CC6699","#CC3399","#CC00CC\t","#990066","#663399","#993300"
                         ,"#66CCCC","#999966","#339966","#CCFFFF","#99FF66","#CC66CC"};
@@ -174,13 +177,15 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
                 String act_name=act.getText().toString().trim();
                 Log.e("name",location_name);
                 Log.e("name2",act_name);
-
                 addcontact(location_name,act_name);
+                Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
+                dismiss();
             }
         });
     }
 
     private void addcontact(String name1, String name2) {
+        Log.i("addr",addr+"lat"+lat+"lng"+lng);
         int user_id=p.getInt("user_id",0);
         User user=new User();
         user.setUser_id(user_id);
@@ -190,7 +195,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid+"&&location_name"+name1+"&&activity_name"+name2);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ContactController?userid="+userid+"&&location_name"+name1+"&&activity_name"+name2+"&&addr="+addr+"&&lat="+lat+"&&lng="+lng+"");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -240,7 +245,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/ActivityController?userid="+userid+"&info="+"findall");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -277,23 +282,27 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
                     public void onReceiveLocation(BDLocation bdLocation) {
                         //获取定位详细数据
                         //获取地址信息
-                        String addr = bdLocation.getAddrStr();
-                        Log.i("lww", "地址：" + addr);
-                        //获取经纬度
-                        double lat = bdLocation.getLatitude();
-                        double lng = bdLocation.getLongitude();
-                        Log.i("lww", "纬度："+lat+";经度："+lng);
-                        //获取周边POI信息
-                        List<Poi> pois = bdLocation.getPoiList();
-                        for (Poi p:pois) {
-                            String name = p.getName();
-                            String pAddr = p.getAddr();
-                            Log.i("lww", "POI:" + name+":"+pAddr);
+                        if(isFirst){
+                            isFirst=false;
+                            addr = bdLocation.getAddrStr();
+                            Log.i("lww", "地址：" + addr);
+                            //获取经纬度
+                            lat = bdLocation.getLatitude();
+                            lng = bdLocation.getLongitude();
+                            Log.i("lww", "纬度："+lat+";经度："+lng);
+                            //获取周边POI信息
+                            List<Poi> pois = bdLocation.getPoiList();
+                            for (Poi p:pois) {
+                                String name = p.getName();
+                                String pAddr = p.getAddr();
+                                Log.i("lww", "POI:" + name+":"+pAddr);
+                            }
+                            String time = bdLocation.getTime();
+                            //将定位数据显示在地图上
+                            showLocOnMap(lat, lng);
+                            Log.e("xianshi",lat+lng+"");
                         }
-                        String time = bdLocation.getTime();
-                        //将定位数据显示在地图上
-                        showLocOnMap(lat, lng);
-                        Log.e("xianshi",lat+lng+"");
+
                     }
                 }
         );
@@ -311,9 +320,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
                 );
         //应用显示方式
         baiduMap.setMyLocationConfiguration(config);
-        LatLng latLng = new LatLng(
-                lat + 0.00374531687912,
-                lng + 0.008774687519);
         //显示
         MyLocationData locData = new MyLocationData
                 .Builder()
@@ -324,7 +330,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
 
         //移动到中心位置
         MapStatusUpdate msu =
-                MapStatusUpdateFactory.newLatLng(latLng);
+                MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
         baiduMap.animateMapStatus(msu);
     }
     private void hideLogo() {
@@ -356,6 +362,7 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
             locationClient.start();
         }
     }
+    
 
 
     //实现动态创建button以及自动换行功能
