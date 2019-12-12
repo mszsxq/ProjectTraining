@@ -7,7 +7,7 @@
         icon="@drawable/bottombar_cycle"
         title="记录" />
     <tab
-        barColorWhenSelected="#4D28DCA2"
+        barColorWhenSelected="#09DAA0"
         id="@+id/bb_menu_activity"
         icon="@drawable/bottombar_run"
         title="活动" />
