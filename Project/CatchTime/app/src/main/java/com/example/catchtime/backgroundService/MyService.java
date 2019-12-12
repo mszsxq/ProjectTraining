@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.telecom.Connection;
 import android.util.Log;
 import android.widget.Toast;
 import com.baidu.location.BDAbstractLocationListener;
@@ -132,6 +133,9 @@ public class MyService extends AbsWorkService {
         if (contacts==null){
             contacts=new ArrayList<>();
         }
+        if (locations==null){
+            locations=new ArrayList<>();
+        }
     }
 
 //    @Override
@@ -145,7 +149,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void startWork(Intent intent, final int flags, int startId) {
-        Log.e("LocationService", "执行startwork 但是未调用方法");
+//        Log.e("LocationService", "执行startwork 但是未调用方法");
         //初始化数据
         if (intent!=null){
             inits(intent);
@@ -162,7 +166,7 @@ public class MyService extends AbsWorkService {
                 EventBus.getDefault().register(this);
             }
 
-            Log.e("LocationService", "开始 执行startwork");
+//            Log.e("LocationService", "开始 执行startwork");
 
             locationClient = new LocationClient(getApplicationContext());
             locationClientOption = new LocationClientOption();
@@ -179,26 +183,26 @@ public class MyService extends AbsWorkService {
             locationClient.registerLocationListener(new BDAbstractLocationListener() {
                 @Override
                 public void onReceiveLocation(BDLocation bdLocation) {
-                    Log.e("LocationService","155555555555");
+
                     if (new Date().getHours()>22){
 
                     }
-                    Log.e("LocationService","255555555555");
+
                     if (activitybdlocation == null) {
                         activitybdlocation = bdLocation;
                     }
-                    Log.e("LocationService","355555555555");
+
                     //如果是第一次打开APP 进行初始化地址 名称
                     if (activityName==null){
-                        Log.e("LocationService","3155555555555");
+//                        Log.e("LocationService","3155555555555");
                         boolean inlocation = false;
                         for (Location locationBean : locations) {
                             if (isRange(bdLocation.getLatitude(), bdLocation.getLongitude(), locationBean.getLocationLat(), locationBean.getLocationLng())) {
                                 inlocation = true;
                                 LocationName = locationBean.getLocationName();
-                                Log.e("LocationService",LocationName);
+//                                Log.e("LocationService",LocationName);
                                 activityName = findActivitybylocation(LocationName);//name等于与此地点相关联的活动
-                                if (activityName!=null){Log.e("LocationService",activityName);}
+//                                if (activityName!=null){Log.e("LocationService",activityName);}
                                 activitybdlocation.setLatitude(locationBean.getLocationLat());
                                 activitybdlocation.setLongitude(locationBean.getLocationLng());
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
@@ -219,7 +223,7 @@ public class MyService extends AbsWorkService {
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                             }
                         }
-                        Log.e("LocationService","3255555555555");
+//                        Log.e("LocationService","3255555555555");
                         if (inlocation == false && inAbleLocation == false) {
                             Handler handlerThre = new Handler(Looper.getMainLooper());
                             handlerThre.post(new Runnable() {
@@ -242,20 +246,21 @@ public class MyService extends AbsWorkService {
                             activitybdlocation.setLatitude(bdLocation.getLatitude());
                             centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                         }
-                        Log.e("LocationService","3355555555555");
+//                        Log.e("LocationService","3355555555555");
                     }
-                    Log.e("LocationService","4155555555555");
+
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
+//                    Log.e("LocationService",new Date().getHours()+"");
                     usingTime += 10;
-                    Log.e("LocationService","4255555555555");
+
                     if (latestScreenPresent == null) {
                         latestScreenPresent = timeAll;
                     }
-                    Log.e("LocationService","4355555555555");
+
                     final float speed = bdLocation.getSpeed();
                     List<Poi> pois = bdLocation.getPoiList();
-                    Log.e("LocationService","4455555555555");
+
 //                PoiRegion poiRegion= bdLocation.getPoiRegion();
 //                String poiDerectionDesc = poiRegion.getDerectionDesc();    //获取PoiRegion位置关系
 //                String poiRegionName = poiRegion.getName();    //获取PoiRegion名称
@@ -269,15 +274,15 @@ public class MyService extends AbsWorkService {
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    }
-                    Log.e("LocationService","455555555555");
+
                     distance = DistanceUtil.getDistance(
                             new LatLng(bdLocation.getLongitude(),
                                     bdLocation.getLatitude()),
                             new LatLng(perbdlocation.getLongitude(),
                                     perbdlocation.getLatitude()));
-                    Log.e("LocationService","555555555555");
+
                     if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
-                        Log.e("LocationService","11111111111111111111");
+
                         stepingsec += 10;
                         if (flagsteping == false) {
                             lateststepstart = timeAll;//刚开始行走时 设置行走时间
@@ -293,12 +298,10 @@ public class MyService extends AbsWorkService {
                     else {//速度为零并且距离为零
                         flagsteping = false;//取消正在行走的标志
                         lateststepend = timeAll;//设置最近一次行走停止的时间
-                        Log.e("LocationService","22222222222222222222");
                         if (flagagainsteping == true) {//判断是否是刚刚停止行走
                             againstepingsec += 10;//重新行走的静止时间加10
                         }
                     }
-                    Log.e("LocationService","655555555555");
                     if (againstepingsec > 60 && flagagainsteping == true) {//表示刚刚停止行走 但是在新地点的时间已经超过4分钟
                         againstepingsec = 0;//
                         flagagainsteping = false;//
@@ -325,7 +328,7 @@ public class MyService extends AbsWorkService {
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
                             }
                         }
-                        Log.e("LocationService","3333333333333333333");
+
                         // TODO: 2019/12/3 在这加上可识别地点的判断  方便用户进行使用
                         boolean inAbleLocation = false;
                         if (inlocation==false) {
@@ -362,15 +365,21 @@ public class MyService extends AbsWorkService {
                         }
 
                     }
-                    Log.e("LocationService","755555555555");
+
                     if (againstepingsec < 60 && isagainsteping == true) {//添加条件是用户进行了休息时间不到1分钟 并且继续行走
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     //把两次行走之间的时间存入数据 算作行走; 时间为latestActivityFinishTime-当前时间
-                                    URL url = new URL("https://cn.bing.com/");// TODO: 2019/12/2 添加完整的url地址
-                                    url.openConnection();
+                                    detail.setActivity_id(findActivityId(activityName));
+                                    detail.setLocation_id(findLocationId(LocationName));
+                                    detail.setBegin_time(latestActivityFinishTime);
+                                    detail.setFinish_time(timeAll);
+                                    URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                                    URLConnection connection= url.openConnection();
+                                    InputStream inputStream=connection.getInputStream();
+                                    inputStream.close();
                                     writeExternal(getBaseContext(), "起始时间:" + latestActivityFinishTime + "  结束时间:" + timeAll+"    继续行走", null);
                                 } catch (MalformedURLException e) {
                                     e.printStackTrace();
@@ -382,7 +391,7 @@ public class MyService extends AbsWorkService {
                         isagainsteping = false;
                         flagagainsteping = false;
                     }
-                    Log.e("LocationService","855555555555");
+
                     if (flagsteping == false) {
                         //停止运动之后把行走时间存输入数据库  并且把行走的时间置零
                         if (stepingsec > 60) {//如果行走时间超过4分钟才存入到数据库
@@ -393,11 +402,25 @@ public class MyService extends AbsWorkService {
                                 @Override
                                 public void run() {
                                     try {
-                                        URL url = new URL("https://cn.bing.com/");// TODO: 2019/12/2 添加完整的url地址
-                                        url.openConnection();
+                                        detail.setActivity_id(findActivityId(activityName));
+                                        detail.setLocation_id(findLocationId(LocationName));
+                                        detail.setBegin_time(ss);
+                                        detail.setFinish_time(lateststepstart);
+                                        URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                                        URLConnection connection=url.openConnection();
+                                        InputStream inputStream=connection.getInputStream();
+                                        inputStream.close();
                                         // TODO: 2019/12/3 把前一个活动存入到数据库  起始时间为latestActivityFinishTime 结束时间为lateststepstart(当前-stepingsec) 活动名为activityname
                                         writeExternal(getBaseContext(), "起始时间:" + ss + "  结束时间:"+lateststepstart +"    "+activityName, null);
                                         // TODO: 2019/12/3 把行走存入到数据库  起始时间为lateststepstart 结束时间为lateststepend 活动名为行走
+                                        detail.setActivity_id(0);
+                                        detail.setLocation_id(0);
+                                        detail.setBegin_time(lateststepstart);
+                                        detail.setFinish_time(lateststepend);
+                                        url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                                        connection=url.openConnection();
+                                        inputStream=connection.getInputStream();
+                                        inputStream.close();
                                         writeExternal(getBaseContext(), "起始时间:" + lateststepstart + "  结束时间:"+lateststepend +"    行走", null);
 
                                     } catch (MalformedURLException e) {
@@ -449,25 +472,21 @@ public class MyService extends AbsWorkService {
 //                    }
                     }
 
-                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
+//                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
                     handlerThree.post(new Runnable() {
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "steping=" + stepingsec + ";usingtime=" + usingTime + ";againstepsec=" + againstepingsec + "    " + speed + "    " + finalDistance + "   正在进行的活动"+activityName + timeAll, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "steping=" + stepingsec + ";usingtime=" + usingTime + ";againstepsec=" + againstepingsec + "    " + speed + "    " + finalDistance + "   正在进行的活动"+activityName + timeAll, Toast.LENGTH_LONG).show();
                         }
 
                     });
                     perbdlocation = bdLocation;
-                    Log.e("LocationService","11111111111111111111");
 
                     isrunning=true;
                 }
             });
-            Log.e("LocationService","11111111111111111111");
-            Log.e("LocationService","11111111111111111111");
         }
-        Log.e("LocationService","11111111111111111111");
     }
     private int findActivityId(String activityName){
         for (Activity activity:activities){
@@ -506,7 +525,7 @@ public class MyService extends AbsWorkService {
         int locationId=findLocationId(locationName);
         for (Contact contact:contacts){
             if (locationId!=-1&&contact.getLocation_Id()==locationId){
-                Log.e("LocationService",contact.getLocation_Id()+"");
+//                Log.e("LocationService",contact.getLocation_Id()+"");
                 return findActivityName(contact.getActivity_Id());
             }
         }
@@ -515,7 +534,7 @@ public class MyService extends AbsWorkService {
 
     //获取用户的常用地点列表
     private List<Location> getLocations(int userId) throws IOException {
-        Log.e("LocationService","获取location列表");
+//        Log.e("LocationService","获取location列表");
 //        final List<LocationBean> locationBeans = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
@@ -596,15 +615,15 @@ public class MyService extends AbsWorkService {
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void stringEvent(String s) throws ParseException {
         if (s.equals("ACTION_SCREEN_ON")){
-            Log.e("LocationService","ACTION_SCREEN_ON");//屏幕点亮
+//            Log.e("LocationService","ACTION_SCREEN_ON");//屏幕点亮
             latestScreenOn =ft.format(new Date());
             screenFlag="ACTION_SCREEN_ON";
-            Log.e("LocationService",latestScreenOn);
+//            Log.e("LocationService",latestScreenOn);
         }
         if (s.equals("ACTION_SCREEN_OFF")){
-            Log.e("LocationService","ACTION_SCREEN_OFF");//屏幕熄灭
+//            Log.e("LocationService","ACTION_SCREEN_OFF");//屏幕熄灭
             latestScreenOff=ft.format(new Date());
-            Log.e("LocationService",latestScreenOff);
+//            Log.e("LocationService",latestScreenOff);
             if((ft.parse(latestScreenOff).getTime() - ft.parse(latestScreenPresent).getTime()) > 60000) {
                 //把活动的数据存储到 时间为latestActivityFinishTime到latestScreenPresent  活动名为activityname  地点为locationname  玩手机的时间超过一分钟进行存储
                 final String ss=latestActivityFinishTime;
@@ -612,11 +631,21 @@ public class MyService extends AbsWorkService {
                     @Override
                     public void run() {
                         try {
-                            URL url = new URL("https://cn.bing.com/");// TODO: 2019/12/2 添加完整的url地址
-                            url.openConnection();
+                            detail.setActivity_id(findActivityId(activityName));
+                            detail.setLocation_id(findLocationId(LocationName));
+                            detail.setBegin_time(ss);
+                            detail.setFinish_time(latestScreenPresent);
+                            URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                            URLConnection connection=url.openConnection();
+                            InputStream in = connection.getInputStream();
                             writeExternal(getBaseContext(),"起始时间:"+ss+"  结束时间:"+latestScreenPresent+"    "+activityName,null);
-                            url = new URL("https://cn.bing.com/");// TODO: 2019/12/2 添加完整的url地址  把手机时间打包成json传达服务器端
-                            url.openConnection();
+                            detail.setActivity_id(0);
+                            detail.setLocation_id(0);
+                            detail.setBegin_time(latestScreenPresent);
+                            detail.setFinish_time(latestScreenOff);
+                            url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址  把手机时间打包成json传达服务器端
+                            connection=url.openConnection();
+                            in = connection.getInputStream();
                             writeExternal(getBaseContext(),"起始时间:"+latestScreenPresent+"  结束时间:"+latestScreenOff+"    手机娱乐",null);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
@@ -630,7 +659,7 @@ public class MyService extends AbsWorkService {
             screenFlag="ACTION_SCREEN_OFF";
         }
         if (s.equals("ACTION_USER_PRESENT")){
-            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
+//            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
             latestScreenPresent=ft.format(new Date());
             //如果五点之后解锁手机就认为起床
             if (ft.parse(latestScreenPresent).getHours()>=5&&ft.parse(latestScreenPresent).getHours()<=9&&flagsleep==false){
@@ -638,8 +667,14 @@ public class MyService extends AbsWorkService {
                     @Override
                     public void run() {
                         try {
-                            URL url = new URL("https://cn.bing.com/");
-                            url.openConnection();
+                            detail.setActivity_id(findActivityId("睡觉"));
+                            detail.setLocation_id(findLocationId(LocationName));
+                            detail.setBegin_time(latestScreenOff);
+                            detail.setFinish_time(latestScreenPresent);
+                            URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                            URLConnection connection=url.openConnection();
+                            InputStream inputStream= connection.getInputStream();
+                            inputStream.close();
                             writeExternal(getBaseContext(),"起始时间:"+latestScreenOff+"  结束时间:"+latestScreenPresent+"     睡觉",null);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
@@ -653,21 +688,27 @@ public class MyService extends AbsWorkService {
             }
             flagsleep=true;
 //            latestActivityFinishTime=latestScreenPresent;
-            Log.e("LocationService",latestScreenPresent);
+//            Log.e("LocationService",latestScreenPresent);
             screenFlag="ACTION_USER_PRESENT";
         }
         if (s.equals("ACTION_CLOSE_SYSTEM_DIALOGS")){
-            Log.e("LocationService","ACTION_CLOSE_SYSTEM_DIALOGS");//应用缩小 后台或窗口化
+//            Log.e("LocationService","ACTION_CLOSE_SYSTEM_DIALOGS");//应用缩小 后台或窗口化
             screenFlag="ACTION_CLOSE_SYSTEM_DIALOGS";
         }
         if (s.equals("voice warm")&&flagsleep==false){
-            Log.e("LocationService","voice warm");//应用缩小 后台或窗口化
+//            Log.e("LocationService","voice warm");//应用缩小 后台或窗口化
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        URL url = new URL("https://cn.bing.com/");
-                        url.openConnection();
+                        detail.setActivity_id(findActivityId("睡觉"));
+                        detail.setLocation_id(findLocationId(LocationName));
+                        detail.setBegin_time(latestScreenOff);
+                        detail.setFinish_time(ft.format(new Date()));// TODO: 2019/12/11 修改时间为当前时间
+                        URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                        URLConnection connection=url.openConnection();
+                        InputStream inputStream= connection.getInputStream();
+                        inputStream.close();
                         writeExternal(getBaseContext(),"起始时间:"+latestScreenOff+"  结束时间:"+latestScreenPresent+"      睡觉",null);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -686,7 +727,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void stopWork(Intent intent, int flags, int startId) {
-        Log.e("LocationService停止工作","");
+//        Log.e("LocationService停止工作","");
     }
 
     @Override
@@ -702,7 +743,7 @@ public class MyService extends AbsWorkService {
 
     @Override
     public void onServiceKilled(Intent rootIntent) {
-        Log.e("LocationService被杀死","");
+//        Log.e("LocationService被杀死","");
         isrunning=false;
 //        Intent intent=new Intent(this,MyService.class);
 //        startService(intent);
