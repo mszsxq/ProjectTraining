@@ -172,7 +172,7 @@ public class ModifyPage extends SwipeBackActivity implements View.OnClickListene
             Message msg = new Message();
             Bundle bundle = new Bundle();
             bundle.putString("iconName",data.getStringExtra("iconName"));
-            bundle.putInt("activityId",data.getIntExtra("activity_id",0));
+            bundle.putInt("activityId",data.getIntExtra("activityId",0));
             bundle.putString("color",data.getStringExtra("color"));
             bundle.putString("activityName",data.getStringExtra("activityName"));
             bundle.putInt("iconId",data.getIntExtra("iconId",0));

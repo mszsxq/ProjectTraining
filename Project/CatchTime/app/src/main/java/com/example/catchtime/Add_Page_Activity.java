@@ -100,16 +100,16 @@ public class Add_Page_Activity extends AppCompatActivity {
                 }
                 Log.e("info", info);
                 listView.setAdapter(new MyAdapterActivities(Add_Page_Activity.this, lists, R.layout.activitiesfragment_litem));
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent();
-                        intent.setClass(Add_Page_Activity.this, ActivitiesDetail.class);
-                        intent.putExtra("color", lists.get(position).getColor());
-                        intent.putExtra("activity_name",lists.get(position).getActivity_name());
-                        startActivity(intent);
-                    }
-                });
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent intent = new Intent();
+//                        intent.setClass(Add_Page_Activity.this, ActivitiesDetail.class);
+//                        intent.putExtra("color", lists.get(position).getColor());
+//                        intent.putExtra("activity_name",lists.get(position).getActivity_name());
+//                        startActivity(intent);
+//                    }
+//                });
 
             }
         };

@@ -153,132 +153,13 @@ public class Add_detailPage extends SwipeBackActivity {
         });
 
     }
-//                    }else{
-//                     //如果不是当天的activity
-//                     //非法输入弹框
-//                        if (dstart.before(dallstart) || dend.after(dallend)){
-//                            Toast.makeText(getApplicationContext(),"时间越界",Toast.LENGTH_SHORT).show();
-//                        }else {
-//                            //开始时间相同
-//                            if ((dallstart.compareTo(dstart)) == 0) {
-//                                if ((dallend.compareTo(dend) == 0)) {
-//                                    //结束时间相同
-//                                    Time timeall = new Time();
-//                                    timeall.setBegin_time(allstarts);
-//                                    timeall.setFinish_time(allstarts);
-//                                    Time actime = new Time();
-//                                    actime.setBegin_time(allstarts);
-//                                    actime.setFinish_time(allends);
-//                                    long sum = (dend.getTime() - dallend.getTime()) / 600000;
-//                                    long num = (dstart.getTime() - dend.getTime()) / 600000;
-//                                    timeMessageOldBeforeActivityOne(chuan_activity_name,timeall,user_id,sum);
-//                                    timeMessageOldNewActivity(activity_id, location_id, actime,num,user_id);
-//                                    finish();
-//
-//                                } else {
-//                                    //结束时间不同
-//                                    Time timeall = new Time();
-//                                    timeall.setBegin_time(end);
-//                                    timeall.setFinish_time(allends);
-//                                    Time actime = new Time();
-//                                    actime.setBegin_time(start);
-//                                    actime.setFinish_time(end);
-//                                    long sum = (dstart.getTime() - dend.getTime()) / 600000;
-//                                    long num = (dend.getTime() - dallend.getTime()) / 600000;
-//                                    timeMessageOldBeforeActivityOne(chuan_activity_name,timeall,user_id,sum);
-//                                    timeMessageOldNewActivity(activity_id, location_id, actime, num,user_id);
-//                                    finish();
-//                                }
-//                            } else {
-//                                //开始时间不同
-//                                if ((dallend.compareTo(dend) == 0)) {
-//                                    //结束时间相同
-//                                    Time timeall = new Time();
-//                                    timeall.setBegin_time(allstarts);
-//                                    timeall.setFinish_time(start);
-//                                    Time actime = new Time();
-//                                    actime.setBegin_time(start);
-//                                    actime.setFinish_time(allends);
-//                                    long sum = (dallstart.getTime() - dstart.getTime()) / 600000;
-//                                    long num = (dstart.getTime() - dend.getTime()) / 600000;
-//                                    timeMessageOldBeforeActivityOne(chuan_activity_name,timeall,user_id,sum);
-//                                    timeMessageOldNewActivity(activity_id, location_id, actime,num,user_id);
-//                                    finish();
-//                                }else{
-//                                    //结束时间不同
-//                                    Time timeall1 = new Time();
-//                                    timeall1.setBegin_time(allstarts);
-//                                    timeall1.setFinish_time(start);
-//                                    Time timeall2 = new Time();
-//                                    timeall2.setBegin_time(end);
-//                                    timeall2.setFinish_time(allends);
-//                                    Time actime = new Time();
-//                                    actime.setBegin_time(start);
-//                                    actime.setFinish_time(end);
-//                                    long sum1=(dallstart.getTime()-dstart.getTime())/600000;
-//                                    long sum2=(dend.getTime()-dallend.getTime())/600000;
-//                                    long sum = sum1+sum2;
-//                                    long num= (dstart.getTime()-dend.getTime())/600000;
-//                                    timeMessageOldBeforeActivityMuch(chuan_activity_name,timeall1,timeall2,user_id,sum);
-//                                    timeMessageOldNewActivity(activity_id,location_id,actime,num,user_id);
-//                                    finish();
-//                                }
-//                            }
-//                                }
-//                            }
-//
-//
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
+
     private void getnowtime(){
         DateFormat df= new SimpleDateFormat("yyyy-MM-dd");//对日期进行格式化
         timenow = df.format(new Date());
         Log.e("timenow",timenow);
     }
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.tx_begin:
-//                TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker timePicker, int hour, int min) {
-//                        if(hour<10 && min<10){
-//                            btnbegin.setText("0"+hour+":"+"0"+min);
-//                        }else if (hour<10){
-//                            btnbegin.setText("0"+hour+":"+min);
-//                        }else if (min<10){
-//                            btnbegin.setText(hour+":"+"0"+min);
-//                        }else {
-//                            btnbegin.setText(hour+":"+min);
-//                        }
-//                    }
-//                };
-//                TimePickerDialog dialog = new TimePickerDialog(Add_detailPage.this,TimePickerDialog.THEME_HOLO_LIGHT,listener,hour,min,true);
-//                dialog.show();
-//                break;
-//            case R.id.tx_end:
-//                TimePickerDialog.OnTimeSetListener listener1 = new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker timePicker, int hour, int min) {
-//                        if(hour<10 && min<10){
-//                            btnover.setText("0"+hour+":"+"0"+min);
-//                        }else if (hour<10){
-//                            btnover.setText("0"+hour+":"+min);
-//                        }else if (min<10){
-//                            btnover.setText(hour+":"+"0"+min);
-//                        }else {
-//                            btnover.setText(hour+":"+min);
-//                        }
-//                    }
-//                };
-//                TimePickerDialog dialog1 = new TimePickerDialog(Add_detailPage.this,TimePickerDialog.THEME_HOLO_LIGHT,listener1,hour,min,true);
-//                dialog1.show();
-//                break;
-//            default:
-//                break;
-//        }
-//    }
+
 
     //---------------------------------------------------发送time和activity_name找时间
     private void sendMessage() {
@@ -312,6 +193,7 @@ public class Add_detailPage extends SwipeBackActivity {
         String list = gson.toJson(timeList);
         Log.e("发数据啦","准备！");
         Log.e("time",list);
+        Log.e("chuanname", "sendMessageTime:name "+chuan_activity_name+"id"+location_id+"acid"+activity_id+time );
         new Thread(){
             @Override
             public void run() {

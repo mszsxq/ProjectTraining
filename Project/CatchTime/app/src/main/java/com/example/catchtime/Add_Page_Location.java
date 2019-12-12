@@ -49,9 +49,10 @@ public class Add_Page_Location extends AppCompatActivity {
         setContentView(R.layout.locationfragment);
         listView = findViewById(R.id.loc_lv_local);
         final List<Location> locations=new ArrayList<>();
-        getData();
+
         p=getSharedPreferences("user",MODE_PRIVATE);
         id = p.getInt("user_id",0);
+        getData();
         handler=new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -69,14 +70,14 @@ public class Add_Page_Location extends AppCompatActivity {
                 myAdapter = new MyAdapterLocation(Add_Page_Location.this,locations,R.layout.item_location);
 //                ListView listView = findViewById(R.id.loc_lv_local);
                 listView.setAdapter(myAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent();
-                        intent.setClass(Add_Page_Location.this, ActivitiesDetail.class);
-                        startActivity(intent);
-                    }
-                });
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent intent = new Intent();
+//                        intent.setClass(Add_Page_Location.this, ActivitiesDetail.class);
+//                        startActivity(intent);
+//                    }
+//                });
             }
         };
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,9 +103,9 @@ public class Add_Page_Location extends AppCompatActivity {
         });
     }
     private void getData() {
-        int user_id=p.getInt("user_id",0);
+
         User user=new User();
-        user.setUser_id(user_id);
+        user.setUser_id(id);
         Gson gson = new Gson();
         String userid = gson.toJson(user);
         Log.e("mm",userid);
