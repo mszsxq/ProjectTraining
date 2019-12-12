@@ -11,6 +11,6 @@ import usertable.dao.UserTableDao;
  */
 public class UserTableService {
 	public String querryDayTableById(int id) {
-		return new UserTableDao().findusertableByuserid(id).getDayrecord_table_name();
+		return id+"_data";
 	}
 }

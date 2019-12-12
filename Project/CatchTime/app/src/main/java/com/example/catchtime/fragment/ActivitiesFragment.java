@@ -100,7 +100,7 @@ public class ActivitiesFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), ActivitiesDetail.class);
-                        intent.putExtra("color", lists.get(position).getColor());
+                        intent.putExtra("color1", lists.get(position).getColor());
                         intent.putExtra("icon", lists.get(position).getImage());
                         intent.putExtra("activity_name",lists.get(position).getActivity_name());
                         startActivity(intent);

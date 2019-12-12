@@ -79,7 +79,6 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     private int id;
     private ImageView imageView;
     private String activityName;
-    private int color;
     private TextView textView;
 
 //    private String ip="http://C:8080/Catchtime/ActivitiesDetailServlet?activity=cycle&id=1";
@@ -303,19 +302,29 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         }
     }
     public void setColor(){
-        color= getIntent().getIntExtra("color",0);
-        int colorr= getResources().getColor(color);
-//        if(colorstring==null){
-//            color =getResources().getIdentifier("bg", "color", getPackageName());
-//        }else {
-//            color =getResources().getIdentifier(colorstring, "color", getPackageName());
-//        }
-        linearLayout.setBackgroundColor(colorr);
-        l1.setBackgroundColor(colorr);
-        l2.setBackgroundColor(colorr);
-        l3.setBackgroundColor(colorr);
-        int icon =getIntent().getIntExtra("icon",0);
-        imageView.setImageResource(icon);
+        if(null!=getIntent()){
+            int color= getIntent().getIntExtra("color",0);
+            int color1= getIntent().getIntExtra("color1",0);
+            if(color!=0){
+                linearLayout.setBackgroundColor(color);
+                l1.setBackgroundColor(color);
+                l2.setBackgroundColor(color);
+                l3.setBackgroundColor(color);
+            }else if(color1!=0) {
+                linearLayout.setBackgroundColor(getResources().getColor(color1));
+                l1.setBackgroundColor(getResources().getColor(color1));
+                l2.setBackgroundColor(getResources().getColor(color1));
+                l3.setBackgroundColor(getResources().getColor(color1));
+            }else{
+                linearLayout.setBackgroundColor(0);
+                l1.setBackgroundColor(0);
+                l2.setBackgroundColor(0);
+                l3.setBackgroundColor(0);
+            }
+            int icon =getIntent().getIntExtra("icon",0);
+            imageView.setImageResource(icon);
+        }
+
     }
 
 

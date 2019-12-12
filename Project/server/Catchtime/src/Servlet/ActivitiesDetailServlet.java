@@ -39,8 +39,8 @@ public class ActivitiesDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		int  id =1;
-//		String activityName ="cycle";
+//		int  id =3;
+//		String activityName ="睡觉";
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String id1=request.getParameter("id");
@@ -51,7 +51,7 @@ public class ActivitiesDetailServlet extends HttpServlet {
 		
 		UserTableService userTableService =new UserTableService();	
 		String tableName = userTableService.querryDayTableById(id);
-		
+		System.out.println(tableName);
 		DataService dataService =new DataService();
 //		List<All_data> list =null;
 //		list =dataService.activityRecently(tableName, activityName);
