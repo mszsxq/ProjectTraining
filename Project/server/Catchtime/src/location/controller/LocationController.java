@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import contact.dao.ContactDao;
+import entity.Contact;
 import entity.Location;
 import entity.User;
 import location.dao.LocationDao;
