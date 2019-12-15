@@ -171,7 +171,7 @@ public class MyService extends AbsWorkService {
             locationClient = new LocationClient(getApplicationContext());
             locationClientOption = new LocationClientOption();
             locationClientOption.setOpenGps(true);
-            locationClientOption.setScanSpan(10000);//每十秒进行一次扫描
+            locationClientOption.setScanSpan(20000);//每十秒进行一次扫描
             locationClientOption.setCoorType("bd09ll");
             locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
             locationClientOption.setIsNeedAddress(true);
@@ -256,7 +256,7 @@ public class MyService extends AbsWorkService {
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
 //                    Log.e("LocationService",new Date().getHours()+"");
-                    usingTime += 10;
+                    usingTime += 20;
 
                     if (latestScreenPresent == null) {
                         latestScreenPresent = timeAll;
@@ -287,7 +287,7 @@ public class MyService extends AbsWorkService {
 
                     if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
 
-                        stepingsec += 10;
+                        stepingsec += 20;
                         if (flagsteping == false) {
                             lateststepstart = timeAll;//刚开始行走时 设置行走时间
                         }
@@ -303,7 +303,7 @@ public class MyService extends AbsWorkService {
                         flagsteping = false;//取消正在行走的标志
                         lateststepend = timeAll;//设置最近一次行走停止的时间
                         if (flagagainsteping == true) {//判断是否是刚刚停止行走
-                            againstepingsec += 10;//重新行走的静止时间加10
+                            againstepingsec += 20;//重新行走的静止时间加20
                         }
                     }
                     if (againstepingsec > 60 && flagagainsteping == true) {//表示刚刚停止行走 但是在新地点的时间已经超过4分钟
@@ -384,6 +384,7 @@ public class MyService extends AbsWorkService {
                                     detail.setBegin_time(latestActivityFinishTime);
                                     detail.setFinish_time(timeAll);
                                     URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                                    Log.e(TAG,url.toString());
                                     URLConnection connection= url.openConnection();
                                     InputStream inputStream=connection.getInputStream();
                                     inputStream.close();
@@ -414,6 +415,7 @@ public class MyService extends AbsWorkService {
                                         detail.setBegin_time(ss);
                                         detail.setFinish_time(lateststepstart);
                                         URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                                        Log.e(TAG,url.toString());
                                         URLConnection connection=url.openConnection();
                                         InputStream inputStream=connection.getInputStream();
                                         inputStream.close();
@@ -425,6 +427,7 @@ public class MyService extends AbsWorkService {
                                         detail.setBegin_time(lateststepstart);
                                         detail.setFinish_time(lateststepend);
                                         url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                                        Log.e(TAG,url.toString());
                                         connection=url.openConnection();
                                         inputStream=connection.getInputStream();
                                         inputStream.close();
@@ -632,7 +635,8 @@ public class MyService extends AbsWorkService {
 //            Log.e("LocationService","ACTION_SCREEN_OFF");//屏幕熄灭
             latestScreenOff=ft.format(new Date());
 //            Log.e("LocationService",latestScreenOff);
-            if((ft.parse(latestScreenOff).getTime() - ft.parse(latestScreenPresent).getTime()) > 60000) {
+            if((ft.parse(latestScreenOff).getTime() - ft.parse(latestScreenPresent).getTime()) > 60000
+                    &&ft.parse(latestScreenOff).getTime()-ft.parse(latestScreenOn).getTime()>60000) {
                 //把活动的数据存储到 时间为latestActivityFinishTime到latestScreenPresent  活动名为activityname  地点为locationname  玩手机的时间超过一分钟进行存储
                 final String ss=latestActivityFinishTime;
                 new Thread(new Runnable() {
@@ -644,6 +648,7 @@ public class MyService extends AbsWorkService {
                             detail.setBegin_time(ss);
                             detail.setFinish_time(latestScreenPresent);
                             URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
+                            Log.e(TAG,url.toString());
                             URLConnection connection=url.openConnection();
                             InputStream in = connection.getInputStream();
                             writeExternal(getBaseContext(),"起始时间:"+ss+"  结束时间:"+latestScreenPresent+"    "+activityName,null);
@@ -652,6 +657,7 @@ public class MyService extends AbsWorkService {
                             detail.setBegin_time(latestScreenPresent);
                             detail.setFinish_time(latestScreenOff);
                             url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址  把手机时间打包成json传达服务器端
+                            Log.e(TAG,url.toString());
                             connection=url.openConnection();
                             in = connection.getInputStream();
                             writeExternal(getBaseContext(),"起始时间:"+latestScreenPresent+"  结束时间:"+latestScreenOff+"    手机娱乐",null);
@@ -686,6 +692,7 @@ public class MyService extends AbsWorkService {
                             detail.setBegin_time(latestScreenOff);
                             detail.setFinish_time(latestScreenPresent);
                             URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                            Log.e(TAG,url.toString());
                             URLConnection connection=url.openConnection();
                             InputStream inputStream= connection.getInputStream();
                             inputStream.close();
@@ -720,6 +727,7 @@ public class MyService extends AbsWorkService {
                         detail.setBegin_time(latestScreenOff);
                         detail.setFinish_time(ft.format(new Date()));// TODO: 2019/12/11 修改时间为当前时间
                         URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));
+                        Log.e(TAG,url.toString());
                         URLConnection connection=url.openConnection();
                         InputStream inputStream= connection.getInputStream();
                         inputStream.close();

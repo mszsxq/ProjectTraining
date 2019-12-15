@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
 //                    Log.e("LocationService", "screen off");
                     EventBus.getDefault().post(new String("ACTION_SCREEN_OFF"));
-
                 } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
 //                    Log.e("LocationService", "user present");
                     EventBus.getDefault().post(new String("ACTION_USER_PRESENT"));
@@ -129,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 activities=gson.fromJson(list.get(0),new TypeToken<List<Activity>>() {}.getType());
                 locations=gson.fromJson(list.get(0),new TypeToken<List<Location>>() {}.getType());
                 contacts=gson.fromJson(list.get(0),new TypeToken<List<Contact>>() {}.getType());
-                if (!isServiceRunning(getBaseContext(),"com.example.cakeshop.backgroundservice.MyService")){
-                    Toast.makeText(getBaseContext(),"Starting service..",Toast.LENGTH_SHORT).show();
+                if (!isServiceRunning(getBaseContext(),"com.example.catchtime.backgroundService.MyService")){
+//                    Toast.makeText(getBaseContext(),"Starting service..",Toast.LENGTH_SHORT).show();
                     setting=new Setting(getBaseContext());
                     setting.resetServiceWorkingTime();
                     setting.resetStartTime();
@@ -139,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
                     intent1.putExtra("activities",list.get(0));
                     intent1.putExtra("locations",list.get(1));
                     intent1.putExtra("contacts",list.get(2));
-                    System.out.println("111111"+list.get(0));
-                    System.out.println("111111"+list.get(1));
-                    System.out.println("111111"+list.get(2));
                     startService(intent1);
 //        mKeepAliveHandler=new KeepAliveHandler();
                     KeepAliveHandler.Companion.setJob(getBaseContext());
