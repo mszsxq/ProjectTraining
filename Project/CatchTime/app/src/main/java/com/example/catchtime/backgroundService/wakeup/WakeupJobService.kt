@@ -9,13 +9,12 @@ import android.app.job.JobScheduler
 import android.content.Context
 import com.example.catchtime.backgroundService.Setting
 import com.example.catchtime.backgroundService.utils.Utils
-
-
+import com.example.catchtime.backgroundService.wakeup.WakeupJobService
 const val JOB_ID = 123
-const val JOB_PERIOD : Long = 1000 * 60 * 15
+const val JOB_PERIOD : Long = 1000 * 60 * 1
 
 /**
- * Created by Neo on 2018-12-04.
+ * Created by
  * http://m3n.ir/
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -43,6 +42,8 @@ class WakeupJobService : JobService() {
     companion object {
 
         fun setJob(context: Context){
+//            Utils.log( "Jobservice  开始执行")
+
             val componentName = ComponentName(context, WakeupJobService::class.java)
             val jobInfo = JobInfo.Builder(JOB_ID, componentName).setPersisted(true).setPeriodic(JOB_PERIOD)
             val jobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler

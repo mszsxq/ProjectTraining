@@ -19,10 +19,4 @@ public class MyApp extends Application {
     public void setState(String s) {
         myState = s;
     }
-
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(base);
-//        MultiDex.install(this);
-//    }
 }

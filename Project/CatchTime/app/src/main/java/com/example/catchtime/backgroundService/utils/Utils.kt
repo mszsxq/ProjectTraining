@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 
 /**
- * Created by Neo on 2018-12-02.
+ * Created
  * http://m3n.ir/
  */
 class Utils {

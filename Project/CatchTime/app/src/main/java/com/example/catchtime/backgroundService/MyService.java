@@ -153,15 +153,16 @@ public class MyService extends AbsWorkService {
         //初始化数据
         if (intent!=null){
             inits(intent);
-            Log.e("LocationService",activities.toString());
-            Log.e("LocationService",locations.toString());
-            Log.e("LocationService",contacts.toString());
+//            Log.e("LocationService",activities.toString());
+//            Log.e("LocationService",locations.toString());
+//            Log.e("LocationService",contacts.toString());
         }
 
         if (latestActivityFinishTime == null) {
             latestActivityFinishTime = ft.format(new Date());
         }
         if (isrunning==false) {
+            isrunning=true;
             if (!EventBus.getDefault().isRegistered(this)) {
                 EventBus.getDefault().register(this);
             }
@@ -171,7 +172,7 @@ public class MyService extends AbsWorkService {
             locationClient = new LocationClient(getApplicationContext());
             locationClientOption = new LocationClientOption();
             locationClientOption.setOpenGps(true);
-            locationClientOption.setScanSpan(20000);//每十秒进行一次扫描
+            locationClientOption.setScanSpan(10000);//每十秒进行一次扫描
             locationClientOption.setCoorType("bd09ll");
             locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
             locationClientOption.setIsNeedAddress(true);
@@ -256,7 +257,7 @@ public class MyService extends AbsWorkService {
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
 //                    Log.e("LocationService",new Date().getHours()+"");
-                    usingTime += 20;
+                    usingTime += 10;
 
                     if (latestScreenPresent == null) {
                         latestScreenPresent = timeAll;
@@ -285,9 +286,10 @@ public class MyService extends AbsWorkService {
                             new LatLng(perbdlocation.getLongitude(),
                                     perbdlocation.getLatitude()));
 
-                    if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
+//                    if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
+                    if (distance > 0 ) {//正常人的步行速度大概为1米每秒
 
-                        stepingsec += 20;
+                        stepingsec += 10;
                         if (flagsteping == false) {
                             lateststepstart = timeAll;//刚开始行走时 设置行走时间
                         }
@@ -303,7 +305,7 @@ public class MyService extends AbsWorkService {
                         flagsteping = false;//取消正在行走的标志
                         lateststepend = timeAll;//设置最近一次行走停止的时间
                         if (flagagainsteping == true) {//判断是否是刚刚停止行走
-                            againstepingsec += 20;//重新行走的静止时间加20
+                            againstepingsec += 10;//重新行走的静止时间加20
                         }
                     }
                     if (againstepingsec > 60 && flagagainsteping == true) {//表示刚刚停止行走 但是在新地点的时间已经超过4分钟
@@ -482,7 +484,7 @@ public class MyService extends AbsWorkService {
 //                    }
                     }
 
-                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
+                    Log.e("LocationService", "distance="+distance+"speed"+speed+"   steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
                     handlerThree.post(new Runnable() {
