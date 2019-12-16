@@ -11,7 +11,7 @@ import com.example.catchtime.backgroundService.Setting
 import com.example.catchtime.backgroundService.utils.Utils
 import com.example.catchtime.backgroundService.wakeup.WakeupJobService
 const val JOB_ID = 123
-const val JOB_PERIOD : Long = 1000 * 60 * 1
+const val JOB_PERIOD : Long = 1000 * 60 * 5
 
 /**
  * Created by

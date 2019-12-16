@@ -52,6 +52,7 @@ import androidx.annotation.Nullable;
 public class MyService extends AbsWorkService {
     public static boolean sShouldStopService;
     private static boolean isrunning=false;
+    private boolean flagupup=false;
     private String userName;
     private String internetIp;//访问的ip
     private String LocationName;//位置的名称
@@ -188,6 +189,7 @@ public class MyService extends AbsWorkService {
                     try {
                         if (new Date().getHours()>22&&(ft.parse(timeAll).getHours()-ft.parse(latestScreenPresent).getHours())>1){
                             flagsleep=false;
+                            flagupup=false;
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -677,8 +679,32 @@ public class MyService extends AbsWorkService {
         if (s.equals("ACTION_USER_PRESENT")){
 //            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
             latestScreenPresent=ft.format(new Date());
-            if (ft.parse(latestScreenPresent).getHours()>22){
+            if (ft.parse(latestScreenPresent).getHours()>22&&flagupup==false){
                 //弹出总结框
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            detail.setActivity_id(findActivityId("睡觉"));
+                            detail.setLocation_id(findLocationId(LocationName));
+                            detail.setBegin_time(latestScreenOff);
+                            detail.setFinish_time(latestScreenPresent);
+                            URL url = new URL("http://175.24.14.26:8080/Catchtime/DataController?id="+userid);
+                            Log.e(TAG,url.toString());
+                            URLConnection connection=url.openConnection();
+                            InputStream inputStream= connection.getInputStream();
+                            inputStream.close();
+                            writeExternal(getBaseContext(),"起始时间:"+latestScreenOff+"  结束时间:"+latestScreenPresent+"     睡觉",null);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }).start();
+                flagupup=true;
                 Intent dialogIntent = new Intent(getBaseContext(), TimedPopup.class);
                 dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(dialogIntent);
