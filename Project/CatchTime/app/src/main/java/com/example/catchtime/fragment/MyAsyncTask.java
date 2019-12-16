@@ -97,6 +97,9 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
     private int getDrawableID(String str) {
         try {
             String name = str;
+            if (name==null){
+                name="question";
+            }
             Field field = R.drawable.class.getField(name);
             int DrawableID = 0;
             DrawableID = field.getInt(new R.drawable());
@@ -113,6 +116,9 @@ public class MyAsyncTask extends AsyncTask<String,Void, ArrayList<PieEntry>> {
     private int getColorID(String str) {
         try {
             String name = str;
+            if(name==null){
+                name="main_red";
+            }
             Field field = R.color.class.getField(name);
             int ColorID = 0;
             ColorID = field.getInt(new R.drawable());

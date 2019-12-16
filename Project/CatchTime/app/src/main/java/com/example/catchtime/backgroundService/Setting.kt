@@ -1,4 +1,4 @@
-package com.example.catchtime.backgroundService;
+package com.example.catchtime.backgroundService
 import android.content.Context
 import com.example.catchtime.backgroundService.utils.AppSettings
 

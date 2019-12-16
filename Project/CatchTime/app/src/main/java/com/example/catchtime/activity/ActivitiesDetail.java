@@ -153,9 +153,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         }
         lineView.setData(xlist, ylist);
         progressBarShow();
-        lineView2.setData(
-                Arrays.asList("02-1","02-1","02-1","02-1","02-1","02-1","02-1"),
-                Arrays.asList(0.0f,1.0f,2.0f,1.0f,4.0f,5.0f,6.0f));
+
 
     }
     public String xListData(All_data a){
@@ -263,8 +261,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         imageView = (ImageView) findViewById(R.id.ac_icon);
         l1= (LinearLayout) findViewById(R.id.view_weekoccupy);
         l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
-        l3=(LinearLayout)findViewById(R.id.view_totaloccupy);
-        lineView2 =(LineView)findViewById(R.id.lineView2);
+//        lineView2 =(LineView)findViewById(R.id.lineView2);
         barCharts= findViewById(R.id.barchar);
         lineView=(LineView) findViewById(R.id.lineView);
         back = (ImageView) findViewById(R.id.acdetails_back);
@@ -309,12 +306,11 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
                 linearLayout.setBackgroundColor(color);
                 l1.setBackgroundColor(color);
                 l2.setBackgroundColor(color);
-                l3.setBackgroundColor(color);
             }else if(color1!=0) {
                 linearLayout.setBackgroundColor(getResources().getColor(color1));
                 l1.setBackgroundColor(getResources().getColor(color1));
                 l2.setBackgroundColor(getResources().getColor(color1));
-                l3.setBackgroundColor(getResources().getColor(color1));
+
             }else{
                 linearLayout.setBackgroundColor(0);
                 l1.setBackgroundColor(0);
