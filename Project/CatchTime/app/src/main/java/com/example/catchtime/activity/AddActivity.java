@@ -76,6 +76,7 @@ public class AddActivity extends SwipeBackActivity {
                 Intent intent = new Intent();
                 intent.setClass(AddActivity.this, AddActivityDetial.class);
                 startActivity(intent);
+                finish();
             }
         });
         btnex.setOnClickListener(new View.OnClickListener() {
