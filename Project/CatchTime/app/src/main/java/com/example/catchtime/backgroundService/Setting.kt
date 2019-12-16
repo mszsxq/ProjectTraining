@@ -1,4 +1,4 @@
-package com.example.catchtime.backgroundService;
+package com.example.catchtime.backgroundService
 import android.content.Context
 import com.example.catchtime.backgroundService.utils.AppSettings
 
@@ -11,7 +11,7 @@ const val S_CALL_COUNT_ALARM = "s_call_count_alarm"
 const val S_CALL_COUNT_JOB_SERVICE = "s_call_count_job_service"
 
 /**
- * Created
+ * Created by Neo on 2018-12-03.
  * http://m3n.ir/
  */
 class Setting(context: Context) {

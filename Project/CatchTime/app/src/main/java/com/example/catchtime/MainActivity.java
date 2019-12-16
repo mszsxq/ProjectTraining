@@ -2,6 +2,7 @@ package com.example.catchtime;
 
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -25,7 +26,6 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.catchtime.backgroundService.MyService;
 import com.example.catchtime.backgroundService.Setting;
 import com.example.catchtime.backgroundService.wakeup.KeepAliveHandler;
-import com.example.catchtime.backgroundService.wakeup.WakeupAlarm;
 import com.example.catchtime.backgroundService.wakeup.WakeupJobService;
 import com.example.catchtime.entity.Activity;
 import com.example.catchtime.entity.Contact;
@@ -83,6 +83,21 @@ public class MainActivity extends AppCompatActivity {
         intiView();
         initBottomBar();
         initFragment(0);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String packageName = "ai.kitt.snowboy"; //另一个app的包名
+        String className = "ai.kitt.snowboy.ServiceListener"; //另一个app要启动的组件的全路径名
+        intent.setClassName(packageName, className);
+        startService(intent);//或者bindService(intent, mConnection, Context.BIND_AUTO_CREATE); 都能启动
+
+
+        ComponentName componetName = new ComponentName(
+                "ai.kitt.snowboy",  //这个参数是另外一个app的包名
+                "ServiceListener");   //这个是要启动的Service的全路径名
+
+        intent = new Intent();
+        intent.setComponent(componetName);
+        startService(intent);
 
         Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
         setting=new Setting(this);

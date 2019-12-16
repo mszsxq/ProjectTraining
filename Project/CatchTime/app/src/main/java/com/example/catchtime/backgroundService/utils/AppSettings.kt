@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 
 
 /**
- * Created
+ * Created by Neo on 2018-12-03.
  * http://m3n.ir/
  */
 class AppSettings(context: Context) {

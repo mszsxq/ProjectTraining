@@ -2,15 +2,13 @@ package com.example.catchtime.backgroundService.wakeup;
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.example.catchtime.backgroundService.MyService
 import com.example.catchtime.backgroundService.Setting
 import com.example.catchtime.backgroundService.utils.Utils
-import com.example.catchtime.backgroundService.utils.Utils.Companion.toast
-
+import com.example.catchtime.backgroundService.wakeup.WakeupJobService;
 
 /**
- * Created
+ * Created by Neo on 2018-12-06.
  * http://m3n.ir/
  */
 class KeepAliveHandler {
@@ -27,7 +25,7 @@ class KeepAliveHandler {
             }
 
             Setting(context).updateJobLastActiveTime()
-            toast(context,"KeepAliveHandler WORKING!!!")
+//            toast(context,"KeepAliveHandler WORKING!!!")
 //            Utils.playSound(context, R.raw.relentless)
         }
 
