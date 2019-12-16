@@ -25,6 +25,8 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.catchtime.backgroundService.MyService;
 import com.example.catchtime.backgroundService.Setting;
 import com.example.catchtime.backgroundService.wakeup.KeepAliveHandler;
+import com.example.catchtime.backgroundService.wakeup.WakeupAlarm;
+import com.example.catchtime.backgroundService.wakeup.WakeupJobService;
 import com.example.catchtime.entity.Activity;
 import com.example.catchtime.entity.Contact;
 import com.example.catchtime.entity.Location;
@@ -37,6 +39,7 @@ import com.google.gson.reflect.TypeToken;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.xdandroid.hellodaemon.DaemonEnv;
 import com.xdandroid.hellodaemon.IntentWrapper;
 
 import org.greenrobot.eventbus.EventBus;
@@ -73,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-
        if (getSupportActionBar() != null){
            getSupportActionBar().hide();
        }
@@ -82,43 +84,51 @@ public class MainActivity extends AppCompatActivity {
         initBottomBar();
         initFragment(0);
 
+        Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
+        setting=new Setting(this);
+        setting.resetServiceWorkingTime();
+        setting.resetStartTime();
+        setting.setStartTime(System.currentTimeMillis());
+//        startService(new Intent(this, MyService.class));
+        DaemonEnv.startServiceMayBind(MyService.class);
+        KeepAliveHandler.Companion.setJob(this);
+
+//        Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
+//        setting=new Setting(this);
+//        setting.resetServiceWorkingTime();
+//        setting.resetStartTime();
+//        setting.setStartTime(System.currentTimeMillis());
+//        startService(new Intent(this, MyService.class));
+//        KeepAliveHandler.Companion.setJob(this);
+
+
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        // 屏幕亮屏广播
         filter.addAction(Intent.ACTION_SCREEN_ON);
-        // 屏幕解锁广播
         filter.addAction(Intent.ACTION_USER_PRESENT);
-        // 当长按电源键弹出“关机”对话或者锁屏时系统会发出这个广播
-        // example：有时候会用到系统对话框，权限可能很高，会覆盖在锁屏界面或者“关机”对话框之上，
-        // 所以监听这个广播，当收到时就隐藏自己的对话，如点击pad右下角部分弹出的对话框
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 if (Intent.ACTION_SCREEN_ON.equals(action)) {
-//                    Log.e("LocationService", "screen on");
                     EventBus.getDefault().post(new String("ACTION_SCREEN_ON"));
-
-                } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
-//                    Log.e("LocationService", "screen off");
+                }
+                else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                     EventBus.getDefault().post(new String("ACTION_SCREEN_OFF"));
-                } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
-//                    Log.e("LocationService", "user present");
+                }
+                else if (Intent.ACTION_USER_PRESENT.equals(action)) {
                     EventBus.getDefault().post(new String("ACTION_USER_PRESENT"));
-                } else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())) {
-//                    Log.e("LocationService", "close system dialogs");
+                }
+                else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())) {
                     EventBus.getDefault().post(new String("ACTION_CLOSE_SYSTEM_DIALOGS"));
                 }
-
             }
         };
-
         registerReceiver(mBatInfoReceiver, filter);
         IntentWrapper.whiteListMatters(this, "轨迹跟踪服务的持续运行");
 
-        getData();
         handler=new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(@NonNull Message msg) {
@@ -128,24 +138,34 @@ public class MainActivity extends AppCompatActivity {
                 activities=gson.fromJson(list.get(0),new TypeToken<List<Activity>>() {}.getType());
                 locations=gson.fromJson(list.get(0),new TypeToken<List<Location>>() {}.getType());
                 contacts=gson.fromJson(list.get(0),new TypeToken<List<Contact>>() {}.getType());
-                if (!isServiceRunning(getBaseContext(),"com.example.catchtime.backgroundService.MyService")){
-//                    Toast.makeText(getBaseContext(),"Starting service..",Toast.LENGTH_SHORT).show();
-                    setting=new Setting(getBaseContext());
-                    setting.resetServiceWorkingTime();
-                    setting.resetStartTime();
-                    setting.setStartTime(System.currentTimeMillis());
+//                if (!isServiceRunning(getBaseContext(),"com.example.catchtime.backgroundService.MyService")){
+//                if (!isServiceRunning(getBaseContext(),"MyService")){
+                    Toast.makeText(getBaseContext(),"Starting service..",Toast.LENGTH_SHORT).show();
+//                    DaemonEnv.startServiceMayBind(MyService.class);
+//                    setting=new Setting(getApplicationContext());
+//                    setting.resetServiceWorkingTime();
+//                    setting.resetStartTime();
+//                    setting.setStartTime(System.currentTimeMillis());
                     Intent intent1=new Intent(getBaseContext(), MyService.class);
                     intent1.putExtra("activities",list.get(0));
                     intent1.putExtra("locations",list.get(1));
                     intent1.putExtra("contacts",list.get(2));
                     startService(intent1);
-//        mKeepAliveHandler=new KeepAliveHandler();
-                    KeepAliveHandler.Companion.setJob(getBaseContext());
-//        mKeepAliveHandler.setJob(this);
-                }
+//                    KeepAliveHandler.Companion.wakeUpTheService(getBaseContext());
+//                    KeepAliveHandler.Companion.setJob(getApplicationContext());
+//                    KeepAliveHandler.Companion.setJob(getBaseContext());
+//                    Log.e("LocationService","执行KeepAliveHandler");
+//                    WakeupJobService.Companion.setJob(getBaseContext());
+//                    Log.e("LocationService","执行WakeupJobService");
+//                    WakeupAlarm.Companion.setJob(getBaseContext());
+//                    Log.e("LocationService","执行WakeupAlarm");
+
+
+//                }
                 return false;
             }
         });
+        getData();
     }
 
     private void getData() {
@@ -176,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
         Message msg = Message.obtain();
         msg.obj = info;
         handler.sendMessage(msg);
+//        Intent intent1=new Intent(getBaseContext(),MyService.class);
+//        startService(intent1);
     }
-
-
     public static boolean isServiceRunning(Context context, String ServiceName) {
         if (("").equals(ServiceName) || ServiceName == null)
             return false;
@@ -194,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
     private void initFragment(@Nullable int i) {
         //初始化fragment
 
@@ -264,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
             transaction.hide(mSettingFragment);
         }
     }
-
     private void initBottomBar() {
 
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
@@ -299,11 +317,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void intiView() {
         bottomBar=findViewById(R.id.bottomBar);
         mFrameLayout=findViewById(R.id.contentContainer);
     }
-
-
 }
