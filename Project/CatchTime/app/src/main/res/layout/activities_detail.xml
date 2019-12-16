@@ -98,34 +98,10 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <TextView
-        android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/toatalOccupy"
-        android:layout_below="@id/view_lastoccupy"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:text="总共占用时间"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        />
-    <LinearLayout
-        android:id="@+id/view_totaloccupy"
-        android:layout_below="@id/toatalOccupy"
-        android:layout_marginTop="20dp"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-        <com.example.catchtime.activity.LineView
-            android:id="@+id/lineView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+
 
     <TextView
-        android:layout_below="@id/view_totaloccupy"
+        android:layout_below="@id/view_lastoccupy"
         android:id="@+id/dayOccupy"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
