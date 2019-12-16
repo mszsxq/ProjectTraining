@@ -170,6 +170,7 @@ public class AddActivityDetial extends SwipeBackActivity {
                     Intent intent1 = new Intent();
                     intent1.setClass(getApplicationContext(), AddLocation.class);
                     startActivity(intent1);
+                    setResult(RESULT_OK,(new Intent()).setAction(String.valueOf(AddActivity.class)));
                 }else {
                     sendToServer2();
                     finish();

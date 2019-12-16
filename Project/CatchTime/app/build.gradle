@@ -136,4 +136,5 @@ dependencies {
 
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 }

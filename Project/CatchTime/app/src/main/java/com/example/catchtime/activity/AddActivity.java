@@ -118,6 +118,14 @@ public class AddActivity extends SwipeBackActivity {
         };
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+
+        }
+    }
+
     //由图片名称转换为资源文件
     private int getDrawableID(String str) {
         try {
