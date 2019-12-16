@@ -168,18 +168,27 @@ public class AddActivityDetial extends SwipeBackActivity {
 //                    SystemClock.sleep(1000);
                     sendToServer3();
                     Intent intent1 = new Intent();
-                    intent1.setClass(getApplicationContext(), AddLocation.class);
+                    intent1.setClass(getApplicationContext(), AddActivity.class);
                     startActivity(intent1);
+<<<<<<< HEAD
                     setResult(RESULT_OK,(new Intent()).setAction(String.valueOf(AddActivity.class)));
+=======
+                    finish();
+>>>>>>> 05c70cf4d8f6c562f24b7424828f08fa436c8238
                 }else {
                     sendToServer2();
+                    Intent intent1 = new Intent();
+                    intent1.setClass(getApplicationContext(), AddActivity.class);
+                    startActivity(intent1);
                     finish();
+
                 }
             }
         });
 
     }
-//    private void sendMessage() {
+
+    //    private void sendMessage() {
 //        new Thread(){
 //            @Override
 //            public void run() {

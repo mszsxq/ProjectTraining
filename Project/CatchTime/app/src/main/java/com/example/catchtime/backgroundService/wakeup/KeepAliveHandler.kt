@@ -5,7 +5,7 @@ import android.content.Intent
 import com.example.catchtime.backgroundService.MyService
 import com.example.catchtime.backgroundService.Setting
 import com.example.catchtime.backgroundService.utils.Utils
-
+import com.example.catchtime.backgroundService.wakeup.WakeupJobService;
 
 /**
  * Created by Neo on 2018-12-06.

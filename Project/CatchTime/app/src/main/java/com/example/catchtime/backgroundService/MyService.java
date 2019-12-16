@@ -52,6 +52,7 @@ import androidx.annotation.Nullable;
 public class MyService extends AbsWorkService {
     public static boolean sShouldStopService;
     private static boolean isrunning=false;
+    private boolean flagupup=false;
     private String userName;
     private String internetIp;//访问的ip
     private String LocationName;//位置的名称
@@ -153,15 +154,16 @@ public class MyService extends AbsWorkService {
         //初始化数据
         if (intent!=null){
             inits(intent);
-            Log.e("LocationService",activities.toString());
-            Log.e("LocationService",locations.toString());
-            Log.e("LocationService",contacts.toString());
+//            Log.e("LocationService",activities.toString());
+//            Log.e("LocationService",locations.toString());
+//            Log.e("LocationService",contacts.toString());
         }
 
         if (latestActivityFinishTime == null) {
             latestActivityFinishTime = ft.format(new Date());
         }
         if (isrunning==false) {
+            isrunning=true;
             if (!EventBus.getDefault().isRegistered(this)) {
                 EventBus.getDefault().register(this);
             }
@@ -171,7 +173,7 @@ public class MyService extends AbsWorkService {
             locationClient = new LocationClient(getApplicationContext());
             locationClientOption = new LocationClientOption();
             locationClientOption.setOpenGps(true);
-            locationClientOption.setScanSpan(20000);//每十秒进行一次扫描
+            locationClientOption.setScanSpan(10000);//每十秒进行一次扫描
             locationClientOption.setCoorType("bd09ll");
             locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
             locationClientOption.setIsNeedAddress(true);
@@ -187,6 +189,7 @@ public class MyService extends AbsWorkService {
                     try {
                         if (new Date().getHours()>22&&(ft.parse(timeAll).getHours()-ft.parse(latestScreenPresent).getHours())>1){
                             flagsleep=false;
+                            flagupup=false;
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -256,7 +259,7 @@ public class MyService extends AbsWorkService {
                     //进行睡觉的判断
                     timeAll = ft.format(new Date());
 //                    Log.e("LocationService",new Date().getHours()+"");
-                    usingTime += 20;
+                    usingTime += 10;
 
                     if (latestScreenPresent == null) {
                         latestScreenPresent = timeAll;
@@ -285,9 +288,10 @@ public class MyService extends AbsWorkService {
                             new LatLng(perbdlocation.getLongitude(),
                                     perbdlocation.getLatitude()));
 
-                    if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
+//                    if (distance > 0 || speed > 0) {//正常人的步行速度大概为1米每秒
+                    if (distance > 0 ) {//正常人的步行速度大概为1米每秒
 
-                        stepingsec += 20;
+                        stepingsec += 10;
                         if (flagsteping == false) {
                             lateststepstart = timeAll;//刚开始行走时 设置行走时间
                         }
@@ -303,7 +307,7 @@ public class MyService extends AbsWorkService {
                         flagsteping = false;//取消正在行走的标志
                         lateststepend = timeAll;//设置最近一次行走停止的时间
                         if (flagagainsteping == true) {//判断是否是刚刚停止行走
-                            againstepingsec += 20;//重新行走的静止时间加20
+                            againstepingsec += 10;//重新行走的静止时间加20
                         }
                     }
                     if (againstepingsec > 60 && flagagainsteping == true) {//表示刚刚停止行走 但是在新地点的时间已经超过4分钟
@@ -482,7 +486,7 @@ public class MyService extends AbsWorkService {
 //                    }
                     }
 
-                    Log.e("LocationService", "steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
+                    Log.e("LocationService", "distance="+distance+"speed"+speed+"   steping=" + stepingsec + ";usingtime=" + usingTime + "againstepsec" + againstepingsec + "   正在进行的活动"+activityName + timeAll);
                     Handler handlerThree = new Handler(Looper.getMainLooper());
                     final double finalDistance = distance;
                     handlerThree.post(new Runnable() {
@@ -675,8 +679,32 @@ public class MyService extends AbsWorkService {
         if (s.equals("ACTION_USER_PRESENT")){
 //            Log.e("LocationService","ACTION_USER_PRESENT");//系统解锁
             latestScreenPresent=ft.format(new Date());
-            if (ft.parse(latestScreenPresent).getHours()>22){
+            if (ft.parse(latestScreenPresent).getHours()>22&&flagupup==false){
                 //弹出总结框
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            detail.setActivity_id(findActivityId("睡觉"));
+                            detail.setLocation_id(findLocationId(LocationName));
+                            detail.setBegin_time(latestScreenOff);
+                            detail.setFinish_time(latestScreenPresent);
+                            URL url = new URL("http://175.24.14.26:8080/Catchtime/DataController?id="+userid);
+                            Log.e(TAG,url.toString());
+                            URLConnection connection=url.openConnection();
+                            InputStream inputStream= connection.getInputStream();
+                            inputStream.close();
+                            writeExternal(getBaseContext(),"起始时间:"+latestScreenOff+"  结束时间:"+latestScreenPresent+"     睡觉",null);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }).start();
+                flagupup=true;
                 Intent dialogIntent = new Intent(getBaseContext(), TimedPopup.class);
                 dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(dialogIntent);

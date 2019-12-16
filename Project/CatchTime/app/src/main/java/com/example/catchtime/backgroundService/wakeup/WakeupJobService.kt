@@ -52,7 +52,7 @@ class WakeupJobService : JobService() {
             if (resultCode == JobScheduler.RESULT_SUCCESS) {
                 Utils.log( "Job scheduled!")
             } else {
-                Utils.log( "Job not scheduled")
+                Utils.log( "WakeupJobService not scheduled")
             }
         }
 
