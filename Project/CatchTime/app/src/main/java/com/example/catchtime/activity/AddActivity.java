@@ -76,6 +76,7 @@ public class AddActivity extends SwipeBackActivity {
                 Intent intent = new Intent();
                 intent.setClass(AddActivity.this, AddActivityDetial.class);
                 startActivity(intent);
+                finish();
             }
         });
         btnex.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +117,14 @@ public class AddActivity extends SwipeBackActivity {
                 mListView.setAdapter(listViewAdapter);
             }
         };
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+
+        }
     }
 
     //由图片名称转换为资源文件

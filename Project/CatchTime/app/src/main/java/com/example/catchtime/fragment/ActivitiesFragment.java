@@ -51,6 +51,7 @@ public class ActivitiesFragment extends Fragment {
     private MyAdapterActivities myAdapterActivities;
     private Handler handler;
     private SharedPreferences p;
+    private boolean isCreated=false;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override

@@ -264,22 +264,20 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 Log.e("test","显示第1个页面");
                 hideFragments(transaction);
-                if (mActivitiesFragment ==null){
-                    mActivitiesFragment =new ActivitiesFragment();
-                    transaction.add(R.id.contentContainer,mActivitiesFragment,"activities");
-                }else {
-                    transaction.show(mActivitiesFragment);
-                }
+                mActivitiesFragment =new ActivitiesFragment();
+                transaction.add(R.id.contentContainer,mActivitiesFragment,"activities");
                 break;
             case 2:
                 Log.e("test","显示第2个页面");
                 hideFragments(transaction);
-                if (mLocationsFragment ==null){
-                    mLocationsFragment =new LocationsFragment();
-                    transaction.add(R.id.contentContainer,mLocationsFragment,"locations");
-                }else {
-                    transaction.show(mLocationsFragment);
-                }
+                mLocationsFragment =new LocationsFragment();
+                transaction.add(R.id.contentContainer,mLocationsFragment,"locations");
+//                if (mLocationsFragment ==null){
+//                    mLocationsFragment =new LocationsFragment();
+//                    transaction.add(R.id.contentContainer,mLocationsFragment,"locations");
+//                }else {
+//                    transaction.show(mLocationsFragment);
+//                }
                 break;
             case 3:
                 Log.e("test","显示第3个页面");

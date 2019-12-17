@@ -39,10 +39,10 @@ public class JumpTo extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
         isFirstIn = preferences.getBoolean("isFirstIn", true);
         if (isFirstIn){
-            handler.sendEmptyMessageDelayed(1, 1000);
+            handler.sendEmptyMessageDelayed(1, 3000);
             preferences.edit().putBoolean("isFirstIn", false).commit();
         } else {
-            handler.sendEmptyMessageDelayed(0, 1000);
+            handler.sendEmptyMessageDelayed(0, 3000);
         }
     }
 }

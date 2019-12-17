@@ -53,12 +53,12 @@ public class MyAdapterActivities extends BaseAdapter {
             img_activity=convertView.findViewById(R.id.img_activity);
             name_activity=convertView.findViewById(R.id.name_activity);
         }
-        Log.e("1","ok?");
+//        Log.e("1","ok?");
         //获得每个item的对象
         int color=getColorID(data.get(position).getIcon_color());
+        name_activity.setText(data.get(position).getActivity_name());
         img_activity.setImageResource(data.get(position).getImage());
         img_activity.setBackgroundColor(convertView.getResources().getColor(data.get(position).getColor()));
-        name_activity.setText(data.get(position).getActivity_name());
         Log.e("3",name_activity.getText().toString());
         Log.e("4",data.get(position).getIcon_name());
         Log.e("5",data.get(position).getIcon_color());

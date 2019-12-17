@@ -2,88 +2,99 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:paddingRight="100dp"
+    android:background="@drawable/ct">
+    <ImageView
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/title"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="80dp">
-    <TextView
-        android:id="@+id/btn_login"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="登录"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:textColor="@color/orange"
-        />
-    <TextView
-        android:id="@+id/btn_register"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="注册"
-        android:textSize="30dp"
-        android:gravity="center"/>
-    </LinearLayout>
+        android:layout_marginTop="100dp"/>
+<!--    <LinearLayout-->
+<!--        android:paddingRight="100dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="80dp">-->
+<!--    <TextView-->
+<!--        android:id="@+id/btn_login"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="登录"-->
+<!--        android:textSize="30dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/orange"-->
+<!--        />-->
+<!--    <TextView-->
+<!--        android:id="@+id/btn_register"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="注册"-->
+<!--        android:textSize="30dp"-->
+<!--        android:gravity="center"/>-->
+<!--    </LinearLayout>-->
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="120dp"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+        android:layout_marginTop="200dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="120dp"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_gravity="center">-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:alpha="0.7"
+                android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/shape1"
+                android:orientation="horizontal"
+                >
                 <ImageView
                     android:layout_marginLeft="10dp"
-
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/phone"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
+
                 <EditText
                     android:id="@+id/user_number"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
+                    android:hint="请输入手机号"
                     android:inputType="phone"
                     android:maxLength="15"
-                    android:hint="请输入手机号" />
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
+<!--            <View-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="@color/gray"/>-->
             <TextView
                 android:id="@+id/full"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:layout_marginLeft="260dp" />
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:alpha="0.7"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/shape1">
                 <ImageView
                     android:layout_marginLeft="10dp"
-
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/stock"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"/>
                 <EditText
                     android:id="@+id/user_pwd"
                     android:layout_width="200dp"
@@ -92,19 +103,19 @@
                     android:inputType="numberPassword"
                     android:hint="请输入密码"
                     android:maxLength="8"
-                    />
+                    android:layout_gravity="center"/>
                 <ImageView
                     android:id="@+id/eyes"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/closeeye" />
+                    android:src="@drawable/closeeye"
+                    android:layout_gravity="center"/>
             </LinearLayout>
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <Button
-
             android:id="@+id/btn_log"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -114,11 +125,26 @@
             android:textColor="@color/alpha"
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/btn_fpwd"
+        <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="忘记密码？"/>
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/btn_fpwd"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="忘记密码？"
+                android:textColor="@color/orange_dark"/>
+
+            <TextView
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="去注册>"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/orange_dark"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

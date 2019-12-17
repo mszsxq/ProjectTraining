@@ -40,7 +40,7 @@ public class UserInfor extends SwipeBackActivity {
         Log.e("value",value+"");
         Intent intent = getIntent();
         usering_name.setText(intent.getStringExtra("name"));
-        usering_phone.setText(intent.getStringExtra("phone"));
+        usering_phone.setText(intent.getStringExtra("phonee"));
         usering_moto.setText(intent.getStringExtra("moto"));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

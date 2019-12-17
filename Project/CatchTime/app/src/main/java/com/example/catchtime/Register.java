@@ -237,7 +237,7 @@ public class Register extends AppCompatActivity {
                     phone = full_re.getText().toString();
                     password = user_pwd1.getText().toString();
                     String number = et.getText().toString();
-//                    RegisterUser(phone, password);
+//                    RegisterUser(phonee, password);
                      if (number.equals("")){
                         Toast.makeText(Register.this,"验证码不能为空",Toast.LENGTH_SHORT).show();
                     }else {

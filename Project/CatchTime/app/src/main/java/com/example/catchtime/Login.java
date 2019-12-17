@@ -32,7 +32,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import androidx.appcompat.app.AppCompatActivity;
 public class Login extends AppCompatActivity {
-    private TextView btn_login;
+//    private TextView btn_login;
     private TextView btn_register;
     private TextView btn_fpwd;
     private EditText user_number;
@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                     intent.putExtra("name",usering.getUsername());
                     intent.putExtra("moto",usering.getMoto());
                     intent.putExtra("image",usering.getImage());
-                    intent.putExtra("phone",usering.getPhone());
+                    intent.putExtra("phonee",usering.getPhone());
                     intent.putExtra("time",usering.getRegister_date());
                     intent.putExtra("id",usering.getUser_id());
                     startActivity(intent);
@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
 //                    intent.putExtra("name",usering.getUsername());
 //                    intent.putExtra("moto",usering.getMoto());
 //                    intent.putExtra("image",usering.getImage());
-//                    intent.putExtra("phone",usering.getPhone());
+//                    intent.putExtra("phonee",usering.getPhone());
 //                    intent.putExtra("time",usering.getRegister_date());
 
                 }
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
 
     private void registers() {
         listener=new CustomOnclickListener();
-        btn_login.setOnClickListener(listener);
+//        btn_login.setOnClickListener(listener);
         btn_register.setOnClickListener(listener);
         btn_fpwd.setOnClickListener(listener);
         user_number.setOnClickListener(listener);
@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void getViews() {
-        btn_login=findViewById(R.id.btn_login);
+//        btn_login=findViewById(R.id.btn_login);
         btn_register=findViewById(R.id.btn_register);
         btn_fpwd=findViewById(R.id.btn_fpwd);
         user_number=findViewById(R.id.user_number);

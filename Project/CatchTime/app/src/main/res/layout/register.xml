@@ -2,47 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/ct">
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="80dp"-->
+<!--        android:paddingLeft="30dp">-->
+<!--        <TextView-->
+<!--            android:id="@id/btn_register"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="注册"-->
+<!--            android:textSize="30dp"-->
+<!--            android:textColor="@color/orange"-->
+<!--            android:gravity="center"/>-->
+<!--        <TextView-->
+<!--            android:id="@id/btn_login"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="登录"-->
+<!--            android:textSize="30dp"-->
+<!--            android:gravity="center" />-->
+<!--    </LinearLayout>-->
+    <ImageView
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="80dp"
-        android:paddingLeft="30dp">
-        <TextView
-            android:id="@id/btn_register"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="注册"
-            android:textSize="30dp"
-            android:textColor="@color/orange"
-            android:gravity="center"/>
-        <TextView
-            android:id="@id/btn_login"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="登录"
-            android:textSize="30dp"
-            android:gravity="center" />
-    </LinearLayout>
+        android:src="@drawable/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="180dp"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+        android:layout_marginTop="200dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="180dp"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_gravity="center">-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:alpha="0.7"
+                android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/shape1">
                 <ImageView
                     android:layout_marginLeft="10dp"
                     android:layout_width="20dp"
@@ -52,8 +60,8 @@
                     android:layout_marginRight="10dp"/>
                 <EditText
                     android:id="@+id/full_re"
-                    android:layout_width="160dp"
-                    android:layout_height="60dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入手机号"
                     android:maxLength="15"
@@ -67,26 +75,26 @@
                     android:text="获取验证码"/>
 
             </LinearLayout>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
+<!--            <View-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="@color/gray"/>-->
             <TextView
                 android:id="@id/full"
                 android:layout_width="50dp"
                 android:layout_height="15dp"
                 android:text=""
-                android:layout_marginLeft="260dp"/>
+                android:layout_marginLeft="66dp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:alpha="0.7"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal"
-                android:paddingBottom="7dp">
+                android:background="@drawable/shape1">
                 <ImageView
                     android:layout_marginLeft="10dp"
-
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:src="@drawable/yanzheng"
@@ -95,20 +103,23 @@
                 <EditText
                     android:id="@+id/re_et"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入验证码"
-                    />
+                    android:layout_gravity="center"/>
             </LinearLayout>
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
+<!--            <View-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="@color/gray"/>-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:alpha="0.7"
+                android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="15sp"
+                android:background="@drawable/shape1">
                 <ImageView
                     android:layout_marginLeft="10dp"
 
@@ -120,8 +131,9 @@
                 <EditText
                     android:id="@+id/user_pwd1"
                     android:layout_width="200dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
+                    android:layout_gravity="center"
                     android:hint="请输入密码"
                     android:inputType="numberPassword"
                     />
@@ -129,11 +141,11 @@
                     android:id="@+id/eyes1"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center"
                     android:src="@drawable/closeeye" />
             </LinearLayout>
-        </LinearLayout>
+<!--        </LinearLayout>-->
         <Button
             android:id="@+id/re_btn_register"
             android:layout_width="300dp"
@@ -143,6 +155,15 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/shape1"
             android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去登录>"
+            android:textColor="@color/orange_dark"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="120dp"/>
     </LinearLayout>
+
 
 </RelativeLayout>
