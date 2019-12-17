@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import entity.User;
+import login.dao.LoginDao;
 import util.DBManager;
 
 /**
@@ -54,6 +55,7 @@ public class LoginController extends HttpServlet {
 			e1.printStackTrace();
 		}
 		String client = request.getParameter("client");
+		String userid = request.getParameter("userid");
 		if(client!=null) {
 			System.out.println("1");
 			Gson gson=new Gson();
@@ -87,6 +89,13 @@ public class LoginController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		if(userid!=null) {
+			System.out.println("userid"+userid);
+			LoginDao lo = new LoginDao();
+			String gg = lo.findId(Integer.parseInt(userid));
+			System.out.println("user"+gg);
+			out.write(gg);
 		}
 		
 			
