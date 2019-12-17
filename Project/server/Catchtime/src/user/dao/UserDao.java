@@ -328,4 +328,29 @@ public class UserDao {
 		}
 		return n;
 	}
+	public User findUser(int userId) {
+		int n=0;
+		Connection conn= null;
+		PreparedStatement pst = null;
+		ResultSet rs=null;
+		User user = null;
+		try {
+			conn=DBManager.getInstance().getConnection();
+			pst=conn.prepareStatement("select * from user where user_id=?;");
+			pst.setInt(1, userId);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				user = new User();
+				user.setUsername(rs.getString("username"));
+				user.setMoto(rs.getString("moto"));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
 }
