@@ -226,6 +226,7 @@ public class AddLocation extends AppCompatActivity {
                     intent1.putExtra("poi",poiss.toString());
                     intent1.putExtra("resource",0);
                     startActivity(intent1);
+                    finish();
                     break;
             }
         }

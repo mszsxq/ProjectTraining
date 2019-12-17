@@ -79,7 +79,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
     private String[] colors;
     private String color;
     private Handler handler;
-    private  Button add_act;
     private TextView dialog_cancel;
     private UiSettings uiSettings;
     private TextView dialog_sure;
@@ -153,7 +152,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
         setCanceledOnTouchOutside(true);// 点击Dialog外部消失
         act=findViewById(R.id.act);
         newpalece_text_getname=findViewById(R.id.newpalece_text_getname);
-        add_act();//自定义按钮实现跳转并添加activity
         dialog_cancel=findViewById(R.id.dialog_cancel);
         quxiao();
         dialog_sure=findViewById(R.id.dialog_sure);
@@ -222,18 +220,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
         });
     }
 
-    private void add_act() {
-        add_act=findViewById(R.id.add_act);
-        add_act.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setClass(context, AddActivityDetial.class);
-                context.startActivity(intent);
-                ((Activity) context).finish();
-            }
-        });
-    }
     private void getData() {
         p=getContext().getSharedPreferences("user",MODE_PRIVATE);
         int user_id=p.getInt("user_id",0);
