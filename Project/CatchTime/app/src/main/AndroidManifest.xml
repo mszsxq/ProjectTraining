@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
-        android:name=".backgroundService.MyApp"
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -72,7 +72,9 @@
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:enabled="true"
             android:exported="true"/>
-        <service android:name=".backgroundService.MyService" />
+        <service android:name=".backgroundService.MyService"
+            android:exported="true"
+            android:enabled="true"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

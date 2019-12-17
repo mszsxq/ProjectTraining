@@ -1,5 +1,6 @@
 package com.example.catchtime;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -55,6 +56,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,11 +69,23 @@ public class MainActivity extends AppCompatActivity {
     private LocationsFragment mLocationsFragment;
     private SettingFragment mSettingFragment;
     private Setting setting;
+    private Timer timer;
     private Handler handler;
     private Gson gson=new Gson();
     private List<Activity> activities;
     private List<Location> locations;
     private List<Contact> contacts;
+//    private Handler mHandler = @SuppressLint("HandlerLeak")
+
+    private void startTimer(){
+        timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        }, 200, 1000);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         setting.resetStartTime();
         setting.setStartTime(System.currentTimeMillis());
 //        startService(new Intent(this, MyService.class));
-        DaemonEnv.startServiceMayBind(MyService.class);
         KeepAliveHandler.Companion.setJob(this);
 
 //        Toast.makeText(this,"Starting service..",Toast.LENGTH_SHORT).show();
@@ -115,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 //        setting.setStartTime(System.currentTimeMillis());
 //        startService(new Intent(this, MyService.class));
 //        KeepAliveHandler.Companion.setJob(this);
-
 
 
         IntentFilter filter = new IntentFilter();

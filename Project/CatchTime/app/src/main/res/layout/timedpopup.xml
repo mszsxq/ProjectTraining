@@ -46,34 +46,42 @@
 
 
 
-            <View
 
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 discrollve:discrollve_fromBgColor="#88EE66"
                 discrollve:discrollve_toBgColor="#000000"
                 discrollve:discrollve_translation="fromRight|fromBottom"/>
+<!--            <View-->
+
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                discrollve:discrollve_fromBgColor="#88EE66"-->
+<!--                discrollve:discrollve_toBgColor="#000000"-->
+<!--                discrollve:discrollve_translation="fromRight|fromBottom"/>-->
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="活动路线图"
-                android:textSize="18sp"
-                discrollve:discrollve_alpha="true"
-                discrollve:discrollve_translation="fromBottom" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="20dp"-->
+<!--                android:fontFamily="serif"-->
+<!--                android:gravity="center"-->
+<!--                android:text="活动路线图"-->
+<!--                android:textSize="18sp"-->
+<!--                discrollve:discrollve_alpha="true"-->
+<!--                discrollve:discrollve_translation="fromBottom" />-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/setting"
-                discrollve:discrollve_scaleX="true"
-                discrollve:discrollve_scaleY="true"  />
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="20dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/setting"-->
+<!--                discrollve:discrollve_scaleX="true"-->
+<!--                discrollve:discrollve_scaleY="true"  />-->
 
             <com.example.catchtime.backgroundService.DiscrollvablePurpleLayout
                 android:layout_width="match_parent"
@@ -114,7 +122,6 @@
                     android:id="@+id/pathView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="60dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:fontFamily="serif"
@@ -130,20 +137,8 @@
                 android:background="@android:color/holo_red_dark"
                 tools:visibility="gone">
 
-                <TextView
-                    android:id="@+id/redView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="serif"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text="When the cheese comes out everybody's happy pecorino red leicester. The big cheese cheese on toast ricotta cheesy grin smelly cheese manchego chalk and cheese macaroni cheese."
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/redView2"
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart2"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
@@ -151,8 +146,32 @@
                     android:src="@drawable/setting"
                     android:scaleX="0.1"
                     android:scaleY="0.1"
-                    android:translationY="50dp" />
+                    android:translationY="50dp"/>
 
+                <!--
+                                <TextView
+                                    android:id="@+id/redView1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="serif"
+                                    android:gravity="center"
+                                    android:padding="20dp"
+                                    android:text="When the cheese comes out everybody's happy pecorino red leicester. The big cheese cheese on toast ricotta cheesy grin smelly cheese manchego chalk and cheese macaroni cheese."
+                                    android:textColor="@android:color/white"
+                                    android:textSize="18sp" />
+
+                                <ImageView
+                                    android:id="@+id/redView2"
+                                    android:layout_width="200dp"
+                                    android:layout_height="200dp"
+                                    android:layout_gravity="center"
+                                    android:alpha="0.0"
+                                    android:src="@drawable/setting"
+                                    android:scaleX="0.1"
+                                    android:scaleY="0.1"
+                                    android:translationY="50dp" />
+                -->
             </com.example.catchtime.backgroundService.DiscrollvableRedLayout>
 
             <com.example.catchtime.backgroundService.DiscrollvableGreenLayout

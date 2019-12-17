@@ -37,9 +37,9 @@ public class DiscrollvableRedLayout extends FrameLayout implements Discrollvable
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mRedView1 = findViewById(R.id.redView1);
-        mRedView1TranslationY = mRedView1.getTranslationY();
-        mRedView2 = findViewById(R.id.redView2);
+//        mRedView1 = findViewById(R.id.redView1);
+//        mRedView1TranslationY = mRedView1.getTranslationY();
+//        mRedView2 = findViewById(R.id.redView2);
     }
 
     @Override
