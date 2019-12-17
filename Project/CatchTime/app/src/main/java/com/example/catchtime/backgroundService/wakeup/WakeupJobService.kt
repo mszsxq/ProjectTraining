@@ -15,7 +15,7 @@ const val JOB_ID = 123
 const val JOB_PERIOD : Long = 1000 * 60 * 15
 
 /**
- * Created by Neo on 2018-12-04.
+ * Created by
  * http://m3n.ir/
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)

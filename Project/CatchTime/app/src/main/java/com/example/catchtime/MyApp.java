@@ -1,7 +1,6 @@
 package com.example.catchtime;
 
 import android.app.Application;
-
 import com.baidu.mapapi.SDKInitializer;
 import com.example.catchtime.backgroundService.MyService;
 import com.xdandroid.hellodaemon.DaemonEnv;

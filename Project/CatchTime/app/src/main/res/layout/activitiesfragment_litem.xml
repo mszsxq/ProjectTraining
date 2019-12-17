@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/img_activity"
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -23,12 +24,12 @@
             android:textSize="16sp"
             android:gravity="center"
             android:layout_toRightOf="@+id/img_activity"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="255dp"
-            android:layout_gravity="center"
-            android:src="@drawable/rightjt"
-            android:layout_alignParentRight="true"/>
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="255dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/rightjt"-->
+<!--            android:layout_alignParentRight="true"/>-->
     </RelativeLayout>
 </RelativeLayout>

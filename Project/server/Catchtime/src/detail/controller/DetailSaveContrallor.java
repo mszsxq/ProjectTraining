@@ -68,7 +68,7 @@ public class DetailSaveContrallor extends HttpServlet {
 		Date dallend=null;
 		
 		
-		//鎵撳紑Dao
+		//閹垫挸绱慏ao
 		ContactDao tDao = new ContactDao();
 		DetailDao dDao = new DetailDao();
 		DataDao aDao = new DataDao();
@@ -89,7 +89,7 @@ public class DetailSaveContrallor extends HttpServlet {
 		System.out.println(userid);
 		System.out.println(timelike);
         if(list!=null) {
-        	System.out.println("鏀跺埌鐨勮繑鍥瀗ewActivirt"+list);
+        	System.out.println("閺�璺哄煂閻ㄥ嫯绻戦崶鐎梕wActivirt"+list);
         	timelistnew = gson.fromJson(list,typenew);
             for(int i=0;i<timelistnew.size();i++) {
             	if(timelistnew.get(i).getFlag()==1) {
@@ -100,22 +100,22 @@ public class DetailSaveContrallor extends HttpServlet {
             }
             
             
-            //鐜板湪鐨勬椂闂�
-            DateFormat df= new SimpleDateFormat("yyyy-MM-dd");//瀵规棩鏈熻繘琛屾牸寮忓寲
+            //閻滄澘婀惃鍕闂傦拷
+            DateFormat df= new SimpleDateFormat("yyyy-MM-dd");//鐎佃妫╅張鐔荤箻鐞涘本鐗稿蹇撳
             timenow = df.format(new Date());
             
-            //鑾峰彇鏀瑰彉鏃ctivity鐨勬椂闂�
+            //閼惧嘲褰囬弨鐟板綁閺冾湩ctivity閻ㄥ嫭妞傞梻锟�
             String timeold = ds.findStartAndEnd(acname, Integer.parseInt(userid), timelike);
             System.out.println(timeold);
             Type typeold=new TypeToken<List<Time>>(){}.getType();
             timelistold = gson.fromJson(timeold,typeold);
-            System.out.println("杩斿洖鐨勫叾瀹炴椂闂�"+timelistold.get(pos).getBegin_time());
-            System.out.println("杩斿洖鐨勭粨鏉熸椂闂�"+timelistold.get(pos).getFinish_time());
+            System.out.println("鏉╂柨娲栭惃鍕従鐎圭偞妞傞梻锟�"+timelistold.get(pos).getBegin_time());
+            System.out.println("鏉╂柨娲栭惃鍕波閺夌喐妞傞梻锟�"+timelistold.get(pos).getFinish_time());
             oldactime.setBegin_time(timelistold.get(pos).getBegin_time());
             oldactime.setFinish_time(timelistold.get(pos).getFinish_time());
 
             
-            //杞寲data
+            //鏉烆剙瀵瞕ata
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             
     		try {
@@ -137,10 +137,10 @@ public class DetailSaveContrallor extends HttpServlet {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-    		//鍒ゆ柇鏀瑰彉鏃ctivity鏄粖澶╄繕鏄繃鍘�
+    		//閸掋倖鏌囬弨鐟板綁閺冾湩ctivity閺勵垯绮栨径鈺勭箷閺勵垵绻冮崢锟�
     		if(timenow.equals(timelike)) {
-            	//鏄粖澶�
-            	//鏇存柊浠婂ぉ鏂癮ctivity鍗曟潯淇℃伅
+            	//閺勵垯绮栨径锟�
+            	//閺囧瓨鏌婃禒濠傘亯閺傜櫘ctivity閸楁洘娼穱鈩冧紖
             	
             	Contact ct = new Contact(Integer.parseInt(loid),Integer.parseInt(acid));
             	try {
@@ -160,43 +160,43 @@ public class DetailSaveContrallor extends HttpServlet {
     			int detailnewid = dDao.findIdbyidandtime(Integer.parseInt(acid), timelike,Integer.parseInt(userid));
     			if(detailnewid>0) {
     				int i = dDao.upDateDetailbyDetailid(Integer.parseInt(userid),timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00", detailnewid);
-    				System.out.println("淇敼褰撳ぉ鏂癮ctivity鎴愬姛");
+    				System.out.println("娣囶喗鏁艰ぐ鎾炽亯閺傜櫘ctivity閹存劕濮�");
     			}else {
     				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00");
-    				System.out.println("澧炲姞褰撳ぉ鏂癮ctivity鎴愬姛");
+    				System.out.println("婢х偛濮炶ぐ鎾炽亯閺傜櫘ctivity閹存劕濮�");
     			}
-    			//鏇存柊浠婂ぉ鏃ctivity
+    			//閺囧瓨鏌婃禒濠傘亯閺冾湩ctivity
     			if(dstart.before(dallstart) || dend.after(dallend)) {
-    				System.out.println("闈炴硶杈撳叆");
-    				out.write("闈炴硶杈撳叆");
+    				System.out.println("闂堢偞纭舵潏鎾冲弳");
+    				out.write("0");
     			}else {
-    				//濡傛灉寮�濮嬫椂闂寸浉鍚�
+    				//婵″倹鐏夊锟芥慨瀣闂傚娴夐崥锟�
     				if((dallstart.compareTo(dstart))==0){
-                      //濡傛灉缁撴潫鏃堕棿鐩稿悓
+                      //婵″倹鐏夌紒鎾存将閺冨爼妫块惄绋挎倱
                       if((dallend.compareTo(dend)==0)){
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(oldactime.getBegin_time());
                     	  oldtime.setFinish_time(oldactime.getBegin_time());
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }else{
-                      //濡傛灉缁撴潫鏃堕棿涓嶅悓
+                      //婵″倹鐏夌紒鎾存将閺冨爼妫挎稉宥呮倱
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
                     	  oldtime.setFinish_time(oldactime.getFinish_time());
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }
                   }else{
-                  //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿鐩稿悓
+                  //婵″倹鐏夊锟芥慨瀣闂傜繝绗夐崥宀嬬礉缂佹挻娼弮鍫曟？閻╃鎮�
                       if((dallend.compareTo(dend)==0)) {
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(oldactime.getBegin_time());
                     	  oldtime.setFinish_time(timelike+" "+newactime.getBegin_time()+":00");
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }else{
-                       //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿涓嶅悓
+                       //婵″倹鐏夊锟芥慨瀣闂傜繝绗夐崥宀嬬礉缂佹挻娼弮鍫曟？娑撳秴鎮�
                     	  Time oldtime1 = new Time();
                     	  Time oldtime2 = new Time();
                     	  oldtime1.setBegin_time(oldactime.getBegin_time());
@@ -204,13 +204,13 @@ public class DetailSaveContrallor extends HttpServlet {
                     	  oldtime2.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
                     	  oldtime2.setFinish_time(oldactime.getFinish_time());
                     	  ds.updatetodayMuch(acname, Integer.parseInt(userid), timelistold.get(pos).getBegin_time(), oldtime1,oldtime2);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }
                   }
     			}	
             }else {
-            //涓嶆槸浠婂ぉ
-            	//鏇存柊浠ュ墠鏂癮ctivity鍗曟潯淇℃伅
+            //娑撳秵妲告禒濠傘亯
+            	//閺囧瓨鏌婃禒銉ュ閺傜櫘ctivity閸楁洘娼穱鈩冧紖
             	
             	Contact ct = new Contact(Integer.parseInt(loid),Integer.parseInt(acid));
             	try {
@@ -236,27 +236,27 @@ public class DetailSaveContrallor extends HttpServlet {
     				long num1 = aDao.finacdata(table, acn.getActivity_name(), did);
     				long num2 = (dend.getTime()-dstart.getTime())/60000;
     				long num = num1+num2;
-    				System.out.println("鏂版坊鍔犵殑activity鎬绘椂闂存椂闂�"+num);
+    				System.out.println("閺傜増鍧婇崝鐘垫畱activity閹粯妞傞梻瀛樻闂傦拷"+num);
     				aDao.upDateNum(table,acn.getActivity_name(), timelike, String.valueOf(num));
-    				System.out.println("淇敼浠ュ墠鏂癮ctivity鎴愬姛");
+    				System.out.println("娣囶喗鏁兼禒銉ュ閺傜櫘ctivity閹存劕濮�");
     			}else {
     				String table = userid+"_data";
     				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), timelike+" "+newactime.getBegin_time()+":00", timelike+" "+newactime.getFinish_time()+":00");
     				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
     				long num = (dend.getTime()-dstart.getTime())/60000;
-    				System.out.println("鏂版坊鍔犵殑activity鎬绘椂闂存椂闂�"+num);
+    				System.out.println("閺傜増鍧婇崝鐘垫畱activity閹粯妞傞梻瀛樻闂傦拷"+num);
     				int ndid = aDao.findalldata(table);
     				aDao.addalldata(table, ndid+1, timelike, acn.getActivity_name(), String.valueOf(num));
-    				System.out.println("澧炲姞浠ュ墠鏂癮ctivity鎴愬姛");
+    				System.out.println("婢х偛濮炴禒銉ュ閺傜櫘ctivity閹存劕濮�");
     			}
-    			//鏇存柊浠婂ぉ鏃ctivity
+    			//閺囧瓨鏌婃禒濠傘亯閺冾湩ctivity
             	if(dstart.before(dallstart) || dend.after(dallend)) {
-            		out.write("闈炴硶杈撳叆");
-    				System.out.println("闈炴硶杈撳叆");
+            		out.write("0");
+    				System.out.println("闂堢偞纭舵潏鎾冲弳");
     			}else {
-    				//濡傛灉寮�濮嬫椂闂寸浉鍚�
+    				//婵″倹鐏夊锟芥慨瀣闂傚娴夐崥锟�
     				if((dallstart.compareTo(dstart))==0){
-                      //濡傛灉缁撴潫鏃堕棿鐩稿悓
+                      //婵″倹鐏夌紒鎾存将閺冨爼妫块惄绋挎倱
                       if((dallend.compareTo(dend)==0)){
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
@@ -266,12 +266,12 @@ public class DetailSaveContrallor extends HttpServlet {
                     	  long sum1 = aDao.finacdata(table,acname, did);
                     	  long sum2 = (dallend.getTime()-dallstart.getTime())/60000;
                     	  long sum = sum1-sum2;
-                    	  System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿"+sum);
+                    	  System.out.println("閺傞鎱ㄩ弨鍦畱閺冾湩ctivity閺冨爼妫�"+sum);
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
                     	  ds.updatebeforeSimple(Integer.parseInt(userid), acname, timelike, String.valueOf(sum));
-						  out.write("淇敼鎴愬姛");
+						  out.write("1");
                       }else{
-                      //濡傛灉缁撴潫鏃堕棿涓嶅悓
+                      //婵″倹鐏夌紒鎾存将閺冨爼妫挎稉宥呮倱
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
                     	  oldtime.setBegin_time(timelike+" "+newactime.getFinish_time()+":00");
@@ -289,10 +289,10 @@ public class DetailSaveContrallor extends HttpServlet {
 							e.printStackTrace();
 						}
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-						  out.write("淇敼鎴愬姛");
+						  out.write("1");
                       }
                   }else{
-                  //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿鐩稿悓
+                  //婵″倹鐏夊锟芥慨瀣闂傜繝绗夐崥宀嬬礉缂佹挻娼弮鍫曟？閻╃鎮�
                       if((dallend.compareTo(dend)==0)) {
                     	  String table = userid+"_data";
                     	  Time oldtime = new Time();
@@ -312,9 +312,9 @@ public class DetailSaveContrallor extends HttpServlet {
   							e.printStackTrace();
                     	  }
                     	  ds.updatetodaySimple(acname, Integer.parseInt(userid), timelike, oldtime);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }else{
-                       //濡傛灉寮�濮嬫椂闂翠笉鍚岋紝缁撴潫鏃堕棿涓嶅悓
+                       //婵″倹鐏夊锟芥慨瀣闂傜繝绗夐崥宀嬬礉缂佹挻娼弮鍫曟？娑撳秴鎮�
                     	  String table = userid+"_data";
                     	  Time oldtime1 = new Time();
                     	  Time oldtime2 = new Time();
@@ -329,13 +329,13 @@ public class DetailSaveContrallor extends HttpServlet {
 //    							Date nof2 = sdf.parse(oldtime2.getFinish_time());
     							int did = aDao.findataid(table, acname, timelike);
     							long sum1 = aDao.finacdata(table,acname, did);
-    							System.out.println("鑾峰彇鍒扮殑sum1"+sum1);
+    							System.out.println("閼惧嘲褰囬崚鎵畱sum1"+sum1);
 //    							long sum2 = (nof1.getTime()-nos1.getTime())/60000;
-//    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿222"+sum2);
+//    							System.out.println("閺傞鎱ㄩ弨鍦畱閺冾湩ctivity閺冨爼妫�222"+sum2);
     							long sum3 = (dend.getTime()-dstart.getTime())/60000;
-    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿333"+sum3);
+    							System.out.println("閺傞鎱ㄩ弨鍦畱閺冾湩ctivity閺冨爼妫�333"+sum3);
     							long sum = sum1-sum3;
-    							System.out.println("鏂颁慨鏀圭殑鏃ctivity鏃堕棿zzz"+sum);
+    							System.out.println("閺傞鎱ㄩ弨鍦畱閺冾湩ctivity閺冨爼妫縵zz"+sum);
     							ds.updatebeforeSimple(Integer.parseInt(userid), acname, timelike, String.valueOf(sum));
     							
 //                      	  }catch (ParseException e) {
@@ -343,7 +343,7 @@ public class DetailSaveContrallor extends HttpServlet {
 //    							e.printStackTrace();
 //                      	  }
                     	  ds.updatetodayMuch(acname, Integer.parseInt(userid), timelistold.get(pos).getBegin_time(), oldtime1,oldtime2);
-                    	  out.write("淇敼鎴愬姛");
+                    	  out.write("1");
                       }
                   }
     			}	
@@ -351,7 +351,7 @@ public class DetailSaveContrallor extends HttpServlet {
             }
         }
        
-//		//鏇存柊浠ュ墠鍗曟潯鏁版嵁
+//		//閺囧瓨鏌婃禒銉ュ閸楁洘娼弫鐗堝祦
 //		else if(newtime!=null) {
 //			try {
 //				tDao.addContact(ct, Integer.parseInt(userid));
@@ -366,14 +366,14 @@ public class DetailSaveContrallor extends HttpServlet {
 //				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
 //				int did = aDao.findataid(table, acn.getActivity_name(), timelike);
 //				int j = aDao.upDateNum(table, acn.getActivity_name(), timelike, num);
-//				out.write("淇敼浠ュ墠鏂癮ctivity鎴愬姛");
+//				out.write("娣囶喗鏁兼禒銉ュ閺傜櫘ctivity閹存劕濮�");
 //			}else {
 //				dDao.addDetail(Integer.parseInt(userid), Integer.parseInt(acid), Integer.parseInt(loid), tnewtime.getBegin_time(), tnewtime.getFinish_time());
 //				String table = userid+"_data";
 //				int iddata = aDao.findalldata(table);
 //				Activity acn = acDao.findSingle(Integer.parseInt(userid), Integer.parseInt(acid));
 //				aDao.addalldata(table,iddata+1,timelike,acn.getActivity_name(),num);
-//				out.write("娣诲姞浠ュ墠鏂癮ctivity鎴愬姛");
+//				out.write("濞ｈ濮炴禒銉ュ閺傜櫘ctivity閹存劕濮�");
 //			}
 //		}
 		

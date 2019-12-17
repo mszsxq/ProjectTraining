@@ -30,7 +30,7 @@ public class UserInfor extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.settingfragment);
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
