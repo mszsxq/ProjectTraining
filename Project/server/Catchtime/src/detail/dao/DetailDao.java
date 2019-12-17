@@ -283,11 +283,12 @@ public class DetailDao {
 	public List<Time> findTimeListbyidandtime(int activity_id,String timelike,int id) {
 		Time time = null;
 		List<Time> times = new ArrayList<>();
-		String sql = "select * from "+id+"detail_tablename where begin_time like ?";
+		String sql = "select * from "+id+"detail_tablename where begin_time like ? and activity_id=?";
 		try {
 			Connection conn = DBManager.getInstance().getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
 			pstm.setString(1, timelike+"%");
+			pstm.setInt(2,activity_id);
 			ResultSet rs = pstm.executeQuery();
 			while(rs.next()) {
 				time = new Time();

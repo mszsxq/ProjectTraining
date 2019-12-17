@@ -164,6 +164,7 @@ public class Add_detailPage extends SwipeBackActivity {
     //---------------------------------------------------发送time和activity_name找时间
     private void sendMessage() {
 //        chuan_activity_name="xuexi";
+        Log.e("传过来的acname+userid+time",chuan_activity_name+user_id+time);
         new Thread(){
             @Override
             public void run() {
@@ -250,7 +251,7 @@ public class Add_detailPage extends SwipeBackActivity {
             activity_id=activity.getActivity_id();
             Log.e("id", String.valueOf(activity_id));
             acImg.setImageResource(activity.getImage());
-            acImg.setBackgroundColor(activity.getColor());
+            acImg.setBackgroundColor(getResources().getColor(activity.getColor()));
             activityView.setText(activity.getActivity_name());
         }
     }
