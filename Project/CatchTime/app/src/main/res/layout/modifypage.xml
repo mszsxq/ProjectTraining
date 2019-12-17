@@ -37,8 +37,8 @@
             <ImageView
                 android:paddingLeft="15dp"
                 android:id="@+id/location"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:paddingTop="10dp"
                 android:src="@drawable/lujing"/>
             <TextView
@@ -88,6 +88,11 @@
             android:id="@+id/clickActivity"
             android:layout_width="match_parent"
             android:layout_height="50dp">
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+            </RelativeLayout>
             <ImageView
                 android:id="@+id/icon"
                 android:layout_width="40dp"

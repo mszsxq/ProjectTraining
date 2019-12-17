@@ -49,15 +49,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -73,6 +64,7 @@ public class SettingFragment extends Fragment {
     private ImageView help;
     private View inflate;
     private TextView camera;
+    private int value;
     private TextView pic;
     private TextView cancel;
     private TextView usering_name;
@@ -104,10 +96,11 @@ public class SettingFragment extends Fragment {
                 user = gson.fromJson(info,User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
-                circleImageView.setImageResource(getDrawableID(user.getImage()));
+                Log.e("测试",user.getMoto()+user.getUsername());
+//                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
-        int value=p.getInt("user_id",0);
+        value=p.getInt("user_id",0);
         Log.e("value",value+"");
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,15 +172,6 @@ public class SettingFragment extends Fragment {
             }
         }
     }
-<<<<<<< HEAD
-    private void toServer(int user_id) {
-
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://192.168.217.1:8080/Catchtime/UserInfo?user_id="+user_id+"");
-=======
     private void sendMessage() {
         Log.e("发数据啦","准备！");
         Log.e("id",p+"");
@@ -195,22 +179,16 @@ public class SettingFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LoginController?userid="+p);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/UserInfo?userId="+value);
                     Log.e("发送完数据啦","OK");
->>>>>>> f711f48d1d982f82c15780bb98112a3408779a55
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-<<<<<<< HEAD
-                    Log.i("检测","得到"+info);
-                    //wrapperMessage(info);
-=======
                     if(null!=info) {
                         Log.e("ww", info);
                         wrapperMessage(info);
                     }
->>>>>>> f711f48d1d982f82c15780bb98112a3408779a55
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -221,8 +199,6 @@ public class SettingFragment extends Fragment {
             }
         }.start();
     }
-<<<<<<< HEAD
-=======
     private void wrapperMessage(String info){
         Message msg = Message.obtain();
         msg.obj = info;
@@ -244,5 +220,4 @@ public class SettingFragment extends Fragment {
             return 0;
         }
     }
->>>>>>> f711f48d1d982f82c15780bb98112a3408779a55
 }
