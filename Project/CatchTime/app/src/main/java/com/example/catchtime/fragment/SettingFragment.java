@@ -64,11 +64,11 @@ public class SettingFragment extends Fragment {
     private ImageView help;
     private View inflate;
     private TextView camera;
+    private int value;
     private TextView pic;
     private TextView cancel;
     private TextView usering_name;
     private TextView usering_moto;
-    private CircleImageView circleImageView;
     private Dialog dialog;
     private Handler handler;
     private CircleImageView imageView;
@@ -95,10 +95,10 @@ public class SettingFragment extends Fragment {
                 user = gson.fromJson(info,User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
-                circleImageView.setImageResource(getDrawableID(user.getImage()));
+//                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
-        int value=p.getInt("user_id",0);
+        value=p.getInt("user_id",0);
         Log.e("value",value+"");
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +122,6 @@ public class SettingFragment extends Fragment {
         imageView = view.findViewById(R.id.user_img);
         usering_name = view.findViewById(R.id.user_name);
         usering_moto = view.findViewById(R.id.user_infor);
-        circleImageView = view.findViewById(R.id.user_img);
     }
     private void show(View view) {
         dialog = new Dialog(getContext(),R.style.DialogTheme);
@@ -177,7 +176,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://175.24.14.26:8080/Catchtime/LoginController?userid="+p);
+                    URL url = new URL("http://175.24.14.26:8080/Catchtime/UserInfo?userId="+value);
                     Log.e("发送完数据啦","OK");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
