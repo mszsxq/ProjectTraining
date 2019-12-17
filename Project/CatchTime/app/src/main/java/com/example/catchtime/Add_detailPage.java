@@ -81,12 +81,12 @@ public class Add_detailPage extends SwipeBackActivity {
                 super.handleMessage(msg);
                 String info = (String)msg.obj;
                 String inforicon = info;
-                if("修改成功".equals(info)){
-                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                if("0".equals(info)){
+                    Toast.makeText(getApplicationContext(),"非法输入",Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                else if("非法输入".equals(info)){
-                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                else if("1".equals(info)){
+                    Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else{
@@ -164,6 +164,7 @@ public class Add_detailPage extends SwipeBackActivity {
     //---------------------------------------------------发送time和activity_name找时间
     private void sendMessage() {
 //        chuan_activity_name="xuexi";
+        Log.e("传过来的acname+userid+time",chuan_activity_name+user_id+time);
         new Thread(){
             @Override
             public void run() {
@@ -250,7 +251,7 @@ public class Add_detailPage extends SwipeBackActivity {
             activity_id=activity.getActivity_id();
             Log.e("id", String.valueOf(activity_id));
             acImg.setImageResource(activity.getImage());
-            acImg.setBackgroundColor(activity.getColor());
+            acImg.setBackgroundColor(getResources().getColor(activity.getColor()));
             activityView.setText(activity.getActivity_name());
         }
     }

@@ -159,6 +159,12 @@ public class MyService extends AbsWorkService {
 //            Log.e("LocationService",contacts.toString());
         }
 
+        if(intent!=null){
+            String d=intent.getStringExtra("voice warm");
+            if (d!=null){
+                EventBus.getDefault().post("voice warm");
+            }
+        }
         if (latestActivityFinishTime == null) {
             latestActivityFinishTime = ft.format(new Date());
         }
@@ -209,7 +215,7 @@ public class MyService extends AbsWorkService {
                                 LocationName = locationBean.getLocationName();
 //                                Log.e("LocationService",LocationName);
                                 activityName = findActivitybylocation(LocationName);//name等于与此地点相关联的活动
-//                                if (activityName!=null){Log.e("LocationService",activityName);}
+                                if (activityName!=null){Log.e("LocationService",activityName);}
                                 activitybdlocation.setLatitude(locationBean.getLocationLat());
                                 activitybdlocation.setLongitude(locationBean.getLocationLng());
                                 centerLatLng = new LatLng(bdLocation.getLongitude(), bdLocation.getLatitude());
@@ -383,8 +389,8 @@ public class MyService extends AbsWorkService {
                             public void run() {
                                 try {
                                     //把两次行走之间的时间存入数据 算作行走; 时间为latestActivityFinishTime-当前时间
-                                    detail.setActivity_id(findActivityId(activityName));
-                                    detail.setLocation_id(findLocationId(LocationName));
+                                    detail.setActivity_id(3);
+                                    detail.setLocation_id(0);
                                     detail.setBegin_time(latestActivityFinishTime);
                                     detail.setFinish_time(timeAll);
                                     URL url = new URL("http://175.24.14.26:8080/Catchtime/AddDetailServlet?userid="+userid+"&&detail="+gson.toJson(detail));// TODO: 2019/12/2 添加完整的url地址
@@ -426,7 +432,7 @@ public class MyService extends AbsWorkService {
                                         // TODO: 2019/12/3 把前一个活动存入到数据库  起始时间为latestActivityFinishTime 结束时间为lateststepstart(当前-stepingsec) 活动名为activityname
                                         writeExternal(getBaseContext(), "起始时间:" + ss + "  结束时间:"+lateststepstart +"    "+activityName, null);
                                         // TODO: 2019/12/3 把行走存入到数据库  起始时间为lateststepstart 结束时间为lateststepend 活动名为行走
-                                        detail.setActivity_id(0);
+                                        detail.setActivity_id(3);
                                         detail.setLocation_id(0);
                                         detail.setBegin_time(lateststepstart);
                                         detail.setFinish_time(lateststepend);
@@ -525,7 +531,7 @@ public class MyService extends AbsWorkService {
                 return location.getLocationId();
             }
         }
-        return -1;
+        return 0;
     }
     private String findActivitybylocation(String locationName) {
 //        if (locationName.equals("食堂")){
@@ -640,7 +646,7 @@ public class MyService extends AbsWorkService {
             latestScreenOff=ft.format(new Date());
 //            Log.e("LocationService",latestScreenOff);
             if((ft.parse(latestScreenOff).getTime() - ft.parse(latestScreenPresent).getTime()) > 60000
-                    &&ft.parse(latestScreenOff).getTime()-ft.parse(latestScreenOn).getTime()>60000) {
+                    &&(ft.parse(latestScreenOff).getTime()-ft.parse(latestScreenOn).getTime())>60000) {
                 //把活动的数据存储到 时间为latestActivityFinishTime到latestScreenPresent  活动名为activityname  地点为locationname  玩手机的时间超过一分钟进行存储
                 final String ss=latestActivityFinishTime;
                 new Thread(new Runnable() {
