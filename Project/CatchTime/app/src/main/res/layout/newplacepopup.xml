@@ -62,15 +62,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
         </LinearLayout>
-        <Button
-            android:id="@+id/add_act"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/hh"
-            android:text="自定义 +"
-            android:textColor="@color/green"
-            android:textSize="15dp"
-            />
         <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

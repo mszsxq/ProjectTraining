@@ -22,6 +22,15 @@ import com.example.catchtime.R;
 import com.example.catchtime.activity.AddActivity;
 import com.example.catchtime.setting.UserInfor;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -104,5 +113,28 @@ public class SettingFragment extends Fragment {
                     startActivity(intent9);
             }
         }
+    }
+    private void toServer(int user_id) {
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.217.1:8080/Catchtime/UserInfo?user_id="+user_id+"");
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Log.i("检测","得到"+info);
+                    //wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
