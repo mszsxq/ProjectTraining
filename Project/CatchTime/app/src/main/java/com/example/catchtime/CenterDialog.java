@@ -79,7 +79,6 @@ public class CenterDialog extends Dialog implements   View.OnClickListener{
     private String[] colors;
     private String color;
     private Handler handler;
-    private  Button add_act;
     private TextView dialog_cancel;
     private UiSettings uiSettings;
     private TextView dialog_sure;

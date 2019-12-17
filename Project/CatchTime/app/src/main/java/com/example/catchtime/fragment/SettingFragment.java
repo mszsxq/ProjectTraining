@@ -69,7 +69,6 @@ public class SettingFragment extends Fragment {
     private TextView cancel;
     private TextView usering_name;
     private TextView usering_moto;
-    private CircleImageView circleImageView;
     private Dialog dialog;
     private Handler handler;
     private CircleImageView imageView;
@@ -96,7 +95,10 @@ public class SettingFragment extends Fragment {
                 user = gson.fromJson(info,User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
+<<<<<<< HEAD
                 Log.e("测试",user.getMoto()+user.getUsername());
+=======
+>>>>>>> c1c7910923845a5243dabe3d506255978d0c2803
 //                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
@@ -124,7 +126,6 @@ public class SettingFragment extends Fragment {
         imageView = view.findViewById(R.id.user_img);
         usering_name = view.findViewById(R.id.user_name);
         usering_moto = view.findViewById(R.id.user_infor);
-        circleImageView = view.findViewById(R.id.user_img);
     }
     private void show(View view) {
         dialog = new Dialog(getContext(),R.style.DialogTheme);
@@ -172,6 +173,10 @@ public class SettingFragment extends Fragment {
             }
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1c7910923845a5243dabe3d506255978d0c2803
     private void sendMessage() {
         Log.e("发数据啦","准备！");
         Log.e("id",p+"");
@@ -185,6 +190,11 @@ public class SettingFragment extends Fragment {
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
+<<<<<<< HEAD
+=======
+                    Log.i("检测","得到"+info);
+                    //wrapperMessage(info);
+>>>>>>> c1c7910923845a5243dabe3d506255978d0c2803
                     if(null!=info) {
                         Log.e("ww", info);
                         wrapperMessage(info);
@@ -199,6 +209,10 @@ public class SettingFragment extends Fragment {
             }
         }.start();
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1c7910923845a5243dabe3d506255978d0c2803
     private void wrapperMessage(String info){
         Message msg = Message.obtain();
         msg.obj = info;
