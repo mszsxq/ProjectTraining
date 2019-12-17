@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp">
+
+    >
     <TextView
         android:id="@+id/loc_item_tv"
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:text="家"
         android:textSize="18sp"
+        android:paddingLeft="10dp"
         android:gravity="center_vertical"/>
 </RelativeLayout>

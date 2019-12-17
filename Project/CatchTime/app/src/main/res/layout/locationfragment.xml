@@ -28,13 +28,14 @@
             android:textColor="@android:color/black"/>
     </RelativeLayout>
     <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray"/>
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@id/ly" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10sp">
+        android:layout_height="match_parent">
         <ListView
             android:id="@+id/loc_lv_local"
             android:layout_width="match_parent"

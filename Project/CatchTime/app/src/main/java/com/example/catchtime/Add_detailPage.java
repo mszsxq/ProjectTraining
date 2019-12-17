@@ -81,12 +81,12 @@ public class Add_detailPage extends SwipeBackActivity {
                 super.handleMessage(msg);
                 String info = (String)msg.obj;
                 String inforicon = info;
-                if("修改成功".equals(info)){
-                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                if("0".equals(info)){
+                    Toast.makeText(getApplicationContext(),"非法输入",Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                else if("非法输入".equals(info)){
-                    Toast.makeText(getApplicationContext(),info,Toast.LENGTH_SHORT).show();
+                else if("1".equals(info)){
+                    Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else{
