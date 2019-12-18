@@ -96,20 +96,17 @@ public class SettingFragment extends Fragment {
                 user = gson.fromJson(info, User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
-<<<<<<< HEAD
 //                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
         value=p.getInt("user_id",0);
         Log.e("value",value+"");
-=======
                 Log.e("测试", user.getMoto() + user.getUsername());
 //                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
         value = p.getInt("user_id", 0);
         Log.e("value", value + "");
->>>>>>> 8c81c3960293cec6d593019d365b050027d1812f
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,11 +191,8 @@ public class SettingFragment extends Fragment {
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
-<<<<<<< HEAD
-=======
                     Log.i("检测","得到"+info);
                     //wrapperMessage(info);
->>>>>>> 8c81c3960293cec6d593019d365b050027d1812f
                     if(null!=info) {
                         Log.e("ww", info);
                         wrapperMessage(info);
