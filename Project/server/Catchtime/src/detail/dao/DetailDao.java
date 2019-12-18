@@ -188,6 +188,37 @@ public class DetailDao {
 		}
 		return time;
 	}
+	public int findloidbyidandextime(int activity_id,String timelike,int id) {
+		int loid=0;
+		String sql = "select location_id from "+id+"detail_tablename where begin_time= ? and activity_id=?";
+		try {
+			Connection conn = DBManager.getInstance().getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, timelike);
+			
+			pstm.setInt(2, activity_id);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				System.out.println("lo_id"+rs.getInt(1));
+				loid = rs.getInt(1);
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DBManager.getInstance().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return loid;
+	}
 	public Time findTimebyidandtime(int activity_id,String timelike,int id) {
 		Time time = null;
 		List<Time> times = new ArrayList<>();

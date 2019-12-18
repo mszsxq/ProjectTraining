@@ -62,9 +62,9 @@ public class DetailService {
 		Activity ac = dao.findSingleforname(userid, acname);
 		DetailDao dDao = new DetailDao();
 		int detailid = dDao.findIdbyidandtime(ac.getActivity_id(), time,userid);
-		//更改detail表
+		//鏇存敼detail琛�
 		dDao.upDateDetailbyDetailid(userid, timeold.getBegin_time(), timeold.getFinish_time(), detailid);
-		System.out.println("修改今日旧activity成功");
+		System.out.println("淇敼浠婃棩鏃ctivity鎴愬姛");
 	}
 	public void updatetodayMuch(String acname,int userid,String time,Time timeold1,Time timeold2) {
 		ActivityDao dao = new ActivityDao();
@@ -74,12 +74,12 @@ public class DetailService {
 		int detailid = dDao.findIdbyidandextime(ac.getActivity_id(), time,userid);
 		int loid;
 		try {
-			loid = cDao.queryContactLocation(ac.getActivity_id(), userid);
-			//更改detail表
+			loid = dDao.findloidbyidandextime(ac.getActivity_id(), time, userid);
+			//鏇存敼detail琛�
 			System.out.println("timeold.finish"+timeold1.getFinish_time());
 			dDao.upDateDetailbyDetailid(userid, timeold1.getBegin_time(), timeold1.getFinish_time(), detailid);
 			dDao.addDetail(userid,ac.getActivity_id(),loid, timeold2.getBegin_time(), timeold2.getFinish_time());
-			System.out.println("更新今日多条旧成功");
+			System.out.println("鏇存柊浠婃棩澶氭潯鏃ф垚鍔�");
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,13 +90,13 @@ public class DetailService {
 		Activity ac = dao.findSingleforname(userid, acname);
 		DetailDao dDao = new DetailDao();
 //		int detailid = dDao.findIdbyidandtime(ac.getActivity_id(), timelike,Integer.parseInt(userid));
-//		//更改detail表
+//		//鏇存敼detail琛�
 //		dDao.upDateDetailbyDetailid(Integer.parseInt(userid), timefinnal.getBegin_time(), timefinnal.getFinish_time(), detailid);
-		//更改data表
+		//鏇存敼data琛�
 		DataDao ddDao = new DataDao();
 		String tablename = userid+"_data";
 		int dataid = ddDao.findataid(tablename, acname, time);
 		ddDao.upDateNum(tablename,acname, time, sum);
-		System.out.println("更新以前旧activity成功");
+		System.out.println("鏇存柊浠ュ墠鏃ctivity鎴愬姛");
 	}
 }

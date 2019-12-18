@@ -18,7 +18,7 @@ import util.DBManager;
  *
  */
 public class DataDao {
-	//鍒涘缓琛�
+	//閸掓稑缂撶悰锟�
 	public int createdatatable(int id) {
 		int n=0;
 		String table = id+"_data";
@@ -29,9 +29,9 @@ public class DataDao {
 			PreparedStatement p=conn.prepareStatement(sql);
 			n=p.executeUpdate();	
 			if(n==1) {
-				System.out.print("鍒涘缓鎴愬姛");
+				System.out.print("閸掓稑缂撻幋鎰");
 			}else {
-				System.out.print("鍒涘缓澶辫触");
+				System.out.print("閸掓稑缂撴径杈Е");
 			}
 			return n;
 		} catch (ClassNotFoundException e) {
@@ -45,7 +45,7 @@ public class DataDao {
 	}
 	
 	
-	//閹绘帒鍙嗛弫鐗堝祦
+	//闁圭粯甯掗崣鍡涘极閻楀牆绁�
 	public int addalldata(String tablename,int data_id,String data,String activity_name,String activity_data) {
 		int n=0;
 		Connection conn=null;
@@ -58,9 +58,35 @@ public class DataDao {
 			p.setString(3, activity_data);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("閹绘帒鍙嗛幋鎰");
+				System.out.print("闁圭粯甯掗崣鍡涘箣閹邦剙顫�");
 			}else {
-				System.out.print("閹绘帒鍙嗘径杈Е");
+				System.out.print("闁圭粯甯掗崣鍡樺緞鏉堫偉袝");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;
+	}
+	public int addalldata1(String tablename,int data_id,String data,String activity_name,String activity_data) {
+		int n=0;
+		Connection conn=null;
+		try {
+			conn=DBManager.getInstance().getConnection();
+			String sql="insert into "+tablename+" values(?,?,?,?)";
+			PreparedStatement p=conn.prepareStatement(sql);
+			p.setInt(1, data_id);
+			p.setString(2,activity_name);
+			p.setString(3, data);
+			p.setString(4, activity_data);
+			n=p.executeUpdate();
+			if(n==1) {
+				System.out.print("闁圭粯甯掗崣鍡涘箣閹邦剙顫�");
+			}else {
+				System.out.print("闁圭粯甯掗崣鍡樺緞鏉堫偉袝");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -72,7 +98,7 @@ public class DataDao {
 		return n;
 	}
 	
-	//閸掔娀娅庨弫鐗堝祦
+	//闁告帞濞�濞呭酣寮悧鍫濈ウ
 	public int deletealldata(String table_name,int data_id) {
 		int n=0;
 		Connection conn=null;
@@ -84,9 +110,9 @@ public class DataDao {
 			p.setInt(2, data_id);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("閸掔娀娅庨幋鎰");
+				System.out.print("闁告帞濞�濞呭酣骞嬮幇顒�顫�");
 			}else {
-				System.out.print("閸掔娀娅庢径杈Е");
+				System.out.print("闁告帞濞�濞呭孩寰勬潏顐バ�");
 			}
 			return n;
 		} catch (ClassNotFoundException e) {
@@ -99,7 +125,7 @@ public class DataDao {
 		
 		return n;
 	}
-	//閺屻儴顕楅弫鐗堝祦
+	//闁哄被鍎撮妤呭极閻楀牆绁�
 	public All_data findalldataBydataId(String tablename,int data_id) {
 		All_data all_data=null;
 		Connection conn=null;
@@ -232,7 +258,7 @@ public class DataDao {
 		return id;
 		
 	}
-	//鏌ヨ杩戜竷澶╂煇椤规椿鍔ㄧ殑鏃堕棿
+	//閺屻儴顕楁潻鎴滅婢垛晜鐓囨い瑙勬た閸斻劎娈戦弮鍫曟？
 		public List<All_data> activityRecently(String table_name, String activity_name) {
 			List<All_data> list= new ArrayList() ;
 			Connection conn =null;
@@ -268,7 +294,7 @@ public class DataDao {
 			}
 			return list;
 		}
-		//鏌ヨ杩戜竴涓湀鏌愰」娲诲姩鐨勬椂闂�
+		//閺屻儴顕楁潻鎴滅娑擃亝婀�閺屾劙銆嶅ú璇插З閻ㄥ嫭妞傞梻锟�
 			public List<All_data> activityMonthly(String table_name, String activity_name) {
 				List<All_data> list= new ArrayList() ;
 				Connection conn =null;
@@ -337,9 +363,9 @@ public class DataDao {
 			p.setString(3, activity_data);
 			n=p.executeUpdate();
 			if(n==1) {
-				System.out.print("鎻掑叆鎴愬姛");
+				System.out.print("閹绘帒鍙嗛幋鎰");
 			}else {
-				System.out.print("鎻掑叆澶辫触");
+				System.out.print("閹绘帒鍙嗘径杈Е");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
