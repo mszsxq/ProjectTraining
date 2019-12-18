@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.catchtime.Add_detailPage;
+import com.example.catchtime.AppTimeActivity;
 import com.example.catchtime.Login;
 import com.example.catchtime.NewPalce;
 import com.example.catchtime.R;
@@ -160,6 +161,8 @@ public class SettingFragment extends Fragment {
                     startActivity(intent1);
                     break;
                 case R.id.help:
+                    Intent intenth=new Intent(view.getContext(), AppTimeActivity.class);
+                    startActivity(intenth);
                     break;
                 case R.id.btn_unlogin:
                     SharedPreferences preferences = getContext().getSharedPreferences("login", getContext().MODE_PRIVATE);
