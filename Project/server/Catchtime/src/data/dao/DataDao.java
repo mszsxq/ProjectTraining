@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import entity.All_data;
@@ -79,8 +82,17 @@ public class DataDao {
 			String sql="insert into "+tablename+" values(?,?,?,?)";
 			PreparedStatement p=conn.prepareStatement(sql);
 			p.setInt(1, data_id);
-			p.setString(2,activity_name);
-			p.setString(3, data);
+//			
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d;
+//			try {
+//				d = (Date) sdf.parse(data);
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			p.setString(2, data);
+			p.setString(3,activity_name);
 			p.setString(4, activity_data);
 			n=p.executeUpdate();
 			if(n==1) {

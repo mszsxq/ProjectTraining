@@ -62,9 +62,9 @@ public class DetailService {
 		Activity ac = dao.findSingleforname(userid, acname);
 		DetailDao dDao = new DetailDao();
 		int detailid = dDao.findIdbyidandtime(ac.getActivity_id(), time,userid);
-		//鏇存敼detail琛�
+		//閺囧瓨鏁糳etail鐞涳拷
 		dDao.upDateDetailbyDetailid(userid, timeold.getBegin_time(), timeold.getFinish_time(), detailid);
-		System.out.println("淇敼浠婃棩鏃ctivity鎴愬姛");
+		System.out.println("娣囶喗鏁兼禒濠冩）閺冾湩ctivity閹存劕濮�");
 	}
 	public void updatetodayMuch(String acname,int userid,String time,Time timeold1,Time timeold2) {
 		ActivityDao dao = new ActivityDao();
@@ -75,12 +75,12 @@ public class DetailService {
 		int loid;
 		try {
 			loid = dDao.findloidbyidandextime(ac.getActivity_id(), time, userid);
-			//鏇存敼detail琛�
+			//閺囧瓨鏁糳etail鐞涳拷
 			System.out.println("timeold.finish"+timeold1.getFinish_time());
 			dDao.upDateDetailbyDetailid(userid, timeold1.getBegin_time(), timeold1.getFinish_time(), detailid);
 			dDao.addDetail(userid,ac.getActivity_id(),loid, timeold2.getBegin_time(), timeold2.getFinish_time());
-			System.out.println("鏇存柊浠婃棩澶氭潯鏃ф垚鍔�");
-		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+			System.out.println("閺囧瓨鏌婃禒濠冩）婢舵碍娼弮褎鍨氶崝锟�");
+		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -90,13 +90,13 @@ public class DetailService {
 		Activity ac = dao.findSingleforname(userid, acname);
 		DetailDao dDao = new DetailDao();
 //		int detailid = dDao.findIdbyidandtime(ac.getActivity_id(), timelike,Integer.parseInt(userid));
-//		//鏇存敼detail琛�
+//		//閺囧瓨鏁糳etail鐞涳拷
 //		dDao.upDateDetailbyDetailid(Integer.parseInt(userid), timefinnal.getBegin_time(), timefinnal.getFinish_time(), detailid);
-		//鏇存敼data琛�
+		//閺囧瓨鏁糳ata鐞涳拷
 		DataDao ddDao = new DataDao();
 		String tablename = userid+"_data";
 		int dataid = ddDao.findataid(tablename, acname, time);
 		ddDao.upDateNum(tablename,acname, time, sum);
-		System.out.println("鏇存柊浠ュ墠鏃ctivity鎴愬姛");
+		System.out.println("閺囧瓨鏌婃禒銉ュ閺冾湩ctivity閹存劕濮�");
 	}
 }

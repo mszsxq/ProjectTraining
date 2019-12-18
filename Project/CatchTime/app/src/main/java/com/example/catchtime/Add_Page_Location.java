@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -92,7 +93,7 @@ public class Add_Page_Location extends AppCompatActivity {
                 finish();
             }
         });
-        TextView addloc = findViewById(R.id.loc_btn_addloc);
+        ImageView addloc = findViewById(R.id.loc_btn_addloc);
         addloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

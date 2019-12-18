@@ -39,7 +39,7 @@ public class ContactDao {
 	public int addContact(int id,Contact contact) throws ClassNotFoundException, SQLException{
 		conn = DBManager.getInstance().getConnection();
 		String table = id+"_contact";
-		String sql="insert into table (location_id,activity_id) values(?,?)";
+		String sql="insert into "+table+" (location_id,activity_id) values(?,?)";
 		ps=conn.prepareStatement(sql);
 		ps.setInt(1, contact.getLocation_Id());
         ps.setInt(2, contact.getActivity_Id());
