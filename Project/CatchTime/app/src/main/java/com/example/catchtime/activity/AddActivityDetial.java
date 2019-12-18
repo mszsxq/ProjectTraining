@@ -419,8 +419,7 @@ class MyAdapter extends BaseAdapter {
         Log.e("name",colorList.get(position));
         imageView.setBackgroundColor(res.getColor(getColorID(colorList.get(position))));
         if (i==position){
-            Log.e("i",i+"");
-            imageView.setImageAlpha(100);
+            imageView.getBackground().setAlpha(50);
         }
         return imageView;
     }
