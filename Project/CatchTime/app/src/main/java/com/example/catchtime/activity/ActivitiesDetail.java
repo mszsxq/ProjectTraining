@@ -147,11 +147,20 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         ArrayList<String>  xlist =new ArrayList<>();
         ArrayList<Float>  ylist =new ArrayList<>();
         for (All_data a :listm){
-            Float data = Float.parseFloat(a.getActivity_data())/60;
+            Float data = (Float.parseFloat(a.getActivity_data()))/300;
             ylist.add(data);
             xlist.add(xListData(a));
         }
-        lineView.setData(xlist, ylist);
+        lineView2.setData(xlist, ylist);
+
+        ArrayList<String>  xlist1 =new ArrayList<>();
+        ArrayList<Float>  ylist1 =new ArrayList<>();
+        for (All_data a :listw){
+            Float data = Float.parseFloat(a.getActivity_data())/300;
+            ylist1.add(data);
+            xlist1.add(xListData(a));
+        }
+        lineView.setData(xlist1, ylist1);
         progressBarShow();
 
 
@@ -173,7 +182,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
     public void listMonthly(){
         listm.clear();
         for(int i=0;i<list.size();i++){
-                if(i%3==0){
+                if(i%2==0){
                     All_data all_data =list.get(i);
                     listm.add(all_data);
                 }
@@ -261,7 +270,8 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         imageView = (ImageView) findViewById(R.id.ac_icon);
         l1= (LinearLayout) findViewById(R.id.view_weekoccupy);
         l2=(LinearLayout)findViewById(R.id.view_lastoccupy);
-//        lineView2 =(LineView)findViewById(R.id.lineView2);
+        l3= (LinearLayout) findViewById(R.id.view_monthlyoccupy);
+        lineView2 =(LineView)findViewById(R.id.lineView2);
         barCharts= findViewById(R.id.barchar);
         lineView=(LineView) findViewById(R.id.lineView);
         back = (ImageView) findViewById(R.id.acdetails_back);
@@ -281,6 +291,7 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
         minfri= (TextView) findViewById(R.id.min6);
         minsat= (TextView) findViewById(R.id.min7);
         linearLayout = (LinearLayout) findViewById(R.id.topbar);
+
 
     }
     public void setListener(){
@@ -306,11 +317,12 @@ public class ActivitiesDetail extends SwipeBackActivity implements ObservableScr
                 linearLayout.setBackgroundColor(color);
                 l1.setBackgroundColor(color);
                 l2.setBackgroundColor(color);
+                l3.setBackgroundColor(color);
             }else if(color1!=0) {
                 linearLayout.setBackgroundColor(getResources().getColor(color1));
                 l1.setBackgroundColor(getResources().getColor(color1));
                 l2.setBackgroundColor(getResources().getColor(color1));
-
+                l3.setBackgroundColor(getResources().getColor(color1));
             }else{
                 linearLayout.setBackgroundColor(0);
                 l1.setBackgroundColor(0);
