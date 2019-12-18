@@ -16,16 +16,25 @@
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
-        <TextView
+        <ImageView
             android:id="@+id/loc_btn_addloc"
-            android:layout_width="wrap_content"
+            android:src="@drawable/bigadd"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="添加"
-            android:textSize="16dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/design_default_color_primary_dark"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"/>
+<!--        <TextView-->
+<!--            android:id="@+id/loc_btn_addloc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="添加"-->
+<!--            android:textSize="16dp"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:textColor="@android:color/black"/>-->
     </RelativeLayout>
     <View
         android:id="@+id/line"

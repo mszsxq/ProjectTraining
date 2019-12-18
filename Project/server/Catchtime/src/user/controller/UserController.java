@@ -1,4 +1,4 @@
-package user.controller;
+﻿package user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +59,7 @@ public class UserController extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		if(phone !=null && pwd !=null) {
 			int a = userDao.UpdateUserPassword(pwd, phone);
-			if(a==1) {
+			if(a!=0) {
 				out.write("重置成功");
 			}else {
 				out.write("重置失败");

@@ -95,6 +95,7 @@ public class ActivitiesFragment extends Fragment {
                 }
                 Log.e("info", info);
                 listView = (ListView) view.findViewById(R.id.listview);
+                listView.setDivider(null);
                 listView.setAdapter(new MyAdapterActivities(getActivity(), lists, R.layout.activitiesfragment_litem));
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
