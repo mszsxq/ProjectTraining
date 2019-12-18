@@ -27,5 +27,5 @@
 
 ##屏幕截图##
 ![](https://github.com/mszsxq/ProjectTraining/blob/master/Project/1.jpg)
-![](http://https://github.com/mszsxq/ProjectTraining/blob/master/Project/2.jpg)
-![](http://https://github.com/mszsxq/ProjectTraining/blob/master/Project/3.jpg)
+![](https://github.com/mszsxq/ProjectTraining/blob/master/Project/2.jpg)
+![](/https://github.com/mszsxq/ProjectTraining/blob/master/Project/3.jpg)
