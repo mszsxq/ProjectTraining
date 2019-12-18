@@ -24,7 +24,7 @@
     <RelativeLayout
         android:id="@+id/aloc_rt_footer"
         android:layout_width="match_parent"
-        android:layout_height="260sp"
+        android:layout_height="460sp"
         android:layout_below="@+id/aloc_rt_header">
         <com.baidu.mapapi.map.MapView
             android:id="@+id/bmapView"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/aloc_rt_footer"
         android:layout_alignParentBottom="true"
-        android:layout_margin="60dp">
+        android:layout_margin="30dp">
         <RelativeLayout
             android:id="@+id/icon_layout"
             android:layout_width="match_parent"

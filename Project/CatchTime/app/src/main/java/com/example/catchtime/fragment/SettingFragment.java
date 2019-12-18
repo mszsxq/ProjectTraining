@@ -96,7 +96,7 @@ public class SettingFragment extends Fragment {
                 user = gson.fromJson(info, User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
-                Log.e("测试", user.getMoto() + user.getUsername());
+                Log.e("测试",user.getMoto()+user.getUsername());
 //                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };

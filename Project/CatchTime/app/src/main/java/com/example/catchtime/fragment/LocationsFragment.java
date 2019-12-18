@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.catchtime.AddLocation;
@@ -84,6 +85,7 @@ public class LocationsFragment extends Fragment {
                 }
                 myAdapter = new MyAdapterLocation(getActivity(),locations,R.layout.item_location);
                 ListView listView = view.findViewById(R.id.loc_lv_local);
+                listView.setDivider(null);
                 listView.setAdapter(myAdapter);
 //                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //                    @Override
@@ -95,7 +97,7 @@ public class LocationsFragment extends Fragment {
 //                });
             }
         };
-        TextView addloc = view.findViewById(R.id.loc_btn_addloc);
+        ImageView addloc = view.findViewById(R.id.loc_btn_addloc);
         addloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
