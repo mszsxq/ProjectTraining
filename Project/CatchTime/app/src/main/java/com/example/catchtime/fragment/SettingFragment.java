@@ -69,16 +69,16 @@ public class SettingFragment extends Fragment {
     private TextView cancel;
     private TextView usering_name;
     private TextView usering_moto;
-    private CircleImageView circleImageView;
     private Dialog dialog;
     private Handler handler;
     private CircleImageView imageView;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        view=inflater.inflate(R.layout.settingfragment,null);
+        view = inflater.inflate(R.layout.settingfragment, null);
         p = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 //        if(getSupportActionBar() != null){
 //            getSupportActionBar().hide();
@@ -86,21 +86,30 @@ public class SettingFragment extends Fragment {
         getViews();
         onLisener();
         sendMessage();
-        handler= new Handler() {
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 String info = (String) msg.obj;
                 Gson gson = new Gson();
                 User user = new User();
-                user = gson.fromJson(info,User.class);
+                user = gson.fromJson(info, User.class);
                 usering_name.setText(user.getUsername());
                 usering_moto.setText(user.getMoto());
+<<<<<<< HEAD
 //                circleImageView.setImageResource(getDrawableID(user.getImage()));
             }
         };
         value=p.getInt("user_id",0);
         Log.e("value",value+"");
+=======
+                Log.e("测试", user.getMoto() + user.getUsername());
+//                circleImageView.setImageResource(getDrawableID(user.getImage()));
+            }
+        };
+        value = p.getInt("user_id", 0);
+        Log.e("value", value + "");
+>>>>>>> 8c81c3960293cec6d593019d365b050027d1812f
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +118,7 @@ public class SettingFragment extends Fragment {
         });
         return view;
     }
+
     private void onLisener() {
         listener = new customListener();
         add_activity.setOnClickListener(listener);
@@ -123,10 +133,10 @@ public class SettingFragment extends Fragment {
         imageView = view.findViewById(R.id.user_img);
         usering_name = view.findViewById(R.id.user_name);
         usering_moto = view.findViewById(R.id.user_infor);
-        circleImageView = view.findViewById(R.id.user_img);
     }
+
     private void show(View view) {
-        dialog = new Dialog(getContext(),R.style.DialogTheme);
+        dialog = new Dialog(getContext(), R.style.DialogTheme);
         inflate = LayoutInflater.from(getContext()).inflate(R.layout.change_photo, null);
         //初始化控件
         camera = (TextView) inflate.findViewById(R.id.camera);
@@ -137,7 +147,7 @@ public class SettingFragment extends Fragment {
         //获取当前Activity所在的窗体
         Window dialogWindow = dialog.getWindow();
         //设置Dialog从窗体底部弹出
-        dialogWindow.setGravity( Gravity.BOTTOM);
+        dialogWindow.setGravity(Gravity.BOTTOM);
         //获得窗体的属性
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.y = 20;//设置Dialog距离底部的距离
@@ -146,13 +156,13 @@ public class SettingFragment extends Fragment {
         dialog.show();//显示对话框
     }
 
-    class customListener implements View.OnClickListener{
+    class customListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.add_activity:
-                    Intent intent1=new Intent(view.getContext(), AddActivity.class);
+                    Intent intent1 = new Intent(view.getContext(), AddActivity.class);
                     startActivity(intent1);
                     break;
                 case R.id.help:
@@ -163,8 +173,8 @@ public class SettingFragment extends Fragment {
                     editor.clear();
                     preferences.edit().putBoolean("isFirstIn", true).commit();
                     editor.commit();
-                    int a = p.getInt("user_id",0);
-                    Log.e("zy",a+"");
+                    int a = p.getInt("user_id", 0);
+                    Log.e("zy", a + "");
                     Intent intent3 = new Intent(view.getContext(), Login.class);
                     startActivity(intent3);
                     break;
@@ -184,6 +194,11 @@ public class SettingFragment extends Fragment {
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
+<<<<<<< HEAD
+=======
+                    Log.i("检测","得到"+info);
+                    //wrapperMessage(info);
+>>>>>>> 8c81c3960293cec6d593019d365b050027d1812f
                     if(null!=info) {
                         Log.e("ww", info);
                         wrapperMessage(info);
